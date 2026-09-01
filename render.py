@@ -257,7 +257,8 @@ def number_alphas(labels):
     return alphas
 
 
-def draw_frame(base, entry, colours, W, H, font_cache, ball_fade=False):
+def draw_frame(base, entry, colours, W, H, font_cache, ball_fade=False,
+               boxes=False):
     """Draw one frame's annotations onto `base` (an RGB Image). Returns it."""
     overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(overlay)
@@ -272,7 +273,24 @@ def draw_frame(base, entry, colours, W, H, font_cache, ball_fade=False):
         ew = max(ELLIPSE_MIN_W, bw * ELLIPSE_WIDTH_MUL)
         eh = ew * ELLIPSE_ASPECT
 
-        if p.get("on_ball"):
+        if boxes:
+            # DIAGNOSTIC MODE, not a deliverable. Every model returns a box
+            # aspect of ~2.2 where a standing player is ~3.5 — 37% too short —
+            # but "too short" does not say WHICH edge is wrong, and the two have
+            # opposite fixes. If the TOP is right and the BOTTOM rides high, the
+            # model is boxing torsos and the foot point (y) is wrong, so the
+            # markers sit above the feet. If the BOTTOM is right and the TOP is
+            # low, the foot point is already correct and asking for it directly
+            # (HANDOFF item 6) buys nothing.
+            #
+            # The two edges are therefore coloured differently and named in the
+            # legend, so the answer is "cyan sits at the head / magenta sits at
+            # the boots" rather than a judgement about the box as a whole.
+            x0, y0, x1, y1 = fx - bw / 2, fy - bh, fx + bw / 2, fy
+            d.rectangle([x0, y0, x1, y1], outline=col + (200,), width=1)
+            d.line([x0, y0, x1, y0], fill=(0, 229, 255, 255), width=2)   # top
+            d.line([x0, y1, x1, y1], fill=(255, 0, 200, 255), width=2)   # bottom
+        elif p.get("on_ball"):
             # "Differently again" as a soft glow on their own marker rather than
             # a hard white ring around it. The ring was a second high-contrast
             # edge competing with the ellipse it surrounded; a glow reads as
@@ -370,6 +388,11 @@ def main():
     # look identical on screen. Turn it back on for the deliverable.
     ap.add_argument("--ball-fade", action="store_true",
                     help="fade the numbers of players far from the ball")
+    # Diagnostic, never a deliverable. Boxes are ~37% too short in every model
+    # tested; this says WHICH edge is wrong, and the two have opposite fixes.
+    ap.add_argument("--boxes", action="store_true",
+                    help="draw the raw bounding box instead of the foot ellipse "
+                         "— CYAN top edge, MAGENTA bottom edge")
     args = ap.parse_args()
 
     for tool in ("ffmpeg", "ffprobe"):
@@ -395,7 +418,8 @@ def main():
         colours[T["teams"].get(kit_b)] = cb
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out = args.out or OUT_DIR / f"{args.tracks.stem.replace('__tracks','')}.mp4"
+    stem = args.tracks.stem.replace('__tracks', '') + ('__BOXES' if args.boxes else '')
+    out = args.out or OUT_DIR / f"{stem}.mp4"
 
     reader = subprocess.Popen(
         ["ffmpeg", "-v", "error", "-i", str(clip),
@@ -418,7 +442,7 @@ def main():
                 break
             img = Image.frombytes("RGB", (W, H), buf)
             img = draw_frame(img, by_frame.get(n, blank), colours, W, H,
-                             font_cache, args.ball_fade)
+                             font_cache, args.ball_fade, args.boxes)
             writer.stdin.write(img.tobytes())
             n += 1
     finally:

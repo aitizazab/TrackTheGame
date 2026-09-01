@@ -22,6 +22,10 @@ outputs/frames/
 outputs/videos/_*
 *.tmp
 
+# Box-edge diagnostics from `render.py --boxes`. Regenerable from the committed
+# tracks JSON in seconds, and not a deliverable.
+outputs/videos/*__BOXES.mp4
+
 # Development screenshots. Renders of the tracker mid-development, kept locally
 # for reference. Real work, but not evidence and not a deliverable — the
 # committed videos and docs/*.jsonl carry the argument.
