@@ -1,0 +1,418 @@
+{
+ "clip": "hard10_allstars.mp4",
+ "model": "qwen/qwen3.5-9b",
+ "fps": 10,
+ "width": null,
+ "tag": "qwen_qwen3_5_9b",
+ "ts": "2026-08-28T12:27:58.577056+00:00",
+ "effort": null,
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 43.0,
+ "source_fps": 30,
+ "wall_s": 44.32323670000187,
+ "n_source_frames": 300,
+ "frames": [],
+ "dropped": [
+  {
+   "frame": 0,
+   "error": "deadline"
+  },
+  {
+   "frame": 3,
+   "error": "deadline"
+  },
+  {
+   "frame": 6,
+   "error": "deadline"
+  },
+  {
+   "frame": 9,
+   "error": "deadline"
+  },
+  {
+   "frame": 12,
+   "error": "deadline"
+  },
+  {
+   "frame": 15,
+   "error": "deadline"
+  },
+  {
+   "frame": 18,
+   "error": "deadline"
+  },
+  {
+   "frame": 21,
+   "error": "deadline"
+  },
+  {
+   "frame": 24,
+   "error": "deadline"
+  },
+  {
+   "frame": 27,
+   "error": "deadline"
+  },
+  {
+   "frame": 30,
+   "error": "deadline"
+  },
+  {
+   "frame": 33,
+   "error": "deadline"
+  },
+  {
+   "frame": 36,
+   "error": "deadline"
+  },
+  {
+   "frame": 39,
+   "error": "deadline"
+  },
+  {
+   "frame": 42,
+   "error": "deadline"
+  },
+  {
+   "frame": 45,
+   "error": "deadline"
+  },
+  {
+   "frame": 48,
+   "error": "deadline"
+  },
+  {
+   "frame": 51,
+   "error": "deadline"
+  },
+  {
+   "frame": 54,
+   "error": "deadline"
+  },
+  {
+   "frame": 57,
+   "error": "deadline"
+  },
+  {
+   "frame": 60,
+   "error": "deadline"
+  },
+  {
+   "frame": 63,
+   "error": "deadline"
+  },
+  {
+   "frame": 66,
+   "error": "deadline"
+  },
+  {
+   "frame": 69,
+   "error": "deadline"
+  },
+  {
+   "frame": 72,
+   "error": "deadline"
+  },
+  {
+   "frame": 75,
+   "error": "deadline"
+  },
+  {
+   "frame": 78,
+   "error": "deadline"
+  },
+  {
+   "frame": 81,
+   "error": "deadline"
+  },
+  {
+   "frame": 84,
+   "error": "deadline"
+  },
+  {
+   "frame": 87,
+   "error": "deadline"
+  },
+  {
+   "frame": 90,
+   "error": "deadline"
+  },
+  {
+   "frame": 93,
+   "error": "deadline"
+  },
+  {
+   "frame": 96,
+   "error": "deadline"
+  },
+  {
+   "frame": 99,
+   "error": "deadline"
+  },
+  {
+   "frame": 102,
+   "error": "deadline"
+  },
+  {
+   "frame": 105,
+   "error": "deadline"
+  },
+  {
+   "frame": 108,
+   "error": "deadline"
+  },
+  {
+   "frame": 111,
+   "error": "deadline"
+  },
+  {
+   "frame": 114,
+   "error": "deadline"
+  },
+  {
+   "frame": 117,
+   "error": "deadline"
+  },
+  {
+   "frame": 120,
+   "error": "deadline"
+  },
+  {
+   "frame": 123,
+   "error": "deadline"
+  },
+  {
+   "frame": 126,
+   "error": "deadline"
+  },
+  {
+   "frame": 129,
+   "error": "deadline"
+  },
+  {
+   "frame": 132,
+   "error": "deadline"
+  },
+  {
+   "frame": 135,
+   "error": "deadline"
+  },
+  {
+   "frame": 138,
+   "error": "deadline"
+  },
+  {
+   "frame": 141,
+   "error": "deadline"
+  },
+  {
+   "frame": 144,
+   "error": "deadline"
+  },
+  {
+   "frame": 147,
+   "error": "deadline"
+  },
+  {
+   "frame": 150,
+   "error": "deadline"
+  },
+  {
+   "frame": 153,
+   "error": "deadline"
+  },
+  {
+   "frame": 156,
+   "error": "deadline"
+  },
+  {
+   "frame": 159,
+   "error": "deadline"
+  },
+  {
+   "frame": 162,
+   "error": "deadline"
+  },
+  {
+   "frame": 165,
+   "error": "deadline"
+  },
+  {
+   "frame": 168,
+   "error": "deadline"
+  },
+  {
+   "frame": 171,
+   "error": "deadline"
+  },
+  {
+   "frame": 174,
+   "error": "deadline"
+  },
+  {
+   "frame": 177,
+   "error": "deadline"
+  },
+  {
+   "frame": 180,
+   "error": "deadline"
+  },
+  {
+   "frame": 183,
+   "error": "deadline"
+  },
+  {
+   "frame": 186,
+   "error": "deadline"
+  },
+  {
+   "frame": 189,
+   "error": "deadline"
+  },
+  {
+   "frame": 192,
+   "error": "deadline"
+  },
+  {
+   "frame": 195,
+   "error": "deadline"
+  },
+  {
+   "frame": 198,
+   "error": "deadline"
+  },
+  {
+   "frame": 201,
+   "error": "deadline"
+  },
+  {
+   "frame": 204,
+   "error": "deadline"
+  },
+  {
+   "frame": 207,
+   "error": "deadline"
+  },
+  {
+   "frame": 210,
+   "error": "deadline"
+  },
+  {
+   "frame": 213,
+   "error": "deadline"
+  },
+  {
+   "frame": 216,
+   "error": "deadline"
+  },
+  {
+   "frame": 219,
+   "error": "deadline"
+  },
+  {
+   "frame": 222,
+   "error": "deadline"
+  },
+  {
+   "frame": 225,
+   "error": "deadline"
+  },
+  {
+   "frame": 228,
+   "error": "deadline"
+  },
+  {
+   "frame": 231,
+   "error": "deadline"
+  },
+  {
+   "frame": 234,
+   "error": "deadline"
+  },
+  {
+   "frame": 237,
+   "error": "deadline"
+  },
+  {
+   "frame": 240,
+   "error": "deadline"
+  },
+  {
+   "frame": 243,
+   "error": "deadline"
+  },
+  {
+   "frame": 246,
+   "error": "deadline"
+  },
+  {
+   "frame": 249,
+   "error": "deadline"
+  },
+  {
+   "frame": 252,
+   "error": "deadline"
+  },
+  {
+   "frame": 255,
+   "error": "deadline"
+  },
+  {
+   "frame": 258,
+   "error": "deadline"
+  },
+  {
+   "frame": 261,
+   "error": "deadline"
+  },
+  {
+   "frame": 264,
+   "error": "deadline"
+  },
+  {
+   "frame": 267,
+   "error": "deadline"
+  },
+  {
+   "frame": 270,
+   "error": "deadline"
+  },
+  {
+   "frame": 273,
+   "error": "deadline"
+  },
+  {
+   "frame": 276,
+   "error": "deadline"
+  },
+  {
+   "frame": 279,
+   "error": "deadline"
+  },
+  {
+   "frame": 282,
+   "error": "deadline"
+  },
+  {
+   "frame": 285,
+   "error": "deadline"
+  },
+  {
+   "frame": 288,
+   "error": "deadline"
+  },
+  {
+   "frame": 291,
+   "error": "deadline"
+  },
+  {
+   "frame": 294,
+   "error": "deadline"
+  },
+  {
+   "frame": 297,
+   "error": "deadline"
+  }
+ ]
+}

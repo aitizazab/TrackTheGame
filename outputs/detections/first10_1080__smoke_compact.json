@@ -1,0 +1,564 @@
+{
+ "clip": "first10_1080.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 5,
+ "width": null,
+ "tag": "smoke_compact",
+ "ts": "2026-08-31T06:54:48.332991+00:00",
+ "effort": "medium",
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 43.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": true
+ },
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 19.224589699995704,
+ "n_source_frames": 300,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "A soccer match between France in blue and England in white, with players positioned around the penalty box during an attack.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.217,
+     "y": 0.832,
+     "w": 0.033,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.47,
+     "y": 0.613,
+     "w": 0.025,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.025,
+     "y": 0.544,
+     "w": 0.021,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.046,
+     "y": 0.511,
+     "w": 0.027,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.104,
+     "y": 0.231,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.352,
+     "y": 0.334,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.366,
+     "y": 0.238,
+     "w": 0.013,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.262,
+     "w": 0.014,
+     "h": 0.054,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.471,
+     "y": 0.297,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.498,
+     "y": 0.274,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.324,
+     "w": 0.022,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.536,
+     "y": 0.279,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.56,
+     "y": 0.315,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.573,
+     "y": 0.323,
+     "w": 0.019,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.559,
+     "y": 0.356,
+     "w": 0.023,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.537,
+     "y": 0.384,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.539,
+     "y": 0.408,
+     "w": 0.023,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.602,
+     "y": 0.398,
+     "w": 0.021,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.825,
+     "y": 0.285,
+     "w": 0.018,
+     "h": 0.058,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.387,
+    "y": 0.611,
+    "w": 0.014,
+    "h": 0.021,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 72,
+   "scene": "A soccer match in progress with France in blue and England in white, with the ball contested in the air in front of the penalty box.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.044,
+     "y": 0.412,
+     "w": 0.025,
+     "h": 0.113,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.06,
+     "y": 0.521,
+     "w": 0.038,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.133,
+     "y": 0.686,
+     "w": 0.041,
+     "h": 0.141,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.192,
+     "y": 0.584,
+     "w": 0.029,
+     "h": 0.134,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.248,
+     "y": 0.669,
+     "w": 0.031,
+     "h": 0.129,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.33,
+     "y": 0.437,
+     "w": 0.039,
+     "h": 0.111,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.342,
+     "y": 0.489,
+     "w": 0.032,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.373,
+     "y": 0.628,
+     "w": 0.033,
+     "h": 0.127,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.407,
+     "y": 0.563,
+     "w": 0.035,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.417,
+     "y": 0.495,
+     "w": 0.041,
+     "h": 0.098,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.418,
+     "y": 0.718,
+     "w": 0.025,
+     "h": 0.143,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.551,
+     "w": 0.038,
+     "h": 0.117,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.514,
+     "y": 0.515,
+     "w": 0.027,
+     "h": 0.114,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.887,
+     "y": 0.475,
+     "w": 0.031,
+     "h": 0.105,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.403,
+    "y": 0.467,
+    "w": 0.01,
+    "h": 0.018,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 144,
+   "scene": "A soccer match is shown from an elevated perspective with France in blue kits and England in white kits.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.443,
+     "y": 0.329,
+     "w": 0.027,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.302,
+     "y": 0.366,
+     "w": 0.024,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.518,
+     "y": 0.414,
+     "w": 0.026,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.412,
+     "y": 0.463,
+     "w": 0.024,
+     "h": 0.111,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.658,
+     "y": 0.455,
+     "w": 0.027,
+     "h": 0.097,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.063,
+     "y": 0.49,
+     "w": 0.033,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.806,
+     "y": 0.531,
+     "w": 0.027,
+     "h": 0.116,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.037,
+     "y": 0.567,
+     "w": 0.031,
+     "h": 0.133,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.602,
+     "y": 0.588,
+     "w": 0.034,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.342,
+     "y": 0.597,
+     "w": 0.027,
+     "h": 0.131,
+     "kit": "blue",
+     "num": 8,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.494,
+     "y": 0.648,
+     "w": 0.029,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.233,
+     "y": 0.658,
+     "w": 0.029,
+     "h": 0.133,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.481,
+     "y": 0.675,
+     "w": 0.038,
+     "h": 0.132,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.584,
+     "y": 0.729,
+     "w": 0.046,
+     "h": 0.132,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.433,
+    "y": 0.383,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.9
+   }
+  }
+ ],
+ "dropped": []
+}

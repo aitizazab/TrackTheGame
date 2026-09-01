@@ -1,0 +1,921 @@
+{
+ "clip": "allstars_fr_eng.mp4",
+ "model": "openai/gpt-5.6-luna",
+ "fps": 10,
+ "width": null,
+ "tag": "luna_fix",
+ "ts": "2026-08-28T00:10:50.291784+00:00",
+ "source_fps": 30,
+ "wall_s": 36.96522230000119,
+ "n_source_frames": 900,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "Wide, evenly lit stadium view of a penalty-area set piece, with blue-and-white kits and white-and-blue kits visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.108,
+     "y": 0.231,
+     "w": 0.012,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.37,
+     "y": 0.237,
+     "w": 0.009,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.355,
+     "y": 0.331,
+     "w": 0.011,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.477,
+     "y": 0.615,
+     "w": 0.02,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.029,
+     "y": 0.542,
+     "w": 0.017,
+     "h": 0.089,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.051,
+     "y": 0.511,
+     "w": 0.016,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.22,
+     "y": 0.828,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.78
+    },
+    {
+     "x": 0.234,
+     "y": 0.861,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.84
+    },
+    {
+     "x": 0.48,
+     "y": 0.263,
+     "w": 0.012,
+     "h": 0.051,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.5,
+     "y": 0.274,
+     "w": 0.014,
+     "h": 0.047,
+     "kit": "white",
+     "num": null,
+     "conf": 0.89
+    },
+    {
+     "x": 0.542,
+     "y": 0.277,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.476,
+     "y": 0.303,
+     "w": 0.013,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 0.88
+    },
+    {
+     "x": 0.505,
+     "y": 0.321,
+     "w": 0.016,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.561,
+     "y": 0.314,
+     "w": 0.015,
+     "h": 0.055,
+     "kit": "white",
+     "num": null,
+     "conf": 0.89
+    },
+    {
+     "x": 0.576,
+     "y": 0.319,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "conf": 0.86
+    },
+    {
+     "x": 0.544,
+     "y": 0.352,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.88
+    },
+    {
+     "x": 0.561,
+     "y": 0.356,
+     "w": 0.02,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 0.85
+    },
+    {
+     "x": 0.609,
+     "y": 0.407,
+     "w": 0.018,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    }
+   ],
+   "ball": {
+    "x": 0.386,
+    "y": 0.626,
+    "w": 0.012,
+    "h": 0.018,
+    "conf": 0.72
+   }
+  },
+  {
+   "frame": 150,
+   "scene": "Wide elevated broadcast view in bright daylight, showing white kits with blue accents and blue kits with white accents on the field.",
+   "kits": [
+    {
+     "colour": "white",
+     "accent": "blue"
+    },
+    {
+     "colour": "blue",
+     "accent": "white"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.106,
+     "y": 0.479,
+     "w": 0.023,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "conf": 0.9
+    },
+    {
+     "x": 0.057,
+     "y": 0.558,
+     "w": 0.025,
+     "h": 0.129,
+     "kit": "blue",
+     "num": 22,
+     "conf": 0.96
+    },
+    {
+     "x": 0.326,
+     "y": 0.358,
+     "w": 0.021,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.459,
+     "y": 0.322,
+     "w": 0.023,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.424,
+     "y": 0.457,
+     "w": 0.024,
+     "h": 0.114,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.53,
+     "y": 0.406,
+     "w": 0.024,
+     "h": 0.099,
+     "kit": "white",
+     "num": 25,
+     "conf": 0.97
+    },
+    {
+     "x": 0.664,
+     "y": 0.449,
+     "w": 0.032,
+     "h": 0.103,
+     "kit": "white",
+     "num": 17,
+     "conf": 0.88
+    },
+    {
+     "x": 0.363,
+     "y": 0.596,
+     "w": 0.022,
+     "h": 0.132,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.261,
+     "y": 0.664,
+     "w": 0.023,
+     "h": 0.128,
+     "kit": "white",
+     "num": 4,
+     "conf": 0.96
+    },
+    {
+     "x": 0.512,
+     "y": 0.681,
+     "w": 0.025,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.86
+    },
+    {
+     "x": 0.534,
+     "y": 0.647,
+     "w": 0.027,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "conf": 0.79
+    },
+    {
+     "x": 0.624,
+     "y": 0.589,
+     "w": 0.027,
+     "h": 0.131,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.624,
+     "y": 0.731,
+     "w": 0.025,
+     "h": 0.125,
+     "kit": "white",
+     "num": null,
+     "conf": 0.9
+    },
+    {
+     "x": 0.805,
+     "y": 0.526,
+     "w": 0.027,
+     "h": 0.119,
+     "kit": "white",
+     "num": 13,
+     "conf": 0.97
+    }
+   ],
+   "ball": {
+    "x": 0.444,
+    "y": 0.371,
+    "w": 0.008,
+    "h": 0.013,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 300,
+   "scene": "Wide elevated broadcast framing under bright stadium lighting, showing players in blue-and-white kits and white-and-blue kits on the green pitch.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.216,
+     "y": 0.271,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.97
+    },
+    {
+     "x": 0.28,
+     "y": 0.289,
+     "w": 0.017,
+     "h": 0.05,
+     "kit": "white",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.518,
+     "y": 0.256,
+     "w": 0.012,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.563,
+     "y": 0.254,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.294,
+     "y": 0.356,
+     "w": 0.013,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.602,
+     "y": 0.319,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.642,
+     "y": 0.314,
+     "w": 0.013,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.712,
+     "y": 0.333,
+     "w": 0.015,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.118,
+     "y": 0.429,
+     "w": 0.017,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.162,
+     "y": 0.499,
+     "w": 0.019,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.153,
+     "y": 0.59,
+     "w": 0.02,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.263,
+     "y": 0.662,
+     "w": 0.02,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.645,
+     "y": 0.671,
+     "w": 0.023,
+     "h": 0.107,
+     "kit": "white",
+     "num": 99,
+     "conf": 0.97
+    },
+    {
+     "x": 0.688,
+     "y": 0.461,
+     "w": 0.021,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.719,
+     "y": 0.451,
+     "w": 0.02,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.92,
+     "y": 0.426,
+     "w": 0.016,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.944,
+     "y": 0.403,
+     "w": 0.019,
+     "h": 0.125,
+     "kit": "white",
+     "num": null,
+     "conf": 0.88
+    },
+    {
+     "x": 0.982,
+     "y": 0.503,
+     "w": 0.018,
+     "h": 0.099,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.955,
+     "y": 0.56,
+     "w": 0.016,
+     "h": 0.097,
+     "kit": "blue",
+     "num": 14,
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.237,
+    "y": 0.342,
+    "w": 0.009,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 450,
+   "scene": "Wide, high-angle stadium framing under even daylight, showing blue and white outfield kits on a green pitch.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.143,
+     "y": 0.271,
+     "w": 0.009,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.32,
+     "y": 0.335,
+     "w": 0.013,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.45,
+     "y": 0.318,
+     "w": 0.011,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.562,
+     "y": 0.326,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.3,
+     "y": 0.403,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.77
+    },
+    {
+     "x": 0.469,
+     "y": 0.383,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.83
+    },
+    {
+     "x": 0.461,
+     "y": 0.41,
+     "w": 0.013,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 0.85
+    },
+    {
+     "x": 0.302,
+     "y": 0.444,
+     "w": 0.015,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 0.79
+    },
+    {
+     "x": 0.443,
+     "y": 0.456,
+     "w": 0.015,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.514,
+     "y": 0.446,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.581,
+     "y": 0.413,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.488,
+     "y": 0.499,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.527,
+     "y": 0.5,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.46,
+     "y": 0.569,
+     "w": 0.021,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "conf": 0.88
+    },
+    {
+     "x": 0.696,
+     "y": 0.429,
+     "w": 0.015,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.81,
+     "y": 0.551,
+     "w": 0.018,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.773,
+     "y": 0.608,
+     "w": 0.02,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.123,
+     "y": 0.704,
+     "w": 0.018,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.0,
+     "y": 0.578,
+     "w": 0.006,
+     "h": 0.04,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.35
+    }
+   ],
+   "ball": {
+    "x": 0.441,
+    "y": 0.524,
+    "w": 0.007,
+    "h": 0.01,
+    "conf": 0.82
+   }
+  },
+  {
+   "frame": 600,
+   "scene": "A wide elevated stadium view under bright even lighting shows players in predominantly white-and-blue and blue-and-white kits on a green pitch.",
+   "kits": [
+    {
+     "colour": "white",
+     "accent": "blue"
+    },
+    {
+     "colour": "blue",
+     "accent": "white"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.009,
+     "y": 0.185,
+     "w": 0.011,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.72
+    },
+    {
+     "x": 0.145,
+     "y": 0.275,
+     "w": 0.012,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.248,
+     "y": 0.25,
+     "w": 0.011,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.316,
+     "y": 0.326,
+     "w": 0.013,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.87
+    },
+    {
+     "x": 0.362,
+     "y": 0.315,
+     "w": 0.013,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.92
+    },
+    {
+     "x": 0.388,
+     "y": 0.268,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.312,
+     "y": 0.358,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.76
+    },
+    {
+     "x": 0.298,
+     "y": 0.39,
+     "w": 0.012,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.4,
+     "y": 0.414,
+     "w": 0.014,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 0.93
+    },
+    {
+     "x": 0.444,
+     "y": 0.374,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.505,
+     "y": 0.381,
+     "w": 0.015,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.53,
+     "y": 0.472,
+     "w": 0.021,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.366,
+     "y": 0.446,
+     "w": 0.019,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.17,
+     "y": 0.588,
+     "w": 0.027,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "conf": 0.91
+    },
+    {
+     "x": 0.325,
+     "y": 0.588,
+     "w": 0.02,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "conf": 0.95
+    },
+    {
+     "x": 0.581,
+     "y": 0.575,
+     "w": 0.021,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 0.94
+    },
+    {
+     "x": 0.224,
+     "y": 0.665,
+     "w": 0.019,
+     "h": 0.101,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.96
+    },
+    {
+     "x": 0.655,
+     "y": 0.749,
+     "w": 0.018,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "conf": 0.96
+    }
+   ],
+   "ball": {
+    "x": 0.619,
+    "y": 0.374,
+    "w": 0.007,
+    "h": 0.006,
+    "conf": 0.58
+   }
+  }
+ ],
+ "dropped": []
+}

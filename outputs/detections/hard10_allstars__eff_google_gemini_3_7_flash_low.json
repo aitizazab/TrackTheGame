@@ -1,0 +1,1108 @@
+{
+ "clip": "hard10_allstars.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 10,
+ "width": null,
+ "tag": "eff_google_gemini_3_7_flash_low",
+ "ts": "2026-08-28T14:19:44.356942+00:00",
+ "effort": "low",
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 43.0,
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 23.899602399993455,
+ "n_source_frames": 300,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "A wide broadcast view of a football pitch showing players in blue and white kits under bright stadium lighting.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.224,
+     "y": 0.267,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.288,
+     "y": 0.298,
+     "w": 0.017,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.276,
+     "y": 0.334,
+     "w": 0.024,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.134,
+     "y": 0.398,
+     "w": 0.018,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.241,
+     "y": 0.443,
+     "w": 0.021,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.156,
+     "y": 0.563,
+     "w": 0.02,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.274,
+     "y": 0.627,
+     "w": 0.021,
+     "h": 0.108,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.514,
+     "y": 0.262,
+     "w": 0.016,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.55,
+     "y": 0.273,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.561,
+     "y": 0.329,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.645,
+     "y": 0.309,
+     "w": 0.016,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.707,
+     "y": 0.34,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.667,
+     "y": 0.468,
+     "w": 0.02,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.69,
+     "y": 0.457,
+     "w": 0.021,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.639,
+     "y": 0.634,
+     "w": 0.023,
+     "h": 0.108,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.951,
+     "y": 0.559,
+     "w": 0.022,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.969,
+     "y": 0.504,
+     "w": 0.02,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.898,
+     "y": 0.415,
+     "w": 0.018,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.911,
+     "y": 0.401,
+     "w": 0.018,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.923,
+     "y": 0.422,
+     "w": 0.02,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 60,
+   "scene": "Long shot of an international football match under overcast daylight, with France in blue and England in white.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.03,
+     "y": 0.554,
+     "w": 0.026,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.063,
+     "y": 0.414,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.138,
+     "y": 0.274,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.166,
+     "y": 0.638,
+     "w": 0.02,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.205,
+     "y": 0.386,
+     "w": 0.028,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.266,
+     "y": 0.426,
+     "w": 0.018,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.309,
+     "y": 0.322,
+     "w": 0.018,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.434,
+     "y": 0.304,
+     "w": 0.015,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.456,
+     "y": 0.336,
+     "w": 0.017,
+     "h": 0.046,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.457,
+     "y": 0.36,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.509,
+     "y": 0.592,
+     "w": 0.019,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.519,
+     "y": 0.505,
+     "w": 0.019,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.563,
+     "y": 0.314,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.589,
+     "y": 0.379,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.597,
+     "y": 0.509,
+     "w": 0.017,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.626,
+     "y": 0.43,
+     "w": 0.02,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.708,
+     "y": 0.437,
+     "w": 0.027,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.74,
+     "y": 0.413,
+     "w": 0.026,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.849,
+     "y": 0.535,
+     "w": 0.018,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.854,
+     "y": 0.588,
+     "w": 0.021,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.213,
+    "y": 0.451,
+    "w": 0.01,
+    "h": 0.013,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 120,
+   "scene": "Wide stadium view under bright daylight showing players in blue and white kits in the midfield.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.119,
+     "y": 0.702,
+     "w": 0.021,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.042,
+     "y": 0.446,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.138,
+     "y": 0.27,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.3,
+     "y": 0.395,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.3,
+     "y": 0.446,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.318,
+     "y": 0.334,
+     "w": 0.017,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.448,
+     "y": 0.316,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.459,
+     "y": 0.404,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.468,
+     "y": 0.379,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.437,
+     "y": 0.453,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.481,
+     "y": 0.495,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.46,
+     "y": 0.567,
+     "w": 0.021,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.513,
+     "y": 0.449,
+     "w": 0.02,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.525,
+     "y": 0.485,
+     "w": 0.018,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.559,
+     "y": 0.324,
+     "w": 0.017,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.582,
+     "y": 0.41,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.693,
+     "y": 0.427,
+     "w": 0.019,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.77,
+     "y": 0.607,
+     "w": 0.023,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.809,
+     "y": 0.548,
+     "w": 0.022,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.437,
+    "y": 0.517,
+    "w": 0.009,
+    "h": 0.013,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 180,
+   "scene": "Wide telephoto match coverage under daylight showing France in blue versus England in white.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.168,
+     "y": 0.655,
+     "w": 0.026,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 1.0
+    },
+    {
+     "x": 0.076,
+     "y": 0.504,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.17,
+     "y": 0.388,
+     "w": 0.016,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.252,
+     "y": 0.205,
+     "w": 0.015,
+     "h": 0.055,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.334,
+     "y": 0.454,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.385,
+     "y": 0.281,
+     "w": 0.015,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.446,
+     "y": 0.344,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.488,
+     "y": 0.384,
+     "w": 0.022,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.509,
+     "y": 0.356,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.512,
+     "y": 0.265,
+     "w": 0.013,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.523,
+     "y": 0.402,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.562,
+     "y": 0.48,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.606,
+     "y": 0.431,
+     "w": 0.022,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.622,
+     "y": 0.415,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.612,
+     "y": 0.27,
+     "w": 0.015,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.642,
+     "y": 0.373,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.735,
+     "y": 0.38,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.776,
+     "y": 0.5,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.733,
+     "y": 0.583,
+     "w": 0.019,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.211,
+    "y": 0.684,
+    "w": 0.011,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 240,
+   "scene": "Wide telephoto view of a football pitch with daylight lighting, featuring France in blue kits and England in white shirts with blue shorts.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.145,
+     "y": 0.207,
+     "w": 0.016,
+     "h": 0.051,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.267,
+     "y": 0.282,
+     "w": 0.017,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.364,
+     "y": 0.261,
+     "w": 0.016,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.488,
+     "y": 0.283,
+     "w": 0.016,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.422,
+     "y": 0.329,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.406,
+     "y": 0.363,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.425,
+     "y": 0.354,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.38,
+     "y": 0.38,
+     "w": 0.019,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.518,
+     "y": 0.379,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.593,
+     "y": 0.385,
+     "w": 0.021,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.468,
+     "y": 0.407,
+     "w": 0.02,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.511,
+     "y": 0.425,
+     "w": 0.027,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.558,
+     "y": 0.466,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.637,
+     "y": 0.536,
+     "w": 0.022,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.389,
+     "y": 0.528,
+     "w": 0.023,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.198,
+     "y": 0.556,
+     "w": 0.027,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.058,
+     "y": 0.403,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.18,
+     "y": 0.638,
+     "w": 0.038,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.643,
+     "y": 0.686,
+     "w": 0.027,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.846,
+     "y": 0.334,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.217,
+    "y": 0.714,
+    "w": 0.01,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  }
+ ],
+ "dropped": []
+}

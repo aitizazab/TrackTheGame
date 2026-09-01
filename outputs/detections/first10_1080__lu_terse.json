@@ -1,0 +1,9106 @@
+{
+ "clip": "first10_1080.mp4",
+ "model": "openai/gpt-5.6-luna",
+ "fps": 5,
+ "width": null,
+ "tag": "lu_terse",
+ "ts": "2026-08-31T07:29:08.703325+00:00",
+ "effort": null,
+ "scene_last": false,
+ "terse_schema": true,
+ "timeout_s": 43.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": false,
+  "ruler": false
+ },
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 33.11236289999215,
+ "n_source_frames": 300,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "Soccer match in a stadium, with blue and white outfield teams and a red-clad goalkeeper defending the goal on the right. The ball is airborne near the lower center-left.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.109,
+     "y": 0.232,
+     "w": 0.009,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.369,
+     "y": 0.239,
+     "w": 0.01,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.483,
+     "y": 0.259,
+     "w": 0.01,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.504,
+     "y": 0.276,
+     "w": 0.011,
+     "h": 0.044,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.542,
+     "y": 0.278,
+     "w": 0.012,
+     "h": 0.054,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.475,
+     "y": 0.302,
+     "w": 0.011,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.54,
+     "y": 0.304,
+     "w": 0.012,
+     "h": 0.046,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.568,
+     "y": 0.316,
+     "w": 0.012,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.578,
+     "y": 0.32,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.504,
+     "y": 0.322,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.563,
+     "y": 0.354,
+     "w": 0.013,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.542,
+     "y": 0.388,
+     "w": 0.014,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.547,
+     "y": 0.414,
+     "w": 0.014,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.606,
+     "y": 0.406,
+     "w": 0.013,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.354,
+     "y": 0.332,
+     "w": 0.011,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.827,
+     "y": 0.285,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    },
+    {
+     "x": 0.05,
+     "y": 0.511,
+     "w": 0.014,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.026,
+     "y": 0.544,
+     "w": 0.02,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.474,
+     "y": 0.619,
+     "w": 0.014,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.219,
+     "y": 0.831,
+     "w": 0.031,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    }
+   ],
+   "ball": {
+    "x": 0.391,
+    "y": 0.614,
+    "w": 0.01,
+    "h": 0.018,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 6,
+   "scene": "Football match set piece: France in blue versus England in white, with an orange goalkeeper defending the goal. The ball is airborne just outside the crowded penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.086,
+     "y": 0.245,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.342,
+     "y": 0.347,
+     "w": 0.014,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.003,
+     "y": 0.563,
+     "w": 0.021,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.201,
+     "y": 0.852,
+     "w": 0.034,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.485,
+     "y": 0.272,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.541,
+     "y": 0.295,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.493,
+     "y": 0.342,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.528,
+     "y": 0.403,
+     "w": 0.018,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.352,
+     "y": 0.253,
+     "w": 0.013,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.034,
+     "y": 0.531,
+     "w": 0.021,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.466,
+     "y": 0.315,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.502,
+     "y": 0.286,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.563,
+     "y": 0.328,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.577,
+     "y": 0.348,
+     "w": 0.016,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.556,
+     "y": 0.377,
+     "w": 0.018,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.529,
+     "y": 0.431,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.593,
+     "y": 0.431,
+     "w": 0.018,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.469,
+     "y": 0.637,
+     "w": 0.018,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.808,
+     "y": 0.297,
+     "w": 0.016,
+     "h": 0.058,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.44,
+    "y": 0.501,
+    "w": 0.009,
+    "h": 0.019,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 12,
+   "scene": "Soccer match in progress near the penalty area. Players are wearing blue-and-white kits, with a red-clad goalkeeper in the goal at right; the ball is on the grass just outside the crowded group.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.054,
+     "y": 0.264,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.328,
+     "y": 0.27,
+     "w": 0.016,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.322,
+     "y": 0.368,
+     "w": 0.013,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.477,
+     "y": 0.295,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.493,
+     "y": 0.304,
+     "w": 0.018,
+     "h": 0.055,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.53,
+     "y": 0.314,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.527,
+     "y": 0.338,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.55
+    },
+    {
+     "x": 0.55,
+     "y": 0.344,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.569,
+     "y": 0.364,
+     "w": 0.017,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.473,
+     "y": 0.357,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.542,
+     "y": 0.398,
+     "w": 0.02,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.505,
+     "y": 0.42,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.63
+    },
+    {
+     "x": 0.507,
+     "y": 0.434,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.578,
+     "y": 0.442,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.816,
+     "y": 0.319,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    },
+    {
+     "x": 0.007,
+     "y": 0.554,
+     "w": 0.016,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.457,
+     "y": 0.66,
+     "w": 0.014,
+     "h": 0.099,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.166,
+     "y": 0.87,
+     "w": 0.022,
+     "h": 0.126,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    }
+   ],
+   "ball": {
+    "x": 0.466,
+    "y": 0.422,
+    "w": 0.006,
+    "h": 0.011,
+    "conf": 0.91
+   }
+  },
+  {
+   "frame": 18,
+   "scene": "Soccer match with blue and white outfield teams, a red-clad goalkeeper, and players gathered near the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.016,
+     "y": 0.294,
+     "w": 0.011,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.301,
+     "y": 0.296,
+     "w": 0.013,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.291,
+     "y": 0.399,
+     "w": 0.015,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.416,
+     "y": 0.369,
+     "w": 0.017,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.447,
+     "y": 0.388,
+     "w": 0.015,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.467,
+     "y": 0.321,
+     "w": 0.014,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.485,
+     "y": 0.331,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.509,
+     "y": 0.343,
+     "w": 0.017,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.62
+    },
+    {
+     "x": 0.517,
+     "y": 0.356,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.52
+    },
+    {
+     "x": 0.536,
+     "y": 0.378,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.555,
+     "y": 0.391,
+     "w": 0.019,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.522,
+     "y": 0.436,
+     "w": 0.02,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.77
+    },
+    {
+     "x": 0.56,
+     "y": 0.464,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.81
+    },
+    {
+     "x": 0.479,
+     "y": 0.456,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.483,
+     "y": 0.493,
+     "w": 0.02,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.804,
+     "y": 0.344,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.94
+    },
+    {
+     "x": 0.436,
+     "y": 0.695,
+     "w": 0.014,
+     "h": 0.112,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.121,
+     "y": 0.928,
+     "w": 0.04,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.62
+    }
+   ],
+   "ball": {
+    "x": 0.645,
+    "y": 0.416,
+    "w": 0.006,
+    "h": 0.004,
+    "conf": 0.55
+   }
+  },
+  {
+   "frame": 24,
+   "scene": "Football match in a stadium: a cross or set piece is entering the penalty area, with blue- and white-shirted players clustered near goal and a red-clad goalkeeper on the right; the ball is airborne above the group.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.266,
+     "y": 0.332,
+     "w": 0.019,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.255,
+     "y": 0.436,
+     "w": 0.015,
+     "h": 0.082,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.448,
+     "y": 0.359,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.471,
+     "y": 0.363,
+     "w": 0.016,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.488,
+     "y": 0.372,
+     "w": 0.014,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.5,
+     "y": 0.393,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.379,
+     "y": 0.404,
+     "w": 0.025,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.417,
+     "y": 0.431,
+     "w": 0.018,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.523,
+     "y": 0.415,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.533,
+     "y": 0.422,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.58
+    },
+    {
+     "x": 0.504,
+     "y": 0.439,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.51,
+     "y": 0.465,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.449,
+     "y": 0.498,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.68
+    },
+    {
+     "x": 0.537,
+     "y": 0.507,
+     "w": 0.016,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.448,
+     "y": 0.505,
+     "w": 0.024,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.796,
+     "y": 0.378,
+     "w": 0.015,
+     "h": 0.067,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    },
+    {
+     "x": 0.404,
+     "y": 0.747,
+     "w": 0.02,
+     "h": 0.114,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    }
+   ],
+   "ball": {
+    "x": 0.476,
+    "y": 0.365,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 30,
+   "scene": "Wide stadium football match with blue and white outfield teams; a red-clad goalkeeper is positioned near the right-side goal, and the ball is airborne above the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.223,
+     "y": 0.366,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.204,
+     "y": 0.478,
+     "w": 0.023,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.333,
+     "y": 0.439,
+     "w": 0.029,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.376,
+     "y": 0.473,
+     "w": 0.023,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.422,
+     "y": 0.4,
+     "w": 0.025,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.454,
+     "y": 0.406,
+     "w": 0.021,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.468,
+     "y": 0.445,
+     "w": 0.024,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.62
+    },
+    {
+     "x": 0.502,
+     "y": 0.454,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.477,
+     "y": 0.508,
+     "w": 0.024,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.515,
+     "y": 0.551,
+     "w": 0.02,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.404,
+     "y": 0.546,
+     "w": 0.024,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.375,
+     "y": 0.805,
+     "w": 0.015,
+     "h": 0.116,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.784,
+     "y": 0.407,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.465,
+    "y": 0.367,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 36,
+   "scene": "Soccer match in a stadium, with blue and white outfield players attacking the goal defended by a red-clad goalkeeper. The ball is airborne near the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.176,
+     "y": 0.394,
+     "w": 0.013,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.142,
+     "y": 0.519,
+     "w": 0.016,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.277,
+     "y": 0.471,
+     "w": 0.023,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.334,
+     "y": 0.509,
+     "w": 0.016,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.395,
+     "y": 0.439,
+     "w": 0.017,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.42,
+     "y": 0.44,
+     "w": 0.019,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.43,
+     "y": 0.436,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.443,
+     "y": 0.478,
+     "w": 0.021,
+     "h": 0.055,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.47,
+     "y": 0.484,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.487,
+     "y": 0.482,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.365,
+     "y": 0.59,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.73
+    },
+    {
+     "x": 0.446,
+     "y": 0.535,
+     "w": 0.021,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.362,
+     "y": 0.591,
+     "w": 0.02,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.364,
+     "y": 0.617,
+     "w": 0.03,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.483,
+     "y": 0.596,
+     "w": 0.018,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.786,
+     "y": 0.435,
+     "w": 0.015,
+     "h": 0.076,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.97
+    },
+    {
+     "x": 0.323,
+     "y": 0.876,
+     "w": 0.026,
+     "h": 0.124,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    }
+   ],
+   "ball": {
+    "x": 0.446,
+    "y": 0.379,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 42,
+   "scene": "Soccer match during a set piece near the penalty area. Players from blue and white teams are clustered in front of goal, with a red-clad goalkeeper; the ball is airborne above the group.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.122,
+     "y": 0.414,
+     "w": 0.019,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.073,
+     "y": 0.554,
+     "w": 0.018,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.211,
+     "y": 0.499,
+     "w": 0.027,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.359,
+     "y": 0.459,
+     "w": 0.022,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.39,
+     "y": 0.463,
+     "w": 0.021,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.411,
+     "y": 0.465,
+     "w": 0.023,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.421,
+     "y": 0.524,
+     "w": 0.018,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.62
+    },
+    {
+     "x": 0.441,
+     "y": 0.52,
+     "w": 0.023,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.471,
+     "y": 0.507,
+     "w": 0.021,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.424,
+     "y": 0.572,
+     "w": 0.022,
+     "h": 0.099,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.284,
+     "y": 0.543,
+     "w": 0.02,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.323,
+     "y": 0.621,
+     "w": 0.02,
+     "h": 0.117,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.83
+    },
+    {
+     "x": 0.308,
+     "y": 0.652,
+     "w": 0.026,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.459,
+     "y": 0.638,
+     "w": 0.018,
+     "h": 0.105,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.796,
+     "y": 0.46,
+     "w": 0.017,
+     "h": 0.082,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.94
+    },
+    {
+     "x": 0.28,
+     "y": 0.944,
+     "w": 0.026,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.55
+    }
+   ],
+   "ball": {
+    "x": 0.43,
+    "y": 0.403,
+    "w": 0.007,
+    "h": 0.014,
+    "conf": 0.91
+   }
+  },
+  {
+   "frame": 48,
+   "scene": "Football match with players clustered around the penalty area, a blue-shirted team attacking against a white-shirted team, and the ball airborne above the group.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.01,
+     "y": 0.583,
+     "w": 0.035,
+     "h": 0.116,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.085,
+     "y": 0.432,
+     "w": 0.018,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.157,
+     "y": 0.524,
+     "w": 0.023,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.243,
+     "y": 0.579,
+     "w": 0.03,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.29,
+     "y": 0.659,
+     "w": 0.025,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.264,
+     "y": 0.689,
+     "w": 0.027,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.338,
+     "y": 0.484,
+     "w": 0.022,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.372,
+     "y": 0.491,
+     "w": 0.021,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.404,
+     "y": 0.501,
+     "w": 0.021,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.409,
+     "y": 0.535,
+     "w": 0.022,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.423,
+     "y": 0.548,
+     "w": 0.027,
+     "h": 0.099,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.468,
+     "y": 0.531,
+     "w": 0.026,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.403,
+     "y": 0.602,
+     "w": 0.027,
+     "h": 0.11,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.434,
+     "y": 0.681,
+     "w": 0.032,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.816,
+     "y": 0.48,
+     "w": 0.018,
+     "h": 0.089,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.422,
+    "y": 0.444,
+    "w": 0.008,
+    "h": 0.016,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 54,
+   "scene": "Soccer match in a crowded penalty area, with blue and white outfield players contesting an airborne ball near the goal; a red-clad goalkeeper is positioned on the goal line.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.065,
+     "y": 0.444,
+     "w": 0.018,
+     "h": 0.1,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.118,
+     "y": 0.544,
+     "w": 0.027,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.329,
+     "y": 0.49,
+     "w": 0.034,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.359,
+     "y": 0.507,
+     "w": 0.027,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.394,
+     "y": 0.519,
+     "w": 0.029,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.405,
+     "y": 0.532,
+     "w": 0.027,
+     "h": 0.101,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.419,
+     "y": 0.541,
+     "w": 0.029,
+     "h": 0.114,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.477,
+     "y": 0.545,
+     "w": 0.027,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.226,
+     "y": 0.596,
+     "w": 0.021,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.392,
+     "y": 0.628,
+     "w": 0.027,
+     "h": 0.117,
+     "kit": "white",
+     "num": 9,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.273,
+     "y": 0.681,
+     "w": 0.025,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.228,
+     "y": 0.718,
+     "w": 0.037,
+     "h": 0.103,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.426,
+     "y": 0.709,
+     "w": 0.035,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.834,
+     "y": 0.496,
+     "w": 0.019,
+     "h": 0.092,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.97
+    }
+   ],
+   "ball": {
+    "x": 0.417,
+    "y": 0.5,
+    "w": 0.008,
+    "h": 0.017,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 60,
+   "scene": "Soccer match in the right-side penalty area. Two outfield kits are blue with white accents and white with blue accents. Fourteen players are visible, including an orange goalkeeper near the goal, with the ball on the grass to the right of the group.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.051,
+     "y": 0.434,
+     "w": 0.013,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.071,
+     "y": 0.533,
+     "w": 0.04,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.322,
+     "y": 0.471,
+     "w": 0.022,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.348,
+     "y": 0.505,
+     "w": 0.028,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.399,
+     "y": 0.516,
+     "w": 0.027,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.398,
+     "y": 0.535,
+     "w": 0.028,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.423,
+     "y": 0.538,
+     "w": 0.023,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.489,
+     "y": 0.544,
+     "w": 0.026,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.852,
+     "y": 0.49,
+     "w": 0.022,
+     "h": 0.099,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    },
+    {
+     "x": 0.206,
+     "y": 0.597,
+     "w": 0.022,
+     "h": 0.118,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.193,
+     "y": 0.713,
+     "w": 0.028,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.257,
+     "y": 0.681,
+     "w": 0.027,
+     "h": 0.123,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.386,
+     "y": 0.633,
+     "w": 0.025,
+     "h": 0.122,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.42,
+     "y": 0.712,
+     "w": 0.023,
+     "h": 0.128,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.596,
+    "y": 0.621,
+    "w": 0.008,
+    "h": 0.005,
+    "conf": 0.65
+   }
+  },
+  {
+   "frame": 66,
+   "scene": "A football match in a stadium, with blue and white outfield players attacking toward the goal on the right; a red-clad goalkeeper is positioned near the goal.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.042,
+     "y": 0.426,
+     "w": 0.023,
+     "h": 0.107,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.034,
+     "y": 0.53,
+     "w": 0.031,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.325,
+     "y": 0.458,
+     "w": 0.02,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.35,
+     "y": 0.499,
+     "w": 0.02,
+     "h": 0.117,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.409,
+     "y": 0.51,
+     "w": 0.035,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.393,
+     "y": 0.564,
+     "w": 0.028,
+     "h": 0.111,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.421,
+     "y": 0.552,
+     "w": 0.04,
+     "h": 0.122,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.503,
+     "y": 0.537,
+     "w": 0.02,
+     "h": 0.11,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.381,
+     "y": 0.633,
+     "w": 0.02,
+     "h": 0.13,
+     "kit": "white",
+     "num": 93,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.193,
+     "y": 0.596,
+     "w": 0.027,
+     "h": 0.13,
+     "kit": "blue",
+     "num": 1,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.251,
+     "y": 0.68,
+     "w": 0.028,
+     "h": 0.121,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.16,
+     "y": 0.702,
+     "w": 0.031,
+     "h": 0.129,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.414,
+     "y": 0.72,
+     "w": 0.028,
+     "h": 0.139,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.87,
+     "y": 0.491,
+     "w": 0.028,
+     "h": 0.096,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.604,
+    "y": 0.621,
+    "w": 0.009,
+    "h": 0.006,
+    "conf": 0.8
+   }
+  },
+  {
+   "frame": 72,
+   "scene": "Soccer match in the attacking third. Two outfield teams wear blue and white shirts with blue shorts; an orange-clad goalkeeper is visible in the right-side goal. The ball is airborne above the players near the edge of the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.047,
+     "y": 0.413,
+     "w": 0.02,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.008,
+     "y": 0.522,
+     "w": 0.036,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.333,
+     "y": 0.439,
+     "w": 0.037,
+     "h": 0.108,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.346,
+     "y": 0.494,
+     "w": 0.027,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.418,
+     "y": 0.497,
+     "w": 0.036,
+     "h": 0.095,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.514,
+     "y": 0.518,
+     "w": 0.026,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.438,
+     "y": 0.556,
+     "w": 0.036,
+     "h": 0.112,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.41,
+     "y": 0.569,
+     "w": 0.027,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.376,
+     "y": 0.63,
+     "w": 0.033,
+     "h": 0.126,
+     "kit": "white",
+     "num": 93,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.192,
+     "y": 0.585,
+     "w": 0.028,
+     "h": 0.136,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.252,
+     "y": 0.668,
+     "w": 0.028,
+     "h": 0.13,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.418,
+     "y": 0.718,
+     "w": 0.027,
+     "h": 0.14,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.136,
+     "y": 0.689,
+     "w": 0.037,
+     "h": 0.136,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.885,
+     "y": 0.479,
+     "w": 0.034,
+     "h": 0.101,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.405,
+    "y": 0.469,
+    "w": 0.007,
+    "h": 0.018,
+    "conf": 0.94
+   }
+  },
+  {
+   "frame": 78,
+   "scene": "Soccer match in the penalty area, with blue and white outfield players, an orange goalkeeper, and the ball airborne above the grass.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.0,
+     "y": 0.504,
+     "w": 0.032,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.062,
+     "y": 0.404,
+     "w": 0.021,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.358,
+     "y": 0.422,
+     "w": 0.022,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.354,
+     "y": 0.481,
+     "w": 0.021,
+     "h": 0.121,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.434,
+     "y": 0.487,
+     "w": 0.024,
+     "h": 0.098,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.534,
+     "y": 0.507,
+     "w": 0.028,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.474,
+     "y": 0.542,
+     "w": 0.034,
+     "h": 0.113,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.421,
+     "y": 0.563,
+     "w": 0.026,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.201,
+     "y": 0.576,
+     "w": 0.024,
+     "h": 0.133,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.141,
+     "y": 0.677,
+     "w": 0.026,
+     "h": 0.134,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.261,
+     "y": 0.659,
+     "w": 0.027,
+     "h": 0.129,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.383,
+     "y": 0.624,
+     "w": 0.034,
+     "h": 0.124,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.421,
+     "y": 0.711,
+     "w": 0.033,
+     "h": 0.138,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.893,
+     "y": 0.46,
+     "w": 0.029,
+     "h": 0.103,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.404,
+    "y": 0.398,
+    "w": 0.009,
+    "h": 0.015,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 84,
+   "scene": "Soccer match in progress near the penalty area; the ball is airborne above the grass, with blue-shirted and white-shirted outfield players and an orange-clad goalkeeper visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0,
+     "y": 0.5,
+     "w": 0.028,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.089,
+     "y": 0.399,
+     "w": 0.02,
+     "h": 0.107,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.388,
+     "y": 0.402,
+     "w": 0.026,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.359,
+     "y": 0.476,
+     "w": 0.03,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.452,
+     "y": 0.471,
+     "w": 0.024,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.557,
+     "y": 0.495,
+     "w": 0.026,
+     "h": 0.1,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.507,
+     "y": 0.529,
+     "w": 0.034,
+     "h": 0.117,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.443,
+     "y": 0.548,
+     "w": 0.031,
+     "h": 0.128,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.22,
+     "y": 0.566,
+     "w": 0.021,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.399,
+     "y": 0.614,
+     "w": 0.017,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.278,
+     "y": 0.645,
+     "w": 0.026,
+     "h": 0.122,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.141,
+     "y": 0.657,
+     "w": 0.032,
+     "h": 0.136,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.439,
+     "y": 0.701,
+     "w": 0.03,
+     "h": 0.134,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.895,
+     "y": 0.448,
+     "w": 0.036,
+     "h": 0.102,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.96
+    }
+   ],
+   "ball": {
+    "x": 0.411,
+    "y": 0.36,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 90,
+   "scene": "Soccer match in a stadium, with blue and white outfield players attacking near the right-side goal; the goalkeeper is wearing orange. The ball is airborne above the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.0,
+     "y": 0.496,
+     "w": 0.022,
+     "h": 0.107,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.115,
+     "y": 0.406,
+     "w": 0.02,
+     "h": 0.102,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.405,
+     "y": 0.39,
+     "w": 0.025,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.46,
+     "y": 0.469,
+     "w": 0.023,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.564,
+     "y": 0.479,
+     "w": 0.027,
+     "h": 0.1,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.37,
+     "y": 0.476,
+     "w": 0.026,
+     "h": 0.112,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.539,
+     "y": 0.529,
+     "w": 0.036,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.463,
+     "y": 0.544,
+     "w": 0.022,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.239,
+     "y": 0.558,
+     "w": 0.024,
+     "h": 0.128,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.158,
+     "y": 0.648,
+     "w": 0.023,
+     "h": 0.127,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.391,
+     "y": 0.611,
+     "w": 0.033,
+     "h": 0.118,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.297,
+     "y": 0.638,
+     "w": 0.026,
+     "h": 0.119,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.441,
+     "y": 0.694,
+     "w": 0.036,
+     "h": 0.131,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.891,
+     "y": 0.446,
+     "w": 0.024,
+     "h": 0.099,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.412,
+    "y": 0.36,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 96,
+   "scene": "Football match in a stadium, with blue and white outfield teams attacking near the penalty area; an orange goalkeeper is positioned in front of the goal and the ball is airborne above the grass.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.11,
+     "y": 0.406,
+     "w": 0.028,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.393,
+     "y": 0.386,
+     "w": 0.029,
+     "h": 0.106,
+     "kit": "blue",
+     "num": 78,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.444,
+     "y": 0.463,
+     "w": 0.035,
+     "h": 0.093,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.353,
+     "y": 0.475,
+     "w": 0.025,
+     "h": 0.112,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.564,
+     "y": 0.469,
+     "w": 0.025,
+     "h": 0.073,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.563,
+     "y": 0.527,
+     "w": 0.026,
+     "h": 0.108,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.457,
+     "y": 0.547,
+     "w": 0.025,
+     "h": 0.129,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.229,
+     "y": 0.563,
+     "w": 0.031,
+     "h": 0.125,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.139,
+     "y": 0.651,
+     "w": 0.028,
+     "h": 0.125,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.294,
+     "y": 0.64,
+     "w": 0.028,
+     "h": 0.12,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.375,
+     "y": 0.611,
+     "w": 0.034,
+     "h": 0.127,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.427,
+     "y": 0.694,
+     "w": 0.029,
+     "h": 0.134,
+     "kit": "white",
+     "num": 33,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.872,
+     "y": 0.437,
+     "w": 0.025,
+     "h": 0.106,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.391,
+    "y": 0.376,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.97
+   }
+  },
+  {
+   "frame": 102,
+   "scene": "Soccer match in the attacking third near the penalty area. One red-clad goalkeeper is positioned by the goal, with blue-shirted and white-shirted outfield players tracking the ball.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.127,
+     "y": 0.407,
+     "w": 0.027,
+     "h": 0.095,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.401,
+     "y": 0.378,
+     "w": 0.022,
+     "h": 0.098,
+     "kit": "blue",
+     "num": 18,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.356,
+     "y": 0.467,
+     "w": 0.022,
+     "h": 0.112,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.453,
+     "y": 0.459,
+     "w": 0.022,
+     "h": 0.09,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.575,
+     "y": 0.462,
+     "w": 0.025,
+     "h": 0.1,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.68
+    },
+    {
+     "x": 0.464,
+     "y": 0.551,
+     "w": 0.031,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.582,
+     "y": 0.518,
+     "w": 0.043,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.242,
+     "y": 0.565,
+     "w": 0.024,
+     "h": 0.125,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.14,
+     "y": 0.654,
+     "w": 0.025,
+     "h": 0.117,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.302,
+     "y": 0.641,
+     "w": 0.028,
+     "h": 0.118,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.377,
+     "y": 0.612,
+     "w": 0.021,
+     "h": 0.122,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.426,
+     "y": 0.696,
+     "w": 0.028,
+     "h": 0.132,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.875,
+     "y": 0.436,
+     "w": 0.022,
+     "h": 0.095,
+     "kit": "red",
+     "num": 3,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.386,
+    "y": 0.415,
+    "w": 0.006,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 108,
+   "scene": "Football match in a stadium, with blue and white outfield teams and a red-clad goalkeeper; the ball is airborne near the top of the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.161,
+     "y": 0.408,
+     "w": 0.021,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.413,
+     "y": 0.372,
+     "w": 0.022,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.462,
+     "y": 0.452,
+     "w": 0.026,
+     "h": 0.089,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.592,
+     "y": 0.456,
+     "w": 0.023,
+     "h": 0.108,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.627,
+     "y": 0.517,
+     "w": 0.033,
+     "h": 0.12,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.355,
+     "y": 0.472,
+     "w": 0.031,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.483,
+     "y": 0.558,
+     "w": 0.034,
+     "h": 0.125,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.264,
+     "y": 0.569,
+     "w": 0.022,
+     "h": 0.122,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.15,
+     "y": 0.652,
+     "w": 0.024,
+     "h": 0.12,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.327,
+     "y": 0.644,
+     "w": 0.028,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.375,
+     "y": 0.622,
+     "w": 0.039,
+     "h": 0.121,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.442,
+     "y": 0.698,
+     "w": 0.027,
+     "h": 0.132,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.889,
+     "y": 0.434,
+     "w": 0.022,
+     "h": 0.101,
+     "kit": "red",
+     "num": 3,
+     "role": "goalkeeper",
+     "conf": 0.97
+    }
+   ],
+   "ball": {
+    "x": 0.392,
+    "y": 0.414,
+    "w": 0.007,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 114,
+   "scene": "Soccer match in the penalty area, with blue and white outfield players, an orange goalkeeper, and the ball airborne near the top of the box.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.0,
+     "y": 0.535,
+     "w": 0.012,
+     "h": 0.156,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.5
+    },
+    {
+     "x": 0.187,
+     "y": 0.407,
+     "w": 0.023,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.428,
+     "y": 0.366,
+     "w": 0.02,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.478,
+     "y": 0.445,
+     "w": 0.024,
+     "h": 0.09,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.612,
+     "y": 0.462,
+     "w": 0.026,
+     "h": 0.104,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.37,
+     "y": 0.472,
+     "w": 0.026,
+     "h": 0.11,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.667,
+     "y": 0.523,
+     "w": 0.03,
+     "h": 0.112,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.908,
+     "y": 0.444,
+     "w": 0.023,
+     "h": 0.1,
+     "kit": "orange",
+     "num": 3,
+     "role": "goalkeeper",
+     "conf": 0.95
+    },
+    {
+     "x": 0.281,
+     "y": 0.576,
+     "w": 0.024,
+     "h": 0.126,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.353,
+     "y": 0.658,
+     "w": 0.032,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.392,
+     "y": 0.63,
+     "w": 0.03,
+     "h": 0.126,
+     "kit": "white",
+     "num": 93,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.457,
+     "y": 0.718,
+     "w": 0.034,
+     "h": 0.128,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.166,
+     "y": 0.649,
+     "w": 0.029,
+     "h": 0.129,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.51,
+     "y": 0.569,
+     "w": 0.029,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    }
+   ],
+   "ball": {
+    "x": 0.402,
+    "y": 0.378,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.97
+   }
+  },
+  {
+   "frame": 120,
+   "scene": "Soccer match between Italy in blue and England in white, with play developing near the penalty area; the ball is airborne and the score is 0\u20130.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.0,
+     "y": 0.509,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "white",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.213,
+     "y": 0.4,
+     "w": 0.019,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.434,
+     "y": 0.36,
+     "w": 0.023,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.489,
+     "y": 0.442,
+     "w": 0.021,
+     "h": 0.097,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.38,
+     "y": 0.474,
+     "w": 0.023,
+     "h": 0.118,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.625,
+     "y": 0.458,
+     "w": 0.024,
+     "h": 0.107,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.703,
+     "y": 0.531,
+     "w": 0.027,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.533,
+     "y": 0.578,
+     "w": 0.025,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.177,
+     "y": 0.656,
+     "w": 0.031,
+     "h": 0.131,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.295,
+     "y": 0.586,
+     "w": 0.025,
+     "h": 0.127,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.403,
+     "y": 0.639,
+     "w": 0.029,
+     "h": 0.128,
+     "kit": "white",
+     "num": 93,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.378,
+     "y": 0.664,
+     "w": 0.029,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.483,
+     "y": 0.719,
+     "w": 0.028,
+     "h": 0.126,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.0,
+     "y": 0.563,
+     "w": 0.025,
+     "h": 0.13,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.933,
+     "y": 0.447,
+     "w": 0.021,
+     "h": 0.106,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.409,
+    "y": 0.364,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 126,
+   "scene": "Soccer match in the penalty area: players wear blue or white shirts, with an orange-clad goalkeeper at right. The ball is airborne near the upper-center of the field.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.001,
+     "y": 0.504,
+     "w": 0.023,
+     "h": 0.106,
+     "kit": "white",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.009,
+     "y": 0.567,
+     "w": 0.026,
+     "h": 0.132,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.232,
+     "y": 0.393,
+     "w": 0.022,
+     "h": 0.098,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.413,
+     "y": 0.354,
+     "w": 0.019,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.388,
+     "y": 0.478,
+     "w": 0.026,
+     "h": 0.11,
+     "kit": "blue",
+     "num": 24,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.496,
+     "y": 0.434,
+     "w": 0.023,
+     "h": 0.096,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.305,
+     "y": 0.569,
+     "w": 0.024,
+     "h": 0.153,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.645,
+     "y": 0.461,
+     "w": 0.024,
+     "h": 0.107,
+     "kit": "white",
+     "num": 17,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.545,
+     "y": 0.583,
+     "w": 0.029,
+     "h": 0.132,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.726,
+     "y": 0.531,
+     "w": 0.039,
+     "h": 0.113,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.185,
+     "y": 0.67,
+     "w": 0.03,
+     "h": 0.12,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.409,
+     "y": 0.651,
+     "w": 0.029,
+     "h": 0.139,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.79
+    },
+    {
+     "x": 0.409,
+     "y": 0.65,
+     "w": 0.029,
+     "h": 0.14,
+     "kit": "white",
+     "num": 33,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.508,
+     "y": 0.724,
+     "w": 0.03,
+     "h": 0.131,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.947,
+     "y": 0.455,
+     "w": 0.026,
+     "h": 0.105,
+     "kit": "orange",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.95
+    }
+   ],
+   "ball": {
+    "x": 0.414,
+    "y": 0.368,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 132,
+   "scene": "Soccer match in the penalty area: a white-and-blue team attacks a blue-and-white team, with a red-clad goalkeeper visible near the right goal. The ball is airborne above the grass near the upper-center player.",
+   "kits": [
+    {
+     "colour": "white",
+     "accent": "blue"
+    },
+    {
+     "colour": "blue",
+     "accent": "white"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.017,
+     "y": 0.498,
+     "w": 0.026,
+     "h": 0.101,
+     "kit": "white",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.014,
+     "y": 0.571,
+     "w": 0.027,
+     "h": 0.129,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.253,
+     "y": 0.383,
+     "w": 0.027,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.435,
+     "y": 0.344,
+     "w": 0.02,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.503,
+     "y": 0.425,
+     "w": 0.024,
+     "h": 0.094,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.391,
+     "y": 0.469,
+     "w": 0.023,
+     "h": 0.117,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.645,
+     "y": 0.455,
+     "w": 0.028,
+     "h": 0.108,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.758,
+     "y": 0.531,
+     "w": 0.028,
+     "h": 0.121,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.194,
+     "y": 0.659,
+     "w": 0.029,
+     "h": 0.135,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.99
+    },
+    {
+     "x": 0.311,
+     "y": 0.594,
+     "w": 0.025,
+     "h": 0.132,
+     "kit": "blue",
+     "num": 3,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.434,
+     "y": 0.651,
+     "w": 0.03,
+     "h": 0.144,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.419,
+     "y": 0.687,
+     "w": 0.034,
+     "h": 0.108,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.68
+    },
+    {
+     "x": 0.563,
+     "y": 0.589,
+     "w": 0.029,
+     "h": 0.132,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.529,
+     "y": 0.727,
+     "w": 0.04,
+     "h": 0.126,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.962,
+     "y": 0.457,
+     "w": 0.022,
+     "h": 0.106,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.99
+    }
+   ],
+   "ball": {
+    "x": 0.417,
+    "y": 0.392,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.94
+   }
+  },
+  {
+   "frame": 138,
+   "scene": "Soccer match in a stadium, with blue and white outfield teams and a red goalkeeper visible near the right edge.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.445,
+     "y": 0.335,
+     "w": 0.016,
+     "h": 0.095,
+     "kit": "blue",
+     "num": 15,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.277,
+     "y": 0.372,
+     "w": 0.021,
+     "h": 0.1,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.512,
+     "y": 0.42,
+     "w": 0.021,
+     "h": 0.098,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.404,
+     "y": 0.469,
+     "w": 0.018,
+     "h": 0.115,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.652,
+     "y": 0.454,
+     "w": 0.023,
+     "h": 0.108,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.785,
+     "y": 0.532,
+     "w": 0.023,
+     "h": 0.116,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.984,
+     "y": 0.462,
+     "w": 0.016,
+     "h": 0.107,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.85
+    },
+    {
+     "x": 0.042,
+     "y": 0.494,
+     "w": 0.019,
+     "h": 0.087,
+     "kit": "white",
+     "num": 9,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.027,
+     "y": 0.568,
+     "w": 0.02,
+     "h": 0.131,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.327,
+     "y": 0.598,
+     "w": 0.024,
+     "h": 0.127,
+     "kit": "blue",
+     "num": 8,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.581,
+     "y": 0.589,
+     "w": 0.03,
+     "h": 0.128,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.212,
+     "y": 0.667,
+     "w": 0.028,
+     "h": 0.131,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.46,
+     "y": 0.654,
+     "w": 0.027,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.45
+    },
+    {
+     "x": 0.446,
+     "y": 0.673,
+     "w": 0.034,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.5
+    },
+    {
+     "x": 0.565,
+     "y": 0.731,
+     "w": 0.025,
+     "h": 0.128,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    }
+   ],
+   "ball": {
+    "x": 0.424,
+    "y": 0.412,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 144,
+   "scene": "Soccer match in a stadium, with blue-shirted and white-shirted outfield players attacking near the penalty area. The ball is visible in the air near the upper-center of the field; no goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.074,
+     "y": 0.493,
+     "w": 0.021,
+     "h": 0.1,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.304,
+     "y": 0.369,
+     "w": 0.02,
+     "h": 0.098,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.521,
+     "y": 0.416,
+     "w": 0.022,
+     "h": 0.092,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.661,
+     "y": 0.455,
+     "w": 0.021,
+     "h": 0.102,
+     "kit": "white",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.807,
+     "y": 0.532,
+     "w": 0.027,
+     "h": 0.119,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.235,
+     "y": 0.66,
+     "w": 0.024,
+     "h": 0.132,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.497,
+     "y": 0.652,
+     "w": 0.03,
+     "h": 0.105,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.56
+    },
+    {
+     "x": 0.599,
+     "y": 0.731,
+     "w": 0.034,
+     "h": 0.131,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.453,
+     "y": 0.326,
+     "w": 0.02,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.412,
+     "y": 0.466,
+     "w": 0.022,
+     "h": 0.108,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.039,
+     "y": 0.568,
+     "w": 0.026,
+     "h": 0.133,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.345,
+     "y": 0.6,
+     "w": 0.023,
+     "h": 0.131,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.603,
+     "y": 0.589,
+     "w": 0.031,
+     "h": 0.133,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.485,
+     "y": 0.684,
+     "w": 0.034,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    }
+   ],
+   "ball": {
+    "x": 0.434,
+    "y": 0.382,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 150,
+   "scene": "Soccer match in a stadium: blue and white-shirted outfield players are visible around the penalty area; no goalkeeper is visible in this frame. The ball is airborne near the upper-middle of the field.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.058,
+     "y": 0.561,
+     "w": 0.028,
+     "h": 0.126,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.104,
+     "y": 0.479,
+     "w": 0.031,
+     "h": 0.105,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.328,
+     "y": 0.357,
+     "w": 0.022,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.463,
+     "y": 0.319,
+     "w": 0.018,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.42,
+     "y": 0.457,
+     "w": 0.032,
+     "h": 0.112,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.535,
+     "y": 0.404,
+     "w": 0.022,
+     "h": 0.1,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.663,
+     "y": 0.446,
+     "w": 0.035,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.828,
+     "y": 0.524,
+     "w": 0.029,
+     "h": 0.12,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.521,
+     "y": 0.634,
+     "w": 0.044,
+     "h": 0.13,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.516,
+     "y": 0.676,
+     "w": 0.027,
+     "h": 0.124,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.627,
+     "y": 0.589,
+     "w": 0.033,
+     "h": 0.134,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.624,
+     "y": 0.72,
+     "w": 0.029,
+     "h": 0.138,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.263,
+     "y": 0.657,
+     "w": 0.027,
+     "h": 0.134,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.364,
+     "y": 0.597,
+     "w": 0.024,
+     "h": 0.131,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    }
+   ],
+   "ball": {
+    "x": 0.445,
+    "y": 0.37,
+    "w": 0.008,
+    "h": 0.015,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 156,
+   "scene": "Soccer match in a stadium: blue team attacking against a white-shirted, red-accented team. The ball is visible in the penalty area; no goalkeepers are visible in this frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.468,
+     "y": 0.313,
+     "w": 0.026,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.346,
+     "y": 0.345,
+     "w": 0.022,
+     "h": 0.098,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.431,
+     "y": 0.45,
+     "w": 0.025,
+     "h": 0.113,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.539,
+     "y": 0.397,
+     "w": 0.022,
+     "h": 0.095,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.665,
+     "y": 0.444,
+     "w": 0.023,
+     "h": 0.104,
+     "kit": "white",
+     "num": 17,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.143,
+     "y": 0.556,
+     "w": 0.025,
+     "h": 0.13,
+     "kit": "blue",
+     "num": 77,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.144,
+     "y": 0.476,
+     "w": 0.023,
+     "h": 0.103,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.38,
+     "y": 0.594,
+     "w": 0.025,
+     "h": 0.129,
+     "kit": "blue",
+     "num": 9,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.847,
+     "y": 0.523,
+     "w": 0.027,
+     "h": 0.117,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.286,
+     "y": 0.653,
+     "w": 0.024,
+     "h": 0.126,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.544,
+     "y": 0.674,
+     "w": 0.028,
+     "h": 0.115,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.544,
+     "y": 0.675,
+     "w": 0.027,
+     "h": 0.124,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.646,
+     "y": 0.582,
+     "w": 0.028,
+     "h": 0.132,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.649,
+     "y": 0.72,
+     "w": 0.033,
+     "h": 0.137,
+     "kit": "white",
+     "num": 33,
+     "role": "outfield",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.451,
+    "y": 0.382,
+    "w": 0.008,
+    "h": 0.013,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 162,
+   "scene": "Broadcast soccer match in the penalty area: players in blue and white kits are contesting the ball near the top of the box. No goalkeeper is visible in the frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.469,
+     "y": 0.309,
+     "w": 0.023,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.358,
+     "y": 0.338,
+     "w": 0.02,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.539,
+     "y": 0.388,
+     "w": 0.02,
+     "h": 0.09,
+     "kit": "white",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.44,
+     "y": 0.441,
+     "w": 0.019,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.657,
+     "y": 0.433,
+     "w": 0.021,
+     "h": 0.103,
+     "kit": "white",
+     "num": 17,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.085,
+     "y": 0.554,
+     "w": 0.022,
+     "h": 0.128,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.39,
+     "y": 0.593,
+     "w": 0.025,
+     "h": 0.129,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.662,
+     "y": 0.581,
+     "w": 0.02,
+     "h": 0.131,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.598,
+     "y": 0.619,
+     "w": 0.042,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.304,
+     "y": 0.647,
+     "w": 0.024,
+     "h": 0.131,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.558,
+     "y": 0.676,
+     "w": 0.034,
+     "h": 0.122,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.674,
+     "y": 0.718,
+     "w": 0.03,
+     "h": 0.131,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.854,
+     "y": 0.519,
+     "w": 0.027,
+     "h": 0.119,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.96
+    }
+   ],
+   "ball": {
+    "x": 0.452,
+    "y": 0.377,
+    "w": 0.009,
+    "h": 0.013,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 168,
+   "scene": "Soccer match in a stadium, with blue and white teams attacking near the penalty area. No goalkeeper is visible in the frame; the referee is excluded.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.471,
+     "y": 0.301,
+     "w": 0.023,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.375,
+     "y": 0.328,
+     "w": 0.017,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.54,
+     "y": 0.378,
+     "w": 0.018,
+     "h": 0.099,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.445,
+     "y": 0.435,
+     "w": 0.022,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.655,
+     "y": 0.426,
+     "w": 0.02,
+     "h": 0.106,
+     "kit": "white",
+     "num": 17,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.203,
+     "y": 0.458,
+     "w": 0.023,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.096,
+     "y": 0.546,
+     "w": 0.023,
+     "h": 0.127,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.323,
+     "y": 0.647,
+     "w": 0.025,
+     "h": 0.128,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.399,
+     "y": 0.592,
+     "w": 0.023,
+     "h": 0.129,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.678,
+     "y": 0.579,
+     "w": 0.022,
+     "h": 0.126,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.646,
+     "y": 0.615,
+     "w": 0.022,
+     "h": 0.124,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.588,
+     "y": 0.671,
+     "w": 0.02,
+     "h": 0.124,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.703,
+     "y": 0.709,
+     "w": 0.029,
+     "h": 0.134,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.865,
+     "y": 0.517,
+     "w": 0.025,
+     "h": 0.116,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.457,
+    "y": 0.364,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 174,
+   "scene": "Soccer match in progress near the penalty area. The visible teams wear blue and white shirts with blue shorts; a yellow-shirted referee is excluded. The ball is just ahead of the blue player near the top-center of the field.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.468,
+     "y": 0.298,
+     "w": 0.033,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.394,
+     "y": 0.323,
+     "w": 0.019,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.546,
+     "y": 0.374,
+     "w": 0.019,
+     "h": 0.089,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.455,
+     "y": 0.43,
+     "w": 0.025,
+     "h": 0.103,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.238,
+     "y": 0.455,
+     "w": 0.03,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.114,
+     "y": 0.542,
+     "w": 0.027,
+     "h": 0.127,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.415,
+     "y": 0.589,
+     "w": 0.023,
+     "h": 0.128,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.35,
+     "y": 0.636,
+     "w": 0.021,
+     "h": 0.127,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.672,
+     "y": 0.611,
+     "w": 0.033,
+     "h": 0.107,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.686,
+     "y": 0.573,
+     "w": 0.024,
+     "h": 0.144,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.608,
+     "y": 0.67,
+     "w": 0.029,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.874,
+     "y": 0.512,
+     "w": 0.029,
+     "h": 0.119,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.721,
+     "y": 0.709,
+     "w": 0.038,
+     "h": 0.125,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.656,
+     "y": 0.389,
+     "w": 0.014,
+     "h": 0.013,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    }
+   ],
+   "ball": {
+    "x": 0.458,
+    "y": 0.371,
+    "w": 0.013,
+    "h": 0.012,
+    "conf": 0.91
+   }
+  },
+  {
+   "frame": 180,
+   "scene": "Soccer match in a stadium, with blue-shirted and white-shirted outfield players attacking near the penalty area. No goalkeeper is visible in the frame; the referee in yellow is excluded. The ball is airborne above the grass near the upper-left side of the penalty area.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.477,
+     "y": 0.293,
+     "w": 0.022,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.416,
+     "y": 0.324,
+     "w": 0.026,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.553,
+     "y": 0.368,
+     "w": 0.021,
+     "h": 0.087,
+     "kit": "white",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.47,
+     "y": 0.418,
+     "w": 0.02,
+     "h": 0.1,
+     "kit": "blue",
+     "num": 21,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.656,
+     "y": 0.418,
+     "w": 0.02,
+     "h": 0.099,
+     "kit": "white",
+     "num": 17,
+     "role": "outfield",
+     "conf": 0.81
+    },
+    {
+     "x": 0.272,
+     "y": 0.451,
+     "w": 0.03,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.887,
+     "y": 0.51,
+     "w": 0.029,
+     "h": 0.118,
+     "kit": "white",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.135,
+     "y": 0.537,
+     "w": 0.025,
+     "h": 0.118,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.714,
+     "y": 0.57,
+     "w": 0.025,
+     "h": 0.126,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.431,
+     "y": 0.584,
+     "w": 0.025,
+     "h": 0.128,
+     "kit": "blue",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.719,
+     "y": 0.602,
+     "w": 0.028,
+     "h": 0.109,
+     "kit": "white",
+     "num": 25,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.374,
+     "y": 0.633,
+     "w": 0.028,
+     "h": 0.126,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.632,
+     "y": 0.667,
+     "w": 0.028,
+     "h": 0.119,
+     "kit": "blue",
+     "num": 3,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.763,
+     "y": 0.699,
+     "w": 0.026,
+     "h": 0.131,
+     "kit": "white",
+     "num": 23,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.395,
+     "y": 0.369,
+     "w": 0.01,
+     "h": 0.012,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.2
+    }
+   ],
+   "ball": {
+    "x": 0.395,
+    "y": 0.369,
+    "w": 0.01,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 186,
+   "scene": "Soccer match in a penalty-area attack, with blue-shirted and white-shirted outfield players visible; no goalkeeper is visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.157,
+     "y": 0.528,
+     "w": 0.023,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.494,
+     "y": 0.281,
+     "w": 0.012,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.484,
+     "y": 0.417,
+     "w": 0.018,
+     "h": 0.099,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.45,
+     "y": 0.581,
+     "w": 0.021,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.737,
+     "y": 0.565,
+     "w": 0.024,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.658,
+     "y": 0.659,
+     "w": 0.023,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.3,
+     "y": 0.446,
+     "w": 0.027,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.436,
+     "y": 0.316,
+     "w": 0.024,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.561,
+     "y": 0.367,
+     "w": 0.028,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.657,
+     "y": 0.417,
+     "w": 0.022,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.897,
+     "y": 0.507,
+     "w": 0.025,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.759,
+     "y": 0.593,
+     "w": 0.023,
+     "h": 0.113,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.791,
+     "y": 0.686,
+     "w": 0.026,
+     "h": 0.126,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.404,
+     "y": 0.623,
+     "w": 0.025,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.389,
+     "y": 0.975,
+     "w": 0.022,
+     "h": 0.025,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.2
+    }
+   ],
+   "ball": {
+    "x": 0.339,
+    "y": 0.376,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 192,
+   "scene": "Soccer match in a stadium, with blue and white teams attacking near the penalty area. The referee is visible but excluded. The ball is airborne above the grass left of center. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.456,
+     "y": 0.314,
+     "w": 0.027,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.513,
+     "y": 0.28,
+     "w": 0.012,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.58,
+     "y": 0.358,
+     "w": 0.023,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.5,
+     "y": 0.411,
+     "w": 0.021,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.667,
+     "y": 0.41,
+     "w": 0.025,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.327,
+     "y": 0.437,
+     "w": 0.028,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.184,
+     "y": 0.525,
+     "w": 0.025,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.91,
+     "y": 0.506,
+     "w": 0.036,
+     "h": 0.111,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.433,
+     "y": 0.616,
+     "w": 0.025,
+     "h": 0.122,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.476,
+     "y": 0.577,
+     "w": 0.021,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.689,
+     "y": 0.658,
+     "w": 0.029,
+     "h": 0.118,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.768,
+     "y": 0.562,
+     "w": 0.026,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.796,
+     "y": 0.579,
+     "w": 0.028,
+     "h": 0.121,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.824,
+     "y": 0.681,
+     "w": 0.029,
+     "h": 0.128,
+     "kit": "white",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.004,
+     "y": 0.935,
+     "w": 0.029,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.415,
+     "y": 0.964,
+     "w": 0.027,
+     "h": 0.036,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.67
+    }
+   ],
+   "ball": {
+    "x": 0.297,
+    "y": 0.385,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 198,
+   "scene": "Soccer match in the attacking third near the penalty area. Players wear blue or white shirts, the ball is visible on the grass left of the penalty area, and no goalkeeper is visible in this frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.039,
+     "y": 0.913,
+     "w": 0.03,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.449,
+     "y": 0.946,
+     "w": 0.028,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.214,
+     "y": 0.523,
+     "w": 0.021,
+     "h": 0.108,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.351,
+     "y": 0.421,
+     "w": 0.029,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.535,
+     "y": 0.28,
+     "w": 0.018,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.473,
+     "y": 0.306,
+     "w": 0.031,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.597,
+     "y": 0.359,
+     "w": 0.023,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.52,
+     "y": 0.403,
+     "w": 0.02,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.681,
+     "y": 0.409,
+     "w": 0.023,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.933,
+     "y": 0.502,
+     "w": 0.03,
+     "h": 0.108,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.797,
+     "y": 0.558,
+     "w": 0.024,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.834,
+     "y": 0.581,
+     "w": 0.026,
+     "h": 0.112,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.721,
+     "y": 0.658,
+     "w": 0.025,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.858,
+     "y": 0.669,
+     "w": 0.03,
+     "h": 0.124,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.47,
+     "y": 0.608,
+     "w": 0.025,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.504,
+     "y": 0.571,
+     "w": 0.021,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    }
+   ],
+   "ball": {
+    "x": 0.268,
+    "y": 0.385,
+    "w": 0.009,
+    "h": 0.013,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 204,
+   "scene": "Football match in progress, with blue-shirted and white-shirted teams attacking near the penalty area; score 0\u20130 at 07:38.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "red"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.074,
+     "y": 0.886,
+     "w": 0.029,
+     "h": 0.114,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.243,
+     "y": 0.513,
+     "w": 0.03,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.373,
+     "y": 0.413,
+     "w": 0.032,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.496,
+     "y": 0.304,
+     "w": 0.028,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.56,
+     "y": 0.28,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.615,
+     "y": 0.356,
+     "w": 0.03,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.697,
+     "y": 0.405,
+     "w": 0.023,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.541,
+     "y": 0.399,
+     "w": 0.02,
+     "h": 0.138,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.507,
+     "y": 0.597,
+     "w": 0.024,
+     "h": 0.117,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.542,
+     "y": 0.568,
+     "w": 0.017,
+     "h": 0.146,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.824,
+     "y": 0.554,
+     "w": 0.023,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.869,
+     "y": 0.573,
+     "w": 0.028,
+     "h": 0.109,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.759,
+     "y": 0.652,
+     "w": 0.027,
+     "h": 0.115,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.9,
+     "y": 0.663,
+     "w": 0.027,
+     "h": 0.126,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.956,
+     "y": 0.496,
+     "w": 0.027,
+     "h": 0.105,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.484,
+     "y": 0.933,
+     "w": 0.024,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    }
+   ],
+   "ball": {
+    "x": 0.25,
+    "y": 0.393,
+    "w": 0.007,
+    "h": 0.011,
+    "conf": 0.97
+   }
+  },
+  {
+   "frame": 210,
+   "scene": "Soccer match in a stadium: France in blue shirts with white accents and England in white shirts with blue accents. The ball is visible on the grass left of center. Sixteen players are visible, including partially cropped players at the bottom and right edges; the referee is excluded.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.516,
+     "y": 0.303,
+     "w": 0.029,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.584,
+     "y": 0.276,
+     "w": 0.018,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.634,
+     "y": 0.354,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.559,
+     "y": 0.391,
+     "w": 0.034,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.711,
+     "y": 0.397,
+     "w": 0.023,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.388,
+     "y": 0.404,
+     "w": 0.033,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.264,
+     "y": 0.508,
+     "w": 0.032,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.542,
+     "y": 0.591,
+     "w": 0.026,
+     "h": 0.118,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.566,
+     "y": 0.563,
+     "w": 0.025,
+     "h": 0.116,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.851,
+     "y": 0.547,
+     "w": 0.024,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.905,
+     "y": 0.563,
+     "w": 0.028,
+     "h": 0.112,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.977,
+     "y": 0.495,
+     "w": 0.023,
+     "h": 0.106,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.797,
+     "y": 0.662,
+     "w": 0.024,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.928,
+     "y": 0.654,
+     "w": 0.028,
+     "h": 0.122,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.106,
+     "y": 0.865,
+     "w": 0.028,
+     "h": 0.135,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.518,
+     "y": 0.917,
+     "w": 0.028,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    }
+   ],
+   "ball": {
+    "x": 0.24,
+    "y": 0.385,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.97
+   }
+  },
+  {
+   "frame": 216,
+   "scene": "Soccer match in a stadium, with blue-shirted and white-shirted outfield players attacking near the right-side penalty area. The ball is visible on the grass left of center. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.533,
+     "y": 0.299,
+     "w": 0.026,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.607,
+     "y": 0.28,
+     "w": 0.023,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.65,
+     "y": 0.353,
+     "w": 0.026,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.724,
+     "y": 0.398,
+     "w": 0.026,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.406,
+     "y": 0.389,
+     "w": 0.029,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.584,
+     "y": 0.39,
+     "w": 0.028,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.291,
+     "y": 0.496,
+     "w": 0.032,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.577,
+     "y": 0.579,
+     "w": 0.026,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.576,
+     "y": 0.579,
+     "w": 0.026,
+     "h": 0.113,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.938,
+     "y": 0.556,
+     "w": 0.032,
+     "h": 0.115,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.938,
+     "y": 0.648,
+     "w": 0.03,
+     "h": 0.115,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.876,
+     "y": 0.545,
+     "w": 0.029,
+     "h": 0.117,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.833,
+     "y": 0.648,
+     "w": 0.027,
+     "h": 0.115,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.139,
+     "y": 0.848,
+     "w": 0.032,
+     "h": 0.152,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.553,
+     "y": 0.901,
+     "w": 0.03,
+     "h": 0.099,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    }
+   ],
+   "ball": {
+    "x": 0.239,
+    "y": 0.386,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 222,
+   "scene": "Soccer match in the attacking third, with blue-shirted and white-shirted outfield players visible around the penalty area. The ball is on the grass left of center. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.002,
+     "y": 0.343,
+     "w": 0.029,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.001,
+     "y": 0.601,
+     "w": 0.029,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.0,
+     "y": 0.772,
+     "w": 0.019,
+     "h": 0.123,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.551,
+     "y": 0.3,
+     "w": 0.027,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.626,
+     "y": 0.277,
+     "w": 0.028,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.416,
+     "y": 0.38,
+     "w": 0.027,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.665,
+     "y": 0.348,
+     "w": 0.025,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.741,
+     "y": 0.393,
+     "w": 0.024,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.603,
+     "y": 0.386,
+     "w": 0.027,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.317,
+     "y": 0.49,
+     "w": 0.021,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.511,
+     "y": 0.463,
+     "w": 0.019,
+     "h": 0.104,
+     "kit": "yellow",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.99
+    },
+    {
+     "x": 0.611,
+     "y": 0.572,
+     "w": 0.027,
+     "h": 0.114,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.629,
+     "y": 0.556,
+     "w": 0.025,
+     "h": 0.115,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.173,
+     "y": 0.837,
+     "w": 0.026,
+     "h": 0.126,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.868,
+     "y": 0.647,
+     "w": 0.026,
+     "h": 0.112,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.908,
+     "y": 0.539,
+     "w": 0.026,
+     "h": 0.119,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.967,
+     "y": 0.554,
+     "w": 0.024,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.587,
+     "y": 0.89,
+     "w": 0.027,
+     "h": 0.11,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.989,
+     "y": 0.646,
+     "w": 0.011,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    }
+   ],
+   "ball": {
+    "x": 0.241,
+    "y": 0.385,
+    "w": 0.007,
+    "h": 0.013,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 228,
+   "scene": "Soccer match with blue and white teams, score 0-0. The ball is visible on the left-center of the field. No goalkeeper is visible in this frame; the yellow-shirted referee is excluded.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.064,
+     "y": 0.33,
+     "w": 0.016,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.563,
+     "y": 0.293,
+     "w": 0.023,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.634,
+     "y": 0.281,
+     "w": 0.023,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.676,
+     "y": 0.353,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.424,
+     "y": 0.371,
+     "w": 0.026,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.629,
+     "y": 0.385,
+     "w": 0.022,
+     "h": 0.084,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.752,
+     "y": 0.39,
+     "w": 0.017,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.334,
+     "y": 0.48,
+     "w": 0.028,
+     "h": 0.101,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.651,
+     "y": 0.548,
+     "w": 0.016,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.637,
+     "y": 0.56,
+     "w": 0.016,
+     "h": 0.108,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.928,
+     "y": 0.532,
+     "w": 0.022,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.99,
+     "y": 0.555,
+     "w": 0.01,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.6
+    },
+    {
+     "x": 0.892,
+     "y": 0.643,
+     "w": 0.02,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.025,
+     "y": 0.75,
+     "w": 0.032,
+     "h": 0.13,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.197,
+     "y": 0.81,
+     "w": 0.038,
+     "h": 0.131,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.616,
+     "y": 0.869,
+     "w": 0.022,
+     "h": 0.131,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.65
+    }
+   ],
+   "ball": {
+    "x": 0.244,
+    "y": 0.385,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 234,
+   "scene": "Soccer match in progress: one team wears blue shirts with white accents, the other wears white shirts with blue accents. The referee is excluded. The ball is visible on the grass left of center. No goalkeeper is visible in this frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.103,
+     "y": 0.337,
+     "w": 0.022,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.571,
+     "y": 0.294,
+     "w": 0.018,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.641,
+     "y": 0.289,
+     "w": 0.024,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.423,
+     "y": 0.359,
+     "w": 0.031,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.681,
+     "y": 0.35,
+     "w": 0.027,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.641,
+     "y": 0.38,
+     "w": 0.023,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.757,
+     "y": 0.386,
+     "w": 0.023,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.348,
+     "y": 0.471,
+     "w": 0.023,
+     "h": 0.1,
+     "kit": "blue",
+     "num": 22,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.672,
+     "y": 0.542,
+     "w": 0.018,
+     "h": 0.111,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.55
+    },
+    {
+     "x": 0.66,
+     "y": 0.546,
+     "w": 0.02,
+     "h": 0.11,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.94,
+     "y": 0.528,
+     "w": 0.022,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.055,
+     "y": 0.564,
+     "w": 0.025,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.917,
+     "y": 0.636,
+     "w": 0.023,
+     "h": 0.11,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.002,
+     "y": 0.687,
+     "w": 0.02,
+     "h": 0.12,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.058,
+     "y": 0.739,
+     "w": 0.032,
+     "h": 0.121,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.224,
+     "y": 0.794,
+     "w": 0.027,
+     "h": 0.135,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.633,
+     "y": 0.851,
+     "w": 0.028,
+     "h": 0.138,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.9
+    }
+   ],
+   "ball": {
+    "x": 0.247,
+    "y": 0.383,
+    "w": 0.007,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 240,
+   "scene": "Soccer match in a stadium: blue-shirted and white-shirted outfield players are spread across the pitch, with the ball near the left-center. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.146,
+     "y": 0.324,
+     "w": 0.016,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.429,
+     "y": 0.356,
+     "w": 0.016,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.576,
+     "y": 0.294,
+     "w": 0.027,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.646,
+     "y": 0.284,
+     "w": 0.02,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.69,
+     "y": 0.357,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.655,
+     "y": 0.381,
+     "w": 0.026,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.761,
+     "y": 0.389,
+     "w": 0.017,
+     "h": 0.084,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.359,
+     "y": 0.469,
+     "w": 0.019,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.08,
+     "y": 0.564,
+     "w": 0.027,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.035,
+     "y": 0.673,
+     "w": 0.024,
+     "h": 0.119,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.09,
+     "y": 0.727,
+     "w": 0.029,
+     "h": 0.118,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.247,
+     "y": 0.784,
+     "w": 0.021,
+     "h": 0.127,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.68,
+     "y": 0.549,
+     "w": 0.02,
+     "h": 0.102,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.693,
+     "y": 0.537,
+     "w": 0.019,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.81
+    },
+    {
+     "x": 0.653,
+     "y": 0.84,
+     "w": 0.028,
+     "h": 0.13,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.954,
+     "y": 0.524,
+     "w": 0.022,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.932,
+     "y": 0.634,
+     "w": 0.027,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    }
+   ],
+   "ball": {
+    "x": 0.251,
+    "y": 0.383,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.98
+   }
+  },
+  {
+   "frame": 246,
+   "scene": "Soccer match on a grass field, with blue and white teams visible. The ball is on the field left of center; no goalkeeper is visible in this frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.172,
+     "y": 0.322,
+     "w": 0.018,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.42,
+     "y": 0.353,
+     "w": 0.028,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.584,
+     "y": 0.298,
+     "w": 0.014,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.646,
+     "y": 0.29,
+     "w": 0.012,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.686,
+     "y": 0.358,
+     "w": 0.02,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.669,
+     "y": 0.381,
+     "w": 0.019,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.764,
+     "y": 0.389,
+     "w": 0.021,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.364,
+     "y": 0.46,
+     "w": 0.024,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.101,
+     "y": 0.551,
+     "w": 0.027,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.058,
+     "y": 0.662,
+     "w": 0.03,
+     "h": 0.119,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.112,
+     "y": 0.717,
+     "w": 0.025,
+     "h": 0.114,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.259,
+     "y": 0.775,
+     "w": 0.03,
+     "h": 0.124,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.667,
+     "y": 0.822,
+     "w": 0.024,
+     "h": 0.128,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.954,
+     "y": 0.519,
+     "w": 0.027,
+     "h": 0.109,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.943,
+     "y": 0.632,
+     "w": 0.031,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.695,
+     "y": 0.544,
+     "w": 0.019,
+     "h": 0.099,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.709,
+     "y": 0.536,
+     "w": 0.017,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    }
+   ],
+   "ball": {
+    "x": 0.248,
+    "y": 0.385,
+    "w": 0.006,
+    "h": 0.01,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 252,
+   "scene": "Soccer match with blue and white teams; 17 outfield players are visible and the ball is on the grass left of center. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.194,
+     "y": 0.324,
+     "w": 0.019,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.412,
+     "y": 0.346,
+     "w": 0.023,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.578,
+     "y": 0.298,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.638,
+     "y": 0.288,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.685,
+     "y": 0.357,
+     "w": 0.014,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.673,
+     "y": 0.379,
+     "w": 0.015,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.688,
+     "y": 0.382,
+     "w": 0.016,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.748,
+     "y": 0.388,
+     "w": 0.023,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.368,
+     "y": 0.456,
+     "w": 0.018,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.115,
+     "y": 0.538,
+     "w": 0.018,
+     "h": 0.105,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.085,
+     "y": 0.647,
+     "w": 0.022,
+     "h": 0.111,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.134,
+     "y": 0.705,
+     "w": 0.019,
+     "h": 0.112,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.271,
+     "y": 0.762,
+     "w": 0.027,
+     "h": 0.122,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.707,
+     "y": 0.533,
+     "w": 0.02,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.708,
+     "y": 0.533,
+     "w": 0.021,
+     "h": 0.105,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.962,
+     "y": 0.515,
+     "w": 0.019,
+     "h": 0.106,
+     "kit": "blue",
+     "num": 82,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.957,
+     "y": 0.626,
+     "w": 0.02,
+     "h": 0.104,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.673,
+     "y": 0.809,
+     "w": 0.022,
+     "h": 0.128,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.97
+    }
+   ],
+   "ball": {
+    "x": 0.242,
+    "y": 0.381,
+    "w": 0.007,
+    "h": 0.012,
+    "conf": 0.93
+   }
+  },
+  {
+   "frame": 258,
+   "scene": "Soccer match in progress on a grass field. The two visible team kits are blue with white accents and white with blue accents. Multiple outfield players are visible; no goalkeeper is clearly visible in this frame. The ball is near the upper-left blue player.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.207,
+     "y": 0.319,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.4,
+     "y": 0.338,
+     "w": 0.013,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.573,
+     "y": 0.291,
+     "w": 0.013,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.63,
+     "y": 0.288,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.675,
+     "y": 0.357,
+     "w": 0.014,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.666,
+     "y": 0.372,
+     "w": 0.026,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.754,
+     "y": 0.381,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.361,
+     "y": 0.442,
+     "w": 0.019,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.714,
+     "y": 0.519,
+     "w": 0.027,
+     "h": 0.105,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.116,
+     "y": 0.533,
+     "w": 0.026,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.957,
+     "y": 0.503,
+     "w": 0.018,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.79
+    },
+    {
+     "x": 0.102,
+     "y": 0.639,
+     "w": 0.017,
+     "h": 0.094,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.143,
+     "y": 0.687,
+     "w": 0.02,
+     "h": 0.108,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.957,
+     "y": 0.619,
+     "w": 0.018,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.267,
+     "y": 0.748,
+     "w": 0.034,
+     "h": 0.122,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.675,
+     "y": 0.788,
+     "w": 0.019,
+     "h": 0.12,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.98
+    }
+   ],
+   "ball": {
+    "x": 0.233,
+    "y": 0.375,
+    "w": 0.007,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 264,
+   "scene": "Broadcast soccer match showing blue-shirted players against white-shirted players with blue shorts; the ball is near the left-side blue player. The referee is excluded, and no goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.21,
+     "y": 0.318,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.376,
+     "y": 0.333,
+     "w": 0.018,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.561,
+     "y": 0.292,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.615,
+     "y": 0.284,
+     "w": 0.017,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.663,
+     "y": 0.357,
+     "w": 0.014,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.67
+    },
+    {
+     "x": 0.658,
+     "y": 0.375,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.74,
+     "y": 0.378,
+     "w": 0.02,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.352,
+     "y": 0.435,
+     "w": 0.017,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.125,
+     "y": 0.52,
+     "w": 0.016,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.111,
+     "y": 0.623,
+     "w": 0.02,
+     "h": 0.104,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.14,
+     "y": 0.676,
+     "w": 0.03,
+     "h": 0.108,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.271,
+     "y": 0.737,
+     "w": 0.029,
+     "h": 0.12,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.714,
+     "y": 0.512,
+     "w": 0.016,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.724,
+     "y": 0.523,
+     "w": 0.017,
+     "h": 0.095,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.665,
+     "y": 0.774,
+     "w": 0.023,
+     "h": 0.12,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.951,
+     "y": 0.495,
+     "w": 0.018,
+     "h": 0.099,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.983,
+     "y": 0.506,
+     "w": 0.017,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.95,
+     "y": 0.613,
+     "w": 0.023,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    }
+   ],
+   "ball": {
+    "x": 0.23,
+    "y": 0.375,
+    "w": 0.006,
+    "h": 0.01,
+    "conf": 0.96
+   }
+  },
+  {
+   "frame": 270,
+   "scene": "Soccer match with blue and white outfield players on the pitch; referee in yellow excluded. The ball is visible near the blue player on the left. No goalkeeper is visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.208,
+     "y": 0.32,
+     "w": 0.018,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.355,
+     "y": 0.328,
+     "w": 0.018,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.544,
+     "y": 0.291,
+     "w": 0.02,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.603,
+     "y": 0.284,
+     "w": 0.013,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.343,
+     "y": 0.425,
+     "w": 0.016,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.648,
+     "y": 0.356,
+     "w": 0.014,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.655,
+     "y": 0.368,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.728,
+     "y": 0.376,
+     "w": 0.019,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.706,
+     "y": 0.506,
+     "w": 0.015,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.721,
+     "y": 0.514,
+     "w": 0.019,
+     "h": 0.09,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.938,
+     "y": 0.489,
+     "w": 0.02,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.97,
+     "y": 0.495,
+     "w": 0.02,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.99,
+     "y": 0.461,
+     "w": 0.01,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.61
+    },
+    {
+     "x": 0.948,
+     "y": 0.606,
+     "w": 0.019,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.121,
+     "y": 0.503,
+     "w": 0.018,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.117,
+     "y": 0.608,
+     "w": 0.019,
+     "h": 0.097,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.146,
+     "y": 0.665,
+     "w": 0.025,
+     "h": 0.106,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.93
+    },
+    {
+     "x": 0.271,
+     "y": 0.727,
+     "w": 0.019,
+     "h": 0.117,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.658,
+     "y": 0.758,
+     "w": 0.024,
+     "h": 0.119,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.94
+    }
+   ],
+   "ball": {
+    "x": 0.228,
+    "y": 0.374,
+    "w": 0.006,
+    "h": 0.009,
+    "conf": 0.93
+   }
+  },
+  {
+   "frame": 276,
+   "scene": "Wide soccer match scene with blue and white teams, score 0-0 at 07:40. Players are spread across the field, with the ball near a blue player on the left. No goalkeeper is clearly visible in the frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.208,
+     "y": 0.303,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.328,
+     "y": 0.315,
+     "w": 0.029,
+     "h": 0.055,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.537,
+     "y": 0.283,
+     "w": 0.011,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.589,
+     "y": 0.276,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.636,
+     "y": 0.343,
+     "w": 0.014,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.647,
+     "y": 0.351,
+     "w": 0.02,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.724,
+     "y": 0.361,
+     "w": 0.013,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.702,
+     "y": 0.492,
+     "w": 0.018,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.723,
+     "y": 0.498,
+     "w": 0.021,
+     "h": 0.086,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.114,
+     "y": 0.488,
+     "w": 0.027,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.122,
+     "y": 0.577,
+     "w": 0.019,
+     "h": 0.078,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.145,
+     "y": 0.644,
+     "w": 0.022,
+     "h": 0.106,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.262,
+     "y": 0.709,
+     "w": 0.028,
+     "h": 0.115,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.655,
+     "y": 0.733,
+     "w": 0.023,
+     "h": 0.115,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.98
+    },
+    {
+     "x": 0.933,
+     "y": 0.469,
+     "w": 0.02,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.958,
+     "y": 0.475,
+     "w": 0.018,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.976,
+     "y": 0.444,
+     "w": 0.024,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.951,
+     "y": 0.59,
+     "w": 0.017,
+     "h": 0.095,
+     "kit": "blue",
+     "num": 24,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.995,
+     "y": 0.604,
+     "w": 0.005,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.3
+    }
+   ],
+   "ball": {
+    "x": 0.225,
+    "y": 0.359,
+    "w": 0.007,
+    "h": 0.009,
+    "conf": 0.92
+   }
+  },
+  {
+   "frame": 282,
+   "scene": "Wide soccer match in a stadium, with blue and white outfield players spread across the pitch; no goalkeeper is clearly visible. The ball is on the grass near the left side of the frame.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.21,
+     "y": 0.289,
+     "w": 0.01,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.318,
+     "y": 0.295,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.521,
+     "y": 0.262,
+     "w": 0.021,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.579,
+     "y": 0.259,
+     "w": 0.016,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.622,
+     "y": 0.33,
+     "w": 0.017,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.641,
+     "y": 0.338,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.709,
+     "y": 0.348,
+     "w": 0.025,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.695,
+     "y": 0.476,
+     "w": 0.018,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.722,
+     "y": 0.475,
+     "w": 0.021,
+     "h": 0.09,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.922,
+     "y": 0.451,
+     "w": 0.021,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.942,
+     "y": 0.432,
+     "w": 0.018,
+     "h": 0.084,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.956,
+     "y": 0.46,
+     "w": 0.018,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.99,
+     "y": 0.531,
+     "w": 0.01,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.65
+    },
+    {
+     "x": 0.112,
+     "y": 0.469,
+     "w": 0.018,
+     "h": 0.094,
+     "kit": "blue",
+     "num": 12,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.128,
+     "y": 0.557,
+     "w": 0.02,
+     "h": 0.093,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.146,
+     "y": 0.626,
+     "w": 0.019,
+     "h": 0.102,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.26,
+     "y": 0.687,
+     "w": 0.021,
+     "h": 0.114,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.65,
+     "y": 0.711,
+     "w": 0.021,
+     "h": 0.117,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.946,
+     "y": 0.574,
+     "w": 0.018,
+     "h": 0.101,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.9
+    }
+   ],
+   "ball": {
+    "x": 0.221,
+    "y": 0.346,
+    "w": 0.007,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 288,
+   "scene": "Soccer match in a stadium, with blue-shirted and white-shirted outfield players spread across the pitch; the ball is near the blue player on the left. No goalkeeper is clearly visible.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.207,
+     "y": 0.277,
+     "w": 0.011,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.302,
+     "y": 0.289,
+     "w": 0.015,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.304,
+     "y": 0.371,
+     "w": 0.021,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.85
+    },
+    {
+     "x": 0.112,
+     "y": 0.451,
+     "w": 0.018,
+     "h": 0.094,
+     "kit": "blue",
+     "num": 12,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.135,
+     "y": 0.533,
+     "w": 0.019,
+     "h": 0.094,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.146,
+     "y": 0.615,
+     "w": 0.018,
+     "h": 0.099,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.261,
+     "y": 0.674,
+     "w": 0.018,
+     "h": 0.113,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.521,
+     "y": 0.259,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.572,
+     "y": 0.258,
+     "w": 0.014,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.614,
+     "y": 0.325,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.638,
+     "y": 0.333,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.73
+    },
+    {
+     "x": 0.706,
+     "y": 0.338,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.7
+    },
+    {
+     "x": 0.692,
+     "y": 0.465,
+     "w": 0.018,
+     "h": 0.089,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.68
+    },
+    {
+     "x": 0.723,
+     "y": 0.474,
+     "w": 0.018,
+     "h": 0.081,
+     "kit": "white",
+     "num": 4,
+     "role": "outfield",
+     "conf": 0.78
+    },
+    {
+     "x": 0.652,
+     "y": 0.695,
+     "w": 0.021,
+     "h": 0.116,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.919,
+     "y": 0.438,
+     "w": 0.02,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.6
+    },
+    {
+     "x": 0.955,
+     "y": 0.415,
+     "w": 0.019,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.58
+    },
+    {
+     "x": 0.928,
+     "y": 0.448,
+     "w": 0.017,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.55
+    },
+    {
+     "x": 0.945,
+     "y": 0.465,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.55
+    },
+    {
+     "x": 0.949,
+     "y": 0.565,
+     "w": 0.02,
+     "h": 0.094,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.75
+    },
+    {
+     "x": 0.985,
+     "y": 0.517,
+     "w": 0.015,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.52
+    }
+   ],
+   "ball": {
+    "x": 0.221,
+    "y": 0.339,
+    "w": 0.009,
+    "h": 0.013,
+    "conf": 0.91
+   }
+  },
+  {
+   "frame": 294,
+   "scene": "Football match in a stadium, with blue-shirted and white-shirted teams spread across the field; the ball is near a blue player on the left.",
+   "kits": [
+    {
+     "colour": "blue",
+     "accent": "white"
+    },
+    {
+     "colour": "white",
+     "accent": "blue"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.208,
+     "y": 0.273,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.94
+    },
+    {
+     "x": 0.283,
+     "y": 0.283,
+     "w": 0.02,
+     "h": 0.055,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.516,
+     "y": 0.251,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.563,
+     "y": 0.252,
+     "w": 0.016,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.293,
+     "y": 0.36,
+     "w": 0.019,
+     "h": 0.082,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.91
+    },
+    {
+     "x": 0.113,
+     "y": 0.439,
+     "w": 0.018,
+     "h": 0.093,
+     "kit": "blue",
+     "num": 12,
+     "role": "outfield",
+     "conf": 0.97
+    },
+    {
+     "x": 0.148,
+     "y": 0.514,
+     "w": 0.019,
+     "h": 0.092,
+     "kit": "white",
+     "num": 7,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.147,
+     "y": 0.599,
+     "w": 0.022,
+     "h": 0.097,
+     "kit": "blue",
+     "num": 5,
+     "role": "outfield",
+     "conf": 0.96
+    },
+    {
+     "x": 0.254,
+     "y": 0.661,
+     "w": 0.026,
+     "h": 0.113,
+     "kit": "blue",
+     "num": 13,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.602,
+     "y": 0.318,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.636,
+     "y": 0.319,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.707,
+     "y": 0.333,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.686,
+     "y": 0.462,
+     "w": 0.028,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.87
+    },
+    {
+     "x": 0.715,
+     "y": 0.459,
+     "w": 0.025,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.914,
+     "y": 0.431,
+     "w": 0.022,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.946,
+     "y": 0.408,
+     "w": 0.015,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.94,
+     "y": 0.442,
+     "w": 0.022,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.947,
+     "y": 0.474,
+     "w": 0.022,
+     "h": 0.084,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.58
+    },
+    {
+     "x": 0.979,
+     "y": 0.508,
+     "w": 0.02,
+     "h": 0.097,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.95,
+     "y": 0.559,
+     "w": 0.026,
+     "h": 0.096,
+     "kit": "blue",
+     "num": 74,
+     "role": "outfield",
+     "conf": 0.95
+    },
+    {
+     "x": 0.646,
+     "y": 0.681,
+     "w": 0.021,
+     "h": 0.11,
+     "kit": "white",
+     "num": 99,
+     "role": "outfield",
+     "conf": 0.97
+    }
+   ],
+   "ball": {
+    "x": 0.222,
+    "y": 0.331,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  }
+ ],
+ "dropped": []
+}

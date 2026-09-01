@@ -1,0 +1,13 @@
+[project]
+name = "trackthegame"
+version = "0.1.0"
+description = "Annotate 30s of game footage — players, teams, jersey numbers, ball — using VLMs for perception and geometry for identity."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pillow>=12.3.0",
+    "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
+    "scipy>=1.14",      # linear_sum_assignment — the Hungarian step in track.py
+    "numpy>=2.1",
+]

@@ -1,0 +1,43 @@
+# ---- secrets. non-negotiable. -------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ---- python -------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+
+# ---- big regenerable intermediates --------------------------------------
+# Untrimmed source downloads. The 30s cut in clips/ is what matters; the raw
+# pull is often hundreds of MB and yt-dlp can fetch it again from the URL
+# recorded in fetch_clips.py.
+clips/raw/
+
+# Frames extracted for a run. Hundreds of JPEGs per clip, fully regenerable
+# from the committed clip in seconds.
+outputs/frames/
+
+# Local scratch
+outputs/videos/_*
+*.tmp
+
+# Development screenshots. Renders of the tracker mid-development, kept locally
+# for reference. Real work, but not evidence and not a deliverable — the
+# committed videos and docs/*.jsonl carry the argument.
+Screenshot/
+
+# Zeta Solutions' own assignment brief. Their document, not ours to publish in a
+# public repo. Kept on disk as the source of truth — excluded here, not deleted.
+Zeta-Solutions-Track-the-Game.pdf
+
+# Superseded renders kept for reference. 223 MB of development history — real
+# work, but not the deliverable, and it would dominate a clone.
+outputs/videos/legacy/
+
+# ---- deliberately NOT ignored -------------------------------------------
+# clips/*.mp4            the five 30s inputs — the brief asks for them
+# outputs/videos/*.mp4   the five annotated outputs — the deliverable
+# outputs/detections/    per-frame model output; the evidence behind the report
+# outputs/tracks/        tracker output; lets a reader re-render without an API key
+# docs/*.jsonl           every measurement we've cited

@@ -1,0 +1,249 @@
+{
+ "clip": "hard10_allstars.mp4",
+ "model": "openai/gpt-5.6-luna",
+ "fps": 10,
+ "width": null,
+ "tag": "eff_openai_gpt_5_6_luna_high",
+ "ts": "2026-08-28T14:24:22.056353+00:00",
+ "effort": "high",
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 43.0,
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 43.34208090000902,
+ "n_source_frames": 300,
+ "frames": [
+  {
+   "frame": 240,
+   "scene": "A wide elevated broadcast view under bright stadium lighting shows white shirts with blue accents and blue shirts with white accents.",
+   "kits": [
+    {
+     "colour": "white",
+     "accent": "blue"
+    },
+    {
+     "colour": "blue",
+     "accent": "white"
+    }
+   ],
+   "players": [
+    {
+     "x": 0.147,
+     "y": 0.207,
+     "w": 0.013,
+     "h": 0.05,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.06,
+     "y": 0.407,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.84
+    },
+    {
+     "x": 0.269,
+     "y": 0.288,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.366,
+     "y": 0.265,
+     "w": 0.016,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.49,
+     "y": 0.285,
+     "w": 0.016,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.424,
+     "y": 0.331,
+     "w": 0.016,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.72
+    },
+    {
+     "x": 0.407,
+     "y": 0.364,
+     "w": 0.015,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.82
+    },
+    {
+     "x": 0.384,
+     "y": 0.385,
+     "w": 0.017,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.76
+    },
+    {
+     "x": 0.472,
+     "y": 0.408,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.86
+    },
+    {
+     "x": 0.52,
+     "y": 0.379,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.88
+    },
+    {
+     "x": 0.597,
+     "y": 0.388,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.89
+    },
+    {
+     "x": 0.492,
+     "y": 0.425,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.8
+    },
+    {
+     "x": 0.561,
+     "y": 0.467,
+     "w": 0.022,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.391,
+     "y": 0.531,
+     "w": 0.02,
+     "h": 0.089,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.64,
+     "y": 0.54,
+     "w": 0.019,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.205,
+     "y": 0.558,
+     "w": 0.02,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.191,
+     "y": 0.64,
+     "w": 0.025,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.92
+    },
+    {
+     "x": 0.646,
+     "y": 0.689,
+     "w": 0.023,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "role": "outfield",
+     "conf": 0.9
+    },
+    {
+     "x": 0.848,
+     "y": 0.335,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "red",
+     "num": null,
+     "role": "goalkeeper",
+     "conf": 0.94
+    }
+   ],
+   "ball": {
+    "x": 0.216,
+    "y": 0.714,
+    "w": 0.008,
+    "h": 0.011,
+    "conf": 0.88
+   }
+  }
+ ],
+ "dropped": [
+  {
+   "frame": 0,
+   "error": "deadline"
+  },
+  {
+   "frame": 60,
+   "error": "deadline"
+  },
+  {
+   "frame": 120,
+   "error": "deadline"
+  },
+  {
+   "frame": 180,
+   "error": "deadline"
+  }
+ ]
+}

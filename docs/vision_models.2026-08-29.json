@@ -1,0 +1,5377 @@
+{
+ "fetched": "2026-08-28T10:54:04.193100+00:00",
+ "total_models": 387,
+ "vision_models": 223,
+ "models": [
+  {
+   "id": "openrouter/auto-beta",
+   "name": "Auto Router (Beta)",
+   "created": 1784311165,
+   "modalities": [
+    "text",
+    "image",
+    "audio",
+    "file",
+    "video"
+   ],
+   "output_modalities": [
+    "text",
+    "image"
+   ],
+   "context": 2000000,
+   "max_output": null,
+   "in_per_m": -1000000.0,
+   "out_per_m": -1000000.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openrouter/auto",
+   "name": "Auto Router",
+   "created": 1699401600,
+   "modalities": [
+    "text",
+    "image",
+    "audio",
+    "file",
+    "video"
+   ],
+   "output_modalities": [
+    "text",
+    "image"
+   ],
+   "context": 2000000,
+   "max_output": null,
+   "in_per_m": -1000000.0,
+   "out_per_m": -1000000.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "dots-studio/dots-3-note-preview:free",
+   "name": "Dots Studio: Dots3-Note Preview (free)",
+   "created": 1786680361,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 512000,
+   "max_output": 460800,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "thinkingmachines/inkling-small:free",
+   "name": "Thinking Machines: Inkling Small (free)",
+   "created": 1785443117,
+   "modalities": [
+    "text",
+    "image",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 262144,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "thinkingmachines/inkling:free",
+   "name": "Thinking Machines: Inkling (free)",
+   "created": 1784325956,
+   "modalities": [
+    "text",
+    "image",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 262144,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "nvidia/nemotron-3.5-content-safety:free",
+   "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+   "created": 1780581864,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 8192,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "minimax/minimax-m3:free",
+   "name": "MiniMax: MiniMax M3 (free)",
+   "created": 1780245374,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+   "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
+   "created": 1777393095,
+   "modalities": [
+    "text",
+    "audio",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 256000,
+   "max_output": 65536,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-4-26b-a4b-it:free",
+   "name": "Google: Gemma 4 26B A4B  (free)",
+   "created": 1775227989,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-4-31b-it:free",
+   "name": "Google: Gemma 4 31B (free)",
+   "created": 1775148486,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/lyria-3-pro-preview",
+   "name": "Google: Lyria 3 Pro Preview",
+   "created": 1774907286,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text",
+    "audio"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/lyria-3-clip-preview",
+   "name": "Google: Lyria 3 Clip Preview",
+   "created": 1774907255,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text",
+    "audio"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openrouter/free",
+   "name": "Free Models Router",
+   "created": 1769917427,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": null,
+   "in_per_m": 0.0,
+   "out_per_m": 0.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "nex-agi/nex-n2-mini",
+   "name": "Nex AGI: Nex-N2-Mini",
+   "created": 1782312964,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.024999999999999998,
+   "out_per_m": 0.09999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.7-flash",
+   "name": "Qwen: Qwen3.7 Flash",
+   "created": 1785190561,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.03,
+   "out_per_m": 0.13,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-3-4b-it",
+   "name": "Google: Gemma 3 4B",
+   "created": 1741905510,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 16384,
+   "in_per_m": 0.049999999999999996,
+   "out_per_m": 0.09999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-3-12b-it",
+   "name": "Google: Gemma 3 12B",
+   "created": 1741902625,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 16384,
+   "in_per_m": 0.049999999999999996,
+   "out_per_m": 0.15,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-flash-lite:batch",
+   "name": "Google: Gemini 2.5 Flash Lite (batch)",
+   "created": 1753200276,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65535,
+   "in_per_m": 0.049999999999999996,
+   "out_per_m": 0.19999999999999998,
+   "per_image": 5e-08,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5-nano",
+   "name": "OpenAI: GPT-5 Nano",
+   "created": 1754587402,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.049999999999999996,
+   "out_per_m": 0.39999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "amazon/nova-lite-v1",
+   "name": "Amazon: Nova Lite 1.0",
+   "created": 1733437363,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 300000,
+   "max_output": 5120,
+   "in_per_m": 0.06,
+   "out_per_m": 0.24,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "qwen/qwen3.5-flash-02-23",
+   "name": "Qwen: Qwen3.5-Flash",
+   "created": 1772053776,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.065,
+   "out_per_m": 0.26,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-4-26b-a4b-it",
+   "name": "Google: Gemma 4 26B A4B ",
+   "created": 1775227989,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 16384,
+   "in_per_m": 0.07,
+   "out_per_m": 0.33999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-small-3.2-24b-instruct",
+   "name": "Mistral: Mistral Small 3.2 24B",
+   "created": 1750443016,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 16384,
+   "in_per_m": 0.075,
+   "out_per_m": 0.19999999999999998,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "z-ai/glm-5.3-flash",
+   "name": "Z.ai: GLM 5.3 Flash",
+   "created": 1787752741,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1310720,
+   "max_output": 131072,
+   "in_per_m": 0.075,
+   "out_per_m": 0.25,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "bytedance-seed/seed-1.6-flash",
+   "name": "ByteDance Seed: Seed 1.6 Flash",
+   "created": 1766505011,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.075,
+   "out_per_m": 0.3,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-3-27b-it",
+   "name": "Google: Gemma 3 27B",
+   "created": 1741756359,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 117964,
+   "in_per_m": 0.08,
+   "out_per_m": 0.44999999999999996,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemma-4-31b-it",
+   "name": "Google: Gemma 4 31B",
+   "created": 1775148486,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 16384,
+   "in_per_m": 0.09,
+   "out_per_m": 0.33999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "rekaai/reka-edge",
+   "name": "Reka Edge",
+   "created": 1774026965,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 16384,
+   "max_output": 14745,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.09999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/ministral-3b-2512",
+   "name": "Mistral: Ministral 3 3B 2512",
+   "created": 1764681560,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 104857,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.09999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-9b",
+   "name": "Qwen: Qwen3.5-9B",
+   "created": 1773152396,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.15,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta/muse-spark-1.2-contributor",
+   "name": "Meta: Muse Spark 1.2 Contributor",
+   "created": 1787336476,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.19999999999999998,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "bytedance/ui-tars-1.5-7b",
+   "name": "ByteDance: UI-TARS 7B ",
+   "created": 1753205056,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 2048,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.19999999999999998,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "bytedance-seed/seed-2.0-mini",
+   "name": "ByteDance Seed: Seed-2.0-Mini",
+   "created": 1772131107,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 131072,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.39999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-flash-lite",
+   "name": "Google: Gemini 2.5 Flash Lite",
+   "created": 1753200276,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65535,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.39999999999999997,
+   "per_image": 1e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-4.1-nano",
+   "name": "OpenAI: GPT-4.1 Nano",
+   "created": 1744651369,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1047576,
+   "max_output": 32768,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.39999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "qwen/qwen3.6-35b-a3b",
+   "name": "Qwen: Qwen3.6 35B A3B",
+   "created": 1777260255,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.09999999999999999,
+   "out_per_m": 0.8999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-32b-instruct",
+   "name": "Qwen: Qwen3 VL 32B Instruct",
+   "created": 1761231332,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 0.10400000000000001,
+   "out_per_m": 0.41600000000000004,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta-llama/llama-4-scout",
+   "name": "Meta: Llama 4 Scout",
+   "created": 1743881519,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1310720,
+   "max_output": 8192,
+   "in_per_m": 0.11,
+   "out_per_m": 0.33999999999999997,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-8b-instruct",
+   "name": "Qwen: Qwen3 VL 8B Instruct",
+   "created": 1760463308,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.117,
+   "out_per_m": 0.45499999999999996,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-flash-lite:batch",
+   "name": "Google: Gemini 3.1 Flash Lite (batch)",
+   "created": 1778168828,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.125,
+   "out_per_m": 0.75,
+   "per_image": 1.25e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-30b-a3b-instruct",
+   "name": "Qwen: Qwen3 VL 30B A3B Instruct",
+   "created": 1759794476,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.13,
+   "out_per_m": 0.52,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "xiaomi/mimo-v2.5",
+   "name": "Xiaomi: MiMo-V2.5",
+   "created": 1776874269,
+   "modalities": [
+    "text",
+    "audio",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 131072,
+   "in_per_m": 0.14,
+   "out_per_m": 0.28,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/ministral-8b-2512",
+   "name": "Mistral: Ministral 3 8B 2512",
+   "created": 1764681654,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.15,
+   "out_per_m": 0.15,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/ministral-8b-2512:batch",
+   "name": "Mistral: Ministral 3 8B 2512 (batch)",
+   "created": 1764681654,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.15,
+   "out_per_m": 0.15,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.8-flash",
+   "name": "Qwen: Qwen3.8 Flash",
+   "created": 1787773060,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 131072,
+   "in_per_m": 0.15,
+   "out_per_m": 0.47,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-small-2603",
+   "name": "Mistral: Mistral Small 4",
+   "created": 1773695685,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.15,
+   "out_per_m": 0.6,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-small-2603:batch",
+   "name": "Mistral: Mistral Small 4 (batch)",
+   "created": 1773695685,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.15,
+   "out_per_m": 0.6,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-4o-mini",
+   "name": "OpenAI: GPT-4o-mini",
+   "created": 1721260800,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 16384,
+   "in_per_m": 0.15,
+   "out_per_m": 0.6,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4o-mini-2024-07-18",
+   "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+   "created": 1721260800,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 16384,
+   "in_per_m": 0.15,
+   "out_per_m": 0.6,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-3.5-flash-lite:batch",
+   "name": "Google: Gemini 3.5 Flash Lite (batch)",
+   "created": 1784646726,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.15,
+   "out_per_m": 1.25,
+   "per_image": 1.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-flash:batch",
+   "name": "Google: Gemini 2.5 Flash (batch)",
+   "created": 1750172488,
+   "modalities": [
+    "file",
+    "image",
+    "text",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65535,
+   "in_per_m": 0.15,
+   "out_per_m": 1.25,
+   "per_image": 1.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "perceptron/perceptron-mk1",
+   "name": "Perceptron: Perceptron Mk1",
+   "created": 1778597029,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 32768,
+   "max_output": 8192,
+   "in_per_m": 0.15,
+   "out_per_m": 1.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta-llama/llama-guard-4-12b",
+   "name": "Meta: Llama Guard 4 12B",
+   "created": 1745975193,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 163840,
+   "max_output": 16384,
+   "in_per_m": 0.18,
+   "out_per_m": 0.18,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-8b-thinking",
+   "name": "Qwen: Qwen3 VL 8B Thinking",
+   "created": 1760463746,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 0.18,
+   "out_per_m": 2.0999999999999996,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.7-flash:batch",
+   "name": "Google: Gemini 3.7 Flash (batch)",
+   "created": 1786640581,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.1875,
+   "out_per_m": 0.9375,
+   "per_image": 1.875e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.6-flash",
+   "name": "Qwen: Qwen3.6 Flash",
+   "created": 1777261362,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.1875,
+   "out_per_m": 1.125,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-27b",
+   "name": "Qwen: Qwen3.5-27B",
+   "created": 1772053810,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 65536,
+   "in_per_m": 0.195,
+   "out_per_m": 1.56,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/ministral-14b-2512",
+   "name": "Mistral: Ministral 3 14B 2512",
+   "created": 1764681735,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 0.19999999999999998,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta-llama/llama-4-maverick",
+   "name": "Meta: Llama 4 Maverick",
+   "created": 1743881822,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 16384,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 0.7999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "minimax/minimax-01",
+   "name": "MiniMax: MiniMax-01",
+   "created": 1736915462,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000192,
+   "max_output": 900172,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 1.1,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "stepfun/step-3.7-flash",
+   "name": "StepFun: Step 3.7 Flash",
+   "created": 1779985069,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 230400,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 1.15,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.6-luna-pro",
+   "name": "OpenAI: GPT-5.6 Luna Pro",
+   "created": 1783590867,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 1.2,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.6-luna",
+   "name": "OpenAI: GPT-5.6 Luna",
+   "created": 1783590864,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 1.2,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.4-nano",
+   "name": "OpenAI: GPT-5.4 Nano",
+   "created": 1773748187,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 1.25,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "qwen/qwen3-vl-30b-a3b-thinking",
+   "name": "Qwen: Qwen3 VL 30B A3B Thinking",
+   "created": 1759794479,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.19999999999999998,
+   "out_per_m": 2.4,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-235b-a22b-instruct",
+   "name": "Qwen: Qwen3 VL 235B A22B Instruct",
+   "created": 1758668687,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.21,
+   "out_per_m": 1.9,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "deepseek/deepseek-v4-flash-vision-exp",
+   "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+   "created": 1787311563,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 384000,
+   "in_per_m": 0.22,
+   "out_per_m": 0.66,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen2.5-vl-72b-instruct",
+   "name": "Qwen: Qwen2.5 VL 72B Instruct",
+   "created": 1738410311,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 28800,
+   "in_per_m": 0.25,
+   "out_per_m": 0.75,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "nex-agi/nex-n2-pro",
+   "name": "Nex AGI: Nex-N2-Pro",
+   "created": 1780937140,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.25,
+   "out_per_m": 1.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-35b-a3b",
+   "name": "Qwen: Qwen3.5-35B-A3B",
+   "created": 1772053822,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.25,
+   "out_per_m": 1.25,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-3-haiku",
+   "name": "Anthropic: Claude 3 Haiku",
+   "created": 1710288000,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 4096,
+   "in_per_m": 0.25,
+   "out_per_m": 1.25,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-3.1-flash-lite-image",
+   "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
+   "created": 1782837225,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 65536,
+   "max_output": 58982,
+   "in_per_m": 0.25,
+   "out_per_m": 1.5,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-flash-lite",
+   "name": "Google: Gemini 3.1 Flash Lite",
+   "created": 1778168828,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.25,
+   "out_per_m": 1.5,
+   "per_image": 2.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-flash-lite-preview",
+   "name": "Google: Gemini 3.1 Flash Lite Preview",
+   "created": 1772512673,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.25,
+   "out_per_m": 1.5,
+   "per_image": 2.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3-flash-preview:batch",
+   "name": "Google: Gemini 3 Flash Preview (batch)",
+   "created": 1765987078,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.25,
+   "out_per_m": 1.5,
+   "per_image": 2.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "bytedance-seed/seed-2.0-lite",
+   "name": "ByteDance Seed: Seed-2.0-Lite",
+   "created": 1773157231,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 131072,
+   "in_per_m": 0.25,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "bytedance-seed/seed-1.6",
+   "name": "ByteDance Seed: Seed 1.6",
+   "created": 1766504997,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 32768,
+   "in_per_m": 0.25,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.1-codex-mini",
+   "name": "OpenAI: GPT-5.1-Codex-Mini",
+   "created": 1763057820,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.25,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5-mini",
+   "name": "OpenAI: GPT-5 Mini",
+   "created": 1754587407,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.25,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "qwen/qwen3.5-plus-02-15",
+   "name": "Qwen: Qwen3.5 Plus 2026-02-15",
+   "created": 1771229416,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.26,
+   "out_per_m": 1.56,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-122b-a10b",
+   "name": "Qwen: Qwen3.5-122B-A10B",
+   "created": 1772053789,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.26,
+   "out_per_m": 2.08,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "z-ai/glm-4.6v",
+   "name": "Z.ai: GLM 4.6V",
+   "created": 1765207462,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 0.3,
+   "out_per_m": 0.8999999999999999,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "minimax/minimax-m3",
+   "name": "MiniMax: MiniMax M3",
+   "created": 1780245374,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 512000,
+   "in_per_m": 0.3,
+   "out_per_m": 1.2,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "minimax/minimax-m3:batch",
+   "name": "MiniMax: MiniMax M3 (batch)",
+   "created": 1780245374,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 524288,
+   "max_output": 471859,
+   "in_per_m": 0.3,
+   "out_per_m": 1.2,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-plus-20260420",
+   "name": "Qwen: Qwen3.5 Plus 2026-04-20",
+   "created": 1777261368,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.3,
+   "out_per_m": 1.7999999999999998,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.5-flash-lite",
+   "name": "Google: Gemini 3.5 Flash Lite",
+   "created": 1784646726,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.3,
+   "out_per_m": 2.5,
+   "per_image": 3e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "amazon/nova-2-lite-v1",
+   "name": "Amazon: Nova 2 Lite",
+   "created": 1764696672,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65535,
+   "in_per_m": 0.3,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-2.5-flash-image",
+   "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
+   "created": 1759870431,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 32768,
+   "max_output": 8192,
+   "in_per_m": 0.3,
+   "out_per_m": 2.5,
+   "per_image": 3e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-flash",
+   "name": "Google: Gemini 2.5 Flash",
+   "created": 1750172488,
+   "modalities": [
+    "file",
+    "image",
+    "text",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65535,
+   "in_per_m": 0.3,
+   "out_per_m": 2.5,
+   "per_image": 3e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.7-plus",
+   "name": "Qwen: Qwen3.7 Plus",
+   "created": 1780491783,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 131072,
+   "in_per_m": 0.32,
+   "out_per_m": 1.28,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.6-plus",
+   "name": "Qwen: Qwen3.6 Plus",
+   "created": 1775133557,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 65536,
+   "in_per_m": 0.325,
+   "out_per_m": 1.95,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta/muse-glimmer-30b",
+   "name": "Meta: Muse Glimmer 30B",
+   "created": 1786302394,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 117964,
+   "in_per_m": 0.35,
+   "out_per_m": 1.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-small-3.1-24b-instruct",
+   "name": "Mistral: Mistral Small 3.1 24B",
+   "created": 1742238937,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 102400,
+   "in_per_m": 0.351,
+   "out_per_m": 0.5549999999999999,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.7-flash",
+   "name": "Google: Gemini 3.7 Flash",
+   "created": 1786640581,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.375,
+   "out_per_m": 1.875,
+   "per_image": 3.75e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.6-flash:batch",
+   "name": "Google: Gemini 3.6 Flash (batch)",
+   "created": 1784646733,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.375,
+   "out_per_m": 1.875,
+   "per_image": 3.75e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "~google/gemini-flash-latest",
+   "name": "Google Gemini Flash Latest",
+   "created": 1777318398,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.375,
+   "out_per_m": 1.875,
+   "per_image": 3.75e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.5-397b-a17b",
+   "name": "Qwen: Qwen3.5 397B A17B",
+   "created": 1771223018,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 65536,
+   "in_per_m": 0.39,
+   "out_per_m": 2.34,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-4.1-mini",
+   "name": "OpenAI: GPT-4.1 Mini",
+   "created": 1744651381,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1047576,
+   "max_output": 32768,
+   "in_per_m": 0.39999999999999997,
+   "out_per_m": 1.5999999999999999,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "mistralai/mistral-medium-3.1",
+   "name": "Mistral: Mistral Medium 3.1",
+   "created": 1755095639,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 104857,
+   "in_per_m": 0.39999999999999997,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-medium-3.1:batch",
+   "name": "Mistral: Mistral Medium 3.1 (batch)",
+   "created": 1755095639,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 104857,
+   "in_per_m": 0.39999999999999997,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-medium-3",
+   "name": "Mistral: Mistral Medium 3",
+   "created": 1746627341,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 104857,
+   "in_per_m": 0.39999999999999997,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3-vl-235b-a22b-thinking",
+   "name": "Qwen: Qwen3 VL 235B A22B Thinking",
+   "created": 1758668690,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 0.39999999999999997,
+   "out_per_m": 4.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "baidu/ernie-4.5-vl-424b-a47b",
+   "name": "Baidu: ERNIE 4.5 VL 424B A47B ",
+   "created": 1751300903,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 123000,
+   "max_output": 16000,
+   "in_per_m": 0.42,
+   "out_per_m": 1.25,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.8-27b",
+   "name": "Qwen: Qwen3.8 27B",
+   "created": 1786722910,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 131072,
+   "in_per_m": 0.425,
+   "out_per_m": 2.5500000000000003,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "thinkingmachines/inkling-small",
+   "name": "Thinking Machines: Inkling Small",
+   "created": 1785443117,
+   "modalities": [
+    "text",
+    "image",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 262144,
+   "in_per_m": 0.44999999999999996,
+   "out_per_m": 1.2,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-large-2512",
+   "name": "Mistral: Mistral Large 3 2512",
+   "created": 1764624472,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.5,
+   "out_per_m": 1.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-large-2512:batch",
+   "name": "Mistral: Mistral Large 3 2512 (batch)",
+   "created": 1764624472,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.5,
+   "out_per_m": 1.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "bytedance-seed/seed-2-1-turbo",
+   "name": "ByteDance Seed: Seed 2.1 Turbo",
+   "created": 1786552176,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.5,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-haiku-4.5:batch",
+   "name": "Anthropic: Claude Haiku 4.5 (batch)",
+   "created": 1760547638,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 64000,
+   "in_per_m": 0.5,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "bytedance-seed/seed-2.0-code",
+   "name": "ByteDance Seed: Seed-2.0-Code",
+   "created": 1786550701,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 131072,
+   "in_per_m": 0.5,
+   "out_per_m": 3.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-flash-image",
+   "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
+   "created": 1781754065,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 0.5,
+   "out_per_m": 3.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-flash-image-preview",
+   "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
+   "created": 1772119558,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 65536,
+   "max_output": 58982,
+   "in_per_m": 0.5,
+   "out_per_m": 3.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3-flash-preview",
+   "name": "Google: Gemini 3 Flash Preview",
+   "created": 1765987078,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.5,
+   "out_per_m": 3.0,
+   "per_image": 5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "z-ai/glm-4.5v",
+   "name": "Z.ai: GLM 4.5V",
+   "created": 1754922288,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 65536,
+   "max_output": 16384,
+   "in_per_m": 0.6,
+   "out_per_m": 1.7999999999999998,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "moonshotai/kimi-k2.5",
+   "name": "MoonshotAI: Kimi K2.5",
+   "created": 1769487076,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.6,
+   "out_per_m": 3.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.6-27b",
+   "name": "Qwen: Qwen3.6 27B",
+   "created": 1777255064,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.6,
+   "out_per_m": 3.5999999999999996,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-pro:batch",
+   "name": "Google: Gemini 2.5 Pro (batch)",
+   "created": 1750169544,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.625,
+   "out_per_m": 5.0,
+   "per_image": 6.25e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "moonshotai/kimi-k2.7-code",
+   "name": "MoonshotAI: Kimi K2.7 Code",
+   "created": 1781266361,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.66,
+   "out_per_m": 3.4,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.6-flash",
+   "name": "Google: Gemini 3.6 Flash",
+   "created": 1784646733,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.75,
+   "out_per_m": 3.75,
+   "per_image": 7.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-medium-3-5:batch",
+   "name": "Mistral: Mistral Medium 3.5 (batch)",
+   "created": 1777570439,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 0.75,
+   "out_per_m": 3.75,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.5-flash:batch",
+   "name": "Google: Gemini 3.5 Flash (batch)",
+   "created": 1779193800,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 0.75,
+   "out_per_m": 4.5,
+   "per_image": 7.5e-07,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "~openai/gpt-mini-latest",
+   "name": "OpenAI GPT Mini Latest",
+   "created": 1777318471,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.75,
+   "out_per_m": 4.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.4-mini",
+   "name": "OpenAI: GPT-5.4 Mini",
+   "created": 1773748178,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 0.75,
+   "out_per_m": 4.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "amazon/nova-pro-v1",
+   "name": "Amazon: Nova Pro 1.0",
+   "created": 1733436303,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 300000,
+   "max_output": 5120,
+   "in_per_m": 0.7999999999999999,
+   "out_per_m": 3.1999999999999997,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "sakana/sakana-namazu",
+   "name": "Sakana: Sakana Namazu",
+   "created": 1786410129,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 65536,
+   "in_per_m": 0.95,
+   "out_per_m": 4.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "moonshotai/kimi-k2.6",
+   "name": "MoonshotAI: Kimi K2.6",
+   "created": 1776699402,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 235929,
+   "in_per_m": 0.95,
+   "out_per_m": 4.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "thinkingmachines/inkling",
+   "name": "Thinking Machines: Inkling",
+   "created": 1784325956,
+   "modalities": [
+    "text",
+    "image",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 262144,
+   "in_per_m": 0.95,
+   "out_per_m": 4.05,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "perplexity/sonar",
+   "name": "Perplexity: Sonar",
+   "created": 1738013808,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 127072,
+   "max_output": 114364,
+   "in_per_m": 1.0,
+   "out_per_m": 1.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "x-ai/grok-build-0.1",
+   "name": "SpaceXAI: Grok Build 0.1",
+   "created": 1779298123,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 256000,
+   "max_output": 230400,
+   "in_per_m": 1.0,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "thinkingmachines/inkling:batch",
+   "name": "Thinking Machines: Inkling (batch)",
+   "created": 1784325956,
+   "modalities": [
+    "text",
+    "image",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 524288,
+   "max_output": 471859,
+   "in_per_m": 1.0,
+   "out_per_m": 4.05,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-sonnet-5:batch",
+   "name": "Anthropic: Claude Sonnet 5 (batch)",
+   "created": 1782843083,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 1.0,
+   "out_per_m": 5.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "~anthropic/claude-haiku-latest",
+   "name": "Anthropic Claude Haiku Latest",
+   "created": 1777318492,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 64000,
+   "in_per_m": 1.0,
+   "out_per_m": 5.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-haiku-4.5",
+   "name": "Anthropic: Claude Haiku 4.5",
+   "created": 1760547638,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 64000,
+   "in_per_m": 1.0,
+   "out_per_m": 5.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-3.1-pro-preview:batch",
+   "name": "Google: Gemini 3.1 Pro Preview (batch)",
+   "created": 1771509627,
+   "modalities": [
+    "audio",
+    "file",
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 1.0,
+   "out_per_m": 6.0,
+   "per_image": 1e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/o4-mini-high",
+   "name": "OpenAI: o4 Mini High",
+   "created": 1744824212,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 1.1,
+   "out_per_m": 4.4,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/o4-mini",
+   "name": "OpenAI: o4 Mini",
+   "created": 1744820942,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 1.1,
+   "out_per_m": 4.4,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "z-ai/glm-5v-turbo",
+   "name": "Z.ai: GLM 5V Turbo",
+   "created": 1775061458,
+   "modalities": [
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 202752,
+   "max_output": 131072,
+   "in_per_m": 1.2,
+   "out_per_m": 4.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "x-ai/grok-4.3",
+   "name": "SpaceXAI: Grok 4.3",
+   "created": 1777591821,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 900000,
+   "in_per_m": 1.25,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "x-ai/grok-4.20-multi-agent",
+   "name": "SpaceXAI: Grok 4.20 Multi-Agent",
+   "created": 1774979158,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 2000000,
+   "max_output": 1800000,
+   "in_per_m": 1.25,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "x-ai/grok-4.20",
+   "name": "SpaceXAI: Grok 4.20",
+   "created": 1774979019,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 2000000,
+   "max_output": 1800000,
+   "in_per_m": 1.25,
+   "out_per_m": 2.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "meta/muse-spark-1.2",
+   "name": "Meta: Muse Spark 1.2",
+   "created": 1785959287,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 1.25,
+   "out_per_m": 4.25,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "meta/muse-spark-1.1",
+   "name": "Meta: Muse Spark 1.1",
+   "created": 1784215741,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 1.25,
+   "out_per_m": 4.25,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.1-codex-max",
+   "name": "OpenAI: GPT-5.1-Codex-Max",
+   "created": 1764878934,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.1",
+   "name": "OpenAI: GPT-5.1",
+   "created": 1763060305,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.1-codex",
+   "name": "OpenAI: GPT-5.1-Codex",
+   "created": 1763060298,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5",
+   "name": "OpenAI: GPT-5",
+   "created": 1754587413,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-2.5-pro",
+   "name": "Google: Gemini 2.5 Pro",
+   "created": 1750169544,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": 1.25e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-pro-preview",
+   "name": "Google: Gemini 2.5 Pro Preview 06-05",
+   "created": 1749137257,
+   "modalities": [
+    "file",
+    "image",
+    "text",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": 1.25e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-2.5-pro-preview-05-06",
+   "name": "Google: Gemini 2.5 Pro Preview 05-06",
+   "created": 1746578513,
+   "modalities": [
+    "text",
+    "image",
+    "file",
+    "audio",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65535,
+   "in_per_m": 1.25,
+   "out_per_m": 10.0,
+   "per_image": 1.25e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "mistralai/mistral-medium-3-5",
+   "name": "Mistral: Mistral Medium 3.5",
+   "created": 1777570439,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 262144,
+   "max_output": 209715,
+   "in_per_m": 1.5,
+   "out_per_m": 7.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-sonnet-4.6:batch",
+   "name": "Anthropic: Claude Sonnet 4.6 (batch)",
+   "created": 1771342990,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 1.5,
+   "out_per_m": 7.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-sonnet-4.5:batch",
+   "name": "Anthropic: Claude Sonnet 4.5 (batch)",
+   "created": 1759161676,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 64000,
+   "in_per_m": 1.5,
+   "out_per_m": 7.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-3.5-flash",
+   "name": "Google: Gemini 3.5 Flash",
+   "created": 1779193800,
+   "modalities": [
+    "text",
+    "image",
+    "video",
+    "file",
+    "audio"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 1.5,
+   "out_per_m": 9.0,
+   "per_image": 1.5e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.3-codex",
+   "name": "OpenAI: GPT-5.3-Codex",
+   "created": 1771959164,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.75,
+   "out_per_m": 14.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.2-codex",
+   "name": "OpenAI: GPT-5.2-Codex",
+   "created": 1768409315,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.75,
+   "out_per_m": 14.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.2-chat",
+   "name": "OpenAI: GPT-5.2 Chat",
+   "created": 1765389783,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 32000,
+   "in_per_m": 1.75,
+   "out_per_m": 14.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.2",
+   "name": "OpenAI: GPT-5.2",
+   "created": 1765389775,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 1.75,
+   "out_per_m": 14.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "x-ai/grok-4.6",
+   "name": "SpaceXAI: Grok 4.6",
+   "created": 1786548957,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 500000,
+   "max_output": 450000,
+   "in_per_m": 2.0,
+   "out_per_m": 6.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "qwen/qwen3.8-max",
+   "name": "Qwen: Qwen3.8 Max",
+   "created": 1785731612,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 131072,
+   "in_per_m": 2.0,
+   "out_per_m": 6.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "x-ai/grok-4.5",
+   "name": "SpaceXAI: Grok 4.5",
+   "created": 1783523154,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 500000,
+   "max_output": 450000,
+   "in_per_m": 2.0,
+   "out_per_m": 6.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "~x-ai/grok-latest",
+   "name": "xAI: Grok Latest",
+   "created": 1783519360,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 500000,
+   "max_output": 450000,
+   "in_per_m": 2.0,
+   "out_per_m": 6.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/o3",
+   "name": "OpenAI: o3",
+   "created": 1744823457,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 2.0,
+   "out_per_m": 8.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4.1",
+   "name": "OpenAI: GPT-4.1",
+   "created": 1744651385,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1047576,
+   "max_output": 32768,
+   "in_per_m": 2.0,
+   "out_per_m": 8.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "perplexity/sonar-reasoning-pro",
+   "name": "Perplexity: Sonar Reasoning Pro",
+   "created": 1741313308,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 115200,
+   "in_per_m": 2.0,
+   "out_per_m": 8.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5.6-sol-pro",
+   "name": "OpenAI: GPT-5.6 Sol Pro",
+   "created": 1783590854,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.6-sol",
+   "name": "OpenAI: GPT-5.6 Sol",
+   "created": 1783590850,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-sonnet-5",
+   "name": "Anthropic: Claude Sonnet 5",
+   "created": 1782843083,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "~anthropic/claude-sonnet-latest",
+   "name": "Anthropic Claude Sonnet Latest",
+   "created": 1777318368,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "~openai/gpt-latest",
+   "name": "OpenAI GPT Latest",
+   "created": 1777318334,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.6-terra-pro",
+   "name": "OpenAI: GPT-5.6 Terra Pro",
+   "created": 1783590861,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.6-terra",
+   "name": "OpenAI: GPT-5.6 Terra",
+   "created": 1783590857,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "google/gemini-3-pro-image",
+   "name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
+   "created": 1781754054,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 131072,
+   "max_output": 32768,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": 2e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "~google/gemini-pro-latest",
+   "name": "Google Gemini Pro Latest",
+   "created": 1777318451,
+   "modalities": [
+    "audio",
+    "file",
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": 2e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-pro-preview-customtools",
+   "name": "Google: Gemini 3.1 Pro Preview Custom Tools",
+   "created": 1772045923,
+   "modalities": [
+    "text",
+    "audio",
+    "image",
+    "video",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": 2e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3.1-pro-preview",
+   "name": "Google: Gemini 3.1 Pro Preview",
+   "created": 1771509627,
+   "modalities": [
+    "audio",
+    "file",
+    "image",
+    "text",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 65536,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": 2e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "google/gemini-3-pro-image-preview",
+   "name": "Google: Nano Banana Pro (Gemini 3 Pro Image Preview)",
+   "created": 1763653797,
+   "modalities": [
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 65536,
+   "max_output": 32768,
+   "in_per_m": 2.0,
+   "out_per_m": 12.0,
+   "per_image": 2e-06,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5-image-mini",
+   "name": "OpenAI: GPT-5 Image Mini",
+   "created": 1760624583,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 2.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4o-2024-11-20",
+   "name": "OpenAI: GPT-4o (2024-11-20)",
+   "created": 1732127594,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 16384,
+   "in_per_m": 2.5,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4o-2024-08-06",
+   "name": "OpenAI: GPT-4o (2024-08-06)",
+   "created": 1722902400,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 16384,
+   "in_per_m": 2.5,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4o",
+   "name": "OpenAI: GPT-4o",
+   "created": 1715558400,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 16384,
+   "in_per_m": 2.5,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-5:batch",
+   "name": "Claude Opus 5 (batch)",
+   "created": 1784912544,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.8:batch",
+   "name": "Anthropic: Claude Opus 4.8 (batch)",
+   "created": 1779905091,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.7:batch",
+   "name": "Anthropic: Claude Opus 4.7 (batch)",
+   "created": 1776351100,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.6:batch",
+   "name": "Anthropic: Claude Opus 4.6 (batch)",
+   "created": 1770219050,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.5:batch",
+   "name": "Anthropic: Claude Opus 4.5 (batch)",
+   "created": 1764010580,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 64000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "amazon/nova-premier-v1",
+   "name": "Amazon: Nova Premier 1.0",
+   "created": 1761950332,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 32000,
+   "in_per_m": 2.5,
+   "out_per_m": 12.5,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.4",
+   "name": "OpenAI: GPT-5.4",
+   "created": 1772734352,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 2.5,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "~moonshotai/kimi-latest",
+   "name": "MoonshotAI Kimi Latest",
+   "created": 1777318428,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 2.5500000000000003,
+   "out_per_m": 12.75,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "moonshotai/kimi-k3",
+   "name": "MoonshotAI: Kimi K3",
+   "created": 1784215858,
+   "modalities": [
+    "text",
+    "image",
+    "video"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1048576,
+   "max_output": 943718,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-sonnet-4.6",
+   "name": "Anthropic: Claude Sonnet 4.6",
+   "created": 1771342990,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "perplexity/sonar-pro-search",
+   "name": "Perplexity: Sonar Pro Search",
+   "created": 1761854366,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 8000,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-sonnet-4.5",
+   "name": "Anthropic: Claude Sonnet 4.5",
+   "created": 1759161676,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 64000,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-sonnet-4",
+   "name": "Anthropic: Claude Sonnet 4",
+   "created": 1747930371,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 64000,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "perplexity/sonar-pro",
+   "name": "Perplexity: Sonar Pro",
+   "created": 1741312423,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 8000,
+   "in_per_m": 3.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": false,
+   "tools": false,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-4o-2024-05-13",
+   "name": "OpenAI: GPT-4o (2024-05-13)",
+   "created": 1715558400,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 4096,
+   "in_per_m": 5.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-5",
+   "name": "Claude Opus 5",
+   "created": 1784912544,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-fable-5:batch",
+   "name": "Anthropic: Claude Fable 5 (batch)",
+   "created": 1781007515,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.8",
+   "name": "Anthropic: Claude Opus 4.8",
+   "created": 1779905091,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "~anthropic/claude-opus-latest",
+   "name": "Anthropic: Claude Opus Latest",
+   "created": 1776795361,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.7",
+   "name": "Anthropic: Claude Opus 4.7",
+   "created": 1776351100,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.6",
+   "name": "Anthropic: Claude Opus 4.6",
+   "created": 1770219050,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.5",
+   "name": "Anthropic: Claude Opus 4.5",
+   "created": 1764010580,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 64000,
+   "in_per_m": 5.0,
+   "out_per_m": 25.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "sakana/fugu-ultra",
+   "name": "Sakana: Fugu Ultra",
+   "created": 1782276303,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 30.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-chat-latest",
+   "name": "OpenAI: GPT Chat Latest",
+   "created": 1778000212,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 30.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.5",
+   "name": "OpenAI: GPT-5.5",
+   "created": 1777051893,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 5.0,
+   "out_per_m": 30.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-opus-4.1:batch",
+   "name": "Anthropic: Claude Opus 4.1 (batch)",
+   "created": 1754411591,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 32000,
+   "in_per_m": 7.5,
+   "out_per_m": 37.5,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.4-image-2",
+   "name": "OpenAI: GPT-5.4 Image 2",
+   "created": 1776797528,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 272000,
+   "max_output": 128000,
+   "in_per_m": 8.0,
+   "out_per_m": 15.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5-image",
+   "name": "OpenAI: GPT-5 Image",
+   "created": 1760447986,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "image",
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 10.0,
+   "out_per_m": 10.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-4-turbo",
+   "name": "OpenAI: GPT-4 Turbo",
+   "created": 1712620800,
+   "modalities": [
+    "text",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 128000,
+   "max_output": 4096,
+   "in_per_m": 10.0,
+   "out_per_m": 30.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": false,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-5-fast",
+   "name": "Claude Opus 5 (Fast)",
+   "created": 1784912546,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 10.0,
+   "out_per_m": 50.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "~anthropic/claude-fable-latest",
+   "name": "Anthropic: Claude Fable Latest",
+   "created": 1781029944,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 10.0,
+   "out_per_m": 50.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-fable-5",
+   "name": "Anthropic: Claude Fable 5",
+   "created": 1781007515,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 10.0,
+   "out_per_m": 50.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": false
+  },
+  {
+   "id": "anthropic/claude-opus-4.8-fast",
+   "name": "Anthropic: Claude Opus 4.8 (Fast)",
+   "created": 1779913703,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 10.0,
+   "out_per_m": 50.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/o1",
+   "name": "OpenAI: o1",
+   "created": 1734459999,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 15.0,
+   "out_per_m": 60.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.1",
+   "name": "Anthropic: Claude Opus 4.1",
+   "created": 1754411591,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 32000,
+   "in_per_m": 15.0,
+   "out_per_m": 75.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4",
+   "name": "Anthropic: Claude Opus 4",
+   "created": 1747931245,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 32000,
+   "in_per_m": 15.0,
+   "out_per_m": 75.0,
+   "per_image": null,
+   "structured": false,
+   "response_format": false,
+   "reasoning": true,
+   "tools": true,
+   "temperature": true,
+   "moderated": false
+  },
+  {
+   "id": "openai/gpt-5-pro",
+   "name": "OpenAI: GPT-5 Pro",
+   "created": 1759776663,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 15.0,
+   "out_per_m": 120.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/o3-pro",
+   "name": "OpenAI: o3 Pro",
+   "created": 1749598352,
+   "modalities": [
+    "text",
+    "file",
+    "image"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 20.0,
+   "out_per_m": 80.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.2-pro",
+   "name": "OpenAI: GPT-5.2 Pro",
+   "created": 1765389780,
+   "modalities": [
+    "image",
+    "text",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 400000,
+   "max_output": 128000,
+   "in_per_m": 21.0,
+   "out_per_m": 168.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "anthropic/claude-opus-4.7-fast",
+   "name": "Anthropic: Claude Opus 4.7 (Fast)",
+   "created": 1778613011,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1000000,
+   "max_output": 128000,
+   "in_per_m": 30.0,
+   "out_per_m": 150.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.5-pro",
+   "name": "OpenAI: GPT-5.5 Pro",
+   "created": 1777051896,
+   "modalities": [
+    "file",
+    "image",
+    "text"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 30.0,
+   "out_per_m": 180.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/gpt-5.4-pro",
+   "name": "OpenAI: GPT-5.4 Pro",
+   "created": 1772734366,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 1050000,
+   "max_output": 128000,
+   "in_per_m": 30.0,
+   "out_per_m": 180.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": true,
+   "temperature": false,
+   "moderated": true
+  },
+  {
+   "id": "openai/o1-pro",
+   "name": "OpenAI: o1-pro",
+   "created": 1742423211,
+   "modalities": [
+    "text",
+    "image",
+    "file"
+   ],
+   "output_modalities": [
+    "text"
+   ],
+   "context": 200000,
+   "max_output": 100000,
+   "in_per_m": 150.0,
+   "out_per_m": 600.0,
+   "per_image": null,
+   "structured": true,
+   "response_format": true,
+   "reasoning": true,
+   "tools": false,
+   "temperature": false,
+   "moderated": true
+  }
+ ]
+}
