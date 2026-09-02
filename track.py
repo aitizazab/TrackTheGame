@@ -115,6 +115,16 @@ DEDUPE_IOU = 0.45
 DEGENERATE_RATIO = 0.40
 MAX_COAST_S = 0.60          # kill a track unseen this long
 COAST_DAMP = 0.72           # velocity decay per frame while unmatched
+# The tracker had no concept of the frame edge. Death was decided on ONE
+# condition — unseen for MAX_COAST_S — so a player running off the side and a
+# player hidden behind a team-mate produced the identical signature (detections
+# stop) and got identical treatment (extrapolate the last velocity for 0.6s).
+# Coasting is right for occlusion and wrong for exit: the marker keeps sailing in
+# the direction the player was running, which is the "ring sent flying" the user
+# reported, and 42-46% of identities on the football clips ended within 6% of an
+# edge. A track whose coasted centre crosses the boundary has left the picture;
+# stop predicting and let re-entry start a clean track.
+EDGE_MARGIN = 0.015         # a coasted centre this far outside [0,1] is gone
 # A 9 m/s sprint across a ~68m pitch is ~0.13 fraction units/sec. 0.22 leaves
 # headroom for camera motion and box jitter; past it, it is not a player.
 MAX_PLAYER_SPEED = 0.22
@@ -152,6 +162,13 @@ BALL_FLAT_H_FRAC = 0.65
 # 1.0 gains 46 frames over 0.5 and 2.0 gains nothing further, so the real gaps
 # in this footage are all under a second and 1.0 is the natural plateau.
 BALL_MAX_GAP_S = 1.00
+# Hard floor on the ball's reported confidence, OFF by default (--ball-min-conf).
+# A 0.70 floor was measured and rejected on Luna: 20 of 37 decoys caught against
+# 19 of 252 good detections lost, roughly one-for-one. That was a different model
+# on a different clip, and the decoys Gemini 3.7 Flash produces sit at 0.70-0.80
+# against 0.90-0.95 for real balls, so the separation may be cleaner here.
+# Left as a flag rather than a default so the claim gets tested, not assumed.
+BALL_MIN_CONF = 0.0
 ON_BALL_RADIUS_BH = 1.6     # a player is "on the ball" within this many heights
 ON_BALL_SMOOTH_S = 0.40     # majority-filter the on-ball flag over this window
 
@@ -813,6 +830,17 @@ def run(data, debug=False):
             active.append(Track(hi[di], fi, t))
         still = []
         for tr in active:
+            # Two ways to die now: age, and leaving the picture. The second only
+            # applies while UNMATCHED — a track with a live detection near the
+            # edge is a player standing on the touchline, which is not the same
+            # as a coasted prediction that has sailed past it.
+            cx, cy = float(tr.kf.x[0]), float(tr.kf.x[1])
+            gone = (t > tr.last_t) and not (-EDGE_MARGIN <= cx <= 1 + EDGE_MARGIN
+                                            and -EDGE_MARGIN <= cy <= 1 + EDGE_MARGIN)
+            if gone:
+                if tr.hits >= MIN_HITS:
+                    finished.append(tr)
+                continue
             if t - tr.last_t <= MAX_COAST_S:
                 still.append(tr)
             elif tr.hits >= MIN_HITS:
@@ -967,6 +995,21 @@ def run(data, debug=False):
 
     ball_outliers = []
 
+    # Filter -1 — CONFIDENCE FLOOR, off unless asked for. The kinematic filters
+    # below can only catch a decoy that moves implausibly. A white spot mark or
+    # a boot sitting NEXT to the real ball implies a perfectly ordinary
+    # 0.1-0.4 frac/s and sails through every one of them; on the cuts clip the
+    # three decoys reported at t+14.4s, t+14.6s and t+25.0s had implied speeds of
+    # 0.100, 0.305 and 0.771 against a gate of 1.44-1.56. Confidence is the only
+    # signal that separates them: they came back at 0.70-0.80 where real balls
+    # sit at 0.90-0.95.
+    if BALL_MIN_CONF > 0:
+        low = [r for r in raw if r[3] < BALL_MIN_CONF]
+        for r in low:
+            ball_outliers.append({"frame": r[0], "kind": "low-conf",
+                                  "conf": r[3]})
+        raw = [r for r in raw if r[3] >= BALL_MIN_CONF]
+
     # Filter 0 — THE FLAT BOX. This is the one that works, and it is geometry
     # rather than tracking.
     #
@@ -1067,10 +1110,23 @@ def run(data, debug=False):
         # and y, so a bridged frame gets a plausible size rather than none.
         bh = np.array([s[4] for s in seen])
         bw = np.array([s[5] for s in seen])
+        # THE MEMO. Until 2 Sep the interpolator could not tell "the model never
+        # reported a ball here" from "we looked at what it reported and judged it
+        # a decoy" — both are just an index missing from `seen`. So a rejected
+        # frame was immediately repainted from its neighbours, undoing the
+        # filter's decision. Worse, rejecting a frame WIDENS the gap that then
+        # gets spanned: at allstars t+23.1s the over-speed filter removed frame
+        # 690, leaving 684 and 696 as the endpoints — 0.49 apart in 0.4s, a fast
+        # pass — and the linear midpoint put the ball somewhere it never was.
+        #
+        # A frame we actively judged is not the same as a frame we never saw.
+        vetoed = {o["frame"] for o in ball_outliers}
         for a, b in zip(seen, seen[1:]):
             if (b[0] - a[0]) / src_fps > BALL_MAX_GAP_S:
                 continue      # a long absence is a real absence — do not invent it
             for fr in range(a[0], b[0] + 1):
+                if fr in vetoed:
+                    continue  # judged a decoy: leave the hole rather than repaint it
                 ball_at[fr] = (float(np.interp(fr, bidx, bx)),
                                float(np.interp(fr, bidx, by)),
                                float(np.interp(fr, bidx, bw)),
@@ -1134,11 +1190,18 @@ def main():
     ap.add_argument("--debug", action="store_true")
     ap.add_argument("--coast", type=float, default=None,
                     help="override MAX_COAST_S: how long a track survives unseen")
+    ap.add_argument("--ball-min-conf", type=float, default=None,
+                    help="reject ball detections below this confidence. OFF by "
+                         "default. Targets decoys the kinematic filters cannot "
+                         "see — a spot mark or boot beside the real ball moves "
+                         "plausibly. Try 0.82")
     ap.add_argument("--reconfirm", action="store_true",
                     help="a lone sighting between two absences is not drawn")
     args = ap.parse_args()
     if args.coast is not None:
         globals()["MAX_COAST_S"] = args.coast
+    if args.ball_min_conf is not None:
+        globals()["BALL_MIN_CONF"] = args.ball_min_conf
     RECONFIRM[0] = args.reconfirm
 
     if not args.detections.exists():
