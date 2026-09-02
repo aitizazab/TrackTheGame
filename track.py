@@ -139,6 +139,11 @@ PAN_SEARCH_FLOOR = 0.05     # search this far for a camera shift regardless of d
 # moves 30 m/s and is a few pixels across. Flat generous gate instead.
 BALL_GATE_PER_SEC = 1.2     # fraction units per second a real ball can manage
 BALL_JUMP_FRAC = 0.10       # a "leap" for round-trip purposes
+# The round trip and the speed gate run alternately until neither removes
+# anything. Capped rather than unbounded: each pass makes survivors look more
+# isolated, and an over-eager ball filter has already cost this project real
+# detections once (see the retired static-cluster note below).
+BALL_FILTER_PASSES = 4
 # The test cannot tell a painted mark from a ball lying still on the grass while
 # the camera pans across it — both sit at a fixed point on the pitch. What
 # separates them is persistence, so the bar is "seen at the same field position
@@ -1055,23 +1060,64 @@ def run(data, debug=False):
     # travelling that fast keeps going; it does not return to its own launch
     # point one tenth of a second later. This is the boot-mistaken-for-ball case
     # and it shows up as a one-frame flicker in the video.
-    if len(raw) >= 3:
-        keep = [raw[0]]
-        for i in range(1, len(raw) - 1):
-            a, b, c = keep[-1], raw[i], raw[i + 1]
-            if (b[0] - a[0]) > 2 * (src_fps // max(data.get("fps") or 10, 1)) + 1:
-                keep.append(b)          # too far apart in time to judge
-                continue
-            d_ab = np.hypot(b[1] - a[1], b[2] - a[2])
-            d_bc = np.hypot(c[1] - b[1], c[2] - b[2])
-            d_ac = np.hypot(c[1] - a[1], c[2] - a[2])
-            if d_ab > BALL_JUMP_FRAC and d_bc > BALL_JUMP_FRAC and d_ac < d_ab * 0.5:
-                ball_outliers.append({"frame": b[0], "kind": "round-trip",
-                                      "jump": round(float(d_ab), 3)})
-                continue
-            keep.append(b)
-        keep.append(raw[-1])
-        raw = keep
+    # RUN TO A FIXED POINT, not once. The round trip only ever adapted on its
+    # LEFT: `a = keep[-1]` is the last surviving detection, so a rejected
+    # predecessor is skipped, but `c` comes from the unfiltered list and the
+    # speed gate below runs afterwards, so nothing it removes ever feeds back.
+    #
+    # That order-dependence is what put a decoy on screen at allstars t+23.1s.
+    # The model reported the same white spot on frames 678, 690, 696 and 702.
+    # On the earlier run frame 690 came back with h=0.0090, two ten-thousandths
+    # under the flat-box line, and was removed FIRST — so the round trip judged
+    # 696 against 684 and 702, saw a clean leap-and-return, and rejected it. On
+    # the later run the same detection came back at h=0.0110, survived flat-box,
+    # and left 696 sitting 0.006 from its neighbour, which is not a leap at all.
+    # The speed gate then removed 690 anyway, but too late: 696 was already kept,
+    # and interpolation dutifully slid the ball down to the white spot and back.
+    #
+    # A second pass sees 684 and 714 as 696's neighbours and rejects it, which is
+    # what the first run got by luck. Bounded, because this codebase has been
+    # burned once by an over-eager ball filter: the static-cluster test retired on
+    # 28 Aug caught 10 painted marks and destroyed 18 real detections doing it.
+    # Passes stop as soon as a pass removes nothing, and never exceed the cap.
+    for _pass in range(BALL_FILTER_PASSES):
+        n_before = len(raw)
+        if len(raw) >= 3:
+            keep = [raw[0]]
+            for i in range(1, len(raw) - 1):
+                a, b, c = keep[-1], raw[i], raw[i + 1]
+                if (b[0] - a[0]) > 2 * (src_fps // max(data.get("fps") or 10, 1)) + 1:
+                    keep.append(b)          # too far apart in time to judge
+                    continue
+                d_ab = np.hypot(b[1] - a[1], b[2] - a[2])
+                d_bc = np.hypot(c[1] - b[1], c[2] - b[2])
+                d_ac = np.hypot(c[1] - a[1], c[2] - a[2])
+                if d_ab > BALL_JUMP_FRAC and d_bc > BALL_JUMP_FRAC and d_ac < d_ab * 0.5:
+                    ball_outliers.append({"frame": b[0], "kind": "round-trip",
+                                          "jump": round(float(d_ab), 3),
+                                          "pass": _pass + 1})
+                    continue
+                keep.append(b)
+            keep.append(raw[-1])
+            raw = keep
+
+        # Speed gate, inside the loop so its removals feed the next round trip.
+        gated = []
+        for r in raw:
+            if gated:
+                gap = max((r[0] - gated[-1][0]) / src_fps, 1e-3)
+                speed = np.hypot(r[1] - gated[-1][1], r[2] - gated[-1][2]) / gap
+                allowed = BALL_GATE_PER_SEC * (0.5 + r[3])
+                if speed > allowed:
+                    ball_outliers.append({"frame": r[0], "kind": "over-speed",
+                                          "frac_per_s": round(float(speed), 2),
+                                          "conf": r[3], "pass": _pass + 1})
+                    continue
+            gated.append(r)
+        raw = gated
+
+        if len(raw) == n_before:
+            break                       # converged
 
     # Filter 2 — the speed gate. Anything demanding a speed a struck ball cannot
     # reach is a different object, not a fast ball. Catches sustained drift onto
@@ -1085,18 +1131,9 @@ def run(data, debug=False):
     # worth having. As a multiplier on the speed gate it costs nothing: a
     # confident detection earns more benefit of the doubt, a hesitant one has to
     # be geometrically plausible as well.
-    seen = []
-    for r in raw:
-        if seen:
-            gap = max((r[0] - seen[-1][0]) / src_fps, 1e-3)
-            speed = np.hypot(r[1] - seen[-1][1], r[2] - seen[-1][2]) / gap
-            allowed = BALL_GATE_PER_SEC * (0.5 + r[3])
-            if speed > allowed:
-                ball_outliers.append({"frame": r[0], "kind": "over-speed",
-                                      "frac_per_s": round(float(speed), 2),
-                                      "conf": r[3]})
-                continue
-        seen.append(r)
+    # The gate itself now runs inside the fixed-point loop above, so that what it
+    # removes is visible to the next round-trip pass. Nothing left to do here.
+    seen = raw
 
     ball_at = {}
     if seen:
@@ -1110,23 +1147,21 @@ def run(data, debug=False):
         # and y, so a bridged frame gets a plausible size rather than none.
         bh = np.array([s[4] for s in seen])
         bw = np.array([s[5] for s in seen])
-        # THE MEMO. Until 2 Sep the interpolator could not tell "the model never
-        # reported a ball here" from "we looked at what it reported and judged it
-        # a decoy" — both are just an index missing from `seen`. So a rejected
-        # frame was immediately repainted from its neighbours, undoing the
-        # filter's decision. Worse, rejecting a frame WIDENS the gap that then
-        # gets spanned: at allstars t+23.1s the over-speed filter removed frame
-        # 690, leaving 684 and 696 as the endpoints — 0.49 apart in 0.4s, a fast
-        # pass — and the linear midpoint put the ball somewhere it never was.
+        # A rejected frame IS still interpolated over, deliberately.
         #
-        # A frame we actively judged is not the same as a frame we never saw.
-        vetoed = {o["frame"] for o in ball_outliers}
+        # Tried the opposite on 2 Sep — skip any frame a filter had vetoed, on the
+        # reasoning that repainting a frame you judged bad undoes the filter's
+        # decision. Measured across all four clips it was wrong, and backwards:
+        # all 17 rejections were being bridged, and the interpolated point sat a
+        # median 0.179 fraction units from the rejected detection (max 0.506)
+        # against a player spacing of 0.072. The decoy COORDINATE was never being
+        # drawn. Rejection removes the bad measurement; interpolation then supplies
+        # a substitute from the surviving neighbours, which is the whole point.
+        # Skipping them replaced 17 good positions with 17 holes and fixed nothing.
         for a, b in zip(seen, seen[1:]):
             if (b[0] - a[0]) / src_fps > BALL_MAX_GAP_S:
                 continue      # a long absence is a real absence — do not invent it
             for fr in range(a[0], b[0] + 1):
-                if fr in vetoed:
-                    continue  # judged a decoy: leave the hole rather than repaint it
                 ball_at[fr] = (float(np.interp(fr, bidx, bx)),
                                float(np.interp(fr, bidx, by)),
                                float(np.interp(fr, bidx, bw)),
