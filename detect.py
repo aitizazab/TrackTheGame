@@ -45,6 +45,7 @@ import copy
 import io
 import json
 import os
+import random
 import shutil
 import subprocess
 import sys
@@ -136,7 +137,16 @@ COORD_CONVENTION = {
 # only the tail that would otherwise own the whole batch. Dropped frames cost a
 # little accuracy; a straggler costs the entire budget, and the tracker
 # interpolates across the gap either way.
-TIMEOUT_S = 43.0
+# 43.0 until 2 Sep, chosen when p90 was 41.6s. Lowered to 35.0 because wall clock
+# IS the slowest call (measured: wall minus slowest call is 0.7-1.2s across three
+# runs, which is the ffmpeg extract), so the deadline is the only direct cap on
+# it. On a good run nothing changes — flex_30s peaked at 30.3s, so neither 43 nor
+# 35 ever fires — but on a bad one it bounds the damage: the 2 Sep run peaked at
+# 43.2s and had calls sitting on the old limit.
+#
+# Do NOT drop it to 25 to "hit the target". The latency distribution has a hard
+# shoulder, not a thin tail: 28s costs 3.3% of frames, 25s costs 32.7%.
+TIMEOUT_S = 35.0
 SOURCE_FPS = 30           # fetch_clips.py normalises every clip to this
 
 # ---------------------------------------------------------------- the schema
@@ -667,20 +677,44 @@ def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
     same answer. Dropped-on-deadline stays dropped.
     """
     last = None
+    waited = 0.0
     for attempt in range(tries):
         rec = call_one(session, headers, model, frame_idx, path, width, timeout,
                        schema, effort, convention, variant)
         if rec.get("ok"):
             if attempt:
                 rec["retries"] = attempt
+                rec["retry_wait_s"] = round(waited, 2)
             return rec
         err = rec.get("error") or ""
         transient = ("ConnectionError" in err or "SSLError" in err
                      or "ChunkedEncoding" in err or "RemoteDisconnected" in err)
-        if not transient:
+        # HTTP 429 is the canonical retryable error and was NOT being retried:
+        # on 2 Sep, 49 of 150 calls died to it without a single second attempt,
+        # while 29 transport failures were recovered by this same function.
+        #
+        # It needs a DELAY, unlike a transport failure. The refusal comes from
+        # Google's shared upstream quota, so retrying instantly just asks the
+        # same overloaded endpoint again. And because we fire every frame at
+        # once, undelayed retries would arrive as one synchronised wave — a
+        # thundering herd that re-triggers the limiter it is waiting on. The
+        # jitter is what breaks the wave up; the doubling is what backs off.
+        rate_limited = rec.get("status") == 429
+        if not (transient or rate_limited):
             return rec
         last = rec
-    last["retries"] = tries - 1
+        if rate_limited and attempt < tries - 1:
+            # 1s, 2s, 4s, each x0.75-1.33. Worst case ~9.3s added, inside a 35s
+            # deadline. Recorded separately so it can never be mistaken for
+            # model latency: t0 is set inside call_one, AFTER this sleep, so
+            # latency_s is unaffected and only wall clock absorbs the wait.
+            delay = (2 ** attempt) * random.uniform(0.75, 1.333)
+            waited += delay
+            time.sleep(delay)
+    if last is not None:
+        last["retries"] = tries - 1
+        if waited:
+            last["retry_wait_s"] = round(waited, 2)
     return last
 
 
@@ -855,10 +889,16 @@ def main():
     # 1.35/6.75) and default routing silently moved from flex to standard between
     # 28 and 31 Aug: 511 calls billed at 1.88, then 562 at 3.75, same model, same
     # clip. That looked like a price rise and was recorded as one. It was routing.
-    ap.add_argument("--provider-order", default=None,
-                    help="comma-separated OpenRouter provider tags to pin, e.g. "
-                         "google-ai-studio/flex. Sets allow_fallbacks=false so a "
-                         "run cannot silently land on a different price tier")
+    # Both Google flex endpoints, in preference order. They are priced
+    # IDENTICALLY (0.375/1.875), so listing the second costs nothing and gives a
+    # rate-limited call somewhere to go that is not the 2x standard tier.
+    # allow_fallbacks stays false, so standard remains unreachable by accident.
+    ap.add_argument("--provider-order",
+                    default="google-ai-studio/flex,google-vertex/global/flex",
+                    help="comma-separated OpenRouter provider tags to pin. "
+                         "Defaults to both Google FLEX endpoints (same price). "
+                         "Sets allow_fallbacks=false so a run cannot silently "
+                         "land on a dearer tier. Pass '' to disable pinning")
     args = ap.parse_args()
 
     schema = build_schema(scene_last=args.scene_last, terse=args.terse_schema,
@@ -970,7 +1010,16 @@ def main():
         print(f"  latency med     {lat[len(lat)//2]:.1f}s   max {lat[-1]:.1f}s")
     retried = sum(1 for r in records if r.get("retries"))
     if retried:
-        print(f"  retried         {retried} calls recovered a transport failure")
+        print(f"  retried         {retried} calls retried")
+    # Backoff is reported SEPARATELY from latency and named against wall clock,
+    # so "did the retries cause this?" is answerable from the run summary alone.
+    # latency_s excludes the sleeps by construction (t0 is set after them).
+    waits = [r["retry_wait_s"] for r in records if r.get("retry_wait_s")]
+    if waits:
+        print(f"  429 backoff     {len(waits)} calls slept, "
+              f"{sum(waits):.1f}s total, worst {max(waits):.1f}s on one call")
+        print(f"                  wall was {wall:.1f}s; without any backoff the "
+              f"floor would be ~{wall - max(waits):.1f}s")
     inval = [r for r in records if r.get("invalid_boxes")]
     if inval:
         nb = sum(r["invalid_boxes"]["dropped"] for r in inval)

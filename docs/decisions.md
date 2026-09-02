@@ -753,7 +753,68 @@ holding. It remains the weakest axis and the honest limitation for the report.
 
 ## D20 · Payload bytes, not resolution, and the base64 tax
 
-**Open, not yet decided — the measurement is done, the run is not.**
+> ## ⛔ RETRACTED 2 Sep — the bandwidth model below is not supported
+>
+> D20 claimed the `p50 → wall` gap is upload contention, and that cutting bytes
+> (JPEG quality, resolution) would cut wall clock. **The data refutes it.**
+>
+> **The decisive test — same frame count, different resolution:**
+>
+> | run | n | res | MB on wire | p50 | **wall** |
+> |---|---|---|---|---|---|
+> | `google_gemini_3_7_flash` | 100 | 1280 | **22.4** | 23.3s | **43.9s** |
+> | `ctl_10fps` | 100 | 1920 | **43.9** | 22.6s | **37.6s** |
+> | `flex_10fps` | 100 | 1920 | **43.9** | 11.8s | **19.1s** |
+>
+> **Half the bytes produced a LONGER wall.** And eight runs at an identical
+> 22.0 MB show walls from 30.7s to 43.6s — a 13s spread with payload held fixed.
+> Correlation of the gap against bytes is **+0.43**, against request count
+> **+0.44** — indistinguishable, and both too weak to be a mechanism.
+>
+> **What is actually true: wall clock IS the slowest call.** Measured, three
+> runs: wall minus slowest call is 0.7s / 1.0s / 1.2s, which is the ffmpeg
+> extract. D2 said this originally and was right; D20 talked itself out of it.
+>
+> **And cutting frames barely helps**, because the slow band is not a thin tail.
+> Resampling `flex_30s`'s own 150 latencies:
+>
+> | frames sent | median worst-case call |
+> |---|---|
+> | 150 | 30.3s |
+> | 100 | 30.3s |
+> | 75 | 29.1s |
+> | 50 | 29.1s |
+>
+> p75 is already 25.5s, so **a quarter of all calls sit in the 25–30s band**.
+> Draw 50 or 150 samples and you hit ~30s either way. Fewer frames buys cost,
+> not wall clock.
+>
+> **The one direct lever is the deadline, and it has a cliff:**
+>
+> | `TIMEOUT_S` | frames lost | wall becomes |
+> |---|---|---|
+> | 43s / 35s | 0 | 30.3s |
+> | 30s | 1 (0.7%) | 29.1s |
+> | **28s** | **5 (3.3%)** | **27.9s** |
+> | 25s | **49 (32.7%)** | 24.9s |
+>
+> **The dominant variable is provider-side latency variance, which we do not
+> control.** `flex_10fps` and `ctl_10fps` are the same 100 frames at the same
+> resolution on the same model, and differ 2× in wall clock. That is the whole
+> effect, and it is why a peer can report 11s on the same configuration.
+>
+> **Consequences:** the JPEG-quality ablation (A9/E2) loses its rationale and is
+> **cancelled** — it was predicated on bytes driving the wall. Dropping to 720p
+> will not fix latency either; it remains only a jersey-number trade. The base64
+> observation stands as a fact (33% wire overhead) but explains nothing here.
+>
+> **The methodological failure is the familiar one, one level up.** The
+> byte-vs-wall story was built on a *single run's* internal correlation — the
+> fast/slow split within `flex_30s` — and never checked against runs that varied
+> payload independently. One run cannot separate two variables that move
+> together inside it.
+
+**Superseded. Retained below as written, for the record.**
 
 Wall clock is the only failing constraint (31.0s against 25s). D18 established
 the mechanism as upload contention. The refinement: **what is actually on the
