@@ -248,11 +248,48 @@ pulled so far has been on a slack axis.
 
 ### What IS tight
 
-**Position accuracy.** The marker's foot point is `y + h`. Every model returns a
-*visual* box aspect of 2.2–2.4 where a standing footballer is ~3.5 — boxes are
-30–40% too short, so the foot point carries a systematic error of roughly
-0.02 fraction units, which is **40% of the distance to the next player**. Not
-noise: same bias, every frame, every model.
+~~**Position accuracy.**~~ **RETRACTED 2 Sep — the boxes are correct.**
+
+The claim was: box aspect is 2.2–2.4 where a standing footballer is ~3.5, so
+boxes are 30–40% too short and the foot point carries a systematic 0.02-unit
+error. **The 3.5 reference was wrong.** It describes a person standing with arms
+at their sides; a footballer in play has arms out and legs mid-stride, and a
+tight box around *that* pose is ~2.2. The measurement was right and the
+expectation it was compared against was invented.
+
+Verified by rendering the raw boxes (`render.py --boxes`, cyan top edge, magenta
+bottom edge) and watching the clip: **top of head and bottom of feet line up with
+the box edges consistently.** Width varies a lot between boxes; both vertical
+edges are reliable.
+
+**Consequence: the foot point is already correct, and marker placement is not a
+problem.** Item 6 (ask for the foot point directly) loses its accuracy rationale
+entirely — see §7 for why the remaining token argument does not pay for itself.
+
+### Two real defects the box render did expose
+
+- **The box lags under acceleration.** Visible when a player starts or stops.
+  The ellipse masks it (soft, larger than the player); the box exposes it. This
+  is the centred smoother — already recorded as overshooting on a curve and
+  guarded by a second-difference test. Cosmetic at ring size, real at box size.
+- **Single-axis offsets: a decimal-precision artifact, now measured.** ~1 in 5
+  sightings has one coordinate emitted at 2dp while the other keeps 3:
+
+  | | share of 2609 sightings |
+  |---|---|
+  | both axes at 3dp (fine) | 78.3% |
+  | **exactly ONE axis coarse (≤2dp)** | **20.4%** |
+  | both axes coarse | 1.3% |
+
+  At 2dp the quantisation is **±6.4px horizontal / ±3.6px vertical** at 1280×720,
+  against ±0.6/±0.4px at 3dp. One axis snapping to a coarser grid while the other
+  stays fine is exactly the "a bit too left, or a bit too up, while the other
+  axis is accurate" signature. It is ~7% of the distance to the next player, so
+  it does not threaten association — it is a visible-but-harmless artifact of the
+  model writing round numbers.
+
+  **Cheapest fix to try: require three decimal places in the prompt.** Costs no
+  extra tokens (3dp is fixed-width) and needs no schema change. Untested.
 
 **Occlusion / projection — the user's point, and it invalidates part of the
 above.** `s_min` was taken as measured *image* separation, but a 2D projection

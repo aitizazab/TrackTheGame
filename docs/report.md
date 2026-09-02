@@ -466,9 +466,13 @@ nailed down for the clip's duration, which is the no-flicker requirement met.
   which is exactly the signal that is only 9–12% available. A clip containing
   three verified cuts has now been collected and this is the next thing measured.
 - **The ΔE colour fallback has never fired**, so the branch is unexercised.
-- **Box aspect is ~2.2 where a standing player is ~3.5.** Whether the error is in
-  the top edge, the bottom edge, or the width is under inspection; only the
-  bottom edge would affect marker placement.
+- **Single-axis position offsets, ~1 sighting in 5.** The model emits one
+  coordinate at 2 decimal places while the other keeps 3, snapping that axis to a
+  ±6.4px grid horizontally or ±3.6px vertically. Visible as a box that is
+  slightly too far left, or slightly too high, with the other axis correct. About
+  7% of the distance to the next player, so association is unaffected.
+- **The box lags under acceleration** — the centred smoother, already known to
+  overshoot on a curve. The marker ellipse masks it; the raw box exposes it.
 - **One clip still to collect** — a tight camera where players leave frame,
   stressing track birth and death, which nothing collected so far touches.
 
