@@ -365,8 +365,26 @@ def draw_frame(base, entry, colours, W, H, font_cache, ball_fade=False,
         # between them shimmers frame to frame. Replaced with a soft glow that
         # sits BEHIND a single thin ring — the glow says "look here" without any
         # hard edges, and the ring stays crisp enough to locate precisely.
-        bx, by = entry["ball"]["x"] * W, entry["ball"]["y"] * H
-        r = max(BALL_R_MIN, W * 0.006)
+        b = entry["ball"]
+        bx, by = b["x"] * W, b["y"] * H
+        # The marker used to be r = max(BALL_R_MIN, W * 0.006) — a flat 7.7px at
+        # 720p, identical in every frame of every clip. The model reports the
+        # ball's own w and h on every detection and both were being discarded,
+        # so a ball 20 metres away and a ball filling the goalmouth drew the same
+        # dot, and a basketball drew smaller than it actually is:
+        #
+        #   clip         model's ball width      drawn as
+        #   allstars       7.7 - 17.9 px          7.7 px
+        #   basketball    15.4 - 33.3 px          7.7 px
+        #   cuts           7.7 - 129.3 px         7.7 px
+        #
+        # Mean of w and h, because the box is occasionally flat when the ball is
+        # clipped by a player; the mean degrades more gracefully than either
+        # alone. BALL_R_MIN still floors it so a distant ball stays visible, and
+        # the cap stops a mis-sized box (the cuts clip has a 0.101 outlier)
+        # painting a dinner plate over the pitch.
+        r_model = (b.get("w", 0.0) * W + b.get("h", 0.0) * H) / 4.0
+        r = min(max(BALL_R_MIN, r_model), W * 0.05)
         out = paste_glow(out, bx, by, r * 2.4, r * 2.4,
                          (255, 226, 92, 62), r * 1.4)
         ImageDraw.Draw(out).ellipse(

@@ -1060,21 +1060,30 @@ def run(data, debug=False):
         bidx = np.array([s[0] for s in seen], dtype=float)
         bx = np.array([s[1] for s in seen])
         by = np.array([s[2] for s in seen])
+        # Size travels with position now. `raw` has carried the ball's w and h
+        # since the flat-box filter was written (r[4], r[5]) but they stopped
+        # here, so the renderer drew a flat 7.7px dot for a ball the model
+        # measured anywhere from 7.7px to 129px. Interpolated the same way as x
+        # and y, so a bridged frame gets a plausible size rather than none.
+        bh = np.array([s[4] for s in seen])
+        bw = np.array([s[5] for s in seen])
         for a, b in zip(seen, seen[1:]):
             if (b[0] - a[0]) / src_fps > BALL_MAX_GAP_S:
                 continue      # a long absence is a real absence — do not invent it
             for fr in range(a[0], b[0] + 1):
                 ball_at[fr] = (float(np.interp(fr, bidx, bx)),
-                               float(np.interp(fr, bidx, by)))
+                               float(np.interp(fr, bidx, by)),
+                               float(np.interp(fr, bidx, bw)),
+                               float(np.interp(fr, bidx, bh)))
         for r in seen:
-            ball_at[r[0]] = (r[1], r[2])
+            ball_at[r[0]] = (r[1], r[2], r[5], r[4])
 
     # ---- who is on the ball, smoothed ------------------------------------
     raw_on = {}
     for fr, players in per_frame.items():
         if fr not in ball_at:
             continue
-        bx, by = ball_at[fr]
+        bx, by = ball_at[fr][0], ball_at[fr][1]
         best, bestd = None, 1e9
         for p in players:
             d = np.hypot(p["x"] - bx, p["y"] - by)
@@ -1095,7 +1104,8 @@ def run(data, debug=False):
             p["on_ball"] = (on_ball.get(fr) == p["id"])
         b = ball_at.get(fr)
         out_frames.append({"frame": fr, "players": ps,
-                           "ball": {"x": round(b[0], 5), "y": round(b[1], 5)} if b else None})
+                           "ball": {"x": round(b[0], 5), "y": round(b[1], 5),
+                                    "w": round(b[2], 5), "h": round(b[3], 5)} if b else None})
 
     return {
         "clip": data["clip"], "model": data["model"], "tag": data["tag"],

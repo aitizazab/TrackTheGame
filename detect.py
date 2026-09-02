@@ -688,7 +688,15 @@ def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
             return rec
         err = rec.get("error") or ""
         transient = ("ConnectionError" in err or "SSLError" in err
-                     or "ChunkedEncoding" in err or "RemoteDisconnected" in err)
+                     or "ChunkedEncoding" in err or "RemoteDisconnected" in err
+                     # Both are 200s that carried no usable completion, found on
+                     # 2 Sep across basketball and football_cuts. Neither is a
+                     # config problem and neither was being retried: one crashed
+                     # as KeyError, the other advised raising a cap that was
+                     # already twice what the run used. 3 frames of 300 lost to
+                     # provider hiccups that a second attempt would have fixed.
+                     or "no choices in a 200" in err
+                     or "provider generated 0 tokens" in err)
         # HTTP 429 is the canonical retryable error and was NOT being retried:
         # on 2 Sep, 49 of 150 calls died to it without a single second attempt,
         # while 29 transport failures were recovered by this same function.
@@ -800,8 +808,17 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
         # visible by solving backwards from cost_usd, which is how the 28->31 Aug
         # flex/standard drift went unnoticed for three days.
         rec["provider"] = payload.get("provider")
-        choice = payload["choices"][0]
-        content = choice["message"].get("content") or ""
+        # A 200 does NOT guarantee a completion. Basketball frame 660 came back
+        # 200 with no "choices" key at all, which crashed as KeyError: 'choices'
+        # and was reported as a code bug rather than as the provider hiccup it
+        # is. Name it, and let call_with_retry treat it as transient.
+        choices = payload.get("choices") or []
+        if not choices:
+            rec["ok"] = False
+            rec["error"] = f"no choices in a 200 response (keys: {sorted(payload)[:6]})"
+            return rec
+        choice = choices[0]
+        content = (choice.get("message") or {}).get("content") or ""
         # Name the failure precisely. Truncation arrives as a JSONDecodeError
         # about an unterminated string, which reads like a schema or parsing
         # problem and sends you looking in the wrong place. finish_reason says
@@ -812,10 +829,24 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
                             f"{rec.get('reasoning_tokens')}, raise MAX_TOKENS")
             return rec
         if not content.strip():
-            # The exact failure the output probe predicted: a valid 200 whose
-            # token budget went entirely on reasoning. Loud, not silent.
+            # Two different failures wore this one message until 2 Sep, and the
+            # advice it gave was wrong for one of them:
+            #
+            #   completion_tokens > 0  -> the budget really did go on reasoning,
+            #       which is what the output probe predicted. Raise MAX_TOKENS.
+            #   completion_tokens == 0 -> the model generated NOTHING. Raising
+            #       the cap cannot help; it is a null response and it succeeds
+            #       on a retry.
+            #
+            # Basketball frame 870 and cuts frame 300 were both the second kind
+            # (out=0, rsn=0), and were being told to raise a cap the run was
+            # using less than half of.
             rec["ok"] = False
-            rec["error"] = "empty content — raise MAX_TOKENS"
+            if (rec.get("completion_tokens") or 0) == 0:
+                rec["error"] = "empty response: provider generated 0 tokens"
+            else:
+                rec["error"] = (f"empty content, {rec.get('completion_tokens')} "
+                                f"tokens all spent on reasoning — raise MAX_TOKENS")
             return rec
         rec["result"] = normalise_result(json.loads(content), v.get("compact", False))
         if convention:
