@@ -272,24 +272,41 @@ entirely — see §7 for why the remaining token argument does not pay for itsel
   The ellipse masks it (soft, larger than the player); the box exposes it. This
   is the centred smoother — already recorded as overshooting on a curve and
   guarded by a second-difference test. Cosmetic at ring size, real at box size.
-- **Single-axis offsets: a decimal-precision artifact, now measured.** ~1 in 5
-  sightings has one coordinate emitted at 2dp while the other keeps 3:
+- **Single-axis offsets — CAUSE UNKNOWN. A decimal-rounding explanation was
+  proposed and then disproved.**
 
-  | | share of 2609 sightings |
-  |---|---|
-  | both axes at 3dp (fine) | 78.3% |
-  | **exactly ONE axis coarse (≤2dp)** | **20.4%** |
-  | both axes coarse | 1.3% |
+  The proposal: ~20% of sightings emit one coordinate at 2dp while the other
+  keeps 3, snapping that axis to a ±6.4px grid. **The measurement was counting
+  decimal places, which cannot tell "the model rounded" from "the true value
+  happened to end in zero."** ~10% of genuine 3dp values end in 0 by chance, so
+  a 10% "2dp population" is exactly what a model emitting *full* precision
+  produces. Expected share with one axis apparently coarse, by chance alone:
+  2 × 0.10 × 0.90 = **18%**. Observed: **20.4%**. Effectively nothing.
 
-  At 2dp the quantisation is **±6.4px horizontal / ±3.6px vertical** at 1280×720,
-  against ±0.6/±0.4px at 3dp. One axis snapping to a coarser grid while the other
-  stays fine is exactly the "a bit too left, or a bit too up, while the other
-  axis is accurate" signature. It is ~7% of the distance to the next player, so
-  it does not threaten association — it is a visible-but-harmless artifact of the
-  model writing round numbers.
+  The decisive test is the **third-decimal digit distribution**. Real rounding
+  to 2dp would spike digit 0 hard; rounding to 0.005 steps would spike 0 and 5:
 
-  **Cheapest fix to try: require three decimal places in the prompt.** Costs no
-  extra tokens (3dp is fixed-width) and needs no schema change. Untested.
+  | field | digit-0 share | chance |
+  |---|---|---|
+  | x | 11.2% | 10.0% |
+  | y | 11.7% | 10.0% |
+  | w | **8.7%** | 10.0% |
+  | h | 10.8% | 10.0% |
+
+  **No spike.** `w` is *below* chance. The distributions are mildly non-uniform
+  (χ² 57–116, digit 8 over-represented in all four fields — an LLM digit
+  preference, not rounding), but there is no 2dp quantisation to speak of.
+  **Forcing 3dp in the prompt is therefore pointless**, and worse than pointless:
+  the model already emits 3dp, so demanding precision it does not have invites
+  it to fabricate the third digit. Not doing it.
+
+  **Leading hypothesis instead — it is the same defect as the acceleration lag.**
+  A centred smoother lags *along the direction of motion*. A player accelerating
+  sideways lags in x with y correct; one moving toward or away from camera lags
+  in y with x correct. That produces exactly "offset in one direction while the
+  other axis is accurate", and it unifies the two artifacts rather than needing
+  two causes. **Untested.** Testable free: correlate per-sighting residual
+  direction against the track's velocity direction.
 
 **Occlusion / projection — the user's point, and it invalidates part of the
 above.** `s_min` was taken as measured *image* separation, but a 2D projection
@@ -435,6 +452,39 @@ different apparent heights; that is exactly the case position cannot separate.
    §6 claim that better detections buy sparser sampling
    (`dt_max ≈ 1–2fps with perfect detections`). Probe its convention first;
    do **not** extrapolate from the flash-lite rows.
+8b. **Render polish — user-requested 2 Sep, all free, no API.** The current
+    render is correct but not finished-looking. Four items, in the order they
+    affect the viewer:
+
+    - **Motion smoothness.** Markers move as the tracker's per-sample output,
+      which at 5fps means 6 identical positions then a jump. The render already
+      interpolates position; what it does not do is ease it. The box render made
+      this obvious. Options in increasing cost: interpolate the *filtered*
+      Kalman state rather than raw observations (item 9 — we compute it and
+      discard it); or a short critically-damped follow on the marker so it eases
+      into each new position instead of stepping.
+    - **Invented labels: use Roman numerals, not letters.** Currently a fallback
+      track is `A·h` and reads as a typo. Roman numerals (I, II, III …) are
+      unmistakably *not* jersey numbers, need no legend, and stay legible at
+      9–21px. Preserves the existing hollow-vs-solid distinction, and removes the
+      `·` separator entirely — which the Windows console cannot print and which
+      has been mistaken for corruption once already.
+    - **A better font.** `FONT_STACK` currently falls through
+      bahnschrift → seguisb → tahomabd → DejaVuSansCondensed-Bold → arialbd,
+      i.e. whatever Windows has. Pick one deliberately, ship it in the repo so
+      the render is reproducible on any machine, and prefer a condensed
+      grotesque with **lining tabular numerals** — even digit widths stop labels
+      jittering as numbers change, and condensed means fewer neighbours trip the
+      crowding fade.
+    - **Fade on exit.** Markers currently vanish the instant a track ends, which
+      is jarring. Intent is a graceful exit; implementation is open. A distance
+      -from-frame-edge fade is the obvious version but wrong on its own — a
+      track that dies mid-pitch through occlusion pops just as hard. Better:
+      **fade on track death regardless of cause**, over ~0.3s, driven by the
+      tracker's existing coast state, so a player who walks off the edge and one
+      who is lost behind a crowd both leave the same way. Combining both — an
+      edge proximity fade *and* a death fade — is likely the finished behaviour.
+
 9. **Kalman options not yet explored**: render from the *filtered* state instead
    of raw observations (we compute it and discard it); a proper RTS backward
    smoother; adaptive process noise when a player accelerates; box size as part

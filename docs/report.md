@@ -466,11 +466,12 @@ nailed down for the clip's duration, which is the no-flicker requirement met.
   which is exactly the signal that is only 9–12% available. A clip containing
   three verified cuts has now been collected and this is the next thing measured.
 - **The ΔE colour fallback has never fired**, so the branch is unexercised.
-- **Single-axis position offsets, ~1 sighting in 5.** The model emits one
-  coordinate at 2 decimal places while the other keeps 3, snapping that axis to a
-  ±6.4px grid horizontally or ±3.6px vertically. Visible as a box that is
-  slightly too far left, or slightly too high, with the other axis correct. About
-  7% of the distance to the next player, so association is unaffected.
+- **Single-axis position offsets, cause unknown.** Boxes are intermittently
+  offset in one axis while the other is accurate. A decimal-rounding explanation
+  was proposed, measured, and **disproved** — see §7. The leading remaining
+  hypothesis is that it is the same defect as the acceleration lag: a centred
+  smoother lags *along the direction of motion*, which is single-axis by
+  construction. Untested.
 - **The box lags under acceleration** — the centred smoother, already known to
   overshoot on a curve. The marker ellipse masks it; the raw box exposes it.
 - **One clip still to collect** — a tight camera where players leave frame,
