@@ -149,8 +149,14 @@ MAX_PLAYER_SPEED = 0.22
 
 # --- camera cut detection (D8) --------------------------------------------
 PAN_SEARCH_FLOOR = 0.05     # search this far for a camera shift regardless of dt
-# CUT_MATCH_RATE / CUT_MIN_TRACKS / CUT_PAN_SUPPORT / CUT_SCENE_JACCARD deleted
-# with the cut detector itself. See the note in run().
+# Cut detection, rebuilt 3 Sep on shot scale rather than association collapse.
+# Thresholds sit between what a real cut produces and the worst a 30s no-cut
+# control produces, with a wide margin on both sides:
+#   scale jump   cuts 0.90 and 6.64        control never exceeds 0.19
+#   count jump   cuts 7, 8 and 12          control never exceeds 3
+CUT_SCALE_JUMP = 0.50       # |d median box height| / previous, as a ratio
+CUT_COUNT_JUMP = 5          # absolute change in the number of players seen
+CUT_MIN_TRACKS = 4          # never call a cut with fewer live tracks than this
 
 # --- ball -----------------------------------------------------------------
 # The ball is not a person and does not obey body-height scaling: a struck ball
@@ -765,6 +771,7 @@ def run(data, debug=False):
     cam = (0.0, 0.0)
     cam_cum, cam_at = [0.0, 0.0], {}
     prev_t, prev_scene = None, None
+    prev_med_h, prev_n = None, None
     # Association health, recorded every frame. Added after a run produced 392
     # tracks for 22 players and three separate theories about why, none of them
     # measured. The distribution of these two numbers says which stage is
@@ -806,6 +813,61 @@ def run(data, debug=False):
                                "unique": len(dets)})
             prev_t = t
             continue
+
+        # ---- D8: camera cuts, checked BEFORE association -------------------
+        #
+        # The previous detector used association collapse — "fewer than 30% of
+        # active tracks found a match" — and was removed on 28 Aug after 52 false
+        # positives across nine runs, every one landing on a corrupted-coordinate
+        # frame. Disabling it took identities 49 -> 32. The scene-sentence
+        # discontinuity it was supposed to fall back on is no better: measured on
+        # the clip with three verified cuts, word overlap between consecutive
+        # scene sentences is 0.26 at a cut against 0.36 away from one, and the
+        # no-cut control spans the same 0.09-0.44 range throughout. The model
+        # rewrites its sentence every frame regardless of what the camera did.
+        #
+        # SHOT SCALE is the signal. A cut moves the camera, so apparent player
+        # size changes violently; a pan does not. Measured on football_cuts
+        # against allstars (30s, no cuts) as the control:
+        #
+        #   t+17.2s cut   median box height 0.108 -> 0.825   ratio 6.64   dn 8
+        #   t+21.6s cut                     0.745 -> 0.076   ratio 0.90   dn 12
+        #   t+29.4s cut                     0.124 -> 0.976   ratio 6.54   dn 7
+        #   allstars, entire clip, no cuts             max ratio 0.19   max dn 3
+        #
+        # Three of four cuts caught, zero false positives on the control. The
+        # fourth (t+18.4s, keeper close-up -> behind-goal angle) is invisible to
+        # this and to everything else we have: both shots are tight, so the scale
+        # barely moves. A cut between two similarly-scaled shots is not
+        # detectable from detections alone, and that is a stated limitation.
+        #
+        # Deliberately NOT using association collapse: it is the signal that
+        # produced the 52 false positives, and a degenerate frame looks exactly
+        # like it. Shot scale is computed from the detections only and cannot be
+        # confused with a frame the model got stuck on.
+        med_h = float(np.median([p["h"] for p in dets])) if dets else 0.0
+        # max(), not len(active): the t+21.6s cut goes FROM a 3-player goalmouth
+        # close-up TO a 15-player wide shot. Guarding on live tracks alone missed
+        # it, because the shot being left had almost nothing in it. A jump from
+        # 3 tracks to 15 detections is the strongest cut evidence in the clip;
+        # the guard exists to avoid calling a cut on thin evidence, and evidence
+        # on either side of the boundary counts.
+        if prev_med_h and med_h and max(len(active), len(dets)) >= CUT_MIN_TRACKS:
+            h_ratio = abs(med_h - prev_med_h) / max(prev_med_h, 1e-4)
+            d_n = abs(len(dets) - (prev_n or 0))
+            if h_ratio > CUT_SCALE_JUMP or d_n >= CUT_COUNT_JUMP:
+                cuts.append({"frame": fi, "h_ratio": round(h_ratio, 2),
+                             "d_n": d_n, "med_h": round(med_h, 4),
+                             "prev_med_h": round(prev_med_h, 4)})
+                # Retire every track rather than let it reach across the cut.
+                # Identity is re-anchored afterwards by (kit, number): two
+                # fragments that read the same number on the same kit are the
+                # same player, which needs no special case here.
+                for tr in active:
+                    if tr.hits >= MIN_HITS:
+                        finished.append(tr)
+                active, preds = [], []
+        prev_med_h, prev_n = (med_h or prev_med_h), len(dets)
 
         # ---- camera motion, estimated BEFORE anything is associated -------
         # Chicken-and-egg resolved: vote on the shift straight from the point
