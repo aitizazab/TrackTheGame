@@ -175,7 +175,25 @@ BALL_MAX_GAP_S = 1.00
 # Left as a flag rather than a default so the claim gets tested, not assumed.
 BALL_MIN_CONF = 0.0
 ON_BALL_RADIUS_BH = 1.6     # a player is "on the ball" within this many heights
-ON_BALL_SMOOTH_S = 0.40     # majority-filter the on-ball flag over this window
+ON_BALL_SMOOTH_S = 0.40     # RETIRED: the old symmetric majority-vote window
+# How long a challenger must be the per-frame pick before possession transfers.
+# Asymmetric on purpose: keeping the ball needs no evidence, taking it does.
+#
+# Swept on both clips. Every genuine turnover is delayed by exactly this much,
+# so it is a straight trade of lag against flicker:
+#
+#             basketball spells / median      football spells / median
+#   0.0s        55 / 0.20s   (unusable)         33 / 0.33s
+#   0.2s        29 / 0.60s                      25 / 0.60s
+#   0.3s        16 / 1.55s   <- knee            20 / 0.82s
+#   0.4s        13 / 2.53s                      17 / 1.07s
+#   0.6s        11 / 2.70s                      14 / 1.23s   (visibly laggy)
+#
+# 0.3 is where basketball collapses from 29 spells to 16 — the flicker is gone —
+# while football keeps turnovers at 0.82s, close to the real thing. Past 0.3 the
+# curves flatten and all that is bought is lag, which is what showed on the
+# football render at 0.6.
+ON_BALL_STICK_S = 0.30
 
 
 def foot(d: dict) -> tuple:
@@ -1226,12 +1244,43 @@ def run(data, debug=False):
             if best_rank is None or rank < best_rank:
                 best, best_rank = p["id"], rank
         raw_on[fr] = best
-    win = max(1, int(ON_BALL_SMOOTH_S * src_fps))
+    # HYSTERESIS, not a symmetric majority vote.
+    #
+    # The vote was over +/- ON_BALL_SMOOTH_S = 0.40s, which at 5fps is two
+    # samples — far too short to settle anything, and symmetric, so it gives the
+    # incumbent no advantage over a neighbour who happens to win one frame.
+    # Result: basketball produced 22 possession spells in 30s with a median of
+    # 1.07s and EIGHT under half a second. Real possession lasts seconds; the
+    # marker was flickering between adjacent players rather than following one.
+    #
+    # Possession is a state, so model it as one: the holder keeps the ball until
+    # a challenger has been the per-frame pick for a sustained stretch. That is
+    # asymmetric on purpose — taking the ball off someone should need more
+    # evidence than keeping it.
     on_ball = {}
-    for fr in raw_on:
-        votes = Counter(raw_on.get(k) for k in range(fr - win, fr + win + 1)
-                        if k in raw_on)
-        on_ball[fr] = votes.most_common(1)[0][0] if votes else None
+    order_fr = sorted(raw_on)
+    current, run_id, run_len = None, None, 0
+    need = max(1, int(ON_BALL_STICK_S * src_fps))
+    for fr in order_fr:
+        pick = raw_on[fr]
+        if pick == run_id:
+            run_len += 1
+        else:
+            run_id, run_len = pick, 1
+        # An incumbent who is no longer in the frame cannot still have the ball.
+        # Without this the marker simply vanishes: `current` keeps naming a track
+        # that has ended, nothing in the frame matches the id, and nobody is
+        # drawn. It cost football 25 on-ball frames at stick=0.6 and got worse
+        # the stickier it went, which is the opposite of what stickiness is for.
+        if current is not None and not any(p["id"] == current
+                                           for p in per_frame.get(fr, [])):
+            current = None
+        # Claim the ball when nobody holds it, or when a challenger has held the
+        # per-frame pick long enough to have earned it.
+        if current is None or (run_id != current and run_len >= need):
+            if run_id is not None or run_len >= need:
+                current = run_id
+        on_ball[fr] = current
 
     out_frames = []
     for fr in range(total):
@@ -1270,6 +1319,10 @@ def main():
     ap.add_argument("--debug", action="store_true")
     ap.add_argument("--coast", type=float, default=None,
                     help="override MAX_COAST_S: how long a track survives unseen")
+    ap.add_argument("--stick", type=float, default=None,
+                    help="override ON_BALL_STICK_S: how long a challenger must "
+                         "be the per-frame pick before possession transfers. "
+                         "Higher = steadier but laggier on genuine turnovers")
     ap.add_argument("--ball-min-conf", type=float, default=None,
                     help="reject ball detections below this confidence. OFF by "
                          "default. Targets decoys the kinematic filters cannot "
@@ -1282,6 +1335,8 @@ def main():
         globals()["MAX_COAST_S"] = args.coast
     if args.ball_min_conf is not None:
         globals()["BALL_MIN_CONF"] = args.ball_min_conf
+    if args.stick is not None:
+        globals()["ON_BALL_STICK_S"] = args.stick
     RECONFIRM[0] = args.reconfirm
 
     if not args.detections.exists():
