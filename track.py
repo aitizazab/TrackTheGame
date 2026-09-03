@@ -1000,6 +1000,14 @@ def run(data, debug=False):
 
     ball_outliers = []
 
+    # TRIED AND REMOVED 3 Sep: a wrong-sport filter. detect.py asked the model to
+    # name which sport's ball each detection was, the clip's sport was the
+    # majority verdict, and any minority report was rejected as a
+    # misidentification. On basketball all 136 detections said "basketball",
+    # including every one the geometric filters threw out, so it never fired.
+    # The model names the sport it is watching rather than classifying the
+    # object, which puts the field downstream of the error it was meant to catch.
+
     # Filter -1 — CONFIDENCE FLOOR, off unless asked for. The kinematic filters
     # below can only catch a decoy that moves implausibly. A white spot mark or
     # a boot sitting NEXT to the real ball implies a perfectly ordinary
@@ -1170,16 +1178,53 @@ def run(data, debug=False):
             ball_at[r[0]] = (r[1], r[2], r[5], r[4])
 
     # ---- who is on the ball, smoothed ------------------------------------
+    # Measured against the player's BOX, not their foot point.
+    #
+    # It used to be hypot(p.x - ball.x, p.y - ball.y), and p.x/p.y is the foot
+    # point — the bottom-centre of the box, which is where the marker is drawn.
+    # That is the right reference in football, where the ball is at the feet, and
+    # systematically wrong in basketball, where it is held at chest or head
+    # height. The handler's foot point sits 0.15-0.20 fraction units BELOW the
+    # ball, so a defender standing slightly to the side can be nearer in straight
+    # line distance and steal the marker. The user saw exactly that: the ring
+    # following the man marking the ball carrier rather than the carrier.
+    #
+    # Two changes, both sport-agnostic, so no per-sport branch is needed:
+    #
+    #   1. CONTAINMENT WINS. If the ball's centre falls inside a player's box,
+    #      that player has it. Measured earlier: 79% of basketball ball
+    #      detections sit inside a box, and 23-40% in football. It was a useless
+    #      rejection rule for precisely the reason it is a good possession rule.
+    #   2. Otherwise, distance to the nearest point ON THE BOX rather than to the
+    #      foot point. A ball at a footballer's feet is just below the box edge,
+    #      so this barely moves football; it moves basketball a great deal.
+    def _box(p):
+        return (p["x"] - p["w"] / 2, p["y"] - p["h"], p["x"] + p["w"] / 2, p["y"])
+
     raw_on = {}
     for fr, players in per_frame.items():
         if fr not in ball_at:
             continue
         bx, by = ball_at[fr][0], ball_at[fr][1]
-        best, bestd = None, 1e9
+        best, best_rank = None, None
         for p in players:
-            d = np.hypot(p["x"] - bx, p["y"] - by)
-            if d < min(bestd, ON_BALL_RADIUS_BH * max(p["h"], 0.02)):
-                best, bestd = p["id"], d
+            x0, y0, x1, y1 = _box(p)
+            # Distance to the box: zero inside it, else to the nearest edge.
+            dx = max(x0 - bx, 0.0, bx - x1)
+            dy = max(y0 - by, 0.0, by - y1)
+            d = float(np.hypot(dx, dy))
+            inside = (dx == 0.0 and dy == 0.0)
+            if not inside and d > ON_BALL_RADIUS_BH * max(p["h"], 0.02):
+                continue            # too far to be in possession at all
+            # Containment outranks any distance. Among several containing boxes,
+            # or several near ones, the tie-break is how deep or how close.
+            if inside:
+                depth = min(bx - x0, x1 - bx, by - y0, y1 - by)
+                rank = (0, -depth)  # deeper inside wins
+            else:
+                rank = (1, d)
+            if best_rank is None or rank < best_rank:
+                best, best_rank = p["id"], rank
         raw_on[fr] = best
     win = max(1, int(ON_BALL_SMOOTH_S * src_fps))
     on_ball = {}

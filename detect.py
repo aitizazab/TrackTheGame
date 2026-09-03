@@ -238,6 +238,18 @@ SCHEMA = {
                 "type": ["object", "null"],
                 "description": "null when the ball is not visible. It often is not.",
                 "additionalProperties": False,
+                # TRIED AND REMOVED 3 Sep: a `kind` field naming which sport's
+                # ball this is, so the clip's sport could be set by majority vote
+                # and minority reports rejected as misidentifications. On
+                # basketball all 136 detections said "basketball" — including
+                # every one the geometric filters rejected — so the wrong-sport
+                # filter never fired. The model names the sport it is watching,
+                # not the object: by the time it fills the field it has already
+                # decided "this is the ball", so the field sits downstream of the
+                # error rather than checking it. Cost 6.8% in tokens for nothing.
+                #
+                # The clothing line in the prompt, added at the same time, DID
+                # work — see the note there.
                 "required": ["x", "y", "w", "h", "conf"],
                 "properties": {
                     "x": {"type": "number", "description": "left edge, fraction"},
@@ -302,6 +314,8 @@ THE BALL:
   - Markings painted on the playing surface are not the ball - centre spots,
     penalty spots, painted arcs, court lines and logos. Check that what you are
     looking at sits ABOVE the surface rather than being printed onto it.
+  - Worn or carried objects are not the ball either: a boot, sock, glove,
+    shinpad, bandage or a bunched sleeve. Pale and roundish is not enough.
   - If you cannot see the ball, set ball to null. Do not place it where you
     think it ought to be, and do not settle for the nearest small round thing.
 
