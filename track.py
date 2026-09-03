@@ -1173,9 +1173,32 @@ def run(data, debug=False):
         # the player did not teleport. Across a long gap that reasoning inverts —
         # the player may well have gone, and a marker sliding smoothly to wherever
         # the track resumed is a confident lie rather than a plausible guess.
+        # Split on DISTANCE as well as time. MAX_DRAW_GAP_S was only ever a proxy
+        # for "these two dots are too far apart to join", and a poor one: at 5fps
+        # a single missed sample is 0.4s, comfortably inside the 0.50s limit, so
+        # every visible glide in every clip is exactly 12 source frames long.
+        # Worst observed 0.143 fraction units — 183px at 1280 wide — travelled in
+        # 0.4s, which no footballer does.
+        #
+        # MAX_PLAYER_SPEED already encodes what a player can manage. Using it
+        # here refuses the join when the endpoints are further apart than the gap
+        # allows, while keeping every benign 0.03-0.05 bridge that stops a marker
+        # blinking through a one-frame miss. Measured cost: 24 to 60 player-frames
+        # per clip, under 0.25% of draws on the football clips, against 264-811
+        # for the blunt alternative of tightening MAX_DRAW_GAP_S to 0.30.
         segs, cur = [], [o[0]]
         for a, b in zip(o, o[1:]):
-            if (b[0] - a[0]) / src_fps > MAX_DRAW_GAP_S:
+            span = b[0] - a[0]
+            gap_s = span / src_fps
+            # The distance test applies ONLY where a sample was actually missed.
+            # Between adjacent samples there is nothing to interpolate across, so
+            # the only thing it can do there is fragment a track on ordinary fast
+            # motion — a player crossing 0.05 units in 0.2s under a panning
+            # camera is unremarkable, and testing every pair cut 384 markers on
+            # allstars against the 36 that the bridged gaps actually account for.
+            bridged = span > sample_step
+            moved = float(np.hypot(b[1] - a[1], b[2] - a[2]))
+            if gap_s > MAX_DRAW_GAP_S or (bridged and moved > MAX_PLAYER_SPEED * gap_s):
                 segs.append(cur)
                 cur = [b]
             else:
