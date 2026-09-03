@@ -93,6 +93,10 @@ box is already inside `football_cuts`.
 
 ### Budget — reconciled 1 Sep, and the ledger was incomplete
 
+> ⚠ **Superseded by §0.** The limit is now **$35** and remaining is **~$9.77**.
+> Everything in this subsection describes the state on 1 Sep and is kept for the
+> method, not the numbers.
+
 `/api/v1/auth/key` reports **limit $25, limit_remaining $5.04** — so **$19.96
 used**. The project ledger totalled **$18.81**; the 6% gap is the estimated
 portion below.
@@ -428,8 +432,12 @@ different apparent heights; that is exactly the case position cannot separate.
 > varied at all** and might not — see step 0. On Gemini neither costs money:
 > §3 measured a flat 2821 input tokens at 640, 960, 1280 *and* 1920.
 
-> **Re-ordered again 3 Sep.** The four items below the horizontal rule are what
-> is actually open. Everything above it in this section is historical.
+> **Re-ordered again 3 Sep.** ⬆ **Everything in the blockquote ABOVE this line is
+> historical** — the wall-clock/bytes analysis was largely retracted (D20).
+> **A–D immediately below are the live open items.** The numbered list after the
+> horizontal rule is a working backlog: still useful, but check each item against
+> §0 before acting, because several were written against an older budget and an
+> older prompt.
 >
 > **A. The marker artefact at frame edges — the user's top complaint, unsolved.**
 > A ring detaches from a player leaving the frame and drifts inward, six times
@@ -453,9 +461,15 @@ different apparent heights; that is exactly the case position cannot separate.
 > same resolution differ 2x in wall clock between runs. `TIMEOUT_S = 35` now
 > binds on slower clips — the cuts non-compact run lost 19 frames to it.
 >
-> **D. Prompt bloat.** Roughly 60% of the prompt has never been tested, and the
-> two blocks with the clearest measurements (`conf`, `kits`/`accent`) are
-> measured to do nothing. The user is editing it. §9 has the audit.
+> **D. Prompt bloat — ACTED ON 3 Sep, not yet measured (D26).** The audit in §9
+> found ~60% of the prompt untested and its two best-measured blocks
+> (`conf`, `kits`/`accent`) measured to do nothing. Both are now removed, along
+> with the duplication that had every rule stated twice; judgement calls per
+> frame go 11 → 7 and `PROMPT` goes ~2600 → 440 characters. **No API run has
+> happened, so there are no token or accuracy figures.** The user is writing
+> their own prompt in parallel, which replaces this one wholesale. When it is
+> run, interleave the arms call-by-call — blocked runs cannot beat provider
+> variance, which is what produced the confounded result in D25.
 
 ---
 
@@ -485,16 +499,19 @@ different apparent heights; that is exactly the case position cannot separate.
    high-frequency detail a small number *is*. Three configs, one variable,
    ~$1.92 with `--compact`.
 
-2. **`max_tokens` is the 402 reservation basis.** It is 4000; with `--compact`
-   the median output is 1798. Dropping to 3000 cuts the per-request hold 25% and
-   directly eases the in-flight ceiling that produced the 402s. D4's warning
-   still applies — a cap measured on easy input is not a cap.
+2. **`max_tokens` is the 402 reservation basis.** It is **6500** (raised twice —
+   D4); with `--compact` the median output is ~1750. A large reservation eases
+   nothing and directly worsens the in-flight ceiling that produced the 402s, so
+   there is room to lower it. D4's warning still applies — a cap measured on
+   easy input is not a cap, and reasoning reached 2578 tokens on real footage.
 
    **Do not lower `TIMEOUT_S` to hit the latency target: at 25s it silently
    discards 49 of 150 frames, and it never fires today anyway.**
 
 3. **Rebuild clip 1 with `--compact`** (~$0.64) — a settled win wrongly omitted
-   from the signed-off run (D19). Then run clips 2–5. Budget: $3.84 of $5.04.
+   from the signed-off run (D19). Then run clips 2–5. **Budget is now ~$9.77,
+   not the $5.04 this was costed against** (§0); the four-clip + rebuild +
+   ablation plan came to $3.84 and still does.
 4. **`call_with_retry` handles no HTTP status errors** (`detect.py:678` covers
    only `ConnectionError`/`SSLError`/`ChunkedEncoding`/`RemoteDisconnected`).
    **Retry 429 with backoff; abort the run on 402.** Six of eight losses on
@@ -607,7 +624,7 @@ the ones measured to do nothing — both are now removed. The prompt had grown b
 accretion: each line defended against a specific failure, none had ever been
 taken out.
 
-**MEASURED USEFUL**
+**MEASURED USEFUL** — all of these survived the D26 rewrite.
 
 | block | evidence |
 |---|---|
@@ -617,7 +634,7 @@ taken out.
 | GOALKEEPERS, sport-conditional | D14 — the single word "outfield" excluded every keeper. Generalisation verified: basketball 0, football 86 and 60 |
 | `scene` first | A4. `--scene-last` helped Luna, hurt Gemini. Also enforced by schema property order, so the prompt line restates it |
 
-**NO RECORDING — never tested either way**
+**NO RECORDING — never tested either way.** D26 cut most of this group on the grounds that an untested line defending an unobserved failure is not free: it costs a judgement call. The exceptions kept are the officials list and the count-discipline line, which are the whole of the new prompt.
 
 The opening line, the worked example, the TIGHT-box clause, "players on the
 field of play", the officials list, "report partly hidden players", "do not pad
@@ -629,11 +646,11 @@ line itself was never A/B'd.
 
 **HAS NOT EARNED ITS PLACE**
 
-| block | measurement |
-|---|---|
-| `conf` | `HIGH_CONF = 0.50` split is a **no-op** — every detection in every file is above it. Nudges Kalman noise 11%. A 0.82 floor was tested and made ball tracking worse |
-| `kits` / `accent` | Feeds D11's dE>=30 fallback, which has **never fired on any clip**. Every render printed "kit colours are distinguishable; used as-is" |
-| the clothing line | Added alongside the `kind` field, so its evidence is confounded. Basketball decoys 4 → 2, but cuts still has many |
+| block | measurement | outcome |
+|---|---|---|
+| `conf` | the `HIGH_CONF = 0.50` split is effectively a no-op — **333 of 80,374 detections (0.41%)** ever fell below it, not zero as first written. Nudges Kalman noise 11%. A 0.82 floor was tested and made ball tracking worse | **REMOVED for players** (D26). Kept for the ball, where it weights the speed gate |
+| `kits` / `accent` | Feeds D11's dE>=30 fallback, which has **never fired on any clip**. Every render printed "kit colours are distinguishable; used as-is" | **REMOVED** (D26). Team colour never came from it — that is a vote over the players' own `kit` words |
+| the clothing line | Added alongside the `kind` field, so its evidence is confounded. Basketball decoys 4 → 2, but cuts still has many | **REPLACED** by one positive test (D26) |
 
 ## 10. Things measured and rejected — do not re-propose
 

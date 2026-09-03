@@ -56,9 +56,10 @@ Downscaling costs the pixels a football occupies and buys nothing measurable.
 
 ---
 
-## D4 · `max_tokens = 4000`
+## D4 · `max_tokens = 6500`
 
-**Was 1600. Raised 27 Aug after it failed on real frames.**
+**Was 1600, then 4000. Raised twice; the current value is 6500 — see the note
+at the end of this entry. The heading said 4000 until 3 Sep.**
 
 The output sweep showed `completion_tokens` equalling `max_tokens` exactly at
 every level, with every token below 128 being a reasoning token — so Luna
@@ -86,6 +87,25 @@ reports `"truncated at max_tokens"` with the reasoning count, and empty content
 reports `"empty content"`. Truncation previously surfaced as a
 `JSONDecodeError` about an unterminated string, which reads like a schema bug and
 sends you looking in the wrong place.
+
+**Second raise, 4000 → 6500.** Across 300 real frames reasoning reached 2578
+tokens at the top end and two frames truncated anyway. 6500 is a ceiling, not a
+reservation.
+
+**Do not nudge it again.** Reasoning is 77.9% of output tokens on the shipping
+model and ~64% of the per-video bill (D25), so the cap is not the lever — the
+number of judgement calls the prompt demands is, which is what D26 acts on.
+
+⚠ **Three different failures all surface as a `JSONDecodeError`** and must not
+be conflated — this happened on 3 Sep and produced a wrong entry in D25:
+
+| symptom | what it is |
+|---|---|
+| `finish_reason == "length"`, high `reasoning_tokens` | genuine truncation. Raise the cap |
+| `compl=0, reason=0`, HTTP 200 | the **zero-token 200**: the provider returned an empty completion. Already retryable; not a schema problem |
+| valid `finish_reason`, non-zero tokens, bad JSON | an actual malformed response. This has not yet been observed on the shipping model |
+
+Check `completion_tokens` and `finish_reason` **before** reading the parse error.
 
 ---
 
@@ -650,7 +670,8 @@ The trade at 1280 is ~7.4s of wall clock against jersey-number read rate, which
 
 **Fifth instance of the same lesson:** a constant derived from the synthetic
 concurrency probe (`TIMEOUT_S = 43.0`, and the straggler model behind it) did not
-survive contact with the real batch. Derive to get the shape; measure to get the
+survive contact with the real batch. *(`TIMEOUT_S` is **35.0** now, lowered 2 Sep.
+It does bind on slower clips — the cuts non-compact run lost 19 frames to it.)* Derive to get the shape; measure to get the
 number.
 
 ---
@@ -875,7 +896,12 @@ of 150 frames — 33% — to buy ~6s.
 
 ## D21 · The budget ledger was incomplete in three ways
 
-`/api/v1/auth/key` reports **limit $25, limit_remaining $5.04** → **$19.96 used**.
+> **Figures superseded 3 Sep.** The instructor raised the limit to **$35** and
+> topped up the shared pool; remaining is now **~$9.77**. The reconciliation
+> below is kept because the *method* is the point — the three structural holes
+> it found are still the reason to query `run_log.jsonl` rather than estimate.
+
+`/api/v1/auth/key` reported **limit $25, limit_remaining $5.04** → **$19.96 used**.
 The project ledger totalled **$18.81**, a 6% gap consistent with the estimated
 rows below.
 

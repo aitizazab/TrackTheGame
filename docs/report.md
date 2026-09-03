@@ -84,7 +84,8 @@ Structured output via `json_schema`, strict, `additionalProperties: false`.
 | `kit` | the shirt colour **as an ordinary word**, never "team A" — each call is independent, so a call asked for "team A" picks its own A and the teams shuffle between frames. Colour is observer-independent |
 | `num` | jersey number, **null unless genuinely readable**. A wrong number is far worse than no number |
 | `role` | `outfield` / `goalkeeper`. Added after goalkeepers were silently excluded — see §7 |
-| `conf` | model's own confidence, used to admit partly-hidden players rather than lose them |
+| `conf` | **ball only.** It multiplies the ball speed gate: decoys come back at median 0.68 against 0.95 for real balls, so a confident detection earns more benefit of the doubt. Players carried it too until 3 Sep, when it was removed — 333 of 80,374 detections (0.41%) ever fell below the 0.50 split it fed, so it bought a judgement call per player for a decision it never made |
+| ~~`kits`~~ | **removed 3 Sep.** A per-frame summary of each team's dominant and accent colour. Team colour never depended on it — that comes from the players' own `kit` votes (§below) — and its only unique output, `accent`, fed a fallback that has never fired |
 
 ### Coordinate conventions are pinned per model, never inferred
 
@@ -100,16 +101,23 @@ The tell that exposed this was in the data the whole time: `x+w` topped out at
 that lands on 1000 in both axes is a normalised space, not a resolution.** The
 JSON looked perfectly valid; only the renders were wrong.
 
-### `max_tokens = 4000`
+### `max_tokens = 6500`
 
-Raised from 1600 after it failed on real frames. The model reasons before
-emitting content and the cap governs both together. On three consecutive live
-frames reasoning came in at 516, 1034 and 1306 tokens — a 2.5× swing — and at a
-1600 cap two of the three truncated mid-string.
+Raised twice. The model reasons before emitting content and the cap governs both
+together. On three consecutive live frames reasoning came in at 516, 1034 and
+1306 tokens — a 2.5× swing — and at the original 1600 cap two of the three
+truncated mid-string. 4000 was not enough either: across 300 real frames
+reasoning ran to 2578 at the top end and two frames still truncated. 6500 is a
+ceiling, not a reservation — a typical frame bills a quarter of it.
 
 **Generalisable lesson, and it recurred:** a budget measured on an easy input is
 not a budget. Both constants calibrated on the synthetic probe frame were wrong
 by 3–5× against real footage.
+
+This is not a number worth nudging further. **Reasoning is 77.9% of output
+tokens and about 64% of the per-video bill** (1361 of 1748 on the shipping
+model), so the cap is not the lever — the number of judgement calls the prompt
+demands is. That is what §8's next ablation varies.
 
 ---
 
@@ -180,13 +188,26 @@ despite unambiguous geometry), and the gate widened to 8 body-heights/sec.
 Recall is 97%. The failures are false positives: a pitch is covered in small
 white round things — penalty spot, centre spot, painted arc, a boot, a sock — and
 the model reports them confidently because they genuinely match the description.
-Two purely geometric filters, rejecting 37 detections on the first clip:
+Three filters, rejecting 37 detections on the first clip. The first two are
+purely geometric; none uses the model's opinion of what it saw:
 
+- **Flat box.** A mark painted on the turf is foreshortened vertically by an
+  oblique camera and not at all horizontally, so it comes back much wider than
+  it is tall. A ball does not.
 - **Round trip.** If the ball leaps away and is back next sample where it
   started, the middle reading was a decoy. A real ball travelling that fast keeps
   going.
 - **Over-speed.** Anything demanding a speed above 1.2 frac units/sec is a
-  different object, not a fast ball.
+  different object, not a fast ball. Ball `conf` **weights** this gate rather
+  than gating on its own: decoys sit at median 0.68 against 0.95 for real balls,
+  so a confident detection earns more benefit of the doubt while a hesitant one
+  must also be geometrically plausible. A hard threshold at 0.70 was measured
+  instead and dropped 20 of 37 decoys while losing 19 of 252 good detections —
+  roughly one for one, not worth having.
+
+The filters run to a **fixed point** (up to four passes), because removing a
+detection changes what its neighbours look like: a sustained drift onto a static
+decoy is invisible to the round-trip test until the frames around it are gone.
 
 ---
 
@@ -208,14 +229,27 @@ All drawing is Pillow; **the renderer reads no pixel it did not itself write.**
 
 ### Team colour resolution
 
-Each team uses its own kit colour. If the two kits are too close to tell apart,
-team B switches to its **accent** colour; if that is also unusable, to the **hue
+Each team uses its own kit colour. **Which colour belongs to which team is
+decided by the players, not by any summary field:** every player's `kit` word is
+counted across the whole clip and the two most-seen colours are the two teams
+(D6). A goalkeeper's third colour is therefore never mistaken for a team, and a
+colour word that appears once by mistake cannot become one either.
+
+If the two kits are too close to tell apart, team B switches to the **hue
 opposite** team A's, which is distinguishable by construction.
 
 "Too close" is **CIE76 ΔE ≥ 30 in Lab space, not RGB distance.** RGB disagrees
 with human vision badly enough to matter here: navy and black are far apart in
-RGB and nearly identical on a floodlit pitch. *(Note: on all footage collected so
-far the kits were distinguishable, so this fallback has never actually fired.)*
+RGB and nearly identical on a floodlit pitch.
+
+*This fallback had a second tier until 3 Sep: team B could take its **accent**
+colour, reported per frame in the `kits` field, before falling through to the
+opposite hue. On every clip collected the kits were distinguishable, so neither
+tier ever fired — and `kits` cost a schema subtree, a prompt paragraph and a
+judgement call per frame to feed a branch that never ran. It was removed;
+`resolve_team_colours` now falls straight through to the opposite hue, which
+always returns a distinguishable colour. Restoring the `kits` schema block is the
+entire undo if a later clip needs it.*
 
 ---
 
@@ -238,7 +272,7 @@ far the kits were distinguishable, so this fallback has never actually fired.)*
 | change | why it failed |
 |---|---|
 | **`--ruler`** (coordinate reference drawn on the frame) | worse on both models — Gemini numbers 17.7% → 14.2%, Luna 21.5% → 20.1% — and reasoning went *up*. It solves "where is this"; our failure is "what does that shirt say" |
-| **`--terse-schema`** | output tokens *up* 11%, cost up 4%, and it produced the only coordinate-corruption frame in its run. **The field descriptions were doing real work** |
+| **`--terse-schema`** | output tokens *up* 11%, cost up 4%, and it produced the only coordinate-corruption frame in its run. Measured on the **object** schema. ⚠ This result was later generalised to the array schema, where it does not hold and has never been tested — see §7 |
 | `--system` prompt on Gemini | +23% latency, no gain |
 | `--scene-last` | helped Luna slightly, hurt Gemini — opposite signs on the same change |
 | **Low reasoning effort** | 22% cheaper and it **destroys format compliance**: 36% of frames came back in a wrong coordinate scale, 13 mixing two scales inside one response. Reasoning effort controls instruction *adherence*, not just accuracy |
@@ -311,6 +345,69 @@ that "newer is not better in either Gemini line". **Both were retracted.**
 **Two runs are comparable only when everything except the named variable is
 pinned.** Tier, resolution, clip and provider all varied in that screen, and the
 difference was attributed to whatever the heading named.
+
+### Two experiments welded into one table
+
+The `--compact` flag does two things at once: it drops the player object's key
+names in favour of a fixed-order array, and it strips the schema's `description`
+fields. Both were introduced together and measured together as a single −29%.
+
+Separating them, I reported that the array format saves ~40% while stripping the
+descriptions *costs* ~11% on top — "the cut was never a saving, it was a tax the
+array format was paying". That table paired two different experiments:
+
+- **A7**, 31 Aug: `--terse-schema`, **object** format, a different clip. Output
+  **+11%** when descriptions were stripped.
+- **basketball v2 vs rich**, 3 Sep: **array** format. Output **+6%** when
+  descriptions were restored.
+
+Opposite signs, different formats, different clips — and the second was not
+controlled either. `basketball_v2` ran six hours before the ball `kind` field
+was removed, so it compared *stripped + `kind`* against *described − `kind`*, two
+changes worth ~6.8% pulling opposite ways. The prompt-token counts say so
+plainly: 2037 for v2, 1981 for both later runs. **I had written the rule about
+comparisons that hold nothing constant into the handoff document the same
+morning.**
+
+The one controlled pair — identical prompt tokens, same clip, one hour apart:
+
+| | reasoning | content | total | cost/call |
+|---|---|---|---|---|
+| object + descriptions | 1345 | 864 | 2209 | $0.004944 |
+| array + descriptions | 1361 | **387** | 1748 | $0.004031 |
+
+Reasoning moves 1.2%. Content halves. The format is the entire saving, and the
+effect of the descriptions in the array form is simply **unmeasured**.
+
+**The reporting error underneath it.** I was quoting `completion_tokens`, which
+is reasoning *plus* content in one number. Content is the small half: reasoning
+is **77.9% of output and ~64% of the per-video bill**. The "+6% from
+descriptions" was a 1282→1361 move in reasoning wearing a total-tokens disguise
+— and because the sum hid which half moved, I invented a mechanism for it
+afterwards. Reasoning and content are now reported separately. Correctness still
+gates: cheapness is only ever a tiebreak among variants that are already correct.
+
+### Five lost frames that were never a schema problem
+
+The same run lost 25 of 150 frames, and I reported 20 to the deadline and **5 to
+malformed JSON**, treating the second group as evidence the richer schema broke
+generation. The records say otherwise — all five returned `compl=0`,
+`reason=0`, HTTP 200, at 30–34s:
+
+```
+frame  96  compl=0  reason=0  lat=30.7s  status=200
+frame 258  compl=0  reason=0  lat=31.4s  status=200
+frame 360  compl=0  reason=0  lat=30.3s  status=200
+frame 462  compl=0  reason=0  lat=33.6s  status=200
+frame 600  compl=0  reason=0  lat=33.1s  status=200
+```
+
+The model emitted nothing; the `JSONDecodeError` was the parser choking on an
+empty-completion envelope — a known, already-retryable failure class. Every one
+sits in the same latency band as the 20 deadline losses, on an endpoint whose
+p90 went **17.6s → 36.2s within the hour**. One provider degradation, 25 frames,
+one cause. **A failure mode that already has a name should be checked against
+that name before it is treated as new evidence.**
 
 ### A settled result overridden by a misremembered citation
 
@@ -431,6 +528,48 @@ quantisation destroys first.
 
 ---
 
+### A9 — prompt and schema verbosity, the next one to run
+
+**Why this parameter.** §7 established that reasoning is ~64% of the per-video
+bill and that nothing in the prompt had ever been aimed at it. Reasoning scales
+with the number of *decisions* a frame demands, not the length of the
+instructions, so the variable is **judgement calls per frame**, not word count.
+The prompt asked for eleven: box tightness, colour naming, number legibility,
+confidence calibration, sport inference, goalkeeper identification,
+official-vs-player, bench exclusion, count discipline, ball-vs-decoy, and kit
+summarisation.
+
+The rewrite takes it to seven. Every rule had been stated twice — once in the
+prompt as prose, once in a schema `description`; "scene first" three times,
+though only the schema's property order actually binds. The prompt is now 440
+characters against ~2600 and carries only what a schema cannot say: who is not a
+player, and how to count. Removed with evidence: **player `conf`** (333 of
+80,374 detections, 0.41%, ever fell below the split it fed), **`kits`/`accent`**
+(only consumer is a fallback that has never fired), the worked coordinate
+example, and the eleven named ball decoys in favour of one positive test —
+naming a distractor inside a negation raises its salience. Ball `conf` is kept;
+it is load-bearing in the speed gate.
+
+Also removed: the claim that a long box makes "the marker float below their
+feet". That rationale was **retracted** when the box render showed top and
+bottom edges correct, and leaving it in was telling the model its boxes run long.
+
+**Known cost, measured offline.** Player `conf` is synthesised downstream rather
+than deleted from the tracker, so the internal format is unchanged. On the same
+detections with `kits` stripped and `conf` flattened, identities go 17 → 18 on
+basketball — one extra fragment, because the association gate no longer loosens
+for a hesitant detection. Match rate, ball coverage and players-drawn are
+identical.
+
+**How it must be run.** Provider variance is the dominant noise term: p90 went
+17.6s → 36.2s on the same endpoint within an hour. Running one variant as a
+block and the other as a block cannot separate a schema effect from that — it is
+exactly how the confounded result in §7 was produced. The arms must be
+**interleaved call-by-call inside a single run**, with reasoning and content
+tokens recorded separately. Three arms × 50 frames = 150 calls ≈ $0.20.
+
+---
+
 ## 9. Results
 
 Video 1 of 5, `gemini-3.7-flash` pinned to flex, 1080p, 5fps, 150 calls:
@@ -465,7 +604,7 @@ nailed down for the clip's duration, which is the no-flicker requirement met.
   than useless; the designed replacement re-anchors identity by jersey number,
   which is exactly the signal that is only 9–12% available. A clip containing
   three verified cuts has now been collected and this is the next thing measured.
-- **The ΔE colour fallback has never fired**, so the branch is unexercised.
+- **The ΔE colour fallback has never fired**, so the branch is unexercised. Its accent tier was removed on 3 Sep for that reason; the opposite-hue tier remains.
 - **Single-axis position offsets, cause unknown.** Boxes are intermittently
   offset in one axis while the other is accurate. A decimal-rounding explanation
   was proposed, measured, and **disproved** — see §7. The leading remaining
@@ -479,9 +618,16 @@ nailed down for the clip's duration, which is the no-flicker requirement met.
 
 ## 11. Budget
 
-$25 allocation, $19.96 used, $5.04 remaining. Every call's real charge is
-recorded in `docs/run_log.jsonl`; the reconciliation and its three gaps are in
-`decisions.md` D21.
+**$35 allocation, ~$9.77 remaining** as of 3 Sep, after the instructor raised the
+limit and topped up the shared pool. The earlier reconciliation — $25 allocation,
+$19.96 used — is in `decisions.md` D21 along with the three structural holes it
+exposed: a second project billing the same key, a log schema that gained
+`cost_usd` mid-project, and a probe script that never recorded cost at all.
+
+Every call's real charge is recorded in `docs/run_log.jsonl`. **Query it; do not
+estimate.** The running total drifted $0.58 in one session by subtracting from
+memory, and the ledger was only ever as complete as the set of writers someone
+remembered to check.
 
 The most expensive lesson was not a model choice but an **infrastructure**
 default: unpinned provider routing silently doubled the price of every call for
