@@ -102,6 +102,10 @@ RECONFIRM = [False]
 GATE_FLOOR = 0.010          # fraction units; detector jitter on a static player
 NUMBER_MATCH_BONUS = 0.55   # multiplies cost when jersey numbers agree
 KIT_MISMATCH_PENALTY = 4.0  # multiplies cost across a team boundary; not a veto
+# Apparent box height is a depth cue and is the only signal that survives a
+# crossing, where screen separation goes to zero. Weight is deliberately mild:
+# a 1.5x height disagreement costs 25% at 0.5, where the kit penalty costs 300%.
+HEIGHT_MISMATCH_W = 0.5
 
 HIGH_CONF = 0.50            # ByteTrack's split point
 MIN_HITS = 3                # sightings before a track is real and drawable
@@ -125,6 +129,11 @@ COAST_DAMP = 0.72           # velocity decay per frame while unmatched
 # edge. A track whose coasted centre crosses the boundary has left the picture;
 # stop predicting and let re-entry start a clean track.
 EDGE_MARGIN = 0.015         # a coasted centre this far outside [0,1] is gone
+# Longer than this between two observations and the marker is NOT drawn across
+# the gap. Short absences still interpolate — the player did not teleport — but
+# a long one is where interpolation stops being a plausible guess and becomes a
+# marker gliding through empty space to wherever the track resumed.
+MAX_DRAW_GAP_S = 0.50
 # A 9 m/s sprint across a ~68m pitch is ~0.13 fraction units/sec. 0.22 leaves
 # headroom for camera motion and box jitter; past it, it is not a player.
 MAX_PLAYER_SPEED = 0.22
@@ -636,6 +645,25 @@ def match(tracks, preds, dets, dt, cam, team_of):
             if tr.number is not None and d["num"] is not None \
                     and int(d["num"]) == tr.number:
                 c *= NUMBER_MATCH_BONUS
+            # BOX HEIGHT AS A DEPTH CUE. Apparent height has been smoothed on
+            # every track since D12 and never used to decide anything.
+            #
+            # This is the one signal that survives a crossing. Two players at the
+            # same screen position are at different DEPTHS, and depth shows up as
+            # apparent height. Measured on the basketball swap at t+0.6s: the
+            # candidates around the two tracks ranged 0.141 to 0.240 in height,
+            # a 1.7x spread, while the tracks themselves sat at 0.176 and 0.207.
+            # Position could not separate them — separation fell to 0.034 — and
+            # height could.
+            #
+            # A ratio, not a difference, because apparent height scales with
+            # distance: 0.02 apart means nothing near the camera and everything
+            # far from it. Mild, because a real player's box height is noisy
+            # frame to frame, and this must not out-shout position the way the
+            # kit veto once did.
+            if tr.h and d.get("h"):
+                ratio = max(tr.h, d["h"]) / max(min(tr.h, d["h"]), 1e-4)
+                c *= 1.0 + HEIGHT_MISMATCH_W * (ratio - 1.0)
             cost[i, j] = c
 
     rows, cols = linear_sum_assignment(cost)
@@ -972,7 +1000,28 @@ def run(data, debug=False):
         # This is a deliberate choice of a *plausible* artifact over an
         # *honest* one, for a deliverable that is watched rather than audited.
         # Worth stating plainly in the report rather than hiding.
-        segs = [o]
+        # SPLIT ON A LONG GAP. This was `segs = [o]` — one segment for the whole
+        # observation list — so np.interp drew a straight line across every gap
+        # however long, and however far apart its endpoints were. A track that
+        # lost a player at the frame edge and later re-acquired one somewhere
+        # else glided its marker across the pitch through empty space. Measured
+        # markers travelling 0.09-0.17 fraction units in their final 0.6s, which
+        # is the "ring flying out" the user reported. It was never coasting or
+        # Kalman extrapolation; it was interpolation joining two distant dots.
+        #
+        # The note above still stands for SHORT gaps: a marker that holds through
+        # a brief absence is closer to the truth than the hole it leaves, because
+        # the player did not teleport. Across a long gap that reasoning inverts —
+        # the player may well have gone, and a marker sliding smoothly to wherever
+        # the track resumed is a confident lie rather than a plausible guess.
+        segs, cur = [], [o[0]]
+        for a, b in zip(o, o[1:]):
+            if (b[0] - a[0]) / src_fps > MAX_DRAW_GAP_S:
+                segs.append(cur)
+                cur = [b]
+            else:
+                cur.append(b)
+        segs.append(cur)
         did = identity[tr.id]
         info = display[did]
         # EVERY coherent stretch is drawn, not just the longest. A break means
