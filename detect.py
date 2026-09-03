@@ -160,48 +160,35 @@ SCHEMA = {
     "schema": {
         "type": "object",
         "additionalProperties": False,
-        "required": ["scene", "kits", "players", "ball"],
+        "required": ["scene", "players", "ball"],
         "properties": {
             "scene": {
                 "type": "string",
-                "description": "One sentence: camera framing, lighting, and the "
-                               "two kit colours. Written BEFORE looking for "
-                               "positions, as working-out."
+                "description": "One short sentence: camera framing, lighting, "
+                               "and the shirt colour of each team. Written "
+                               "BEFORE any coordinates, as working-out."
             },
-            "kits": {
-                "type": "array",
-                "description": "The distinct outfield kits visible, most common "
-                               "first. Usually exactly two.",
-                "items": {
-                    "type": "object",
-                    "additionalProperties": False,
-                    "required": ["colour", "accent"],
-                    "properties": {
-                        "colour": {"type": "string",
-                                   "description": "dominant shirt colour, one "
-                                                  "common word"},
-                        # The renderer needs a second colour to fall back on when
-                        # the two kits are too close to tell apart at a glance.
-                        # Asked once per frame rather than once per player: it is
-                        # a property of the kit, and per-player would cost ~20
-                        # extra output tokens per person for no extra signal.
-                        "accent": {"type": ["string", "null"],
-                                   "description": "secondary colour on that kit "
-                                                  "— trim, sleeves, shorts, or "
-                                                  "the number itself. null if "
-                                                  "the kit is plain."}
-                    }
-                }
-            },
+            # KITS REMOVED 3 Sep. The field worked - accent was non-null on
+            # all but 95 of ~10k frames - but its only consumer is the
+            # renderer's dE >= 30 fallback, which has NEVER fired on any clip,
+            # including the one the user nominated as the similar-kit case.
+            # With no accents the fallback degrades from two tiers to one and
+            # still returns a distinguishable colour via opposite(). Cost was a
+            # prompt paragraph, a schema subtree, ~10 output tokens a frame and
+            # one more judgement call per frame. track.py and render.py already
+            # tolerate the field being absent, so restoring this block is the
+            # whole of the undo - do that first if clip 5 has similar kits.
             "players": {
                 "type": "array",
                 "description": "One entry per player on the field of play, "
-                               "GOALKEEPERS INCLUDED. Empty array is valid and "
+                               "GOALKEEPERS INCLUDED. Box tightly: top edge at "
+                               "the crown of the head, bottom edge where the "
+                               "feet meet the ground. Empty array is valid and "
                                "correct if none are visible.",
                 "items": {
                     "type": "object",
                     "additionalProperties": False,
-                    "required": ["x", "y", "w", "h", "kit", "num", "role", "conf"],
+                    "required": ["x", "y", "w", "h", "kit", "num", "role"],
                     "properties": {
                         "x": {"type": "number",
                               "description": "LEFT edge of the player's box, "
@@ -214,10 +201,15 @@ SCHEMA = {
                         "h": {"type": "number",
                               "description": "box height, fraction of image height"},
                         "kit": {"type": "string",
-                                "description": "Shirt colour as one common word"},
+                                "description": "Shirt colour as one common "
+                                               "word. Judge the colour itself; "
+                                               "never \"team A\" or \"home\" - "
+                                               "each frame is judged on its own "
+                                               "and the words must agree across "
+                                               "frames."},
                         "num": {"type": ["integer", "null"],
                                 "description": "Jersey number ONLY if you can "
-                                               "actually read it. null otherwise."},
+                                               "actually read it. null otherwise. A wrong number is far worse than no number."},
                         # Without this a goalkeeper in a third kit colour is
                         # indistinguishable from an unstable colour word, and the
                         # renderer cannot tell "green kit = keeper" from "someone
@@ -227,16 +219,17 @@ SCHEMA = {
                                                 "different kit from both teams "
                                                 "and stand in/near a goal. In "
                                                 "sports with no goalkeeper, "
-                                                "every player is outfield"},
-                        "conf": {"type": "number",
-                                 "description": "0.0 to 1.0, how sure you are this "
-                                                "is a player at this position"}
+                                                "every player is outfield"}
                     }
                 }
             },
             "ball": {
                 "type": ["object", "null"],
-                "description": "null when the ball is not visible. It often is not.",
+                "description": "null when the ball is not visible, which it "
+                               "often is not. The ball is ABOVE the playing "
+                               "surface: not a mark painted on it, and not "
+                               "something a player is wearing or carrying. "
+                               "Never place it where you think it ought to be.",
                 "additionalProperties": False,
                 # TRIED AND REMOVED 3 Sep: a `kind` field naming which sport's
                 # ball this is, so the clip's sport could be set by majority vote
@@ -263,67 +256,36 @@ SCHEMA = {
     }
 }
 
-# Every clause here is defending against a specific failure we predicted:
-# hallucinated players (schemas compel an answer), inconsistent team naming
-# across independent calls, guessed jersey numbers, and phantom balls.
-PROMPT = """You are looking at one frame of sports footage.
+# PROMPT REWRITTEN 3 Sep. Every rule used to be stated twice - once here in
+# prose and once in a schema `description` - and "scene first" three times,
+# though only the schema's property order actually binds. Roughly 900 of 1981
+# prompt tokens were a second copy.
+#
+# The schema now carries the whole per-field contract; this text carries only
+# what a schema cannot say - who is NOT a player, and how to count. Also gone:
+# the worked coordinate example (constrained generation already fixes the shape)
+# and the claim that a long box makes "the marker float below their feet". That
+# rationale was RETRACTED when the box render showed top and bottom edges
+# correct, and leaving it in was telling the model its boxes run long.
+#
+# The eleven named ball decoys - boot, sock, glove, shinpad, bandage, sleeve,
+# centre spot, penalty spot, arcs, lines, logos - collapse to one positive test
+# in the ball description. Naming a distractor inside a negation raises its
+# salience, and the clothing line moved basketball decoys only 4 -> 2 while
+# football_cuts kept plenty.
+#
+# Judgement calls per frame: 11 -> 7. That is the target, not word count -
+# reasoning tokens scale with the number of decisions, not the length of the
+# instructions.
+PROMPT = """One frame of sports footage. Report every player on the playing
+surface, and the ball.
 
-Report the PLAYERS and the BALL.
+Do NOT report: referees and other match officials, substitutes and anyone on the
+bench, coaches, medical staff, the crowd, ball boys.
 
-Give each one a BOUNDING BOX in fractions of the image, never in pixels.
-  x = left edge of the box    (0.0 = image left,  1.0 = image right)
-  y = top edge of the box     (0.0 = image top,   1.0 = image bottom)
-  w = box width               (as a fraction of the image width)
-  h = box height              (as a fraction of the image height)
-
-  Worked example. A player standing in the middle of the picture, occupying the
-  lower half vertically and a narrow slice horizontally:
-      x = 0.48, y = 0.50, w = 0.04, h = 0.28
-  Their box therefore spans 0.48-0.52 across and 0.50-0.78 down.
-
-  The box must be TIGHT: top edge at the top of their head, bottom edge where
-  their feet meet the ground. The bottom edge is used to place a marker under
-  them, so if the box runs long the marker floats below their feet.
-
-For each player also give:
-  kit  the colour of their SHIRT, as one ordinary word: red, blue, white,
-       yellow, green, black, orange, purple. Judge the colour itself. Do not
-       call them "team A" or "home"; another frame will be judged separately
-       and the colours must agree between them.
-  num  the number on their shirt ONLY IF YOU CAN GENUINELY READ IT. If their
-       back is turned, if it is blurred, if they are too small, if it is
-       covered - use null. A wrong number is far worse than no number.
-  conf 1.0 you are certain, 0.5 you think so, 0.2 you are guessing.
-
-Rules that matter:
-  - Report players on the field of play - the pitch, court, or playing surface.
-  - GOALKEEPERS. If this sport has a goalkeeper (football, hockey, handball,
-    futsal), they ARE players and must be reported even though their kit matches
-    neither team. Mark them role="goalkeeper". If the sport has no goalkeeper
-    (basketball, volleyball), every player is role="outfield". Decide from what
-    you can see in the image; do not assume the sport.
-  - Do NOT report match officials (referees, umpires, linesmen), substitutes or
-    players on the bench, coaches, medical staff, the crowd, or ball boys.
-  - Report every player you can see, including partly hidden ones. Give a partly
-    hidden player a low conf rather than leaving them out.
-  - Do NOT pad the list to a round number. If you can see 7 players, report 7.
-    There is no expected count, and it does not depend on the sport.
-
-THE BALL:
-  - A tight box, same fraction format.
-  - Markings painted on the playing surface are not the ball - centre spots,
-    penalty spots, painted arcs, court lines and logos. Check that what you are
-    looking at sits ABOVE the surface rather than being printed onto it.
-  - Worn or carried objects are not the ball either: a boot, sock, glove,
-    shinpad, bandage or a bunched sleeve. Pale and roundish is not enough.
-  - If you cannot see the ball, set ball to null. Do not place it where you
-    think it ought to be, and do not settle for the nearest small round thing.
-
-In "kits", list the two teams' kits. For each, give the dominant shirt colour and
-one secondary "accent" colour — the trim, sleeves, shorts, or the colour the
-numbers are printed in. If a kit is genuinely plain, accent is null.
-
-Fill in "scene" first, as working-out, before you give any coordinates."""
+Report players who are partly hidden or partly out of frame, and box only the
+part you can actually see. Report exactly as many players as you can see - there
+is no expected number and it does not depend on the sport."""
 
 
 # ---------------------------------------------------------- frame extraction
@@ -561,49 +523,52 @@ CONTAINER_PROMPT = """One frame of sports footage. Report the players and the ba
 # --compact replaces the per-player object with a fixed-order array. The key
 # names are over half the bytes of each player record and there are ~18 of them
 # per frame, and output is ~82% of the bill.
-COMPACT_ORDER = ["x", "y", "w", "h", "kit", "num", "role", "conf"]
+COMPACT_ORDER = ["x", "y", "w", "h", "kit", "num", "role"]
 COMPACT_SCHEMA = {
     "name": "frame_detections_compact",
     "strict": True,
     "schema": {
         "type": "object",
         "additionalProperties": False,
-        "required": ["scene", "kits", "players", "ball"],
+        "required": ["scene", "players", "ball"],
         "properties": {
-            # DESCRIPTIONS RESTORED 3 Sep. The array format and the description
-            # cut went in together and were measured together as one -29%, which
-            # hid that they pull in opposite directions:
+            # DESCRIPTIONS RESTORED 3 Sep, and the reason first given for it
+            # was wrong. The table originally here paired A7 (--terse-schema, 31
+            # Aug, OBJECT form, different clip, output +11%) with basketball
+            # v2-vs-rich (3 Sep, ARRAY form, output +6%) and read a single
+            # mechanism across both. They are different experiments pointing
+            # opposite ways, and v2-vs-rich was not controlled either: v2 ran six
+            # hours before the ball `kind` field was dropped, so it was
+            # "stripped + kind" against "described - kind", two changes worth
+            # ~6.8% in opposite directions.
             #
-            #   --terse-schema  strips descriptions, keeps objects  -> output +11%
-            #   --compact       strips descriptions, uses arrays    -> output -29%
+            # The one controlled pair (rich vs nc, identical 1981 prompt tokens,
+            # same clip, one hour apart) says the format is the whole saving and
+            # the descriptions are unmeasured:
             #
-            # Dropping the key names is worth about -40%; stripping the
-            # descriptions costs about +11% on top of it, because a model given
-            # less guidance reasons for longer. The cut was never a saving, it
-            # was a tax the array format was paying. So keep the format and give
-            # the guidance back — every semantic line below is carried over
-            # verbatim from SCHEMA, which is the version that was measured to
-            # earn its tokens.
+            #   object + descriptions   reasoning 1345   content 864   $0.004944
+            #   array  + descriptions   reasoning 1361   content 387   $0.004031
+            #
+            # Reasoning moves 1.2%, which is noise; content halves. So "a model
+            # given less guidance reasons longer" has nothing behind it. What the
+            # split does show is where the money is: reasoning is 77.9% of output
+            # tokens and about 64% of the whole per-video bill, and every schema
+            # change so far has been aimed at the other 18%.
             "scene": {"type": "string",
-                      "description": "One sentence: camera framing, lighting, and "
-                                     "the two kit colours. Written BEFORE looking "
-                                     "for positions, as working-out."},
-            "kits": {"type": "array",
-                     "description": "The distinct outfield kits visible, most "
-                                    "common first. Usually exactly two.",
-                     "items": {
-                         "type": "object", "additionalProperties": False,
-                         "required": ["colour", "accent"],
-                         "properties": {
-                             "colour": {"type": "string",
-                                        "description": "dominant shirt colour, "
-                                                       "one common word"},
-                             "accent": {"type": ["string", "null"],
-                                        "description": "secondary colour on that "
-                                                       "kit - trim, sleeves, "
-                                                       "shorts, or the number "
-                                                       "itself. null if the kit "
-                                                       "is plain."}}}},
+                      "description": "One short sentence: camera framing, "
+                                     "lighting, and the shirt colour of each "
+                                     "team. Written BEFORE any coordinates, as "
+                                     "working-out."},
+            # KITS REMOVED 3 Sep. The field worked - accent was non-null on
+            # all but 95 of ~10k frames - but its only consumer is the
+            # renderer's dE >= 30 fallback, which has NEVER fired on any clip,
+            # including the one the user nominated as the similar-kit case.
+            # With no accents the fallback degrades from two tiers to one and
+            # still returns a distinguishable colour via opposite(). Cost was a
+            # prompt paragraph, a schema subtree, ~10 output tokens a frame and
+            # one more judgement call per frame. track.py and render.py already
+            # tolerate the field being absent, so restoring this block is the
+            # whole of the undo - do that first if clip 5 has similar kits.
             "players": {
                 "type": "array",
                 # The array form loses per-field typing entirely: `items` has to
@@ -614,32 +579,45 @@ COMPACT_SCHEMA = {
                 # why it states the type of every position as well as its meaning.
                 "description": ("One array per player, GOALKEEPERS INCLUDED, "
                                 "ALWAYS in this order: "
-                                "[x, y, w, h, kit, num, role, conf]. "
+                                "[x, y, w, h, kit, num, role]. "
                                 "x = LEFT edge of the box, fraction of image "
-                                "width, 0.0-1.0. "
+                                "width, 0.0-1.0 (number). "
                                 "y = TOP edge of the box, fraction of image "
-                                "height, 0.0-1.0. "
-                                "w = box width as a fraction of image width. "
-                                "h = box height as a fraction of image height. "
-                                "kit = shirt colour as one common word. "
-                                "num = jersey number as an integer ONLY if you "
-                                "can actually read it, otherwise null. "
-                                "role = \"goalkeeper\" if they wear a different "
-                                "kit from both teams and stand in/near a goal, "
+                                "height, 0.0-1.0 (number). "
+                                "w = box width as a fraction of image width "
+                                "(number). "
+                                "h = box height as a fraction of image height "
+                                "(number). "
+                                "Box tightly: top edge at the crown of the head, "
+                                "bottom edge where the feet meet the ground. "
+                                "kit = shirt colour as one ordinary word "
+                                "(string): red, blue, white, yellow, green, "
+                                "black, orange, purple. Judge the colour itself; "
+                                "never \"team A\" or \"home\", because each frame "
+                                "is judged on its own and the words must agree "
+                                "across frames. "
+                                "num = the number on the shirt as an integer, "
+                                "ONLY if you can genuinely read it, otherwise "
+                                "null. A wrong number is far worse than no "
+                                "number. "
+                                "role = \"goalkeeper\" if they wear a kit unlike "
+                                "both teams and stand in or near a goal, "
                                 "otherwise \"outfield\"; in sports with no "
                                 "goalkeeper every player is \"outfield\". "
-                                "conf = 0.0 to 1.0, how sure you are this is a "
-                                "player at this position. "
                                 "An empty array is valid and correct if no "
                                 "players are visible."),
                 "items": {"type": "array",
                           "items": {"type": ["number", "string", "null"]}}},
             "ball": {"type": ["array", "null"],
-                     "description": ("[x, y, w, h, conf] or null. null when the "
-                                     "ball is not visible, which it often is not. "
-                                     "x = left edge, y = top edge, w = width, "
-                                     "h = height, all as fractions 0.0-1.0. "
-                                     "conf = 0.0 to 1.0."),
+                     "description": ("[x, y, w, h, conf] or null, boxed tightly, "
+                                     "all as fractions 0.0-1.0. x = left edge, "
+                                     "y = top edge, w = width, h = height, "
+                                     "conf = 0.0 to 1.0. The ball is ABOVE the "
+                                     "playing surface: not a mark painted on it, "
+                                     "and not something a player is wearing or "
+                                     "carrying. If you cannot see the ball, null "
+                                     "- null is common and correct. Never place "
+                                     "it where you think it ought to be."),
                      "items": {"type": ["number", "null"]}},
         }}}
 
@@ -647,29 +625,47 @@ COMPACT_SCHEMA = {
 def normalise_result(result: dict, compact: bool) -> dict:
     """Turn a compact array response back into the standard dict shape.
 
-    Everything downstream — the validator, the tracker, the renderer — keeps
+    Everything downstream - the validator, the tracker, the renderer - keeps
     working on one format. The wire format is an ablation; the internal one is
     not, and letting a switch leak past this function would mean testing the
     output format and the whole pipeline at the same time.
+
+    That is also why player `conf` is SYNTHESISED here rather than deleted from
+    the tracker. The model stopped reporting it on 3 Sep: across 80,374 recorded
+    detections only 333 - 0.41% - ever came back below ByteTrack's 0.50 split,
+    so it cost a judgement call and an output element per player for a decision
+    it never actually made. track.py reads it in four places, and giving every
+    player the modal value (1.0, which 24,134 detections reported outright)
+    keeps those paths on one format: the ByteTrack low-confidence pass becomes
+    explicitly empty, Kalman measurement noise uniform, and the jersey vote an
+    unweighted count.
+
+    Ball `conf` is REAL and still reported. It multiplies the ball speed gate,
+    where decoys sit at median 0.68 against 0.95 for real balls - the only
+    signal that separates a static decoy from a slow ball.
     """
     if not compact:
+        for pl in result.get("players") or []:
+            if isinstance(pl, dict):
+                pl["conf"] = 1.0
         return result
     out = []
     for row in result.get("players") or []:
         if not isinstance(row, list) or len(row) < len(COMPACT_ORDER):
             continue
-        p = dict(zip(COMPACT_ORDER, row))
-        for k in ("x", "y", "w", "h", "conf"):
+        pl = dict(zip(COMPACT_ORDER, row))
+        for k in ("x", "y", "w", "h"):
             try:
-                p[k] = float(p[k])
+                pl[k] = float(pl[k])
             except (TypeError, ValueError):
-                p[k] = 0.0
+                pl[k] = 0.0
         try:
-            p["num"] = int(p["num"]) if p["num"] is not None else None
+            pl["num"] = int(pl["num"]) if pl["num"] is not None else None
         except (TypeError, ValueError):
-            p["num"] = None
-        p["kit"] = str(p.get("kit") or "")
-        out.append(p)
+            pl["num"] = None
+        pl["kit"] = str(pl.get("kit") or "")
+        pl["conf"] = 1.0
+        out.append(pl)
     result["players"] = out
     b = result.get("ball")
     if isinstance(b, list) and len(b) >= 5:
@@ -719,7 +715,7 @@ def build_schema(scene_last: bool = False, terse: bool = False,
         strip(s["schema"])
     if scene_last:
         props = s["schema"]["properties"]
-        order = ["kits", "players", "ball", "scene"]
+        order = ["players", "ball", "scene"]
         s["schema"]["properties"] = {k: props[k] for k in order}
         s["schema"]["required"] = order
         s["name"] = "frame_detections_scene_last"

@@ -1016,34 +1016,81 @@ only 10% of basketball ball-frames sit inside two or more boxes.
 
 ---
 
-## D25 · `--compact` was two changes measured as one
+## D25 · `--compact`: what was measured, and what I got wrong
 
-The flag does two things and they pull in opposite directions:
+**Corrected 3 Sep, same day it was written.** The original entry paired two
+different experiments as consecutive rows of one table and read a single
+mechanism across them:
 
-| | descriptions | player format | output tokens |
-|---|---|---|---|
-| default | full | object, 8 named keys | baseline |
-| `--terse-schema` | **stripped** | object | **+11%** |
-| `--compact` (as shipped) | mostly stripped | **fixed-order array** | **-29%** |
-| **`--compact` + descriptions restored** | **full** | array | **-22%** |
+- **A7**, 31 Aug: `--terse-schema`, **object** format, a different clip. Output
+  **+11%** when descriptions were stripped.
+- **basketball v2 vs rich**, 3 Sep: **array** format. Output **+6%** when
+  descriptions were restored.
 
-Dropping the key names is worth about -40%. Stripping the descriptions costs
-about +11% on top, because a model given less guidance reasons longer. **The cut
-was never a saving; it was a tax the array format was paying.** Measured
-per-call on basketball: $0.003850 stripped, $0.004022 restored (+4.5%),
-$0.004885 non-compact (+27%).
+Opposite signs, different formats, different clips. And v2-vs-rich was not
+controlled either: `basketball_v2` ran at 00:46, six hours before commit
+`5683626` dropped the ball `kind` field, so it was *stripped + `kind`* against
+*described − `kind`* — two changes worth ~6.8% pulling opposite ways. Prompt
+tokens give it away: 2037 for v2, 1981 for both later runs.
 
-Descriptions are now restored while keeping the array format. Note the array form
-**loses per-field typing entirely** — `items` must admit number, string and null,
-so nothing stops position 0 being a string where the object form constrained `x`
-to `number` and `num` to `integer|null`. The `players` description sentence is
-now the only thing carrying that contract, which is why it states the type of
-every position as well as its meaning.
+**The one controlled pair.** `rich` vs `nc`: identical 1981 prompt tokens, same
+clip, one hour apart, differing only in wire format.
 
-**Unresolved.** The restored-description run lost 25 of 150 frames: 20 to the
-deadline (p90 latency 36.2s against a 35s cap) and **5 to malformed JSON**, where
-the stripped version had none. One run cannot separate a schema effect from
-provider variance, and the provider was demonstrably slow that session.
+| | reasoning | content | total completion | cost/call |
+|---|---|---|---|---|
+| object + descriptions (`nc`) | 1345 | 864 | 2209 | $0.004944 |
+| array + descriptions (`rich`) | 1361 | **387** | 1748 | $0.004031 |
+
+Reasoning moves **1.2%** — noise. Content **halves**. So the array format is the
+entire saving, and *"a model given less guidance reasons longer"* has nothing
+behind it. **The effect of the descriptions in the array format is unmeasured.**
+Not "+11%", not "+4.5%" — unknown.
+
+The array form does **lose per-field typing entirely**: `items` must admit
+number, string and null, so nothing stops position 0 being a string where the
+object form constrained `x` to `number` and `num` to `integer|null`. The
+`players` description sentence is the only thing carrying that contract, which
+is why it states the type of every position as well as its meaning.
+
+### The 25 lost frames were the provider, not the schema
+
+Reported as "5 to malformed JSON, where the stripped version had none". Wrong.
+All five records:
+
+```
+frame  96  compl=0  reason=0  lat=30.7s  status=200
+frame 258  compl=0  reason=0  lat=31.4s  status=200
+frame 360  compl=0  reason=0  lat=30.3s  status=200
+frame 462  compl=0  reason=0  lat=33.6s  status=200
+frame 600  compl=0  reason=0  lat=33.1s  status=200
+```
+
+Zero completion tokens, zero reasoning tokens, HTTP 200. The model emitted
+nothing; the `JSONDecodeError` is the parser choking on an empty-completion
+envelope. That is the **zero-token-200** class already known and already
+retryable, and every one sits at 30–34s alongside the 20 deadline losses. `nc`
+ran p90 **17.6s** on the same endpoint an hour earlier; `rich` ran p90 **36.2s**.
+One provider degradation, 25 frames, one cause.
+
+### Where the money actually is
+
+The split that should have been reported from the start:
+
+| | tokens | $/video at flex |
+|---|---|---|
+| prompt | 1981 × 150 | $0.111 |
+| **reasoning** | **1361 × 150** | **$0.383** |
+| content | 387 × 150 | $0.109 |
+
+**Reasoning is 77.9% of output and ~64% of the whole per-video bill.** Every
+schema change made so far optimised content — the 18% slice. Reporting
+`completion_tokens` as one number is what hid this: the +6% attributed to
+descriptions was a 1282→1361 move in *reasoning* wearing a total-tokens
+disguise. **Report the two separately from now on.** Correctness still gates — a
+variant that loses players or misplaces boxes is rejected whatever it costs, and
+cheapness is only ever a tiebreak among variants that are already correct. The
+split is there to explain *why* a variant is cheaper, so the reason stops being
+invented after the fact.
 
 ### `--compact` is NOT the cause of the marker artefact
 
@@ -1066,6 +1113,79 @@ Whether `--compact` produces more of these, or this is run-to-run variance in a
 non-deterministic model, is **not established**. The user counts six occurrences
 per clip; three separate metrics of mine failed to reproduce that count, so the
 visual count is the better evidence.
+
+---
+
+## D26 · Prompt and schema rewritten around judgement calls, not word count
+
+Written 3 Sep, **not yet run against the API**. Everything below is a design
+change plus the offline evidence that motivated it; the token and accuracy
+effects are unmeasured and must not be quoted as results.
+
+**The premise.** D25 showed reasoning is ~64% of the per-video bill, and nothing
+in the prompt had ever been aimed at it. Reasoning scales with the number of
+*decisions* a frame demands, not the length of the instructions. The old prompt
+asked for eleven judgements per frame: box tightness, colour naming, number
+legibility, confidence calibration, sport inference, goalkeeper identification,
+official-vs-player, bench exclusion, count discipline, ball-vs-decoy, and kit
+summarisation. Now seven.
+
+**Duplication was the structural fault.** Every rule was stated twice — once in
+`PROMPT` as prose, once in a schema `description`. "Scene first" was stated three
+times, and only the schema's property order actually binds. `PROMPT` is now 440
+characters against ~2600, and carries only what a schema cannot say: who is not
+a player, and how to count. The per-field contract lives in the descriptions.
+
+### Removed, with the evidence
+
+| removed | evidence |
+|---|---|
+| **player `conf`** | 333 of **80,374** detections — **0.41%** — ever fell below ByteTrack's 0.50 split. It bought a judgement call and an output element per player for a decision it never made. Ball `conf` is **kept**: it multiplies the ball speed gate, where decoys sit at median 0.68 against 0.95 for real balls |
+| **`kits` / `accent`** | The field worked (accent non-null in all but 95 of ~10k frames) but its only consumer is the renderer's ΔE ≥ 30 fallback, which has **never fired on any clip**, including the one nominated as the similar-kit case |
+| **the worked coordinate example** | Constrained generation already fixes the shape; the arithmetic was for a human reader |
+| **"the marker floats below their feet"** | **Retracted rationale.** The box render showed top and bottom edges correct. Leaving it in was telling the model its boxes run long — a nudge to shrink them |
+| **the eleven named ball decoys** | boot, sock, glove, shinpad, bandage, sleeve, centre spot, penalty spot, arcs, lines, logos → one positive test: *above the surface, not painted on it, not worn*. Naming a distractor inside a negation raises its salience, and the clothing line moved basketball decoys only 4 → 2 while `football_cuts` kept plenty |
+
+**Added:** one line for players cut off by the frame edge — *box only the part
+you can actually see*. This is a correctness fix for a case the prompt never
+addressed. It is **not** an explanation of the marker artefact: at
+`compact_v2` t+0.184s the player was comfortably inside the frame, so whatever
+drags that ring inward is not edge clamping. Remaining suspects there are
+tracker-side.
+
+### What it cost, measured offline
+
+Player `conf` is **synthesised in `normalise_result`** rather than deleted from
+the tracker, so the internal format is unchanged and `track.py` is untouched.
+Every player gets 1.0, the modal value (24,134 detections reported it outright).
+The ByteTrack low-confidence pass becomes explicitly empty, Kalman measurement
+noise uniform, the jersey vote an unweighted count.
+
+That is not free. Same detections, `kits` stripped and `conf` flattened:
+
+| | raw tracks | identities | match rate p50 | ball drawn | players drawn |
+|---|---|---|---|---|---|
+| `basketball_v2` as-is | 27 | **17** | 0.909 | 883/900 | 5 / 10 / 10 |
+| `kits` gone, `conf` flat | 28 | **18** | 0.909 | 883/900 | 5 / 10 / 10 |
+
+**One extra fragment**, because the gate no longer loosens for a hesitant
+detection. Everything else identical. A lower bound on the real change, since a
+live run will also have different detections.
+
+Losing `accent` degrades the ΔE fallback from two tiers to one — `resolve_team_colours`
+falls through to `opposite(ca)`, which always returns a distinguishable colour.
+`track.py` and `render.py` already tolerate both fields being absent, so
+restoring the `kits` schema block is the whole of the undo. **Do that first if
+clip 5 turns out to have similar kits.**
+
+### How the next comparison must be run
+
+Provider variance is the dominant noise term — p90 **17.6s vs 36.2s on the same
+endpoint, one hour apart**. Running variant A as a block and variant B as a block
+cannot separate a schema effect from that; it is how D25 came to publish a
+confounded number. **Interleave the variants call-by-call inside a single run**,
+and record reasoning and content tokens separately. Three arms × 50 frames = 150
+calls ≈ **$0.20**, which also gives the report its one-variable ablation.
 
 ---
 

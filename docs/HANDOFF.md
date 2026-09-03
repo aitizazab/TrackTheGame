@@ -28,31 +28,21 @@ Cost lands near **$0.60/video**, wall clock **22-31s** against a 25s target.
 fractions, the two-layer split. **What is open:** the four items in §7, and the
 `--compact` question in D25.
 
-⚠ **`--compact` changed shape on 3 Sep.** It now sends the fixed-order array
-*with* the field descriptions restored — the two halves of the flag had been
-conflated and the stripping was costing tokens, not saving them (D25). The one
-run behind this lost 5 frames to malformed JSON where the stripped version lost
-none. **If a fresh run shows unparseable responses, this is the first suspect**;
-the previous behaviour is `--terse-schema` plus the array format.
+⚠ **The prompt and both schemas were rewritten on 3 Sep and have NOT been run
+against the API** (D26). `PROMPT` is 440 characters against ~2600, player `conf`
+and the whole `kits`/`accent` block are gone, and every rule is now stated once.
+Ball `conf` is kept — it is load-bearing in the ball speed gate. Offline the
+tracker runs clean on stripped detections at the cost of one extra fragment
+(17 → 18 identities on basketball). **The first live run is an experiment, not a
+deliverable** — interleave it against the old schema rather than running blocks,
+because provider p90 swung 17.6s → 36.2s on the same endpoint in one hour.
 
-### The five recurring failure modes in this project
-
-Every retraction so far has been one of these. Check against them before
-believing a new finding:
-
-1. **A metric moved and the video did not** — six times. Counts measure events;
-   the artefacts are placement and continuity. Use numbers to find the moment,
-   never to decide.
-2. **A comparison that held nothing constant** — D16 varied tier, resolution and
-   clip at once, then blamed the variable in its heading.
-3. **A mechanism asserted before it was checked** — the marker-size story, the
-   decimal-rounding story, the bandwidth model. All three plausible, all three
-   wrong, all three caught by the user.
-4. **A constant derived on a synthetic probe** — `TIMEOUT_S`, `max_tokens`,
-   `OUT_TOK_TERSE`. Derive to get the shape, measure to get the number.
-5. **A conclusion still cited after the constraint it served stopped binding** —
-   "always send 1080p" was decided when cost bound; it is free in tokens and
-   expensive in seconds.
+⚠ **The `--compact` numbers in the first version of D25 were wrong** and are
+corrected there: two different experiments were welded into one table, and the
+"5 malformed JSON responses" were zero-token HTTP 200s from a degraded provider,
+not a schema effect. The live lesson: **report reasoning and content tokens
+separately**. Reasoning is 77.9% of output and ~64% of the per-video bill, and
+every optimisation so far has been aimed at the other 18%.
 
 ---
 
@@ -607,12 +597,15 @@ different apparent heights; that is exactly the case position cannot separate.
 
 ---
 
-## 9. Prompt audit — what has earned its place
+## 9. Prompt audit — what had earned its place
 
-Added 3 Sep. Roughly **60% of the prompt has no experiment behind it**, and the
-two blocks with the clearest measurements are the ones measured to do nothing.
-The prompt has grown by accretion: each line defends against a specific failure,
-none has ever been removed.
+Added 3 Sep, and **acted on the same day**: this audit is what drove the rewrite
+in **D26**, so it describes the PRE-rewrite prompt. Kept because it is the
+justification record for what was cut. Roughly **60% of that prompt had no
+experiment behind it**, and the two blocks with the clearest measurements were
+the ones measured to do nothing — both are now removed. The prompt had grown by
+accretion: each line defended against a specific failure, none had ever been
+taken out.
 
 **MEASURED USEFUL**
 
