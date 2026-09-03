@@ -107,6 +107,15 @@ KIT_MISMATCH_PENALTY = 4.0  # multiplies cost across a team boundary; not a veto
 # a 1.5x height disagreement costs 25% at 0.5, where the kit penalty costs 300%.
 HEIGHT_MISMATCH_W = 0.5
 
+# --- association instrumentation, OFF by default --------------------------
+# --dump-costs FILE writes one JSON record per (track, candidate) pair that
+# match() considers, carrying every term that went into the cost: the raw
+# distance, the gate, the kit multiplier, the number bonus, the height term and
+# the final cost, plus whether Hungarian took it. Nothing in this dict is read
+# unless the flag is passed, so the shipped path is unchanged.
+COST_LOG = {"on": False, "frame": None, "stage": "", "max_frame": 10 ** 9,
+            "rows": []}
+
 HIGH_CONF = 0.50            # ByteTrack's split point
 MIN_HITS = 3                # sightings before a track is real and drawable
 # Two boxes overlapping more than this are the same player reported twice. Set
@@ -619,6 +628,10 @@ def match(tracks, preds, dets, dt, cam, team_of):
     if not tracks or not dets:
         return [], list(range(len(tracks))), list(range(len(dets)))
 
+    log_on = COST_LOG["on"] and (COST_LOG["frame"] or 0) <= COST_LOG["max_frame"]
+    log_start = len(COST_LOG["rows"])
+    log_ix = {}
+
     cost = np.full((len(tracks), len(dets)), 1e6)
     for i, (tr, pred) in enumerate(zip(tracks, preds)):
         # BoT-SORT: shift the prediction by the estimated camera motion before
@@ -629,6 +642,23 @@ def match(tracks, preds, dets, dt, cam, team_of):
         for j, d in enumerate(dets):
             fx, fy = foot(d)
             dist = float(np.hypot(fx - px, fy - py))
+            rec = None
+            if log_on:
+                rec = {"frame": COST_LOG["frame"], "stage": COST_LOG["stage"],
+                       "track": tr.id, "det": j,
+                       "dist": round(dist, 5), "gate": round(gate, 5),
+                       "tr_kit": tr.kit, "d_kit": d["kit"].strip().lower(),
+                       "tr_kit_votes": dict(tr.kit_votes),
+                       "tr_num": tr.number, "d_num": d.get("num"),
+                       "tr_h": round(float(tr.h), 4),
+                       "d_h": round(float(d.get("h") or 0.0), 4),
+                       "det_x": round(fx, 4), "det_y": round(fy, 4),
+                       "pred_x": round(px, 4), "pred_y": round(py, 4),
+                       "kit_mul": 1.0, "num_mul": 1.0, "h_mul": 1.0,
+                       "cost": None, "in_gate": bool(dist <= gate),
+                       "taken": False}
+                log_ix[(i, j)] = len(COST_LOG["rows"])
+                COST_LOG["rows"].append(rec)
             if dist > gate:
                 continue
             c = dist
@@ -642,9 +672,13 @@ def match(tracks, preds, dets, dt, cam, team_of):
             ta, tb = team_of(tr.kit), team_of(d["kit"].strip().lower())
             if ta is not None and tb is not None and ta != tb:
                 c *= KIT_MISMATCH_PENALTY
+                if rec:
+                    rec["kit_mul"] = KIT_MISMATCH_PENALTY
             if tr.number is not None and d["num"] is not None \
                     and int(d["num"]) == tr.number:
                 c *= NUMBER_MATCH_BONUS
+                if rec:
+                    rec["num_mul"] = NUMBER_MATCH_BONUS
             # BOX HEIGHT AS A DEPTH CUE. Apparent height has been smoothed on
             # every track since D12 and never used to decide anything.
             #
@@ -663,7 +697,12 @@ def match(tracks, preds, dets, dt, cam, team_of):
             # kit veto once did.
             if tr.h and d.get("h"):
                 ratio = max(tr.h, d["h"]) / max(min(tr.h, d["h"]), 1e-4)
-                c *= 1.0 + HEIGHT_MISMATCH_W * (ratio - 1.0)
+                hm = 1.0 + HEIGHT_MISMATCH_W * (ratio - 1.0)
+                c *= hm
+                if rec:
+                    rec["h_mul"] = round(hm, 4)
+            if rec:
+                rec["cost"] = round(c, 5)
             cost[i, j] = c
 
     rows, cols = linear_sum_assignment(cost)
@@ -673,6 +712,11 @@ def match(tracks, preds, dets, dt, cam, team_of):
             pairs.append((r, c))
             mt.discard(r)
             md.discard(c)
+    if log_on:
+        for r, c in pairs:
+            k = log_ix.get((r, c))
+            if k is not None and k >= log_start:
+                COST_LOG["rows"][k]["taken"] = True
     return pairs, sorted(mt), sorted(md)
 
 
@@ -806,6 +850,7 @@ def run(data, debug=False):
         hi = [d for d in dets if d["conf"] >= HIGH_CONF]
         lo = [d for d in dets if d["conf"] < HIGH_CONF]
 
+        COST_LOG["frame"], COST_LOG["stage"] = fi, "hi"
         pairs, un_tr, un_hi = match(active, preds, hi, dt, cam, team_of)
         residuals = []
         for ti, di in pairs:
@@ -831,6 +876,7 @@ def run(data, debug=False):
         if un_tr and lo:
             sub = [active[i] for i in un_tr]
             subpred = [preds[i] for i in un_tr]
+            COST_LOG["stage"] = "lo"
             p2, un2, _ = match(sub, subpred, lo, dt, cam, team_of)
             claimed = set()
             for si, di in p2:
@@ -878,7 +924,16 @@ def run(data, debug=False):
 
         # ---- birth and death ----------------------------------------------
         for di in un_hi:
-            active.append(Track(hi[di], fi, t))
+            nt = Track(hi[di], fi, t)
+            active.append(nt)
+            if COST_LOG["on"] and fi <= COST_LOG["max_frame"]:
+                fx, fy = foot(hi[di])
+                COST_LOG["rows"].append(
+                    {"frame": fi, "stage": "birth", "track": nt.id, "det": di,
+                     "d_kit": hi[di]["kit"].strip().lower(),
+                     "d_num": hi[di].get("num"),
+                     "det_x": round(fx, 4), "det_y": round(fy, 4),
+                     "d_h": round(float(hi[di].get("h") or 0.0), 4)})
         still = []
         for tr in active:
             # Two ways to die now: age, and leaving the picture. The second only
@@ -1379,7 +1434,17 @@ def main():
                          "plausibly. Try 0.82")
     ap.add_argument("--reconfirm", action="store_true",
                     help="a lone sighting between two absences is not drawn")
+    ap.add_argument("--dump-costs", type=Path, default=None,
+                    help="DEBUG. Write the full association cost matrix — every "
+                         "(track, candidate) pair with its distance, gate, kit "
+                         "multiplier, number bonus, height term and final cost — "
+                         "as JSONL. Off unless given")
+    ap.add_argument("--dump-costs-until", type=int, default=10 ** 9,
+                    help="only dump costs for source frames <= this")
     args = ap.parse_args()
+    if args.dump_costs is not None:
+        COST_LOG["on"] = True
+        COST_LOG["max_frame"] = args.dump_costs_until
     if args.coast is not None:
         globals()["MAX_COAST_S"] = args.coast
     if args.ball_min_conf is not None:
@@ -1393,6 +1458,16 @@ def main():
     data = json.loads(args.detections.read_text(encoding="utf-8"))
 
     result, tracks, cuts, kit_counts = run(data, args.debug)
+
+    if args.dump_costs is not None:
+        args.dump_costs.parent.mkdir(parents=True, exist_ok=True)
+        with args.dump_costs.open("w", encoding="utf-8") as fh:
+            for r in COST_LOG["rows"]:
+                fh.write(json.dumps(r) + "\n")
+        # Join back to what was drawn via the "track" field on every
+        # player-frame in the tracks json.
+        print(f"  cost dump       {len(COST_LOG['rows'])} rows "
+              f"-> {args.dump_costs}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / (args.detections.stem + "__tracks.json")
