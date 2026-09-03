@@ -106,6 +106,14 @@ KIT_MISMATCH_PENALTY = 4.0  # multiplies cost across a team boundary; not a veto
 # crossing, where screen separation goes to zero. Weight is deliberately mild:
 # a 1.5x height disagreement costs 25% at 0.5, where the kit penalty costs 300%.
 HEIGHT_MISMATCH_W = 0.5
+# What it costs to leave a track unmatched, or to call a detection a new player,
+# expressed in gate widths so it stays commensurate with distance and scales
+# with apparent size. Swept: 1.5 and 2.0 also fix the swap but merge two
+# identities on basketball; 4.0 restores the bug exactly. 2.5 is the largest
+# value that still fixes it, which keeps the most headroom for the D12 case a
+# smaller value would break — a track with nothing same-kit in gate must still
+# be allowed to take a flickered colour rather than die.
+NO_MATCH_GATES = 2.5
 
 # --- association instrumentation, OFF by default --------------------------
 # --dump-costs FILE writes one JSON record per (track, candidate) pair that
@@ -711,10 +719,44 @@ def match(tracks, preds, dets, dt, cam, team_of):
                 rec["cost"] = round(c, 5)
             cost[i, j] = c
 
-    rows, cols = linear_sum_assignment(cost)
-    pairs, mt, md = [], set(range(len(tracks))), set(range(len(dets)))
+    # PAD THE MATRIX so "no match" is an option the solver can actually choose.
+    #
+    # linear_sum_assignment on a SQUARE matrix must return a PERFECT matching.
+    # With 10 tracks and 10 detections every track takes a detection whether one
+    # fits or not — "this track coasts" and "this detection is a new player" were
+    # not in the solution space at all. Out-of-gate cells hold 1e6, which is
+    # FINITE, so a 4x kit mismatch at cost 0.41 is a bargain beside it.
+    #
+    # That is what caused the basketball identity swap, and it is not a kit
+    # penalty problem. At frame 108 track 9 had a same-kit detection at cost
+    # 0.0373 in gate and took an opponent's at 0.4061 — 2.3x farther, 10.9x
+    # dearer — because that detection was in gate for NO OTHER track, so the
+    # solver's only alternative for its column was 1e6. It then redistributed
+    # the rest and pushed a white track onto a blue detection as well: a mutual
+    # exchange, two kit-mismatched pairs accepted in one frame. Across frames
+    # 0-300, 43 of 483 accepted pairs (8.9%) crossed a team boundary.
+    #
+    # Raising KIT_MISMATCH_PENALTY cannot fix this — the competing price was
+    # 1e6, so it would need ~1e7, at which point it IS a hard veto and D12's
+    # one-track-death-per-frame comes back. The post-filter below cannot either:
+    # it only rejects a pair whose OWN cell is the sentinel, never one forced by
+    # a sentinel elsewhere in the matrix.
+    #
+    # Pricing "unmatched" in gate widths keeps it commensurate with distance and
+    # scales with apparent size, so a near player and a far one are judged alike.
+    n, m = len(tracks), len(dets)
+    big = np.full((n + m, m + n), 1e6)
+    big[:n, :m] = cost
+    big[np.arange(n), m + np.arange(n)] = [
+        NO_MATCH_GATES * gate_width(tr.h, dt) for tr in tracks]        # coast
+    big[n + np.arange(m), np.arange(m)] = [
+        NO_MATCH_GATES * gate_width(float(d.get("h") or 0.02), dt)
+        for d in dets]                                                 # birth
+    big[n:, m:] = 0.0
+    rows, cols = linear_sum_assignment(big)
+    pairs, mt, md = [], set(range(n)), set(range(m))
     for r, c in zip(rows, cols):
-        if cost[r, c] < 1e5:      # reject assignments the gate already rejected
+        if r < n and c < m and cost[r, c] < 1e5:
             pairs.append((r, c))
             mt.discard(r)
             md.discard(c)
