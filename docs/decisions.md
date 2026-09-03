@@ -908,6 +908,167 @@ the number was wrong.
 
 ---
 
+## D22 · The Hungarian solver could not decline a match
+
+`linear_sum_assignment` on a SQUARE matrix must return a PERFECT matching. With
+10 tracks and 10 detections every track took a detection whether one fitted or
+not: "this track coasts" and "this detection is a new player" were not in the
+solution space. Out-of-gate cells held `1e6`, which is **finite**, so a 4x kit
+mismatch at cost 0.41 was a bargain beside it.
+
+Basketball frame 108, from the cost-matrix dump:
+
+| candidate | dist | kit x | cost |
+|---|---|---|---|
+| blue det5 | 0.0370 | 1.0 | **0.0373** |
+| white det9 | 0.0836 | **4.0** | **0.4061** |
+
+Track 9 took the white one — 2.3x farther, 10.9x dearer — because det9 was in
+gate for **no other track**, so the solver's only alternative for that column was
+1e6. It then redistributed the rest and pushed a white track onto a blue
+detection too. Across frames 0-300, **43 of 483 accepted pairs (8.9%) crossed a
+team boundary**.
+
+**Neither knob could have fixed it.** Raising `KIT_MISMATCH_PENALTY` needed ~1e7
+to beat the sentinel, at which point it is a hard veto and D12's
+one-death-per-frame returns. The `cost < 1e5` post-filter only rejects a pair
+whose OWN cell is the sentinel, never one forced by a sentinel elsewhere.
+
+Fixed by padding the matrix: a coast column per track and a birth row per
+detection, priced at `NO_MATCH_GATES = 2.5` gate widths. Swept — below 2.5 the
+swap is also fixed but basketball loses two identities; above it the bug returns
+unchanged, and 2.5 and 50.0 behave identically.
+
+Measured: the track labelled `3` is on a non-white detection **0 frames of 22**
+against 13 of 19 before. Identity counts and match rates unchanged on all four
+clips. **This was never a kit-penalty tuning problem**, which is what D7's note
+had implied for two days.
+
+---
+
+## D23 · Cut detection rebuilt on shot scale
+
+Both signals D8 specified are measured unusable. Association collapse was
+removed 28 Aug after 52 false positives. The scene-sentence fallback is no
+better: word overlap between consecutive `scene` sentences is **0.26 at a cut
+against 0.36 away from one**, and a 30s no-cut control spans the same 0.09-0.44
+range throughout. The model rewrites its sentence every frame regardless.
+
+**Shot scale is the signal.** A cut moves the camera so apparent player size
+changes violently; a pan does not.
+
+| event | d median box height | d player count |
+|---|---|---|
+| t+17.2s cut | **6.64** | 8 |
+| t+21.6s cut | **0.90** | 12 |
+| t+29.4s cut | **6.54** | 7 |
+| t+18.4s cut | 0.15 | 3 |
+| **allstars, 30s, no cuts** | **max 0.19** | **max 3** |
+
+Thresholds sit in the empty band between the two populations. Finds three of
+four cuts with **zero false positives** on allstars, amateur and basketball —
+including one at t+29.4s that neither ffmpeg scene detection nor inspection by
+eye had catalogued, confirmed afterwards as a real cut.
+
+The guard is `max(live tracks, detections)`, not live tracks alone: the t+21.6s
+cut goes FROM a three-player close-up TO a fifteen-player wide shot.
+
+**Limitation, for the report:** t+18.4s stays invisible. Keeper close-up to
+behind-goal angle, both tight, so the scale barely moves. **A cut between two
+similarly-scaled shots is not detectable from detections alone.**
+
+---
+
+## D24 · Possession is a state, not a per-frame argmax
+
+Two bugs, one after the other.
+
+**Wrong reference point.** Distance was measured from the ball to `p.x/p.y`, the
+foot point. Right for football, where the ball is at the feet; systematically
+wrong for basketball, where it is held at chest height, so the handler's feet sit
+0.15-0.20 below the ball and a defender to the side is often nearer. Now
+containment wins — ball centre inside a box means that player has it, deepest
+inside as tie-break — and otherwise distance is to the nearest point on the box.
+Sport-agnostic, no branch. Of frames with possession assigned, the ball is inside
+the holder's box **70% in basketball, 22% in football**.
+
+**Recomputed every frame.** The result was smoothed by a symmetric majority vote
+over +/-0.40s, which at 5fps is two samples — too short to settle anything and
+symmetric, so a neighbour winning one frame took the ring from someone who had
+held it for a second. Basketball produced **22 spells in 30s, median 1.07s,
+eight under half a second**.
+
+Replaced with hysteresis: the holder keeps the ball until a challenger has been
+the per-frame pick for `ON_BALL_STICK_S`. Swept, because every genuine turnover
+is delayed by exactly that much:
+
+| stick | basketball spells / median | football spells / median |
+|---|---|---|
+| 0.0s | 55 / 0.20s | 33 / 0.33s |
+| **0.3s** | **16 / 1.55s** | **20 / 0.82s** |
+| 0.6s | 11 / 2.70s | 14 / 1.23s (visibly laggy) |
+
+**Tested and rejected:** matching the ball's velocity against each candidate's,
+on the backlog as promising since 28 Aug. On ambiguous basketball frames the
+assigned player's mismatch is 0.0262 against the best candidate's 0.0273 — no
+signal, would change 10 frames of 883. Box overlap is not the problem either:
+only 10% of basketball ball-frames sit inside two or more boxes.
+
+---
+
+## D25 · `--compact` was two changes measured as one
+
+The flag does two things and they pull in opposite directions:
+
+| | descriptions | player format | output tokens |
+|---|---|---|---|
+| default | full | object, 8 named keys | baseline |
+| `--terse-schema` | **stripped** | object | **+11%** |
+| `--compact` (as shipped) | mostly stripped | **fixed-order array** | **-29%** |
+| **`--compact` + descriptions restored** | **full** | array | **-22%** |
+
+Dropping the key names is worth about -40%. Stripping the descriptions costs
+about +11% on top, because a model given less guidance reasons longer. **The cut
+was never a saving; it was a tax the array format was paying.** Measured
+per-call on basketball: $0.003850 stripped, $0.004022 restored (+4.5%),
+$0.004885 non-compact (+27%).
+
+Descriptions are now restored while keeping the array format. Note the array form
+**loses per-field typing entirely** — `items` must admit number, string and null,
+so nothing stops position 0 being a string where the object form constrained `x`
+to `number` and `num` to `integer|null`. The `players` description sentence is
+now the only thing carrying that contract, which is why it states the type of
+every position as well as its meaning.
+
+**Unresolved.** The restored-description run lost 25 of 150 frames: 20 to the
+deadline (p90 latency 36.2s against a 35s cap) and **5 to malformed JSON**, where
+the stripped version had none. One run cannot separate a schema effect from
+provider variance, and the provider was demonstrably slow that session.
+
+### `--compact` is NOT the cause of the marker artefact
+
+Investigated at length on the user's report that ring fly-outs began when the
+flag was introduced. **Field-for-field the two wire formats are equivalent:**
+player counts identical on 143 of 150 frames, `w`/`h` percentiles identical,
+zero rows with null or default coordinates, no transposition. The only
+difference is `conf` quantisation, 13 distinct values to 8 — and `conf` reaches
+only a no-op ByteTrack split (`HIGH_CONF = 0.50` is below every detection in
+both files), an 11% Kalman nudge, and jersey-vote weighting.
+
+**But the user's observation is correct and unexplained by the above.** At
+allstars frame 12 the model put a player's foot at x=0.016 in the clean run and
+**x=0.061 in the compact run — 58px apart**, and the ring is then held at that
+wrong position until the track dies. The tracker behaved correctly: the bad
+detection implied 0.09 frac/s, well inside the gate. **A 58px error anywhere
+else lands on the player; at the frame edge it lands on grass.**
+
+Whether `--compact` produces more of these, or this is run-to-run variance in a
+non-deterministic model, is **not established**. The user counts six occurrences
+per clip; three separate metrics of mine failed to reproduce that count, so the
+visual count is the better evidence.
+
+---
+
 ## Session record — 31 Aug 2026
 
 ### Settled

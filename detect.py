@@ -570,27 +570,76 @@ COMPACT_SCHEMA = {
         "additionalProperties": False,
         "required": ["scene", "kits", "players", "ball"],
         "properties": {
+            # DESCRIPTIONS RESTORED 3 Sep. The array format and the description
+            # cut went in together and were measured together as one -29%, which
+            # hid that they pull in opposite directions:
+            #
+            #   --terse-schema  strips descriptions, keeps objects  -> output +11%
+            #   --compact       strips descriptions, uses arrays    -> output -29%
+            #
+            # Dropping the key names is worth about -40%; stripping the
+            # descriptions costs about +11% on top of it, because a model given
+            # less guidance reasons for longer. The cut was never a saving, it
+            # was a tax the array format was paying. So keep the format and give
+            # the guidance back — every semantic line below is carried over
+            # verbatim from SCHEMA, which is the version that was measured to
+            # earn its tokens.
             "scene": {"type": "string",
-                      "description": "One sentence of working-out, written first"},
-            "kits": {"type": "array", "items": {
-                "type": "object", "additionalProperties": False,
-                "required": ["colour", "accent"],
-                "properties": {"colour": {"type": "string"},
-                               "accent": {"type": ["string", "null"]}}}},
+                      "description": "One sentence: camera framing, lighting, and "
+                                     "the two kit colours. Written BEFORE looking "
+                                     "for positions, as working-out."},
+            "kits": {"type": "array",
+                     "description": "The distinct outfield kits visible, most "
+                                    "common first. Usually exactly two.",
+                     "items": {
+                         "type": "object", "additionalProperties": False,
+                         "required": ["colour", "accent"],
+                         "properties": {
+                             "colour": {"type": "string",
+                                        "description": "dominant shirt colour, "
+                                                       "one common word"},
+                             "accent": {"type": ["string", "null"],
+                                        "description": "secondary colour on that "
+                                                       "kit - trim, sleeves, "
+                                                       "shorts, or the number "
+                                                       "itself. null if the kit "
+                                                       "is plain."}}}},
             "players": {
                 "type": "array",
-                "description": ("One array per player, ALWAYS in this order: "
+                # The array form loses per-field typing entirely: `items` has to
+                # admit number, string and null, so nothing stops position 0
+                # being a string or position 5 a float. In the object form `x`
+                # was constrained to number and `num` to integer|null. This
+                # sentence is now the ONLY thing carrying that contract, which is
+                # why it states the type of every position as well as its meaning.
+                "description": ("One array per player, GOALKEEPERS INCLUDED, "
+                                "ALWAYS in this order: "
                                 "[x, y, w, h, kit, num, role, conf]. "
-                                "x,y = box top-left as fractions 0-1. "
-                                "w,h = box extents as fractions. "
-                                "kit = shirt colour, one common word. "
-                                "num = jersey number or null. "
-                                "role = \"outfield\" or \"goalkeeper\". "
-                                "conf = 0-1."),
+                                "x = LEFT edge of the box, fraction of image "
+                                "width, 0.0-1.0. "
+                                "y = TOP edge of the box, fraction of image "
+                                "height, 0.0-1.0. "
+                                "w = box width as a fraction of image width. "
+                                "h = box height as a fraction of image height. "
+                                "kit = shirt colour as one common word. "
+                                "num = jersey number as an integer ONLY if you "
+                                "can actually read it, otherwise null. "
+                                "role = \"goalkeeper\" if they wear a different "
+                                "kit from both teams and stand in/near a goal, "
+                                "otherwise \"outfield\"; in sports with no "
+                                "goalkeeper every player is \"outfield\". "
+                                "conf = 0.0 to 1.0, how sure you are this is a "
+                                "player at this position. "
+                                "An empty array is valid and correct if no "
+                                "players are visible."),
                 "items": {"type": "array",
                           "items": {"type": ["number", "string", "null"]}}},
             "ball": {"type": ["array", "null"],
-                     "description": "[x, y, w, h, conf] as fractions, or null",
+                     "description": ("[x, y, w, h, conf] or null. null when the "
+                                     "ball is not visible, which it often is not. "
+                                     "x = left edge, y = top edge, w = width, "
+                                     "h = height, all as fractions 0.0-1.0. "
+                                     "conf = 0.0 to 1.0."),
                      "items": {"type": ["number", "null"]}},
         }}}
 

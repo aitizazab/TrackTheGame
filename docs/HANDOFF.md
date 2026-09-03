@@ -1,7 +1,58 @@
 # Track the Game — handoff
 
-Written 31 Aug 2026 to start a fresh session cleanly. Read this, then
-`decisions.md` for the reasoning behind each choice.
+Written 31 Aug, rewritten 3 Sep. Read this, then `decisions.md` for the
+reasoning behind each choice.
+
+---
+
+## 0. Start here — state as of 3 Sep
+
+**Budget: ~$9.77 of a $35 key limit.** The instructor topped up $10 on 3 Sep
+after the shared pool ran dry. `docs/run_log.jsonl` carries a real `usage.cost`
+on every call ever made — **query it, do not estimate**, my running total drifted
+by $0.58 across one session by subtracting from memory.
+
+**The shipping configuration** (D19, plus everything since):
+
+```
+uv run detect.py clips/<name>_1080.mp4 --fps 5 \
+    --model google/gemini-3.7-flash --tag <tag> --compact
+uv run track.py  outputs/detections/<clip>__<tag>.json
+uv run render.py outputs/tracks/<clip>__<tag>__tracks.json --clip clips/<name>.mp4
+```
+
+Provider defaults to both Google **flex** endpoints with `allow_fallbacks:false`.
+Cost lands near **$0.60/video**, wall clock **22-31s** against a 25s target.
+
+**What is settled:** the model and provider tier (D18/D19), 5fps, 1080p,
+fractions, the two-layer split. **What is open:** the four items in §7, and the
+`--compact` question in D25.
+
+⚠ **`--compact` changed shape on 3 Sep.** It now sends the fixed-order array
+*with* the field descriptions restored — the two halves of the flag had been
+conflated and the stripping was costing tokens, not saving them (D25). The one
+run behind this lost 5 frames to malformed JSON where the stripped version lost
+none. **If a fresh run shows unparseable responses, this is the first suspect**;
+the previous behaviour is `--terse-schema` plus the array format.
+
+### The five recurring failure modes in this project
+
+Every retraction so far has been one of these. Check against them before
+believing a new finding:
+
+1. **A metric moved and the video did not** — six times. Counts measure events;
+   the artefacts are placement and continuity. Use numbers to find the moment,
+   never to decide.
+2. **A comparison that held nothing constant** — D16 varied tier, resolution and
+   clip at once, then blamed the variable in its heading.
+3. **A mechanism asserted before it was checked** — the marker-size story, the
+   decimal-rounding story, the bandwidth model. All three plausible, all three
+   wrong, all three caught by the user.
+4. **A constant derived on a synthetic probe** — `TIMEOUT_S`, `max_tokens`,
+   `OUT_TOK_TERSE`. Derive to get the shape, measure to get the number.
+5. **A conclusion still cited after the constraint it served stopped binding** —
+   "always send 1080p" was decided when cost bound; it is free in tokens and
+   expensive in seconds.
 
 ---
 
@@ -387,6 +438,37 @@ different apparent heights; that is exactly the case position cannot separate.
 > varied at all** and might not — see step 0. On Gemini neither costs money:
 > §3 measured a flat 2821 input tokens at 640, 960, 1280 *and* 1920.
 
+> **Re-ordered again 3 Sep.** The four items below the horizontal rule are what
+> is actually open. Everything above it in this section is historical.
+>
+> **A. The marker artefact at frame edges — the user's top complaint, unsolved.**
+> A ring detaches from a player leaving the frame and drifts inward, six times
+> per clip by the user's count. Root cause at allstars f12 is a **detection**
+> error: the model put a foot at x=0.061 where the clean run said 0.016, 58px
+> apart, and the ring is held there until the track dies. The tracker is
+> blameless — 0.09 frac/s is well inside the gate. Unresolved: whether
+> `--compact` produces more of these than the object format (D25). Three of my
+> metrics failed to reproduce the user's count; trust the count.
+>
+> **B. Player boxes have no aspect guard.** `validate_boxes` checks only the
+> 0..1 scale and positive extents. A box 8.4:1 wide passes, and the renderer
+> draws its ring at `w x 1.9` — 1362px, wider than the frame. Two such boxes
+> appeared in the basketball non-compact run. Across all 78,258 boxes ever
+> detected, w/h is p50 0.251, p90 0.378, p99 0.857. **A guard at w/h > 1.0
+> rejects 0.257%**, most of them the already-rejected low-effort run where
+> 0-1000 values leaked through. Free to add, not yet added.
+>
+> **C. Wall clock, 22-31s against a 25s target.** Not bytes (D20 retracted) and
+> not the deadline. Provider-side variance dominates: the same 100 frames at the
+> same resolution differ 2x in wall clock between runs. `TIMEOUT_S = 35` now
+> binds on slower clips — the cuts non-compact run lost 19 frames to it.
+>
+> **D. Prompt bloat.** Roughly 60% of the prompt has never been tested, and the
+> two blocks with the clearest measurements (`conf`, `kits`/`accent`) are
+> measured to do nothing. The user is editing it. §9 has the audit.
+
+---
+
 0. **JPEG quality — the untested lever, and the cheapest fix available.**
    `detect.py:405` hardcodes `quality=90` and it has never been varied. Measured
    offline on 5 real frames (no API calls), calibrated to the 35 Mbps effective
@@ -522,3 +604,107 @@ different apparent heights; that is exactly the case position cannot separate.
   excludes `.env`, `Screenshot/`, `clips/raw/`, `outputs/frames/`,
   `outputs/videos/legacy/`, and **Zeta's assignment PDF** — their document, not
   ours to publish. It stays on disk as the source of truth.
+
+---
+
+## 9. Prompt audit — what has earned its place
+
+Added 3 Sep. Roughly **60% of the prompt has no experiment behind it**, and the
+two blocks with the clearest measurements are the ones measured to do nothing.
+The prompt has grown by accretion: each line defends against a specific failure,
+none has ever been removed.
+
+**MEASURED USEFUL**
+
+| block | evidence |
+|---|---|
+| fractions, never pixels | D5. Resolution is an ablation axis; pixel coords would need rescaling and any bug would look like a model difference |
+| `kit` as an ordinary word, never "team A" | D6. Calls are independent, so "team A" shuffles between frames |
+| `num` null unless genuinely readable | D17. qwen "read" 99.6% of numbers and invented a squad list |
+| GOALKEEPERS, sport-conditional | D14 — the single word "outfield" excluded every keeper. Generalisation verified: basketball 0, football 86 and 60 |
+| `scene` first | A4. `--scene-last` helped Luna, hurt Gemini. Also enforced by schema property order, so the prompt line restates it |
+
+**NO RECORDING — never tested either way**
+
+The opening line, the worked example, the TIGHT-box clause, "players on the
+field of play", the officials list, "report partly hidden players", "do not pad
+to a round number", the ball's tight-box line, the painted-markings line, and
+"set ball to null". Two notes: the TIGHT-box clause's stated rationale (*"the
+marker floats below their feet"*) was **retracted** — the boxes are correct. And
+the painted-markings line has a measured *filter* behind it (37 decoys), but the
+line itself was never A/B'd.
+
+**HAS NOT EARNED ITS PLACE**
+
+| block | measurement |
+|---|---|
+| `conf` | `HIGH_CONF = 0.50` split is a **no-op** — every detection in every file is above it. Nudges Kalman noise 11%. A 0.82 floor was tested and made ball tracking worse |
+| `kits` / `accent` | Feeds D11's dE>=30 fallback, which has **never fired on any clip**. Every render printed "kit colours are distinguishable; used as-is" |
+| the clothing line | Added alongside the `kind` field, so its evidence is confounded. Basketball decoys 4 → 2, but cuts still has many |
+
+## 10. Things measured and rejected — do not re-propose
+
+Beyond §4. Each cost real time or money to establish.
+
+- **Ball `kind` field** (which sport's ball). All 136 basketball detections said
+  "basketball", including every one the geometric filters rejected. The model
+  names the sport it is watching, not the object, so the field sits downstream of
+  the error. Cost 6.8% for nothing.
+- **Ball confidence floor.** 0.70 measured one-for-one on Luna; 0.82 on
+  gemini-3.7-flash caught none of the three named decoys and cut ball coverage
+  14%. The decoys are slow — 0.10 to 0.77 frac/s against a 1.44 gate — so
+  kinematics cannot see them and confidence does not separate them.
+- **Rejecting balls inside player boxes.** 79% of basketball ball detections are
+  inside a box. Possession *is* the ball being in a box.
+- **Velocity matching for possession.** See D24.
+- **Vetoing the interpolator on rejected frames.** All 17 rejections were being
+  bridged and the interpolated point sat a median 0.179 from the rejected
+  detection — the decoy coordinate was never drawn. The veto replaced 17 good
+  positions with 17 holes.
+- **Frame-bounds track death.** Never fired: no marker centre is ever outside
+  [0,1]. The slide happens *inside* the frame.
+- **Capping concurrency for latency.** Arithmetically worse — 3 waves at the
+  fast p50 is a ~35s floor against the 31s measured.
+- **ffmpeg scene detection for cuts.** Ranks football cuts backwards: real cuts
+  score 0.24–0.31, below ordinary pan, while title-card wipes score 0.46–0.94.
+
+## 11. Subagents — process rules learned the hard way
+
+Two agents run in parallel on 3 Sep **crashed the machine**. Post-mortem:
+Kernel-Power 41, BugcheckCode 0, no dump, plus `stornvme` "failed to allocate
+memory" — kernel non-paged pool exhaustion, not user RAM. `render.py` spawns
+**two ffmpeg processes per call**, and one agent was bisecting across seven
+commits.
+
+Rules:
+
+- **One agent at a time.** Never two on this repo.
+- **Give each an isolated workspace** and treat the project directory as
+  read-only: copy `track.py` and the detections it needs into
+  `%TEMP%\claude\<name>\` and run there.
+- **Never let an agent run `detect.py`** — it spends real money.
+- **Cap fan-out.** No loops that spawn a render per commit.
+- Verify anything an agent leaves behind before trusting it. The cost-matrix
+  instrumentation was kept only after checking it produced byte-identical
+  tracker output with the flag off.
+
+Agents found two things unaided that had been missed for days: the square-matrix
+sentinel (D22) and the `--compact` field-by-field equivalence (D25). They are
+worth using, one at a time.
+
+## 12. Renders on disk, 3 Sep
+
+`outputs/videos/` is down to 134 MB; 14 superseded renders moved to
+`legacy/iterations-20260903/`.
+
+| file | what it is |
+|---|---|
+| `allstars_fr_eng_1080__flex_30s.mp4` | **the signed-off deliverable**, 1 Sep, never re-rendered. The user's reference for "no fly-outs" |
+| `ALL_distgate.mp4` · `AMA_distgate.mp4` · `CUTS_distgate.mp4` | current best per football clip |
+| `basketball_1080__basketball_v2.mp4` | current best basketball |
+| `BB_noncompact.mp4` · `CUTS_noncompact.mp4` | the non-compact comparison, 3 Sep |
+| `allstars_fr_eng_1080__compact_v2.mp4` | the render the user identified the artefact in, at t+0.184s |
+
+**Do not re-render a tag you want to keep for comparison** — `render.py`
+overwrites by stem. Use `--out outputs/videos/<name>.mp4` for anything that
+needs to survive.
