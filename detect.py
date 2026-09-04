@@ -58,6 +58,11 @@ import requests
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw, ImageFont
 
+# The pre-D26 prompt and schemas, frozen byte-identical from git. Only the
+# --arms path uses them; nothing here changes the shipping configuration.
+from prompt_v1 import (COMPACT_ORDER_V1, COMPACT_SCHEMA_V1, PROMPT_V1,
+                       SCHEMA_V1)
+
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_MODEL = "openai/gpt-5.6-luna"
 LOG = Path("docs/run_log.jsonl")
@@ -124,6 +129,7 @@ COORD_CONVENTION = {
     "google/gemini-3.1-flash-lite":    THOUSANDTH,  # x+w tops out at 1003
     "google/gemini-3.5-flash-lite":    THOUSANDTH,  # x+w tops out at 993
     "google/gemini-3.7-flash":         FRACTION,  # probed, max coord 1.0
+    "google/gemini-3.8-flash":         FRACTION,  # probed 4 Sep, max coord 1.0
     "mistralai/mistral-large-2512":    FRACTION,  # probed, max coord 0.9
 }
 # A pattern, recorded but NOT acted on: the Gemini 3.x *flash-lite* models both
@@ -419,8 +425,37 @@ def to_fractions(result: dict, convention: str, img_w: int, img_h: int) -> dict:
 COORD_MIN, COORD_MAX = -0.10, 1.50
 FRAME_REJECT_SHARE = 0.40
 
+# A player box wider than this many times its own height is not a player.
+#
+# MEASURED IN PIXEL SPACE, AND THAT DISTINCTION IS THE WHOLE POINT. Fractions
+# divide x,w by the frame WIDTH and y,h by the frame HEIGHT, so on 16:9 a
+# fraction-space w/h understates the true aspect by exactly 16/9 = 1.778. The
+# same trap is already recorded in HANDOFF §5: "box aspect looked fine in
+# fraction space because a 16:9 frame inflates it by 1.78x". The earlier
+# proposal for this guard — reject fraction w/h > 1.0 — is a PIXEL aspect of
+# 1.78, and would throw away real players.
+#
+# 36,329 player boxes from shipping-config runs (gemini-3.7-flash, fraction,
+# effort not low), pixel aspect: p50 0.463, p90 0.635, p99 0.874, p99.9 1.276.
+# Above 1.4 there are 22 boxes, and they split into two populations with an
+# empty band between them:
+#
+#   plausible, 19 boxes, 1.40-1.94  e.g. 92x50px, kit orange, allstars f828,
+#                                   identical in two independent runs. Sprawled
+#                                   or diving players. A diving goalkeeper is
+#                                   ~2.5 (the user's figure) and belongs here.
+#   corrupt, 3 boxes, 5.61-8.44     e.g. 1075x127px — a ribbon across most of
+#                                   the frame. The renderer draws its ring at
+#                                   w x 1.9, i.e. 2043px on a 1280px frame.
+#
+# 3.0 sits in that empty band: 1.5x above the widest plausible real box, 1.9x
+# below the narrowest corrupt one, and comfortably clear of a 2.5 diving keeper.
+# It rejects 3 boxes in 36,329 — 0.008% — and every one of them is a ribbon.
+# Not tuned to a target rejection rate; placed in a gap the data actually has.
+MAX_PIXEL_ASPECT = 3.0
 
-def validate_boxes(result: dict) -> dict:
+
+def validate_boxes(result: dict, frame_aspect: float = 16 / 9) -> dict:
     """Discard boxes that are not on the 0..1 scale. Never reinterpret them.
 
     `gemini-3.7-flash` is pinned FRACTION and mostly obeys, but on 1080p input it
@@ -436,17 +471,27 @@ def validate_boxes(result: dict) -> dict:
     A frame that loses more than FRAME_REJECT_SHARE of its boxes is failed
     outright, because what remains is not a view of the pitch — same reasoning
     as the degenerate-repetition check in track.py. The tracker coasts across it.
+
+    The second test is shape: a box on the 0..1 scale can still be a ribbon
+    across the frame, and one such box drives a ring wider than the video. See
+    MAX_PIXEL_ASPECT — it is a PIXEL aspect, so `frame_aspect` must be the
+    detected image's w/h, not assumed.
     """
     players = result.get("players") or []
     total = len(players)
     ok = []
+    wide = 0
     for p in players:
         vals = (p.get("x"), p.get("y"),
                 (p.get("x") or 0) + (p.get("w") or 0),
                 (p.get("y") or 0) + (p.get("h") or 0))
-        if all(v is not None and COORD_MIN <= v <= COORD_MAX for v in vals) \
-                and (p.get("w") or 0) > 0 and (p.get("h") or 0) > 0:
-            ok.append(p)
+        if not (all(v is not None and COORD_MIN <= v <= COORD_MAX for v in vals)
+                and (p.get("w") or 0) > 0 and (p.get("h") or 0) > 0):
+            continue
+        if (p["w"] / p["h"]) * frame_aspect > MAX_PIXEL_ASPECT:
+            wide += 1
+            continue
+        ok.append(p)
     dropped = total - len(ok)
 
     b = result.get("ball")
@@ -462,7 +507,11 @@ def validate_boxes(result: dict) -> dict:
     if not dropped and not ball_dropped:
         return {}
     result["players"] = ok
-    return {"total": total, "dropped": dropped, "ball_dropped": ball_dropped,
+    # `wide` is counted inside `dropped` deliberately: a frame that is mostly
+    # ribbons is as corrupt as one that is mostly off-scale, and should fail the
+    # same way. It is reported separately so the run log can tell the two apart.
+    return {"total": total, "dropped": dropped, "wide": wide,
+            "ball_dropped": ball_dropped,
             "frame_rejected": total > 0 and dropped / total > FRAME_REJECT_SHARE}
 
 
@@ -622,7 +671,36 @@ COMPACT_SCHEMA = {
         }}}
 
 
-def normalise_result(result: dict, compact: bool) -> dict:
+# ------------------------------------------------------- prompt versions
+#
+# Two complete prompt+schema packages, selectable per arm. They are a PACKAGE
+# and not two independent knobs: D26 changed the prose and the schema together,
+# because removing player `conf` from the schema while leaving the prose that
+# explains how to calibrate it would test neither version of anything. The
+# report must therefore name the variable as "the D26 prompt+schema package",
+# not "prompt length".
+#
+#   v1  pre-D26. 3291-character prompt, every rule stated twice, player `conf`,
+#       the kits/accent block, eleven named ball decoys. Produced every number
+#       in the project before 3 Sep, including the signed-off video.
+#   v2  the D26 rewrite. 440 characters, rules stated once, no player `conf`,
+#       no kits/accent, one positive test for the ball. NEVER RUN.
+PROMPT_SETS = {
+    "v1": {"prompt": PROMPT_V1, "schema": SCHEMA_V1,
+           "compact_schema": COMPACT_SCHEMA_V1, "compact_order": COMPACT_ORDER_V1,
+           "player_conf": True},
+    "v2": {"prompt": None, "schema": None,           # filled in below; the live
+           "compact_schema": None, "compact_order": None,   # module globals ARE v2
+           "player_conf": False},
+}
+PROMPT_SETS["v2"].update(prompt=PROMPT, schema=SCHEMA,
+                         compact_schema=COMPACT_SCHEMA,
+                         compact_order=COMPACT_ORDER)
+DEFAULT_PROMPT_VERSION = "v2"
+
+
+def normalise_result(result: dict, compact: bool,
+                     version: str = DEFAULT_PROMPT_VERSION) -> dict:
     """Turn a compact array response back into the standard dict shape.
 
     Everything downstream - the validator, the tracker, the renderer - keeps
@@ -644,16 +722,22 @@ def normalise_result(result: dict, compact: bool) -> dict:
     where decoys sit at median 0.68 against 0.95 for real balls - the only
     signal that separates a static decoy from a slow ball.
     """
+    # v1 reports a real player `conf`; v2 does not and it is synthesised. The
+    # version has to be threaded here rather than inferred from the row length,
+    # because a v2 row that happens to arrive with a trailing element would
+    # otherwise be silently reinterpreted as a v1 row.
+    spec = PROMPT_SETS[version]
+    order = spec["compact_order"]
     if not compact:
         for pl in result.get("players") or []:
-            if isinstance(pl, dict):
+            if isinstance(pl, dict) and not spec["player_conf"]:
                 pl["conf"] = 1.0
         return result
     out = []
     for row in result.get("players") or []:
-        if not isinstance(row, list) or len(row) < len(COMPACT_ORDER):
+        if not isinstance(row, list) or len(row) < len(order):
             continue
-        pl = dict(zip(COMPACT_ORDER, row))
+        pl = dict(zip(order, row))
         for k in ("x", "y", "w", "h"):
             try:
                 pl[k] = float(pl[k])
@@ -664,7 +748,13 @@ def normalise_result(result: dict, compact: bool) -> dict:
         except (TypeError, ValueError):
             pl["num"] = None
         pl["kit"] = str(pl.get("kit") or "")
-        pl["conf"] = 1.0
+        if spec["player_conf"]:
+            try:
+                pl["conf"] = float(pl["conf"])
+            except (TypeError, ValueError):
+                pl["conf"] = 1.0
+        else:
+            pl["conf"] = 1.0
         out.append(pl)
     result["players"] = out
     b = result.get("ball")
@@ -693,7 +783,8 @@ def build_messages(prompt: str, data_url: str, system: bool, image_first: bool):
 
 
 def build_schema(scene_last: bool = False, terse: bool = False,
-                 compact: bool = False) -> dict:
+                 compact: bool = False,
+                 version: str = DEFAULT_PROMPT_VERSION) -> dict:
     """SCHEMA with the two ablation knobs applied (A4 and A7).
 
     Field ORDER is semantically load-bearing, not cosmetic: JSON emits fields in
@@ -702,7 +793,8 @@ def build_schema(scene_last: bool = False, terse: bool = False,
     hypothesis of A4, which is why this rebuilds the dict rather than mutating
     a shared one.
     """
-    s = copy.deepcopy(COMPACT_SCHEMA if compact else SCHEMA)
+    spec = PROMPT_SETS[version]
+    s = copy.deepcopy(spec["compact_schema"] if compact else spec["schema"])
     if terse:
         def strip(node):
             if isinstance(node, dict):
@@ -715,7 +807,10 @@ def build_schema(scene_last: bool = False, terse: bool = False,
         strip(s["schema"])
     if scene_last:
         props = s["schema"]["properties"]
-        order = ["players", "ball", "scene"]
+        # Derived from the schema rather than hardcoded: v1 also has "kits", and
+        # a literal ["players","ball","scene"] silently DELETED it, producing a
+        # v1 run with no kit block and no error anywhere.
+        order = [k for k in props if k != "scene"] + ["scene"]
         s["schema"]["properties"] = {k: props[k] for k in order}
         s["schema"]["required"] = order
         s["name"] = "frame_detections_scene_last"
@@ -723,7 +818,8 @@ def build_schema(scene_last: bool = False, terse: bool = False,
 
 
 def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
-                    schema, effort, convention, variant=None, tries=3):
+                    schema, effort, convention, variant=None, tries=3,
+                    version=DEFAULT_PROMPT_VERSION):
     """Retry connection-level failures. Do NOT retry a deadline.
 
     A 1080p JPEG is roughly three times the bytes of a 720p one, and 300 of them
@@ -739,7 +835,7 @@ def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
     waited = 0.0
     for attempt in range(tries):
         rec = call_one(session, headers, model, frame_idx, path, width, timeout,
-                       schema, effort, convention, variant)
+                       schema, effort, convention, variant, version)
         if rec.get("ok"):
             if attempt:
                 rec["retries"] = attempt
@@ -786,10 +882,12 @@ def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
 
 
 def call_one(session, headers, model, frame_idx, path, width, timeout,
-             schema, effort, convention, variant=None):
+             schema, effort, convention, variant=None,
+             version=DEFAULT_PROMPT_VERSION):
     v = variant or {}
     data_url, nbytes, w, h = encode(path, width, v.get("ruler", False))
-    prompt = CONTAINER_PROMPT if v.get("container") else PROMPT
+    prompt = (CONTAINER_PROMPT if v.get("container")
+              else PROMPT_SETS[version]["prompt"])
     if v.get("ruler"):
         prompt = prompt + "\n" + RULER_NOTE
     body = {
@@ -808,7 +906,11 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
     if effort:
         body["reasoning"] = {"effort": effort}
     t0 = time.perf_counter()
-    rec = {"frame": frame_idx, "w": w, "h": h, "bytes": nbytes}
+    # `model` and `prompt_version` are recorded PER CALL, not once per run. In an
+    # interleaved arm run they differ between calls, and the log writer merges
+    # the record last so these win over the run-level defaults.
+    rec = {"frame": frame_idx, "w": w, "h": h, "bytes": nbytes,
+           "model": model, "prompt_version": version}
     try:
         # `timeout=` in requests is NOT a wall-clock limit. It is a socket
         # inactivity limit: the clock resets every time any byte arrives. A
@@ -907,16 +1009,20 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
                 rec["error"] = (f"empty content, {rec.get('completion_tokens')} "
                                 f"tokens all spent on reasoning — raise MAX_TOKENS")
             return rec
-        rec["result"] = normalise_result(json.loads(content), v.get("compact", False))
+        rec["result"] = normalise_result(json.loads(content),
+                                         v.get("compact", False), version)
         if convention:
             rec["result"] = to_fractions(rec["result"], convention, w, h)
-        bad = validate_boxes(rec["result"])
+        bad = validate_boxes(rec["result"], frame_aspect=(w / h if h else 16 / 9))
         if bad:
             rec["invalid_boxes"] = bad
             if bad.get("frame_rejected"):
                 rec["ok"] = False
-                rec["error"] = (f"coordinate corruption: {bad['dropped']} of "
-                                f"{bad['total']} boxes off the 0..1 scale")
+                rec["error"] = (
+                    f"coordinate corruption: {bad['dropped']} of "
+                    f"{bad['total']} boxes invalid "
+                    f"({bad['dropped'] - bad['wide']} off the 0..1 scale, "
+                    f"{bad['wide']} wider than {MAX_PIXEL_ASPECT}:1)")
                 return rec
         rec["ok"] = True
         return rec
@@ -930,6 +1036,185 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
         rec["latency_s"] = time.perf_counter() - t0
         rec["error"] = f"{type(e).__name__}: {e}"
         return rec
+
+
+def parse_arms(spec: str, args) -> list:
+    """`model:version,model:version,...` -> a list of arm dicts.
+
+    Every arm is validated up front, before a single call is made, because the
+    failure mode this guards against is spending two thirds of a run's money and
+    then dying on the third arm's unpinned model.
+    """
+    arms = []
+    for n, part in enumerate(p.strip() for p in spec.split(",") if p.strip()):
+        model, _, version = part.partition(":")
+        version = version or DEFAULT_PROMPT_VERSION
+        if version not in PROMPT_SETS:
+            sys.exit(f"arm {part!r}: unknown prompt version {version!r}. "
+                     f"Known: {sorted(PROMPT_SETS)}")
+        convention = COORD_CONVENTION.get(model)
+        if convention is None:
+            sys.exit(
+                f"\narm {part!r}: {model} has no pinned coordinate convention.\n\n"
+                f"An arm run cannot probe on the fly — the whole point is that\n"
+                f"every arm is comparable, and a model whose convention we are\n"
+                f"guessing is not comparable to one we measured. Probe it first:\n\n"
+                f"    uv run detect.py {args.clip} --model {model} "
+                f"--probe-convention\n\n"
+                f"That costs three calls and prints the line to add to\n"
+                f"COORD_CONVENTION in detect.py.\n")
+        arms.append({
+            "name": chr(ord("A") + n),
+            "model": model,
+            "version": version,
+            "convention": convention,
+            "schema": build_schema(scene_last=args.scene_last,
+                                   terse=args.terse_schema,
+                                   compact=args.compact, version=version),
+        })
+    if len(arms) < 2:
+        sys.exit("--arms needs at least two arms; use --model for a single run.")
+    return arms
+
+
+def run_arms(args, arms, frames, session, headers, variant):
+    """Every arm, on the same frames, in one concurrent burst.
+
+    WHY THIS EXISTS. Provider latency is the dominant noise term — p90 went
+    17.6s to 36.2s on the same endpoint one hour apart — so running arm A as a
+    block and arm B as a block makes time-of-day a hidden variable perfectly
+    correlated with the arm. That is how D25 came to publish a confounded table.
+    Every arm sees the SAME frames here, which makes it a paired design: each
+    frame is its own control.
+
+    Two separate things are being balanced, and they need different mechanisms:
+
+      TIME.     Handled by firing all arms in one pool. 150 calls go out inside
+                a few milliseconds of each other, so all three arms meet
+                identical provider conditions by construction — better than
+                interleaving in sequence, not merely as good.
+      POSITION. Handled by rotating the arm order per frame. Batch position is
+                a measured confound in its own right (§7: frames 0-14 p50 26.1s,
+                30-74 p50 10.9-13.2s, 120-149 p50 25.3s), so if arm A were
+                always submitted first it would collect every slow head-of-batch
+                slot. Rotating gives each arm an even spread of positions.
+
+    Size is deliberate too: 3 arms x 50 frames = 150 concurrent 1080p uploads,
+    which is the size flex_30s already ran cleanly. 300 was measured to produce
+    a 25% transport-failure rate.
+    """
+    tasks = []
+    for i, (frame_idx, path) in enumerate(frames):
+        for j in range(len(arms)):
+            tasks.append((arms[(i + j) % len(arms)], frame_idx, path))
+
+    workers = args.max_concurrent or max(1, len(tasks))
+    print(f"  {len(arms)} arms x {len(frames)} frames = {len(tasks)} calls, "
+          f"{workers} concurrent")
+    for a in arms:
+        print(f"    {a['name']}: {a['model']}  prompt {a['version']}  "
+              f"({a['convention']})")
+
+    t0 = time.perf_counter()
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        records = list(ex.map(
+            lambda t: dict(call_with_retry(
+                session, headers, t[0]["model"], t[1], t[2], args.width,
+                args.timeout, t[0]["schema"], args.effort, t[0]["convention"],
+                variant, version=t[0]["version"]), arm=t[0]["name"]),
+            tasks))
+    wall = time.perf_counter() - t0
+    return records, wall
+
+
+def write_arm_outputs(args, arms, records, wall, variant, stamp):
+    """One detections file per arm, each independently trackable.
+
+    Named `<clip>__<tag>_<arm><version>.json` so the arm is visible in every
+    downstream filename — a render is otherwise indistinguishable from any
+    other and the comparison is lost the moment two of them are on screen.
+    """
+    DETECTIONS.mkdir(parents=True, exist_ok=True)
+    n_source = source_frame_count(args.clip)
+    written = []
+    for a in arms:
+        mine = [r for r in records if r.get("arm") == a["name"]]
+        ok = [r for r in mine if r.get("ok")]
+        dropped = [r for r in mine if not r.get("ok")]
+        tag = f"{args.tag}_{a['name']}{a['version']}"
+        out = DETECTIONS / f"{args.clip.stem}__{tag}.json"
+        out.write_text(json.dumps({
+            "clip": args.clip.name, "model": a["model"], "fps": args.fps,
+            "width": args.width, "tag": tag, "ts": stamp,
+            "effort": args.effort, "scene_last": args.scene_last,
+            "terse_schema": args.terse_schema, "timeout_s": args.timeout,
+            "variant": variant,
+            "coord_convention": a["convention"],
+            # The arm block is what makes this file self-describing. A
+            # detections file that does not say which prompt produced it is
+            # unusable in a comparison three days later.
+            "arm": a["name"], "prompt_version": a["version"],
+            "arm_set": [f"{x['model']}:{x['version']}" for x in arms],
+            "source_fps": SOURCE_FPS, "wall_s": wall,
+            "n_source_frames": n_source,
+            "frames": [{"frame": r["frame"], **r["result"]} for r in ok],
+            "dropped": [{"frame": r["frame"], "error": r.get("error")}
+                        for r in dropped],
+        }, indent=1), encoding="utf-8")
+        written.append((a, out, ok, dropped))
+    return written
+
+
+def report_arms(arms, records, wall, written):
+    """The comparison table. Reasoning and content tokens are reported
+    SEPARATELY, which is the lesson D25 paid for: reasoning is 77.9% of output
+    and ~64% of the bill, and every optimisation so far aimed at the other 18%.
+    A single 'output tokens' column hides the entire effect being measured."""
+    print(f"\n  wall {wall:.1f}s for all arms\n")
+    hdr = (f"  {'arm':4}{'model':26}{'pv':4}{'ok':>6}{'$/call':>9}{'$/150':>8}"
+           f"{'in':>7}{'reason':>8}{'content':>8}{'lat p50':>9}{'lat p90':>9}")
+    print(hdr)
+    print("  " + "-" * (len(hdr) - 2))
+    for a, out, ok, dropped in written:
+        mine = [r for r in records if r.get("arm") == a["name"]]
+        costed = [r for r in mine if r.get("cost_usd")]
+        lat = sorted(r["latency_s"] for r in mine if r.get("latency_s"))
+        n = len(costed) or 1
+        cost = sum(r["cost_usd"] for r in costed) / n
+        rea = sum(r.get("reasoning_tokens") or 0 for r in ok) / max(len(ok), 1)
+        comp = sum(r.get("completion_tokens") or 0 for r in ok) / max(len(ok), 1)
+        pin = sum(r.get("prompt_tokens") or 0 for r in ok) / max(len(ok), 1)
+        p50 = lat[len(lat) // 2] if lat else 0
+        p90 = lat[int(len(lat) * 0.9)] if lat else 0
+        print(f"  {a['name']:4}{a['model'][:25]:26}{a['version']:4}"
+              f"{len(ok):>3}/{len(mine):<2}{cost:9.5f}{cost*150:8.3f}"
+              f"{pin:7.0f}{rea:8.0f}{comp-rea:8.0f}{p50:9.1f}{p90:9.1f}")
+
+    print(f"\n  {'arm':4}{'players/frame':>15}{'num read':>10}{'ball':>8}"
+          f"{'invalid':>9}{'providers':>28}")
+    for a, out, ok, dropped in written:
+        pf = [len(r["result"]["players"]) for r in ok]
+        nums = sum(len([p for p in r["result"]["players"]
+                        if p.get("num") is not None]) for r in ok)
+        tot = sum(pf) or 1
+        ball = sum(1 for r in ok if r["result"].get("ball"))
+        inval = sum((r.get("invalid_boxes") or {}).get("dropped", 0) for r in ok)
+        provs = {}
+        for r in ok:
+            provs[r.get("provider") or "?"] = provs.get(r.get("provider") or "?", 0) + 1
+        ps = ", ".join(f"{k} {v}" for k, v in sorted(provs.items(),
+                                                     key=lambda kv: -kv[1])[:2])
+        med = sorted(pf)[len(pf) // 2] if pf else 0
+        print(f"  {a['name']:4}{med:>15}{100*nums/tot:9.1f}%"
+              f"{ball:>5}/{len(ok):<3}{inval:>8}{ps:>28}")
+    for a, out, ok, dropped in written:
+        print(f"\n  arm {a['name']}: {out}")
+        if dropped:
+            why = {}
+            for r in dropped:
+                k = (r.get("error") or "?").split(":")[0]
+                why[k] = why.get(k, 0) + 1
+            print(f"    dropped {len(dropped)}: {why}")
 
 
 def main():
@@ -989,19 +1274,37 @@ def main():
                          "Defaults to both Google FLEX endpoints (same price). "
                          "Sets allow_fallbacks=false so a run cannot silently "
                          "land on a dearer tier. Pass '' to disable pinning")
+    ap.add_argument("--prompt-version", choices=sorted(PROMPT_SETS),
+                    default=DEFAULT_PROMPT_VERSION,
+                    help="v2 (default) is the D26 rewrite. v1 is the frozen "
+                         "pre-D26 prompt and schema from prompt_v1.py, which "
+                         "produced every measurement before 3 Sep.")
+    ap.add_argument("--arms", default=None,
+                    help="Run several model/prompt combinations on the SAME "
+                         "frames in one concurrent burst, e.g. "
+                         "'google/gemini-3.7-flash:v2,google/gemini-3.8-flash:v1"
+                         ",google/gemini-3.8-flash:v2'. Writes one detections "
+                         "file per arm. Overrides --model and --prompt-version.")
     args = ap.parse_args()
 
+    if args.arms and args.probe_convention:
+        sys.exit("--arms and --probe-convention are mutually exclusive: probe "
+                 "each model on its own, pin it, then run the arms.")
+
     schema = build_schema(scene_last=args.scene_last, terse=args.terse_schema,
-                          compact=args.compact)
+                          compact=args.compact, version=args.prompt_version)
     variant = {"container": args.container, "system": args.system,
                "image_first": args.image_first, "compact": args.compact,
                "ruler": args.ruler,
                "provider_order": ([p.strip() for p in args.provider_order.split(",")]
                                   if args.provider_order else None)}
 
+    arms = parse_arms(args.arms, args) if args.arms else None
+
     # Pinned or it does not run. No inference, no fallback, no "probably".
+    # parse_arms has already enforced this per arm.
     convention = COORD_CONVENTION.get(args.model)
-    if convention is None and not args.probe_convention:
+    if convention is None and not args.probe_convention and not arms:
         sys.exit(
             f"\n{args.model} has no pinned coordinate convention.\n\n"
             f"Models do not reliably obey the fraction convention the schema\n"
@@ -1035,9 +1338,25 @@ def main():
     print(f"  {len(frames)} frames to send"
           f"{' (native resolution)' if not args.width else f' at {args.width}px'}")
 
+    n_conn = (len(frames) * len(arms)) if arms else len(frames)
     session = requests.Session()
     session.mount("https://", requests.adapters.HTTPAdapter(
-        pool_connections=len(frames) or 1, pool_maxsize=len(frames) or 1))
+        pool_connections=n_conn or 1, pool_maxsize=n_conn or 1))
+
+    if arms:
+        stamp = datetime.now(timezone.utc).isoformat()
+        records, wall = run_arms(args, arms, frames, session, headers, variant)
+        LOG.parent.mkdir(parents=True, exist_ok=True)
+        with LOG.open("a", encoding="utf-8") as f:
+            for r in records:
+                f.write(json.dumps({
+                    "stage": "detect", "tag": args.tag, "ts": stamp,
+                    "clip": args.clip.name, "fps": args.fps,
+                    "width": args.width,
+                    **{k: v for k, v in r.items() if k != "result"}}) + "\n")
+        written = write_arm_outputs(args, arms, records, wall, variant, stamp)
+        report_arms(arms, records, wall, written)
+        return
 
     # Concurrency is free on latency — measured: median call time was flat to
     # N=64 and wall clock is set by the slowest call, not the queue. But it is
@@ -1050,13 +1369,10 @@ def main():
         records = list(ex.map(
             lambda fp: call_with_retry(session, headers, args.model, fp[0], fp[1],
                                        args.width, args.timeout, schema,
-                                       args.effort, convention, variant),
+                                       args.effort, convention, variant,
+                                       version=args.prompt_version),
             frames))
     wall = time.perf_counter() - t0
-
-    if args.probe_convention:
-        report_convention(records, args.model)
-        return
 
     ok = [r for r in records if r.get("ok")]
     dropped = [r for r in records if not r.get("ok")]
@@ -1070,6 +1386,27 @@ def main():
                                 "fps": args.fps, "width": args.width,
                                 **{k: v for k, v in r.items() if k != "result"}}) + "\n")
 
+    # MOVED BELOW THE LOG WRITE, 4 Sep. The probe used to return here, three
+    # lines earlier, which had two consequences both already written down as
+    # defects and neither connected to this `return`:
+    #
+    #   - HANDOFF §8: a FAILED probe reported only "no usable detections" and
+    #     discarded the per-call errors, which is why kimi-k2.5 and glm-5.3-flash
+    #     were dropped undiagnosed after two attempts each.
+    #   - D21: the budget ledger was incomplete because some writers never
+    #     recorded cost. Every probe ever run is one of those writers. They are
+    #     cheap - 3 calls - but the ledger's value is being complete, not being
+    #     approximately right, and "probes are small" is exactly the reasoning
+    #     that left probe_budget.py uncosted.
+    if args.probe_convention:
+        report_convention(records, args.model)
+        for r in dropped:
+            print(f"    frame {r.get('frame')}: HTTP {r.get('status')} "
+                  f"{(r.get('error') or '')[:120]}")
+        spent = sum(r.get("cost_usd") or 0 for r in records)
+        print(f"\n  logged {len(records)} probe calls to {LOG}, ${spent:.4f}")
+        return
+
     DETECTIONS.mkdir(parents=True, exist_ok=True)
     out = DETECTIONS / f"{args.clip.stem}__{args.tag}.json"
     out.write_text(json.dumps({
@@ -1078,6 +1415,9 @@ def main():
         "effort": args.effort, "scene_last": args.scene_last,
         "terse_schema": args.terse_schema, "timeout_s": args.timeout,
         "variant": variant,
+        # Which prompt+schema package produced this. Every detections file
+        # written before 4 Sep lacks the key and is v1 by definition.
+        "prompt_version": args.prompt_version,
         # Recorded so a result can never be misread later, and so a convention
         # change shows up as a diff rather than as mysteriously bad tracking.
         "coord_convention": convention,
@@ -1113,9 +1453,11 @@ def main():
     inval = [r for r in records if r.get("invalid_boxes")]
     if inval:
         nb = sum(r["invalid_boxes"]["dropped"] for r in inval)
+        nw = sum(r["invalid_boxes"].get("wide", 0) for r in inval)
         nf = sum(1 for r in inval if r["invalid_boxes"].get("frame_rejected"))
-        print(f"  off-scale       {nb} boxes discarded across {len(inval)} frames"
-              f"  ({nf} frames rejected outright)")
+        print(f"  invalid boxes   {nb} discarded across {len(inval)} frames"
+              f"  ({nb - nw} off-scale, {nw} over {MAX_PIXEL_ASPECT}:1;"
+              f" {nf} frames rejected outright)")
     if ok:
         players = [len(r["result"]["players"]) for r in ok]
         with_ball = sum(1 for r in ok if r["result"]["ball"])
