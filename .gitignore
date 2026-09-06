@@ -45,3 +45,8 @@ outputs/videos/legacy/
 # outputs/detections/    per-frame model output; the evidence behind the report
 # outputs/tracks/        tracker output; lets a reader re-render without an API key
 # docs/*.jsonl           every measurement we've cited
+
+# Font exploration. Only the SHIPPED face is tracked - the other 28 were
+# candidates in the selection pass and are ~4MB of unused binaries.
+assets/fonts/*
+!assets/fonts/BlackOpsOne.ttf
