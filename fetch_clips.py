@@ -3,12 +3,15 @@ Collect and normalise 30-second clips for the tracker.
 
 Two jobs, and the second matters more than it looks:
 
-  DOWNLOAD  pull candidate footage with yt-dlp, capped at 720p so a clip is a
-            few MB rather than a few hundred — these get committed to the repo.
+  DOWNLOAD  pull candidate footage with yt-dlp, preferring 1080p — detection
+            runs at 1080p (D19) and the raw file is gitignored, so there is
+            nothing to save by pulling it smaller.
 
-  NORMALISE cut exactly 30.0s, force CONSTANT 30fps, pad to a fixed 1280x720,
-            drop audio. Every clip then has exactly 900 frames and frame index
-            N means the same instant in every clip.
+  NORMALISE cut exactly 30.0s, force CONSTANT 30fps, drop audio, and write TWO
+            files: <name>.mp4 at 1280x720 for rendering and committing, and
+            <name>_1080.mp4 at 1920x1080 for detection. Every clip then has
+            exactly 900 frames and frame index N means the same instant in
+            every clip.
 
 Why normalising is not optional: source footage is routinely variable-frame-rate.
 Extract frames from a VFR file by index and the timestamps drift, so the boxes a
@@ -51,6 +54,7 @@ CANDIDATES = {
     "basketball":      ("https://www.youtube.com/watch?v=5U9k1U6nN-g",          "00:05", "indoor court, 10 players not 22, large legible numbers — the number layer at the opposite extreme"),
     "football_amateur": ("https://www.youtube.com/watch?v=CNhrwaChUAA",         "02:56", "amateur match, no broadcast grade, uneven exposure"),
     "football_cuts":   ("https://www.youtube.com/watch?v=OT3rAWUqOjU",          "00:00", "THREE HARD CUTS at t+3.60s (0.94), t+10.63s (0.50), t+24.03s (0.62). The only footage that exercises D8"),
+    "volleyball":      ("https://www.youtube.com/watch?v=0lN1HfFAYUY",          "00:00", "clip 5 of 5, user-chosen. A THIRD SPORT: no goalkeepers, a net splitting the two teams, and a ball that is airborne almost continuously - the hardest possible case for the possession rule, which is the one open defect"),
     # Still wanted. '!' in `list` means the URL is not filled in.
     "football_similar_kits": ("https://www.youtube.com/watch?v=",               "00:25", "THE HARD ONE — kits close in colour. D11's dE>=30 rule has never fired on real footage"),
     "football_setpiece": ("https://www.youtube.com/watch?v=",                   "00:00", "corner or free kick: 15+ players in the box, maximum crossing. The association worst case"),
@@ -76,9 +80,14 @@ def download(name: str, url: str) -> Path:
     RAW.mkdir(parents=True, exist_ok=True)
     target = RAW / f"{name}.%(ext)s"
     print(f"  downloading {name} ...")
-    # Cap at 720p: we normalise to 1280x720 anyway, so a 4K source is wasted
-    # bytes and a slow download. -S picks the best available at or below.
-    r = run(["yt-dlp", "-f", "bv*+ba/b", "-S", "res:720,ext:mp4:m4a",
+    # RAISED TO 1080p, 5 Sep. The cap said 720 because "we normalise to
+    # 1280x720 anyway" - which stopped being true at D19, when detection moved
+    # to 1080p and every clip started being normalised TWICE. The comment at the
+    # top of this file already claimed 1080; the code had never been updated, so
+    # the volleyball clip came down at 720 and could not produce a _1080 detect
+    # input. Resolution is free in input tokens on this model but measurably
+    # worth 7.9% -> 12.2% on jersey numbers, so the cap was costing accuracy.
+    r = run(["yt-dlp", "-f", "bv*+ba/b", "-S", "res:1080,ext:mp4:m4a",
              "--merge-output-format", "mp4", "-o", str(target), url])
     if r.returncode != 0:
         print(f"  FAILED {name}: {(r.stdout or '').strip().splitlines()[-1:]}")
@@ -87,17 +96,26 @@ def download(name: str, url: str) -> Path:
     return hits[0] if hits else None
 
 
-def normalise(src: Path, start: str, name: str) -> Path:
-    """Cut exactly 30s at CFR 30fps, 1280x720, no audio."""
+def normalise(src: Path, start: str, name: str,
+              w: int = None, h: int = None, suffix: str = "") -> Path:
+    """Cut exactly 30s at CFR 30fps, no audio, at the requested size.
+
+    Called TWICE per clip: <name>.mp4 at 1280x720 is the render target, and
+    <name>_1080.mp4 at 1920x1080 is the detection input. Coordinates are
+    fractions, so the two are independent - detecting at 1080 while rendering
+    at 720 keeps the deliverable ~14MB instead of ~40MB (D19).
+    """
     need("ffmpeg")
     OUT.mkdir(parents=True, exist_ok=True)
-    dst = OUT / f"{name}.mp4"
+    w = w or TARGET_W
+    h = h or TARGET_H
+    dst = OUT / f"{name}{suffix}.mp4"
     # -ss before -i seeks fast; because we re-encode, ffmpeg still lands
     # frame-accurate rather than snapping to the previous keyframe.
     # force_original_aspect_ratio + pad keeps geometry undistorted: a squashed
     # player is a player the model has never seen the shape of.
-    vf = (f"scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=decrease,"
-          f"pad={TARGET_W}:{TARGET_H}:(ow-iw)/2:(oh-ih)/2,fps={TARGET_FPS}")
+    vf = (f"scale={w}:{h}:force_original_aspect_ratio=decrease,"
+          f"pad={w}:{h}:(ow-iw)/2:(oh-ih)/2,fps={TARGET_FPS}")
     cmd = ["ffmpeg", "-y", "-ss", start, "-i", str(src), "-t", str(TARGET_SECS),
            "-vf", vf, "-fps_mode", "cfr", "-r", str(TARGET_FPS),
            "-c:v", "libx264", "-preset", "medium", "-crf", "23",
@@ -142,7 +160,8 @@ def cmd_get(args):
             continue
         src = download(n, url)
         if src:
-            normalise(src, start, n)
+            normalise(src, start, n)                       # 720p render target
+            normalise(src, start, n, 1920, 1080, "_1080")  # 1080p detect input
 
 
 def cmd_normalise(args):
