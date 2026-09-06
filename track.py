@@ -268,6 +268,12 @@ SMOOTH_FOLLOW_S = 0.10
 # Under ~0.15s reads as a pop and buys nothing over vanishing; over ~0.5s leaves
 # a ring sitting on empty grass, which is the artefact being removed.
 FADE_OUT_S = 0.30
+# Symmetric fade-IN at the start of a drawn stretch. Added 6 Sep: markers
+# dissolved out but POPPED in, which is an asymmetry a viewer notices even if
+# they cannot name it - a marker that leaves gracefully and arrives abruptly
+# reads as two different systems. Same duration as the fade-out so appearing and
+# disappearing are the same gesture reversed.
+FADE_IN_S = 0.30
 
 
 def damped_follow(xs, ys, dt, smooth_time):
@@ -1783,12 +1789,20 @@ def run(data, debug=False):
                 # stretches end within 10 frames of a cut, so a third of all
                 # fades were painting stale markers onto new footage. Those end
                 # hard, at full opacity, which is what a cut looks like.
-                _fade_n = FADE_OUT_S * src_fps
+                _out_n = FADE_OUT_S * src_fps
+                _in_n = FADE_IN_S * src_fps
                 _left = len(grid) - 1 - k
-                _at_cut = any(0 <= c - int(grid[-1]) <= sample_step + 1
-                              for c in cut_frames_draw)
-                _fade = (1.0 if (_fade_n <= 0 or _at_cut)
-                         else min(1.0, _left / _fade_n))
+                # Suppressed on BOTH sides of a cut, for the same reason. A
+                # fade-out across a cut paints stale markers onto a new angle; a
+                # fade-in after one delays the annotation of a shot that has
+                # already changed instantly. A cut is itself the transition.
+                _at_cut_end = any(0 <= c - int(grid[-1]) <= sample_step + 1
+                                  for c in cut_frames_draw)
+                _at_cut_start = any(0 <= int(grid[0]) - c <= sample_step + 1
+                                    for c in cut_frames_draw)
+                _f_out = 1.0 if (_out_n <= 0 or _at_cut_end) else min(1.0, _left / _out_n)
+                _f_in = 1.0 if (_in_n <= 0 or _at_cut_start) else min(1.0, k / _in_n)
+                _fade = min(_f_in, _f_out)
                 per_frame[int(fr)].append({
                     "id": did, "track": tr.id, "fade": round(_fade, 3),
                     "team": info["team"], "label": str(info["number"]),

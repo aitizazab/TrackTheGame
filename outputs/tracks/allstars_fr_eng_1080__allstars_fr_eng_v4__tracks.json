@@ -1006,7 +1006,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -1019,7 +1019,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "V",
      "read": false,
@@ -1032,7 +1032,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -1045,7 +1045,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -1058,7 +1058,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -1071,7 +1071,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "13",
      "read": true,
@@ -1084,7 +1084,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "23",
      "read": true,
@@ -1097,7 +1097,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -1110,7 +1110,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "X",
      "read": false,
@@ -1123,7 +1123,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -1136,7 +1136,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "25",
      "read": true,
@@ -1149,7 +1149,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "9",
      "read": true,
@@ -1162,7 +1162,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -1175,7 +1175,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "77",
      "read": true,
@@ -1188,7 +1188,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "4",
      "read": true,
@@ -1212,7 +1212,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -1225,7 +1225,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "V",
      "read": false,
@@ -1238,7 +1238,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -1251,7 +1251,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -1264,7 +1264,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -1277,7 +1277,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "13",
      "read": true,
@@ -1290,7 +1290,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "23",
      "read": true,
@@ -1303,7 +1303,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -1316,7 +1316,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "X",
      "read": false,
@@ -1329,7 +1329,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -1342,7 +1342,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "25",
      "read": true,
@@ -1355,7 +1355,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "9",
      "read": true,
@@ -1368,7 +1368,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -1381,7 +1381,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "77",
      "read": true,
@@ -1394,7 +1394,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "4",
      "read": true,
@@ -1418,7 +1418,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -1431,7 +1431,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "V",
      "read": false,
@@ -1444,7 +1444,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -1457,7 +1457,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -1470,7 +1470,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -1483,7 +1483,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "13",
      "read": true,
@@ -1496,7 +1496,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "23",
      "read": true,
@@ -1509,7 +1509,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -1522,7 +1522,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "X",
      "read": false,
@@ -1535,7 +1535,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -1548,7 +1548,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "25",
      "read": true,
@@ -1561,7 +1561,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "9",
      "read": true,
@@ -1574,7 +1574,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -1587,7 +1587,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "77",
      "read": true,
@@ -1600,7 +1600,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "4",
      "read": true,
@@ -1624,7 +1624,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -1637,7 +1637,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "V",
      "read": false,
@@ -1650,7 +1650,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -1663,7 +1663,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -1676,7 +1676,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -1689,7 +1689,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "13",
      "read": true,
@@ -1702,7 +1702,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "23",
      "read": true,
@@ -1715,7 +1715,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -1728,7 +1728,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "X",
      "read": false,
@@ -1741,7 +1741,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -1754,7 +1754,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "25",
      "read": true,
@@ -1767,7 +1767,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "9",
      "read": true,
@@ -1780,7 +1780,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -1793,7 +1793,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "77",
      "read": true,
@@ -1806,7 +1806,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "4",
      "read": true,
@@ -1830,7 +1830,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -1843,7 +1843,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "V",
      "read": false,
@@ -1856,7 +1856,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -1869,7 +1869,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -1882,7 +1882,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -1895,7 +1895,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "13",
      "read": true,
@@ -1908,7 +1908,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "23",
      "read": true,
@@ -1921,7 +1921,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -1934,7 +1934,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "X",
      "read": false,
@@ -1947,7 +1947,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -1960,7 +1960,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "25",
      "read": true,
@@ -1973,7 +1973,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "9",
      "read": true,
@@ -1986,7 +1986,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -1999,7 +1999,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "77",
      "read": true,
@@ -2012,7 +2012,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "4",
      "read": true,
@@ -2036,7 +2036,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -2049,7 +2049,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "V",
      "read": false,
@@ -2062,7 +2062,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -2075,7 +2075,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -2088,7 +2088,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -2101,7 +2101,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "13",
      "read": true,
@@ -2114,7 +2114,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "23",
      "read": true,
@@ -2127,7 +2127,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -2140,7 +2140,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "X",
      "read": false,
@@ -2153,7 +2153,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -2166,7 +2166,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "25",
      "read": true,
@@ -2179,7 +2179,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "9",
      "read": true,
@@ -2192,7 +2192,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -2205,7 +2205,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "77",
      "read": true,
@@ -2218,7 +2218,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "4",
      "read": true,
@@ -2242,7 +2242,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -2255,7 +2255,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "V",
      "read": false,
@@ -2268,7 +2268,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -2281,7 +2281,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -2294,7 +2294,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -2307,7 +2307,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "13",
      "read": true,
@@ -2320,7 +2320,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "23",
      "read": true,
@@ -2333,7 +2333,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -2346,7 +2346,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "X",
      "read": false,
@@ -2359,7 +2359,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -2372,7 +2372,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "25",
      "read": true,
@@ -2385,7 +2385,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "9",
      "read": true,
@@ -2398,7 +2398,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -2411,7 +2411,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "77",
      "read": true,
@@ -2424,7 +2424,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "4",
      "read": true,
@@ -2448,7 +2448,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -2461,7 +2461,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "V",
      "read": false,
@@ -2474,7 +2474,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -2487,7 +2487,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -2500,7 +2500,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -2513,7 +2513,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "13",
      "read": true,
@@ -2526,7 +2526,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "23",
      "read": true,
@@ -2539,7 +2539,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -2552,7 +2552,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "X",
      "read": false,
@@ -2565,7 +2565,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -2578,7 +2578,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "25",
      "read": true,
@@ -2591,7 +2591,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "9",
      "read": true,
@@ -2604,7 +2604,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -2617,7 +2617,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "77",
      "read": true,
@@ -2630,7 +2630,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "4",
      "read": true,
@@ -2654,7 +2654,7 @@
     {
      "id": "A\u00b74",
      "track": 4,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "IV",
      "read": false,
@@ -2667,7 +2667,7 @@
     {
      "id": "B\u00b76",
      "track": 6,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "V",
      "read": false,
@@ -2680,7 +2680,7 @@
     {
      "id": "B\u00b716",
      "track": 16,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "VI",
      "read": false,
@@ -2693,7 +2693,7 @@
     {
      "id": "A\u00b78",
      "track": 8,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "VII",
      "read": false,
@@ -2706,7 +2706,7 @@
     {
      "id": "?\u00b719",
      "track": 19,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": null,
      "label": "VIII",
      "read": false,
@@ -2719,7 +2719,7 @@
     {
      "id": "A13",
      "track": 14,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "13",
      "read": true,
@@ -2732,7 +2732,7 @@
     {
      "id": "A23",
      "track": 18,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "23",
      "read": true,
@@ -2745,7 +2745,7 @@
     {
      "id": "A\u00b715",
      "track": 15,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "IX",
      "read": false,
@@ -2758,7 +2758,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "X",
      "read": false,
@@ -2771,7 +2771,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -2784,7 +2784,7 @@
     {
      "id": "A25",
      "track": 10,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "25",
      "read": true,
@@ -2797,7 +2797,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "9",
      "read": true,
@@ -2810,7 +2810,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -2823,7 +2823,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "77",
      "read": true,
@@ -2836,7 +2836,7 @@
     {
      "id": "A4",
      "track": 17,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "4",
      "read": true,
@@ -4818,7 +4818,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "21",
      "read": true,
@@ -5037,7 +5037,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "21",
      "read": true,
@@ -5256,7 +5256,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "21",
      "read": true,
@@ -5475,7 +5475,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 0.889,
+     "fade": 0.333,
      "team": "B",
      "label": "21",
      "read": true,
@@ -5694,7 +5694,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 0.778,
+     "fade": 0.444,
      "team": "B",
      "label": "21",
      "read": true,
@@ -5913,7 +5913,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 0.667,
+     "fade": 0.556,
      "team": "B",
      "label": "21",
      "read": true,
@@ -8591,7 +8591,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "21",
      "read": true,
@@ -8669,7 +8669,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "77",
      "read": true,
@@ -8797,7 +8797,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "21",
      "read": true,
@@ -8875,7 +8875,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "77",
      "read": true,
@@ -9003,7 +9003,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "21",
      "read": true,
@@ -9081,7 +9081,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "77",
      "read": true,
@@ -9209,7 +9209,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "21",
      "read": true,
@@ -9287,7 +9287,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "77",
      "read": true,
@@ -9415,7 +9415,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "21",
      "read": true,
@@ -9493,7 +9493,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "77",
      "read": true,
@@ -9621,7 +9621,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "21",
      "read": true,
@@ -9699,7 +9699,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "77",
      "read": true,
@@ -9814,7 +9814,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "21",
      "read": true,
@@ -9892,7 +9892,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "77",
      "read": true,
@@ -10007,7 +10007,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "21",
      "read": true,
@@ -10085,7 +10085,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "77",
      "read": true,
@@ -10200,7 +10200,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "21",
      "read": true,
@@ -10278,7 +10278,7 @@
     {
      "id": "A77",
      "track": 13,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "77",
      "read": true,
@@ -11063,7 +11063,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "14",
      "read": true,
@@ -11256,7 +11256,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "14",
      "read": true,
@@ -11449,7 +11449,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "14",
      "read": true,
@@ -11642,7 +11642,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "14",
      "read": true,
@@ -11835,7 +11835,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "14",
      "read": true,
@@ -12028,7 +12028,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "14",
      "read": true,
@@ -12221,7 +12221,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "14",
      "read": true,
@@ -12414,7 +12414,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "14",
      "read": true,
@@ -12607,7 +12607,7 @@
     {
      "id": "B14",
      "track": 21,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "14",
      "read": true,
@@ -23567,7 +23567,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "22",
      "read": true,
@@ -23760,7 +23760,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "22",
      "read": true,
@@ -23953,7 +23953,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "22",
      "read": true,
@@ -24146,7 +24146,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "22",
      "read": true,
@@ -24339,7 +24339,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "22",
      "read": true,
@@ -24532,7 +24532,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "22",
      "read": true,
@@ -24608,7 +24608,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "21",
      "read": true,
@@ -24738,7 +24738,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "22",
      "read": true,
@@ -24814,7 +24814,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "21",
      "read": true,
@@ -24944,7 +24944,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "22",
      "read": true,
@@ -25020,7 +25020,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "21",
      "read": true,
@@ -25150,7 +25150,7 @@
     {
      "id": "B22",
      "track": 23,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "22",
      "read": true,
@@ -25226,7 +25226,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "21",
      "read": true,
@@ -25432,7 +25432,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "21",
      "read": true,
@@ -25638,7 +25638,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "21",
      "read": true,
@@ -25844,7 +25844,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "21",
      "read": true,
@@ -26050,7 +26050,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "21",
      "read": true,
@@ -26256,7 +26256,7 @@
     {
      "id": "A21",
      "track": 24,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "21",
      "read": true,
@@ -41132,7 +41132,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "30",
      "read": true,
@@ -41275,7 +41275,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "99",
      "read": true,
@@ -41351,7 +41351,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "30",
      "read": true,
@@ -41494,7 +41494,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "99",
      "read": true,
@@ -41570,7 +41570,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "30",
      "read": true,
@@ -41713,7 +41713,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "99",
      "read": true,
@@ -41789,7 +41789,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "30",
      "read": true,
@@ -41932,7 +41932,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "99",
      "read": true,
@@ -42008,7 +42008,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "30",
      "read": true,
@@ -42151,7 +42151,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "99",
      "read": true,
@@ -42227,7 +42227,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "30",
      "read": true,
@@ -42370,7 +42370,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "99",
      "read": true,
@@ -42446,7 +42446,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "30",
      "read": true,
@@ -42589,7 +42589,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "99",
      "read": true,
@@ -42665,7 +42665,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "30",
      "read": true,
@@ -42808,7 +42808,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "99",
      "read": true,
@@ -42884,7 +42884,7 @@
     {
      "id": "B30",
      "track": 27,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "30",
      "read": true,
@@ -43027,7 +43027,7 @@
     {
      "id": "A99",
      "track": 28,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "99",
      "read": true,
@@ -44957,7 +44957,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "5",
      "read": true,
@@ -44970,7 +44970,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "12",
      "read": true,
@@ -44983,7 +44983,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -45189,7 +45189,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "5",
      "read": true,
@@ -45202,7 +45202,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "12",
      "read": true,
@@ -45215,7 +45215,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -45421,7 +45421,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "5",
      "read": true,
@@ -45434,7 +45434,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "12",
      "read": true,
@@ -45447,7 +45447,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -45653,7 +45653,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "5",
      "read": true,
@@ -45666,7 +45666,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "12",
      "read": true,
@@ -45679,7 +45679,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -45885,7 +45885,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "5",
      "read": true,
@@ -45898,7 +45898,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "12",
      "read": true,
@@ -45911,7 +45911,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -46117,7 +46117,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "5",
      "read": true,
@@ -46130,7 +46130,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "12",
      "read": true,
@@ -46143,7 +46143,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -46349,7 +46349,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "5",
      "read": true,
@@ -46362,7 +46362,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "12",
      "read": true,
@@ -46375,7 +46375,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -46581,7 +46581,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "5",
      "read": true,
@@ -46594,7 +46594,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "12",
      "read": true,
@@ -46607,7 +46607,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -46813,7 +46813,7 @@
     {
      "id": "B5",
      "track": 31,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "5",
      "read": true,
@@ -46826,7 +46826,7 @@
     {
      "id": "B12",
      "track": 30,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "12",
      "read": true,
@@ -46839,7 +46839,7 @@
     {
      "id": "B\u00b729",
      "track": 29,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XIII",
      "read": false,
@@ -47767,7 +47767,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "7",
      "read": true,
@@ -47999,7 +47999,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "7",
      "read": true,
@@ -48231,7 +48231,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "7",
      "read": true,
@@ -48463,7 +48463,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "7",
      "read": true,
@@ -48695,7 +48695,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "7",
      "read": true,
@@ -48927,7 +48927,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "7",
      "read": true,
@@ -49159,7 +49159,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "7",
      "read": true,
@@ -49391,7 +49391,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "7",
      "read": true,
@@ -49623,7 +49623,7 @@
     {
      "id": "A7",
      "track": 32,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "7",
      "read": true,
@@ -54493,7 +54493,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "9",
      "read": true,
@@ -54584,7 +54584,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "93",
      "read": true,
@@ -54725,7 +54725,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "9",
      "read": true,
@@ -54816,7 +54816,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "93",
      "read": true,
@@ -54957,7 +54957,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "9",
      "read": true,
@@ -55048,7 +55048,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "93",
      "read": true,
@@ -55189,7 +55189,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "9",
      "read": true,
@@ -55280,7 +55280,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "93",
      "read": true,
@@ -55421,7 +55421,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "9",
      "read": true,
@@ -55512,7 +55512,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "93",
      "read": true,
@@ -55653,7 +55653,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "9",
      "read": true,
@@ -55744,7 +55744,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "93",
      "read": true,
@@ -55846,7 +55846,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "21",
      "read": true,
@@ -55898,7 +55898,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "9",
      "read": true,
@@ -55989,7 +55989,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "93",
      "read": true,
@@ -56002,7 +56002,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "13",
      "read": true,
@@ -56104,7 +56104,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "21",
      "read": true,
@@ -56156,7 +56156,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "9",
      "read": true,
@@ -56247,7 +56247,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "93",
      "read": true,
@@ -56260,7 +56260,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "13",
      "read": true,
@@ -56362,7 +56362,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "21",
      "read": true,
@@ -56414,7 +56414,7 @@
     {
      "id": "B9",
      "track": 11,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "9",
      "read": true,
@@ -56505,7 +56505,7 @@
     {
      "id": "A93",
      "track": 34,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "93",
      "read": true,
@@ -56518,7 +56518,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "13",
      "read": true,
@@ -56620,7 +56620,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "21",
      "read": true,
@@ -56776,7 +56776,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "13",
      "read": true,
@@ -56878,7 +56878,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "21",
      "read": true,
@@ -57034,7 +57034,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "13",
      "read": true,
@@ -57136,7 +57136,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "21",
      "read": true,
@@ -57292,7 +57292,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "13",
      "read": true,
@@ -57394,7 +57394,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "21",
      "read": true,
@@ -57550,7 +57550,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "13",
      "read": true,
@@ -57652,7 +57652,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "21",
      "read": true,
@@ -57808,7 +57808,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "13",
      "read": true,
@@ -57910,7 +57910,7 @@
     {
      "id": "B21",
      "track": 20,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "21",
      "read": true,
@@ -58066,7 +58066,7 @@
     {
      "id": "A13",
      "track": 35,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "13",
      "read": true,
@@ -59111,7 +59111,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "23",
      "read": true,
@@ -59382,7 +59382,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "23",
      "read": true,
@@ -59653,7 +59653,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "23",
      "read": true,
@@ -59924,7 +59924,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "23",
      "read": true,
@@ -60195,7 +60195,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "23",
      "read": true,
@@ -60466,7 +60466,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "23",
      "read": true,
@@ -60737,7 +60737,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "23",
      "read": true,
@@ -61008,7 +61008,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "23",
      "read": true,
@@ -61279,7 +61279,7 @@
     {
      "id": "A23",
      "track": 36,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "23",
      "read": true,
@@ -105628,7 +105628,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -105899,7 +105899,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -106170,7 +106170,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -106441,7 +106441,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -106712,7 +106712,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -106983,7 +106983,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -107254,7 +107254,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -107525,7 +107525,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -107796,7 +107796,7 @@
     {
      "id": "B\u00b738",
      "track": 38,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XIV",
      "read": false,
@@ -118584,7 +118584,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -118855,7 +118855,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -119126,7 +119126,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -119397,7 +119397,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -119668,7 +119668,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -119939,7 +119939,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -120210,7 +120210,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -120481,7 +120481,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -120752,7 +120752,7 @@
     {
      "id": "B\u00b79",
      "track": 9,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XI",
      "read": false,
@@ -128496,7 +128496,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": null,
      "label": "XV",
      "read": false,
@@ -128780,7 +128780,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": null,
      "label": "XV",
      "read": false,
@@ -129064,7 +129064,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": null,
      "label": "XV",
      "read": false,
@@ -129348,7 +129348,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": null,
      "label": "XV",
      "read": false,
@@ -129632,7 +129632,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": null,
      "label": "XV",
      "read": false,
@@ -129916,7 +129916,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": null,
      "label": "XV",
      "read": false,
@@ -130200,7 +130200,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": null,
      "label": "XV",
      "read": false,
@@ -130484,7 +130484,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": null,
      "label": "XV",
      "read": false,
@@ -130768,7 +130768,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": null,
      "label": "XV",
      "read": false,
@@ -174586,7 +174586,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -174805,7 +174805,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -175024,7 +175024,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -175243,7 +175243,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -175462,7 +175462,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -175681,7 +175681,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -175900,7 +175900,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -176119,7 +176119,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -176338,7 +176338,7 @@
     {
      "id": "B\u00b712",
      "track": 12,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XII",
      "read": false,
@@ -177149,7 +177149,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -177381,7 +177381,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -177613,7 +177613,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -177845,7 +177845,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -178077,7 +178077,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -178309,7 +178309,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -178528,7 +178528,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -178747,7 +178747,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -178966,7 +178966,7 @@
     {
      "id": "B\u00b742",
      "track": 42,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XVI",
      "read": false,
@@ -187596,7 +187596,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "A",
      "label": "X",
      "read": false,
@@ -187815,7 +187815,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "A",
      "label": "X",
      "read": false,
@@ -188034,7 +188034,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "A",
      "label": "X",
      "read": false,
@@ -188253,7 +188253,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "A",
      "label": "X",
      "read": false,
@@ -188472,7 +188472,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "A",
      "label": "X",
      "read": false,
@@ -188691,7 +188691,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "A",
      "label": "X",
      "read": false,
@@ -188910,7 +188910,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "A",
      "label": "X",
      "read": false,
@@ -189129,7 +189129,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "A",
      "label": "X",
      "read": false,
@@ -189348,7 +189348,7 @@
     {
      "id": "A\u00b77",
      "track": 7,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "A",
      "label": "X",
      "read": false,
@@ -193021,7 +193021,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -193240,7 +193240,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -193459,7 +193459,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -193678,7 +193678,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -193897,7 +193897,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -194116,7 +194116,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -194335,7 +194335,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -194554,7 +194554,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -194773,7 +194773,7 @@
     {
      "id": "B\u00b743",
      "track": 43,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": "B",
      "label": "XVII",
      "read": false,
@@ -206801,7 +206801,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.0,
      "team": null,
      "label": "XV",
      "read": false,
@@ -207002,7 +207002,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.111,
      "team": null,
      "label": "XV",
      "read": false,
@@ -207203,7 +207203,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.222,
      "team": null,
      "label": "XV",
      "read": false,
@@ -207404,7 +207404,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.333,
      "team": null,
      "label": "XV",
      "read": false,
@@ -207605,7 +207605,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.444,
      "team": null,
      "label": "XV",
      "read": false,
@@ -207806,7 +207806,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.556,
      "team": null,
      "label": "XV",
      "read": false,
@@ -208007,7 +208007,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.667,
      "team": null,
      "label": "XV",
      "read": false,
@@ -208208,7 +208208,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.778,
      "team": null,
      "label": "XV",
      "read": false,
@@ -208409,7 +208409,7 @@
     {
      "id": "?\u00b740",
      "track": 40,
-     "fade": 1.0,
+     "fade": 0.889,
      "team": null,
      "label": "XV",
      "read": false,
