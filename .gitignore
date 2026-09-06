@@ -50,3 +50,6 @@ outputs/videos/legacy/
 # candidates in the selection pass and are ~4MB of unused binaries.
 assets/fonts/*
 !assets/fonts/BlackOpsOne.ttf
+
+# comparison sheets and style/font previews - working images, not deliverables
+outputs/sheets/
