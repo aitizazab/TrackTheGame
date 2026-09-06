@@ -620,8 +620,32 @@ FINAL_football_cuts.mp4     FINAL_volleyball.mp4
 ```
 
 ~68 superseded experimental renders were moved to `outputs/videos/legacy/`,
-which is gitignored, taking the repo-visible folder from ~1.7GB to 96MB. Every
-`_*.png` comparison sheet in that folder is also gitignored.
+which is gitignored, taking the repo-visible folder from ~1.7GB to 68MB.
+`ST4_halo.mp4` — one of the nine rejected marker styles (D37) — was tracked in
+here by accident and went to `legacy/` too.
+
+**Comparison sheets and previews now live in `outputs/sheets/`**, which is
+gitignored. Sixteen files: the font contact sheets, the nine-style sheets, the
+ring sheet, and the before/after pairs for label collision, fade, carrier hue
+and the grid/ruler overlays. **Several are candidate report figures** — promote
+the ones the report cites into a tracked directory deliberately rather than
+un-ignoring the folder.
+
+### History was rewritten once, before the first push
+
+`outputs/videos/**` was purged from all 29 commits and the five deliverables
+re-added in a single commit. The directory had accumulated **40 blobs totalling
+570MB to deliver 82MB** — every re-render committed a fresh copy of all five
+files, and MP4 is already entropy-coded, so repacking reclaims nothing.
+
+**`.git`: 868MB → 235MB.** Commit messages, source diffs and document history
+are untouched; `git fsck --connectivity-only` is clean and all five videos
+verify at 900 frames. A full pre-rewrite bundle was taken first.
+
+**This was free only because nothing had been pushed.** Do not repeat it after
+the repo is public — it needs a force-push and strands every existing clone.
+If the videos are re-rendered again, that is a new blob each time: budget for it
+or keep renders out of git.
 
 **Do not re-render a tag you want to keep for comparison** — `render.py`
 overwrites by stem. Use `--out`.
