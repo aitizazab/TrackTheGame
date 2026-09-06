@@ -1754,40 +1754,78 @@ basketball rarely sample a ball at the top of a purely vertical flight, and
 volleyball does it constantly. A defect can be sport-specific in its *exposure*
 while being general in its *cause*.
 
-**The fix asks whether the trip was possible**, using the ball's own
-depth-normalised speed gate — a constant that was already calibrated and was
-already being applied six lines below, *after* this test had thrown the point
-away. Both legs must be unreachable for the point to be an outlier.
+**First attempt: ask whether the trip was possible.** Both legs judged against
+the ball's own depth-normalised speed gate — a constant already calibrated and
+already applied six lines below, *after* this test had thrown the point away.
 
-Measured across all five clips, on every one of the 11 round-trip rejections:
+**That shipped, and it was too loose.** The user identified `allstars` frame 24
+on sight: a decoy, now drawn. The gate is a ceiling on *any* ball motion and
+deliberately generous, so using it as the exemption waved through any decoy that
+happened to land within max-ball-speed. Frame 24's legs sit at **69% and 75%** of
+the gate — comfortably "reachable", and wrong.
 
-| now kept | leg speeds vs gate | now rejected | leg speeds vs gate |
+The user's framing is the important part, and it is a precision-over-recall
+argument: *"getting all these successful frames doesn't matter, since we were
+interpolating across them with relative success, if we end up drawing decoys as
+well."* A false delete costs an interpolated span that is usually fine. A false
+keep draws the marker on a boot. **The two errors are not symmetric and the
+filter should not treat them as though they were.**
+
+**The tightening is a different question, not a smaller number.** An out-and-back
+excursion has exactly two physical causes — a ballistic apex and a bounce — and
+**both are vertical reversals**. Gravity acts only downward; a bounce reverses
+only the vertical component. Nothing decelerates a ball horizontally and returns
+it within 0.4s, so a horizontal out-and-back has no mechanism and is an
+association error by construction, *however slowly it happens*.
+
+So the excursion must be **reachable AND vertical**. `dx` is a fraction of width
+and `dy` of height, so `dx` is aspect-corrected before they are compared as a
+direction — the same 16:9 correction as D27.
+
+Measured on all 11 round-trip rejections:
+
+| | excursion \|dy\|/\|dx\| | reachable | verdict |
 |---|---|---|---|
-| volleyball 558 — the reported bug | 0.93 / 0.25 v 1.68 | volleyball 540 | 2.71 / 2.85 v 1.44 |
-| basketball 522 | 0.61 / 0.31 v 1.62 | allstars 654, 678 | 2.50 / 2.55 v 1.56 |
-| basketball 684 | 0.70 / 0.51 v 1.74 | football_cuts 684, 738 | 1.40 / 1.52 |
-| allstars 24 | 0.85 / 0.93 v 1.23 | basketball 450, 864 | 2.79 / 1.42 |
+| volleyball 558 — the reported bug | **15.5** | yes | **kept** |
+| basketball 684 | **5.63** | yes | **kept** |
+| basketball 522 | **3.78** | yes | **kept** |
+| **allstars 24** | **0.285** | yes | **rejected — horizontal** |
+| allstars 654 / 678 | 2.22 / 1.53 | no | rejected |
+| basketball 450 / 864 | 0.53 / 0.64 | no | rejected |
+| football_cuts 684 / 738 | 0.006 / 0.22 | no | rejected |
+| volleyball 540 | 0.028 | no | rejected |
 
-**Every decoy the user named by timestamp is still rejected.** Direction is never
-consulted, so this is not a volleyball special case — an apex is kept because it
-is reachable, not because it is vertical.
+`EXCURSION_VERTICAL_RATIO = 2.0` — at least twice as vertical as horizontal, about
+27° of vertical, generous room for projection and box-centre noise. Frame 24 sits
+an **order of magnitude** below the nearest keep, so the threshold is not fitted
+to it: anything from ~1.0 to ~3.5 separates the same way.
+
+**Known thinness, stated rather than hidden.** `allstars` 654 and 678 are
+vertical-ish decoys at 2.22 and 1.53 and *would* pass the direction test. They are
+caught by reachability instead (2.50 and 2.49 against a 1.56 gate). Neither
+condition is sufficient alone; both are required, and 654 sitting just above the
+direction threshold is why.
 
 Effect on the deliverables, against the committed versions:
 
 | clip | ball drawn | added | removed | positions corrected |
 |---|---|---|---|---|
-| allstars | 840 → 840 | 0 | 0 | 11 frames around t+0.80s |
-| basketball | 858 → 858 | 0 | 0 | 28 frames around t+17.4s, t+22.8s |
 | volleyball | 798 → **846** | +48 | 0 | the apex at t+18.6s |
+| basketball | 858 → 858 | 0 | 0 | 28 frames at t+17.4s, t+22.8s |
+| allstars | **unchanged** — byte-identical to pre-fix | | | |
 | football_cuts, football_amateur | unchanged — byte-identical tracks | | | |
 
-No detection was newly admitted on allstars or basketball; the ball simply
-follows a real sighting through three moments instead of interpolating past it.
+**Two lessons, and the second is the one that generalises.**
 
-**The general lesson is the one D30 already taught in a different costume.** A
-test that measures *shape* will confuse two situations that share a shape. The
-question that separated them here was available all along, in a constant already
-tuned, in the same function — it was just being asked in the wrong order.
+A test that measures *shape* will confuse two situations that share a shape —
+which is D30 in a different costume.
+
+And **an exemption must not be built from a ceiling.** The speed gate answers "is
+any ball motion this fast impossible", which is the right question for rejecting
+and the wrong one for sparing: pass rate at the ceiling is near 100% for exactly
+the population you are trying to exclude. Sparing needs a condition that is
+*rare* among errors, and direction is, because it appeals to a mechanism a
+misdetection has no reason to obey.
 
 ---
 

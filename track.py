@@ -391,6 +391,11 @@ BALL_JUMP_FRAC = 0.10       # a "leap" for round-trip purposes
 # and only the scaling with depth is new.
 BALL_JUMP_PH = 1.19             # 0.10 / 0.084, in player heights
 BALL_GATE_PH_PER_SEC = 14.3     # 1.2  / 0.084, in player heights per second
+# An out-and-back excursion is only spared if it is VERTICAL, because the only
+# two things that turn a ball around - gravity and a bounce - act vertically.
+# Aspect-corrected |dy|/|dx| of the excursion must reach this. See the long note
+# in the round-trip filter; 2.0 is ~27 degrees of vertical.
+EXCURSION_VERTICAL_RATIO = 2.0
 # ...and the flat constants stay on as an absolute CEILING, so normalising can
 # only ever TIGHTEN the gate, never loosen it. This is the same two-limit design
 # gate_width already uses for players: body-height scaling governs the small
@@ -2005,8 +2010,49 @@ def run(data, debug=False):
                 gate_v = ((min(BALL_GATE_PH_PER_SEC * sc, BALL_GATE_PER_SEC)
                            if sc else BALL_GATE_PER_SEC) * (0.5 + b[3]))
                 reachable = (d_ab / dt_ab) <= gate_v and (d_bc / dt_bc) <= gate_v
+                # DIRECTION, added after reachability alone proved too loose.
+                #
+                # The speed gate is a ceiling on ANY ball motion and deliberately
+                # generous, so using it as the exemption waved through any decoy
+                # that happened to land within max-ball-speed. allstars frame 24
+                # is one: legs at 69% and 75% of the gate, and a decoy - the user
+                # identified it on sight after the first version shipped.
+                #
+                # The tightening is not a smaller number, it is a different
+                # question. An out-and-back excursion has exactly two physical
+                # causes, a ballistic apex and a bounce, and BOTH ARE VERTICAL
+                # REVERSALS: gravity acts only downward and a bounce only
+                # reverses the vertical component. Nothing decelerates a ball
+                # horizontally and returns it within 0.4s. A horizontal
+                # out-and-back therefore has no mechanism and is an association
+                # error by construction, however slowly it happens.
+                #
+                # dx is a fraction of WIDTH and dy a fraction of HEIGHT, so dx
+                # must be aspect-corrected before the two are compared as a
+                # direction - the same 16:9 correction as D27.
+                #
+                # Measured on all 11 round-trip rejections, excursion |dy|/|dx|:
+                #   keep    volleyball 558  15.5     basketball 684  5.63
+                #           basketball 522   3.78
+                #   reject  allstars 24      0.285  <- the decoy, an order of
+                #                                      magnitude below any keep
+                #           volleyball 540   0.028   football_cuts 684  0.006
+                #           football_cuts 738 0.22   basketball 450   0.53
+                #           basketball 864   0.64
+                #
+                # 2.0 means "at least twice as vertical as horizontal", about 27
+                # degrees of vertical, which is generous room for projection and
+                # box-centre noise. KNOWN THINNESS: allstars 654 and 678 are
+                # vertical-ish decoys at 2.22 and 1.53 and would pass this test.
+                # They are caught by reachability instead (2.50 and 2.49 against
+                # a 1.56 gate). The two conditions are complementary and BOTH are
+                # required; neither is sufficient alone, which is why 654 sitting
+                # just above 2.0 is tolerable rather than alarming.
+                ex_dx = (b[1] - (a[1] + c[1]) / 2) * FRAME_ASPECT
+                ex_dy = (b[2] - (a[2] + c[2]) / 2)
+                vertical = abs(ex_dy) >= EXCURSION_VERTICAL_RATIO * abs(ex_dx)
                 if (d_ab > jump and d_bc > jump and d_ac < d_ab * 0.5
-                        and not reachable):
+                        and not (reachable and vertical)):
                     ball_outliers.append({"frame": b[0], "kind": "round-trip",
                                           "jump": round(float(d_ab), 3),
                                           "pass": _pass + 1})
