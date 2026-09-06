@@ -1891,6 +1891,57 @@ to be checked against the *blocked* case, not the running one.
 
 ---
 
+## D42 · One run at 3fps — cheaper, faster, and measurably worse
+
+Not planned as an ablation. The user asked, out of curiosity, what frame rate
+would put a video under $0.30 and whether the render was worth seeing. It was,
+so it is recorded as a finding rather than as a direction we were testing.
+
+`allstars` at 3fps, the crowded case, everything else held:
+
+| | 5fps (shipped) | 3fps |
+|---|---|---|
+| cost | $0.5253 | **$0.3217** |
+| wall clock | 26.6s | **14.4s** |
+| frames returned | 147/150 | 90/90 |
+| identities drawn | 29 | **32** |
+| jersey numbers read | 16 | 14 |
+| markers | 15,450 | 15,010 |
+
+**It is the only configuration ever run here that meets the original 15s
+target**, and 39% cheaper. It also tracks visibly worse — the user's verdict was
+that it "works in the most literal sense" and hides less of the compounding
+error, which is the right way to put it.
+
+**The cost is identity fragmentation, and the labels name it.** 3fps loses real
+jersey numbers `30` and `93` and gains invented `I`, `II`, `III`, `XVIII`. Three
+extra identities for the same twenty-two players means tracks are breaking. That
+is D9's prediction arriving on schedule: spacing is constant, motion grows with
+`dt`, so the gate spans 3.6× spacing at 5fps and 6.1× at 3fps.
+
+The residual gate is *not* the signal it looked like — 309 refusals of 366 scored
+pairs at 5fps against 183 of 202 at 3fps, 84% versus 91%. Proportionally similar.
+The damage shows up in identity counts, not in gate pressure.
+
+**Not shipped.** Detections and tracks are committed so the render reproduces
+without a key; the video is not a deliverable.
+
+**What this actually exposes is that 5fps was never searched for.** It came from
+a geometric argument in D9 and was confirmed, not optimised — and 4fps has never
+been run. On two data points, 4fps is where the trade sits: ~$0.42 and ~20s
+against 5fps's $0.53 and 26.6s. Left undone deliberately, with the budget nearly
+spent, but it is the cheapest open question in the project.
+
+**And it pairs with the ball.** A second-pass ball recheck costs one extra round
+trip, estimated 5–8s from the payload/TTFB relationship across 883 instrumented
+calls (r = +0.483 for payload bytes against +0.061 for reasoning tokens; fastest
+TTFB ever observed 3.95s). On 5fps that takes the video to 32–35s and blows the
+target. On 3fps it lands at **20–22s, inside 25s**. The frame rate you would drop
+to for cost is exactly what buys the headroom to afford the fix for the one
+defect that survived the project. Untested, and the strongest remaining lead.
+
+---
+
 # Legacy log — everything below predates D19
 
 > These sections are kept verbatim as the running record. Several are

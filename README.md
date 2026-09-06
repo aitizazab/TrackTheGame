@@ -116,6 +116,46 @@ why the latency lever here is the straggler cut, and why trimming the prompt cut
 cost substantially while barely moving wall clock — speed and cost are separate
 problems with separate levers.
 
+### One run at 3fps
+
+Sampling is 5fps because D9 measured that as the floor. Out of curiosity we ran
+`allstars` — the crowded case, 22 players — at **3fps** to see what the cheaper
+setting actually buys and costs. It was not planned as an ablation; it turned
+into a real finding, so it is recorded here.
+
+| | 5fps (shipped) | 3fps |
+|---|---|---|
+| cost | $0.5253 | **$0.3217** |
+| wall clock | 26.6s | **14.4s** |
+| frames returned | 147/150 | 90/90 |
+| identities drawn | 29 | **32** |
+| jersey numbers read | 16 | 14 |
+| markers drawn | 15,450 | 15,010 |
+
+**It is 39% cheaper and it is the only configuration we have ever run that meets
+the original 15-second target.** It also tracks visibly worse.
+
+The cost is identity fragmentation, and the labels name it precisely: at 3fps the
+run *loses* real jersey numbers `30` and `93` and *gains* invented identifiers
+`I`, `II`, `III` and `XVIII`. Three more identities for the same twenty-two
+players means players are breaking into pieces. This is what D9 predicted from
+geometry alone — player spacing is constant while motion grows with the sample
+interval, so the association gate spans **3.6× the spacing at 5fps and 6.1× at
+3fps**, and the failure appears between those two numbers.
+
+**Not shipped.** It produces a working annotated video in the literal sense, and
+it is worse, so the deliverable stays at 5fps. The detections and tracks are
+committed like every other run, so the render reproduces without an API key:
+
+```bash
+uv run render.py outputs/tracks/allstars_fr_eng_1080__allstars_3fps__tracks.json     --clip clips/allstars_fr_eng.mp4 --ball-fade --out allstars_3fps.mp4
+```
+
+The honest reading is that 5fps is not obviously the optimum — it is the point
+where we stopped, chosen from a geometric argument and confirmed rather than
+searched. 4fps was never run, and on these two data points it is where the
+interesting trade sits.
+
 > **On latency.** Provider variance is larger than anything in our control, and
 > it has now been measured twice. The same basketball clip, same configuration,
 > ran **37.4s on one run and 21.2s on another** — a 43% swing with no code
