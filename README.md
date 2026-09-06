@@ -98,9 +98,23 @@ an API key**.
 and three sports. Every figure is the run that produced the committed video,
 over successful calls only.
 
-Where a single call's time goes (basketball, 150 calls): 1.41s encoding the
-frame, 9.28s to first byte, 2.12s streaming the answer back, and effectively
-zero parsing.
+Where a **typical** call's time goes (basketball, 150 calls, medians): 1.41s
+encoding the frame, 9.28s to first byte, 2.12s streaming the answer back, and
+effectively zero parsing. Those account for the call completely — measured
+against the call's own duration the residual is 0.001s.
+
+They do **not** add up to the 21.2s wall clock, and should not be expected to.
+All 150 calls dispatch inside 0.66s and run concurrently, so the run ends when
+the *slowest* one lands: the median call takes 12.9s and the slowest takes
+21.2s, which is the wall clock to within ten milliseconds. The gap is
+call-to-call variance in time-to-first-byte (9.3s → 14.3s) and streaming
+(2.1s → 7.5s), not a missing stage.
+
+The consequence worth stating: **wall clock is set by the tail, not the
+median.** Halving a typical call would not finish the video any sooner. That is
+why the latency lever here is the straggler cut, and why trimming the prompt cut
+cost substantially while barely moving wall clock — speed and cost are separate
+problems with separate levers.
 
 > **On latency.** Provider variance is larger than anything in our control. The
 > same basketball clip, same configuration, ran **37.4s on one run and 21.2s on

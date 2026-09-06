@@ -57,6 +57,22 @@ change. Report latency as a range; never quote a single run as the figure.
 starts *after* encoding, so **every latency figure quoted before 6 Sep is ~1.4s
 per call short.** Thread queue delay is 0.30s — scheduling is not a factor.
 
+**Those sections are complete but they are MEDIANS — do not subtract them from
+the wall clock.** Measured against a call's own duration the residual is
+**0.001s**, so nothing is missing inside a call. But all 150 calls dispatch
+within **0.66s** and run concurrently, so the run ends when the slowest lands:
+p50 call **12.91s**, slowest call **21.24s**, wall clock **21.25s**. The
+difference is call-to-call variance in TTFB (9.28 → 14.33s) and streaming
+(2.12 → 7.50s).
+
+> **Design consequence, and it governs every latency decision here: wall clock
+> is set by the TAIL, not the median.** Halving a typical call finishes the
+> video no sooner. That is why the only lever that worked was the straggler
+> cut, why `--max-concurrent` was a dead end (D19), and why the prompt rewrite
+> cut cost 26% while barely moving wall clock. **Cost and latency are separate
+> problems with separate levers** — a change that helps one usually does
+> nothing for the other, and several days were spent before that was explicit.
+
 ### What was tried and rejected this session — all with numbers
 
 | | verdict |
