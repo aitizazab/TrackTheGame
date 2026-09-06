@@ -116,13 +116,29 @@ why the latency lever here is the straggler cut, and why trimming the prompt cut
 cost substantially while barely moving wall clock — speed and cost are separate
 problems with separate levers.
 
-> **On latency.** Provider variance is larger than anything in our control. The
-> same basketball clip, same configuration, ran **37.4s on one run and 21.2s on
-> another** — a 43% swing with no code change, and the reason the table above
-> reports the shipped run rather than a best of several. That is why the target is
+> **On latency.** Provider variance is larger than anything in our control, and
+> it has now been measured twice. The same basketball clip, same configuration,
+> ran **37.4s on one run and 21.2s on another** — a 43% swing with no code
+> change. Volleyball, the slowest row above, was re-run under the identical
+> configuration and came back at **23.9s against 36.5s**, a 34% swing in the
+> same direction. Neither clip is expensive; both had a bad draw. The table
+> reports the run that produced the committed video rather than a best of
+> several. That is why the target is
 > reported as a range rather than a figure. A dynamic straggler cut abandons the
 > slowest 3% of calls once 97% have returned, which costs four frames of 150 and
 > a worst blind spell of 0.40s, comfortably inside the tracker's 0.60s coast.
+>
+> **The cut abandons the result, not the thread — so it does not shorten the
+> wall clock.** Instrumenting the volleyball re-run showed the last useful call
+> landing at 22.00s while the run did not end until 23.92s, because the process
+> cannot tear down until the abandoned sockets close. The cut is still doing its
+> real job, which is to stop the tracker waiting on data it has decided to live
+> without; it is simply not the latency saving it looks like. Known, measured,
+> not yet fixed: the fix is to stop joining abandoned futures, not to cut sooner.
+>
+> One further gap: **`ffmpeg` frame extraction (2.09s) sits outside the wall
+> clock above**, which is measured across the call pool. True end to end for
+> volleyball is about 26s.
 
 | requirement | target | result |
 |---|---|---|

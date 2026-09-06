@@ -104,6 +104,25 @@ Do not re-propose any of these:
 
 ### Open, and honestly small
 
+**The straggler cut does not shorten the wall clock (found 6 Sep, not fixed).**
+It abandons the *result* but not the *thread*, so the process waits for the
+abandoned socket to close before tearing down. On the instrumented volleyball
+re-run the last useful call landed at **22.00s** and the run ended at **23.92s**
+— 1.92s spent waiting on calls already given up on. The cut still does its real
+job (the tracker's worst blind spell stays 0.40s); it is just not a latency
+saving. Fix is to stop joining abandoned futures, **not** to lower `CUT_SHARE`,
+which would abandon more results for the same wait. Deferred because it changes
+`detect.py` and all five deliverables were produced with current behaviour.
+
+**Provider variance is now measured twice**, and it is the largest latency term
+by a wide margin: basketball 37.4s → 21.2s (43%), volleyball 36.5s → 23.9s
+(34%), identical configuration both times. Never quote a single run as *the*
+figure.
+
+**`ffmpeg` extraction (2.09s) is outside the reported wall**, which covers the
+call pool only. End-to-end is ~2s longer than every figure in these documents.
+
+
 - **Latency** 21–37s. The p97 straggler cut is in and works (3 calls abandoned
   on allstars, 2 on basketball). It cannot touch a call still waiting for its
   first byte, since it is checked inside the streaming loop.

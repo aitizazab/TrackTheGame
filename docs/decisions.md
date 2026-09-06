@@ -1661,6 +1661,46 @@ have returned, the rest are abandoned. Costs about 4 frames of 150, worst
 resulting blind spell **0.40s** against the tracker's 0.60s coast — inside what
 the tracker already survives.
 
+### The straggler cut abandons the result, not the thread — measured 6 Sep
+
+Volleyball was the slowest clip at 36.5s and was re-run instrumented to find out
+why. The answer was two things, and neither is about volleyball.
+
+**First, it was a bad draw.** Same clip, same configuration, **36.5s → 23.9s**,
+a 34% swing. That is the second measured instance of provider variance at this
+magnitude (basketball: 37.4s → 21.2s, 43%). Two clips, two directions of the
+same effect, no code change either time. Provider variance is now a *measured
+pattern*, not an anecdote, and it is the single largest term in this project's
+latency.
+
+**Second, and structural — the cut does not shorten the wall clock:**
+
+```
+last OK call finishes at      22.00s
+last call of ANY kind at      23.92s   <- the wall
+```
+
+The two calls the cut abandoned set the wall. Frame 738 was cut at TTFB 14.28s
+and its thread did not finish until 23.92s; the pool cannot tear down until the
+abandoned socket closes. **1.92s of the run was spent waiting on calls it had
+already given up on.**
+
+This is very probably where the original 36.5s came from: three stragglers
+instead of two, and no bound on how long an abandoned one takes to close.
+
+The cut is still doing its real job — it stops the *tracker* waiting for data it
+has decided to live without, which is why the worst blind spell stays at 0.40s.
+It is simply not the latency saving it appears to be, and the earlier claim that
+it "caps the tail" was too strong. **The fix is to stop joining abandoned
+futures, not to cut sooner** — lowering `CUT_SHARE` abandons more results for the
+same teardown wait. Not implemented: it changes `detect.py`, and all five
+deliverables were produced with the current behaviour.
+
+**Also: `ffmpeg` extraction is outside the reported wall.** It costs 2.09s once,
+before any call, and the `wall` figure is measured across the call pool. Every
+end-to-end time in this project is therefore ~2s longer than quoted.
+
+
 ---
 
 ## D39 · Ball decoys — five approaches, all measured, all rejected
