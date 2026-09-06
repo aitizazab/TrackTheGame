@@ -760,7 +760,7 @@ defects of the system, which they are not.
 
 ### What was still open on this configuration
 
-> **Updated 6 Sep.** Cost closed: $0.8818 here became a **$0.4675 mean across
+> **Updated 6 Sep.** Cost closed: $0.8818 here became a **$0.4662 mean across
 > five clips**, via the flex tier (D18), the v1→v2 prompt rewrite (D29) and
 > `--compact` (D25). Latency did not close — see below, and D38 for where a
 > call's time actually goes.
@@ -1734,6 +1734,122 @@ are kept in separate files. D15 above is history, not current behaviour.
 
 **Reported, not hidden.** Five measured rejections are a more honest result than a
 sixth heuristic tuned until the named timestamps happen to pass.
+
+---
+
+## D40 · The round-trip test asked geometry when it should have asked physics
+
+Found by the user watching the volleyball render: the ball is hit straight up,
+comes straight back down, and the top of the flight is **deleted**.
+
+The test (both the ball's and the player's) is a pure excursion check — *b* is
+far from *a*, far from *c*, and *a* is close to *c*, therefore *b* was never
+there. A ball at the apex of a vertical flight has exactly that signature. The
+neighbours are low and near each other; the apex is far from both. **Geometry
+cannot separate a real out-and-back from a decoy excursion, because they are the
+same shape.**
+
+It surfaced on volleyball for a real reason rather than by chance: football and
+basketball rarely sample a ball at the top of a purely vertical flight, and
+volleyball does it constantly. A defect can be sport-specific in its *exposure*
+while being general in its *cause*.
+
+**The fix asks whether the trip was possible**, using the ball's own
+depth-normalised speed gate — a constant that was already calibrated and was
+already being applied six lines below, *after* this test had thrown the point
+away. Both legs must be unreachable for the point to be an outlier.
+
+Measured across all five clips, on every one of the 11 round-trip rejections:
+
+| now kept | leg speeds vs gate | now rejected | leg speeds vs gate |
+|---|---|---|---|
+| volleyball 558 — the reported bug | 0.93 / 0.25 v 1.68 | volleyball 540 | 2.71 / 2.85 v 1.44 |
+| basketball 522 | 0.61 / 0.31 v 1.62 | allstars 654, 678 | 2.50 / 2.55 v 1.56 |
+| basketball 684 | 0.70 / 0.51 v 1.74 | football_cuts 684, 738 | 1.40 / 1.52 |
+| allstars 24 | 0.85 / 0.93 v 1.23 | basketball 450, 864 | 2.79 / 1.42 |
+
+**Every decoy the user named by timestamp is still rejected.** Direction is never
+consulted, so this is not a volleyball special case — an apex is kept because it
+is reachable, not because it is vertical.
+
+Effect on the deliverables, against the committed versions:
+
+| clip | ball drawn | added | removed | positions corrected |
+|---|---|---|---|---|
+| allstars | 840 → 840 | 0 | 0 | 11 frames around t+0.80s |
+| basketball | 858 → 858 | 0 | 0 | 28 frames around t+17.4s, t+22.8s |
+| volleyball | 798 → **846** | +48 | 0 | the apex at t+18.6s |
+| football_cuts, football_amateur | unchanged — byte-identical tracks | | | |
+
+No detection was newly admitted on allstars or basketball; the ball simply
+follows a real sighting through three moments instead of interpolating past it.
+
+**The general lesson is the one D30 already taught in a different costume.** A
+test that measures *shape* will confuse two situations that share a shape. The
+question that separated them here was available all along, in a constant already
+tuned, in the same function — it was just being asked in the wrong order.
+
+---
+
+## D41 · The straggler cut disabled, and the deadline lowered to 25s
+
+The cut was the project's headline latency feature. It never worked, and the
+instrumentation added for D38 is what exposed it.
+
+**It abandons the result, not the thread.** The deadline is polled inside
+`for chunk in r.iter_content(...)`, so a worker can only act on it when the next
+chunk arrives — which means it cannot interrupt a stalled stream, the one case
+it exists for, and before response headers arrive it is not consulted at all.
+`with ThreadPoolExecutor(...)` then joins every worker on exit.
+
+Measured on the instrumented volleyball run:
+
+```
+last OK call finished at    22.00s
+last call of any kind at    23.92s   <- the wall
+```
+
+Frame 738 was cut at TTFB 14.28s and its thread did not return until 23.92s.
+**1.92s of the run was spent waiting on calls it had already given up on.**
+
+**There is no cost saving either, and it quietly understated the ledger.**
+`rec["cost_usd"]` is assigned after the body parses; the cut returns before that.
+0 of 14 abandoned calls across the whole project have a recorded cost — while the
+generation completed server-side and was billed anyway. **~$0.042 paid and never
+recorded**, which is one of D21's ledger holes identified.
+
+So: no latency saving, no cost saving, frames discarded, ledger understated.
+`CUT_SHARE = 1.0`, which the flag already supported as a documented off switch.
+
+**And the deadline moves to `TIMEOUT_S = 25.0`.** The comment that stood there
+said *"Do NOT drop it to 25 — 28s costs 3.3% of frames, 25s costs 32.7%"*. That
+was measured when p90 was 41.6s, before the flex tier (D18) and the v1→v2 prompt
+rewrite (D29). Re-measured per frame on the five deliverable runs:
+
+| clip | slowest call | frames cut at 25s | worst blind spell |
+|---|---|---|---|
+| football_cuts | 20.9s | 0 | 0.20s |
+| allstars | 21.2s | 0 | 0.40s |
+| basketball | 18.2s | 0 | 0.40s |
+| football_amateur | 21.1s | 0 | 0.40s |
+| volleyball | 20.7s | 0 | 0.40s |
+
+**25s is above the 100th percentile on all five** — it would not have fired once
+— and the worst blind spell stays 0.40s against the tracker's 0.60s coast. The
+margin is about 2s: the slowest call ever recorded in this configuration is
+23.0s, on the bad-draw volleyball run. A worse draw than any yet seen would start
+costing frames; that is the trade accepted in exchange for a real bound.
+
+**Why the deadline works where the cut did not:** `requests` enforces it at the
+socket, preemptively, without needing the worker to reach a polling point. The
+cut was *cooperative* cancellation of a thread whose defining symptom is that it
+never reaches a cancellation point. It could abandon the healthy and not the sick.
+
+**Two things worth carrying forward.** A feature that is measured only against
+the metric it was designed to improve will look like it works — the D19 sweep
+recorded "wall saved" per cut share without ever checking whether abandoned
+threads were still being joined, and they were. And a cancellation mechanism has
+to be checked against the *blocked* case, not the running one.
 
 ---
 

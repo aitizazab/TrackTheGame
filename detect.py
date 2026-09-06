@@ -164,9 +164,26 @@ COORD_CONVENTION = {
 # 35 ever fires — but on a bad one it bounds the damage: the 2 Sep run peaked at
 # 43.2s and had calls sitting on the old limit.
 #
-# Do NOT drop it to 25 to "hit the target". The latency distribution has a hard
-# shoulder, not a thin tail: 28s costs 3.3% of frames, 25s costs 32.7%.
-TIMEOUT_S = 35.0
+# 25.0 from 6 Sep. The warning that used to sit here - "do NOT drop it to 25,
+# 28s costs 3.3% of frames and 25s costs 32.7%" - was measured when p90 was
+# 41.6s, before the flex tier (D18) and the v1->v2 prompt rewrite (D29) each
+# took a bite out of the distribution. Re-measured per frame across the five
+# runs that produced the deliverables:
+#
+#   clip              slowest call   frames cut at 25s   worst blind spell
+#   football_cuts        20.9s              0                 0.20s
+#   allstars             21.2s              0                 0.40s
+#   basketball           18.2s              0                 0.40s
+#   football_amateur     21.1s              0                 0.40s
+#   volleyball           20.7s              0                 0.40s
+#
+# 25s is above the 100th percentile on all five - it would not have fired
+# once - and the worst blind spell stays 0.40s against the tracker's 0.60s
+# coast. Margin is ~2s: the slowest call ever recorded in this configuration
+# is 23.0s, on the bad-draw volleyball run that also took 36.5s wall. A worse
+# draw than any yet seen would start costing frames, which is the tradeoff
+# being accepted deliberately in exchange for a real bound on wall clock.
+TIMEOUT_S = 25.0
 # DYNAMIC STRAGGLER CUT. Once this share of calls has returned, the rest get
 # CUT_GRACE_S more and are then abandoned mid-stream.
 #
@@ -191,7 +208,38 @@ TIMEOUT_S = 35.0
 #
 # Accuracy cost measured by replaying the cut offline: identities +0 to +2,
 # match rate unchanged to -0.003, marker-frames -1.7% to -2.3%.
-CUT_SHARE = 0.97
+# DISABLED 6 Sep - it does not do what this comment block says it does.
+#
+# The cut is polled inside the streaming loop in call_one, so a worker can
+# only act on it when the NEXT CHUNK ARRIVES. It therefore cannot interrupt a
+# stalled stream, which is the one case it exists for, and before response
+# headers arrive it is not consulted at all. Instrumented on volleyball:
+#
+#   last OK call finished at   22.00s
+#   last call of any kind at   23.92s   <- the wall
+#
+# Frame 738 was cut at TTFB 14.28s and its thread did not return until
+# 23.92s. `with ThreadPoolExecutor(...)` joins every worker on exit, so the
+# pool could not tear down until it did. 1.92s of that run was spent waiting
+# on calls it had already given up on.
+#
+# There is no cost saving either, and it cost us accuracy in the ledger:
+# rec["cost_usd"] is assigned after the body parses and the cut returns
+# before that, so 0 of 14 abandoned calls have a recorded cost - while the
+# generation completed server-side and was billed anyway. ~$0.042 paid and
+# never recorded across the project, one of D21's ledger holes.
+#
+# So: no latency saving, no cost saving, frames discarded, ledger understated.
+# The sweep table below is left intact because it is honest about what was
+# measured at the time - but it measured wall clock against the cut SHARE
+# without checking whether the abandoned threads were still being joined,
+# and they were.
+#
+# The real backstop is TIMEOUT_S, which is preemptive and does work. Fixing
+# the cut properly needs socket-level read deadlines plus shutdown(wait=False,
+# cancel_futures=True); not attempted, because with the deadline at 25s there
+# is very little left for it to do.
+CUT_SHARE = 1.0     # 1.0 disables. Was 0.97; see above.
 CUT_GRACE_S = 1.5
 # Set to a perf_counter deadline once the share is reached; call_one checks it
 # between chunks so an abandoned call actually closes its connection rather than

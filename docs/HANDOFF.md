@@ -36,7 +36,7 @@ flags needed beyond the above.
 | allstars | $0.5148 | 26.6s | 16.6 / 18.9s | 147/150 | `allstars_fr_eng_v4` |
 | basketball | $0.4407 | 21.2s | 11.5 / 15.1s | 149/150 | `basketball_timed` |
 | football_amateur | $0.4654 | 22.6s | 14.2 / 17.4s | 149/150 | `football_amateur_v4` |
-| volleyball | $0.4438 | 36.5s | 11.0 / 17.6s | 146/150 | `volleyball_v4` |
+| volleyball | $0.4373 | 23.9s | 14.9 / 17.6s | 147/150 | `volleyball_timed` |
 
 > **Percentiles are over SUCCESSFUL calls only, corrected 6 Sep.** They had
 > been computed over every logged row, which silently included 150 dead Luna
@@ -45,7 +45,7 @@ flags needed beyond the above.
 > latency that pulled that row's percentiles down. Cost was never affected.
 > **Filter on `ok` before quoting any latency figure from `run_log.jsonl`.**
 
-**Mean $0.4675/video against a $1.00 cap — cost is solved.** Latency 21–37s
+**Mean $0.4662/video against a $1.00 cap — cost is solved.** Latency 21–27s
 against "under 15s, 25s accepted" is the one constraint not met everywhere.
 
 **Provider variance is larger than any lever we control.** Basketball ran 37.4s
@@ -123,7 +123,11 @@ figure.
 call pool only. End-to-end is ~2s longer than every figure in these documents.
 
 
-- **Latency** 21–37s. The p97 straggler cut is in and works (3 calls abandoned
+- **Latency** 21–27s. ~~The p97 straggler cut is in and works~~ **DISABLED 6 Sep —
+  it never worked.** It abandons the result but not the thread, so it saved no
+  wall clock and no cost while discarding frames; `CUT_SHARE = 1.0`. The real
+  bound is `TIMEOUT_S`, now **25.0s**, which is above the slowest call on all
+  five clips and so costs nothing today. (3 calls abandoned
   on allstars, 2 on basketball). It cannot touch a call still waiting for its
   first byte, since it is checked inside the streaming loop.
 - **The 8.8s cut in `football_cuts` is undetectable** from detections: 18
@@ -513,7 +517,8 @@ that contradicts what was believed when they were written.
 - **B. Player boxes have no aspect guard — DONE.** Guard at 3.0 pixel aspect,
   rejecting 3 boxes in 36,329 (0.008%), every one a ribbon. Must be measured in
   PIXEL space; the fraction-space version rejects real players.
-- **C. Wall clock — PARTLY.** p97 straggler cut implemented and working. 21–37s
+- **C. Wall clock — PARTLY.** ~~p97 straggler cut implemented and working.~~
+  The cut was disabled 6 Sep as measured waste; the deadline moved to 25s. 21–27s
   remains, and provider variance (43% swing on identical runs) dominates.
 - **D. Prompt bloat — DONE.** v4 shipped. The user's own prompt was never
   needed; v2's rewrite plus role removal was sufficient.

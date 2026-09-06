@@ -92,9 +92,9 @@ an API key**.
 | allstars | $0.5148 | 26.6s | 16.6s / 18.9s | 147/150 |
 | basketball | $0.4407 | 21.2s | 11.5s / 15.1s | 149/150 |
 | football_amateur | $0.4654 | 22.6s | 14.2s / 17.4s | 149/150 |
-| volleyball | $0.4438 | 36.5s | 11.0s / 17.6s | 146/150 |
+| volleyball | $0.4373 | 23.9s | 14.9s / 17.6s | 147/150 |
 
-**Mean $0.4675 per finished video**, stable to about ±$0.04 across five clips
+**Mean $0.4662 per finished video**, stable to about ±$0.04 across five clips
 and three sports. Every figure is the run that produced the committed video,
 over successful calls only.
 
@@ -121,9 +121,10 @@ problems with separate levers.
 > ran **37.4s on one run and 21.2s on another** — a 43% swing with no code
 > change. Volleyball, the slowest row above, was re-run under the identical
 > configuration and came back at **23.9s against 36.5s**, a 34% swing in the
-> same direction. Neither clip is expensive; both had a bad draw. The table
-> reports the run that produced the committed video rather than a best of
-> several. That is why the target is
+> same direction. Neither clip is expensive; both had a bad draw. **The
+> volleyball row above is now that re-run**, which is the one that produced
+> the committed video; the 36.5s original is kept here as the comparison.
+> That is why the target is
 > reported as a range rather than a figure. A dynamic straggler cut abandons the
 > slowest 3% of calls once 97% have returned, which costs four frames of 150 and
 > a worst blind spell of 0.40s, comfortably inside the tracker's 0.60s coast.
@@ -143,7 +144,7 @@ problems with separate levers.
 | requirement | target | result |
 |---|---|---|
 | cost per video | under $1.00 | **$0.47** ✅ |
-| processing time | under 15s, 25s accepted | 21–37s ⚠️ |
+| processing time | under 15s, 25s accepted | 21–27s ⚠️ |
 | output is a video | yes | ✅ |
 | every player marked | yes | ✅ |
 | teams marked differently | yes | ✅ |

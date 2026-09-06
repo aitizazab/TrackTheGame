@@ -1970,7 +1970,43 @@ def run(data, debug=False):
                 # decoys. Deciding WHICH cluster is the ball needs continuity
                 # against an established trajectory, i.e. an actual ball filter,
                 # not a wider local window.
-                if d_ab > jump and d_bc > jump and d_ac < d_ab * 0.5:
+                # REACHABILITY EXEMPTION, 6 Sep. The test above is purely
+                # GEOMETRIC - far, far, close - and never asks whether the ball
+                # could physically have made the trip. A ball hit straight up and
+                # falling straight back has exactly the excursion signature: the
+                # apex is far from both neighbours and the neighbours are close
+                # to each other. Geometry cannot tell that from a decoy, because
+                # they are the same shape. Physics can.
+                #
+                # Found by the user on volleyball, which is where it shows up -
+                # football and basketball rarely sample a ball at the top of a
+                # vertical flight, volleyball does it constantly. Frame 558:
+                # dy -0.304, dx -0.011, a 28:1 vertical excursion above both
+                # neighbours, deleted as a decoy.
+                #
+                # So require the trip to be IMPOSSIBLE, not merely large. Both
+                # legs are judged against the ball's own speed gate - the same
+                # depth-normalised constant applied six lines below, which was
+                # already being run AFTER this test had thrown the point away.
+                # Measured across all five clips, 11 round-trip rejections:
+                #
+                #   kept   volleyball 558 (0.93 v 1.68 gate) - the reported bug
+                #          basketball 522, 684 - ball dropping, both under half gate
+                #          allstars 24
+                #   still  volleyball 540 (2.71) - a 0.55-width horizontal leap
+                #   cut    allstars 654, 678 (2.50, 2.49) - faster than any real ball
+                #          football_cuts 684, 738 - the known shoe and board decoys
+                #          basketball 450, 864
+                #
+                # Every decoy the user named by timestamp still goes. Direction
+                # is never consulted, so this is not a volleyball special case.
+                dt_ab = max((b[0] - a[0]) / src_fps, 1e-3)
+                dt_bc = max((c[0] - b[0]) / src_fps, 1e-3)
+                gate_v = ((min(BALL_GATE_PH_PER_SEC * sc, BALL_GATE_PER_SEC)
+                           if sc else BALL_GATE_PER_SEC) * (0.5 + b[3]))
+                reachable = (d_ab / dt_ab) <= gate_v and (d_bc / dt_bc) <= gate_v
+                if (d_ab > jump and d_bc > jump and d_ac < d_ab * 0.5
+                        and not reachable):
                     ball_outliers.append({"frame": b[0], "kind": "round-trip",
                                           "jump": round(float(d_ab), 3),
                                           "pass": _pass + 1})
