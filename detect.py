@@ -1961,6 +1961,7 @@ def main():
 
     lat = sorted(r["latency_s"] for r in records if r.get("latency_s"))
     print(f"\n  wall            {wall:.1f}s")
+    report_sections(records, wall)
     print(f"  returned        {len(ok)}/{len(records)}")
     if dropped:
         why = {}
