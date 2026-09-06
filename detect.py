@@ -62,9 +62,16 @@ from PIL import Image, ImageDraw, ImageFont
 # --arms path uses them; nothing here changes the shipping configuration.
 from prompt_v1 import (COMPACT_ORDER_V1, COMPACT_SCHEMA_V1, PROMPT_V1,
                        SCHEMA_V1)
+from prompt_v3 import (COMPACT_ORDER_V3, COMPACT_SCHEMA_V3, COORD_SPACE_V3,
+                       PROMPT_V3, SCHEMA_V3)
 
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
-DEFAULT_MODEL = "openai/gpt-5.6-luna"
+# CHANGED 5 Sep. It was openai/gpt-5.6-luna, which is (a) no longer the
+# shipping model and (b) no longer listed in the provider catalogue at all - a
+# run without --model now 404s on all 150 calls with "No endpoints found".
+# Free, since nothing is billed, but it wastes a full wall clock and writes an
+# empty detections file. The default should be the thing we actually ship.
+DEFAULT_MODEL = "google/gemini-3.7-flash"
 LOG = Path("docs/run_log.jsonl")
 DETECTIONS = Path("outputs/detections")
 
@@ -80,7 +87,14 @@ DETECTIONS = Path("outputs/detections")
 # at the top end and two frames truncated anyway. Raised to 6500. This is not a
 # number to keep nudging — reasoning is 64% of all output tokens on this model,
 # which makes reasoning effort (ablation A5) the real lever, not the cap.
-MAX_TOKENS = 6500
+# LOWERED 5 Sep, 6500 -> 4000. It is the reservation the provider holds against
+# the in-flight budget, and an oversized one directly worsens the 402 ceiling
+# that stopped a run on 1 Sep. Measured need: compact v2 output is ~1750 median
+# and the largest reasoning seen on real football is 2578; the only run that
+# ever truncated was 3.8 + the long v1 prompt, at 6236-6243. D4's warning still
+# applies - a cap measured on easy input is not a cap - so this keeps ~1.5x
+# headroom over the worst REAL v2/v3 frame rather than trimming to the median.
+MAX_TOKENS = 4000
 
 # ---------------------------------------------------- coordinate conventions
 #
@@ -153,6 +167,36 @@ COORD_CONVENTION = {
 # Do NOT drop it to 25 to "hit the target". The latency distribution has a hard
 # shoulder, not a thin tail: 28s costs 3.3% of frames, 25s costs 32.7%.
 TIMEOUT_S = 35.0
+# DYNAMIC STRAGGLER CUT. Once this share of calls has returned, the rest get
+# CUT_GRACE_S more and are then abandoned mid-stream.
+#
+# NOT a lower TIMEOUT_S, which is a guess at where the tail will land and costs
+# 32.7% of frames on a bad day. This adapts to the run: it only starts the clock
+# once most of the work is already in.
+#
+# Swept across all four full-clip runs. Wall saved / frames lost of 150:
+#
+#   p99   0.8-4.4s, but cuts SAVES NOTHING - its slow calls already sit on the
+#         35s deadline, so the p99 threshold lands above them        1-3 frames
+#   p97   2.5 / 3.7 / 5.3 / 14.9s                                    4 frames
+#   p95   3.1 / 4.1 / 6.3 / 17.9s                                    7 frames
+#   p93   3.3 / 4.4 / 6.5 / 18.1s                                   10 frames
+#   p90   3.5 / 4.7 / 7.0 / 18.8s, and amateur's blind spell hits    14 frames
+#         0.60s, the exact coast limit, where tracks start dying
+#
+# Returns flatten after p97 while frame loss grows linearly: p97->p95 buys
+# 0.4-3.0s for three more frames, p95->p93 buys 0.3s for three more. 0.97 takes
+# every clip under ~21s, costs 2.7% of frames, and its worst blind spell is
+# 0.40s - half the tracker's 0.60s coast.
+#
+# Accuracy cost measured by replaying the cut offline: identities +0 to +2,
+# match rate unchanged to -0.003, marker-frames -1.7% to -2.3%.
+CUT_SHARE = 0.97
+CUT_GRACE_S = 1.5
+# Set to a perf_counter deadline once the share is reached; call_one checks it
+# between chunks so an abandoned call actually closes its connection rather than
+# running on in a thread the process must still join at exit.
+CUT_AT = [None]
 SOURCE_FPS = 30           # fetch_clips.py normalises every clip to this
 
 # ---------------------------------------------------------------- the schema
@@ -380,6 +424,76 @@ def draw_ruler(img):
     return img
 
 
+def draw_grid(img, div: int = 10):
+    """Overlay a thin full-frame grid (ablation A1b).
+
+    DIFFERENT HYPOTHESIS FROM `draw_ruler`, which is kept beside it because A1's
+    rejection is a measured result and must stay reproducible. The ruler put
+    numerals on the EDGES: to use it the model still has to project a player
+    inward from the margin, which is the same spatial regression it was already
+    bad at, and it measurably drove reasoning tokens UP.
+
+    A grid puts a reference line WITHIN a body-width of every player, so
+    localising becomes "which cell, and where inside it" — a local judgement
+    against a visible landmark instead of a global one against a distant scale.
+    The target here is not jersey numbers, it is the ~0.05 frame-fraction
+    localisation JITTER that produces ring fly-outs, which the effort probe
+    showed is stochastic and therefore not fixable by prompting or reasoning.
+
+    Magenta because nothing on a football pitch is magenta: not grass, not any
+    kit colour seen so far (blue, white, orange, red, yellow, green, black), and
+    not the ball. A grey or white grid risks being read as a painted line, and
+    the prompt already tells the model painted markings are not the ball.
+
+    Thin and translucent on purpose. A player is ~20px wide and ~80px tall at
+    1080p, so a 1px line at a third opacity cannot hide one, and the lines sit
+    at fixed screen positions so they are trivially separable from anything that
+    moves. Note the cost: fine lines are exactly the high-frequency detail JPEG
+    spends bits on, so bytes-per-frame will rise — measured in the run summary.
+    """
+    w, h = img.size
+    d = ImageDraw.Draw(img, "RGBA")
+    try:
+        font = ImageFont.truetype("arialbd.ttf", max(11, w // 100))
+    except OSError:
+        font = ImageFont.load_default()
+    # MINOR lines at half spacing, unlabelled and fainter. Without them the
+    # nearest reference can be 0.05 away, which is the same magnitude as the
+    # localisation jitter this arm exists to test - a landmark no closer than
+    # the error it is meant to remove is not a landmark. With them, nothing on
+    # the frame is more than 0.025 from a line, about half a player's width.
+    for i in range(1, div * 2):
+        if i % 2 == 0:
+            continue
+        f = i / (div * 2)
+        x, y = int(w * f), int(h * f)
+        d.line([(x, 0), (x, h)], fill=(255, 0, 255, 38), width=1)
+        d.line([(0, y), (w, y)], fill=(255, 0, 255, 38), width=1)
+    for i in range(1, div):
+        f = i / div
+        x, y = int(w * f), int(h * f)
+        d.line([(x, 0), (x, h)], fill=(255, 0, 255, 70), width=1)
+        d.line([(0, y), (w, y)], fill=(255, 0, 255, 70), width=1)
+    # Edge numerals, so the lines carry values rather than only structure.
+    for i in range(1, div):
+        f = i / div
+        x, y = int(w * f), int(h * f)
+        d.text((x + 2, 1), f".{i}", font=font, fill=(255, 255, 0, 235),
+               stroke_width=2, stroke_fill=(0, 0, 0, 220))
+        d.text((2, y + 1), f".{i}", font=font, fill=(255, 255, 0, 235),
+               stroke_width=2, stroke_fill=(0, 0, 0, 220))
+    return img
+
+
+GRID_NOTE = """
+A thin magenta GRID is drawn over the image: brighter lines every 0.1 of width
+and height, fainter ones halfway between them at every 0.05, with yellow
+numerals on the top and left edges. It is an overlay, not part of the scene: do
+not report a grid line as a player or as the ball. Use the nearest lines to
+place each box - read off which cell a player stands in and where in that cell
+their feet are."""
+
+
 RULER_NOTE = """
 A COORDINATE RULER is drawn on the image. Yellow numerals along the top edge
 mark x = .1 to .9; along the left edge they mark y = .1 to .9. Read positions
@@ -387,12 +501,15 @@ off it rather than estimating them. The ruler itself is not part of the scene �
 do not report it as a player or as the ball."""
 
 
-def encode(path: Path, width: int = None, ruler: bool = False) -> tuple:
+def encode(path: Path, width: int = None, ruler: bool = False,
+           grid: bool = False) -> tuple:
     img = Image.open(path).convert("RGB")
     if width and width != img.width:
         img = img.resize((width, round(width * img.height / img.width)))
     if ruler:
         img = draw_ruler(img)
+    if grid:
+        img = draw_grid(img)
     buf = io.BytesIO()
     img.save(buf, format="JPEG", quality=90)
     raw = buf.getvalue()
@@ -688,15 +805,208 @@ COMPACT_SCHEMA = {
 PROMPT_SETS = {
     "v1": {"prompt": PROMPT_V1, "schema": SCHEMA_V1,
            "compact_schema": COMPACT_SCHEMA_V1, "compact_order": COMPACT_ORDER_V1,
-           "player_conf": True},
+           "player_conf": True, "coords": None},
     "v2": {"prompt": None, "schema": None,           # filled in below; the live
            "compact_schema": None, "compact_order": None,   # module globals ARE v2
-           "player_conf": False},
+           "player_conf": False, "coords": None},
+    # v3 asks for 0-1000 INTEGERS, so it carries its own coordinate space and
+    # overrides the per-model pin. `coords` is None for v1/v2, meaning "use
+    # COORD_CONVENTION[model]" exactly as before.
+    "v3": {"prompt": PROMPT_V3, "schema": SCHEMA_V3,
+           "compact_schema": COMPACT_SCHEMA_V3, "compact_order": COMPACT_ORDER_V3,
+           "player_conf": False, "coords": COORD_SPACE_V3},
 }
 PROMPT_SETS["v2"].update(prompt=PROMPT, schema=SCHEMA,
                          compact_schema=COMPACT_SCHEMA,
                          compact_order=COMPACT_ORDER)
 DEFAULT_PROMPT_VERSION = "v2"
+
+
+# ---------------------------------------------------------------------- v4
+#
+# v2, minus `role`, plus the frame-edge exclusion. FRACTIONS ARE KEPT.
+#
+# v3 bundled three changes and one of them was poison: asking for 0-1000
+# INTEGERS made the model emit ~6% of frames on a wrong scale entirely - 63
+# boxes with h > 0.25 where v1 and v2 produced ZERO, max height 0.773 against
+# 0.108. Because the whole frame shifts together, the frame median shifts too,
+# so neither the 0..1 range test nor a relative-height guard can see it: only
+# 1 of 973 boxes exceeded 4x its own frame's median. It renders as giant rings
+# and nothing warns you. Measured saving was 6.4% of cost. Not worth it.
+#
+# That the bundle hid which change did the damage is my error, and the reason
+# v4 changes exactly two things, both of which are inert or prose:
+#   - `role` removed: measured to have 0 references in track.py and render.py.
+#   - the frame-edge line: a prompt sentence, testable by watching for fly-ins.
+def _v4_schema(src, compact):
+    import copy as _copy
+    sc = _copy.deepcopy(src)
+    props = sc["schema"]["properties"]["players"]
+    if compact:
+        props["description"] = (props["description"]
+                                .replace("[x, y, w, h, kit, num, role]",
+                                         "[x, y, w, h, kit, num]"))
+        i = props["description"].find("role = ")
+        j = props["description"].find("An empty array is valid")
+        if i > 0 and j > i:
+            props["description"] = props["description"][:i] + props["description"][j:]
+    else:
+        it = props["items"]
+        it["required"] = [k for k in it["required"] if k != "role"]
+        it["properties"].pop("role", None)
+    return sc
+
+
+PROMPT_V4 = """One frame of sports footage. Report every player on the playing
+surface, and the ball.
+
+Do NOT report: referees and other match officials, substitutes and anyone on the
+bench, coaches, medical staff, the crowd, ball boys.
+
+Do NOT report a player who is more than half outside the frame. If you can see
+most of them, report them and box only the part you can actually see. Report
+exactly as many players as you can see - there is no expected number and it does
+not depend on the sport."""
+
+PROMPT_SETS["v4"] = {
+    "prompt": PROMPT_V4,
+    "schema": _v4_schema(SCHEMA, False),
+    "compact_schema": _v4_schema(COMPACT_SCHEMA, True),
+    "compact_order": [k for k in COMPACT_ORDER if k != "role"],
+    "player_conf": False,
+    "coords": None,
+}
+
+
+# ---------------------------------------------------------------------- v5
+#
+# v4, with the ball returned as a LIST OF CANDIDATES instead of one object.
+#
+# WHY THIS MIGHT BE EXPENSIVE, which is the whole point of testing it before
+# building on it. "Report the ball" lets the search TERMINATE: once the model
+# has found something it believes is the ball, it has answered the question.
+# "Report every object that could be the ball" cannot terminate early - it is
+# only answerable by examining the whole frame. If the model was already doing
+# an exhaustive pass and simply discarding the alternatives, exposing them is
+# nearly free. If it was stopping at the first hit, this makes every frame a
+# full search and the reasoning cost could rise sharply.
+#
+# Those two possibilities are indistinguishable from the outside, which is why
+# this is an arm run and not a schema change.
+#
+# The wording deliberately does NOT say "one is enough if you are sure" - that
+# would restore the early exit and test nothing.
+def _v5_schema(src, compact):
+    import copy as _copy
+    sc = _copy.deepcopy(src)
+    props = sc["schema"]["properties"]
+    order = [k for k in props if k != "ball"] + ["balls"]
+    if compact:
+        props["balls"] = {
+            "type": "array",
+            "description": ("Every object in this frame that could plausibly be "
+                            "the ball, MOST LIKELY FIRST, at most three. Each is "
+                            "[x, y, w, h, conf] with x, y, w, h as fractions "
+                            "0.0-1.0 and conf 0.0-1.0. Include the ones you "
+                            "reject as well as the one you believe: a pale "
+                            "round thing that turned out to be a boot, a sock, "
+                            "a painted mark or a logo still belongs here, with "
+                            "a low conf. An empty array is valid and correct "
+                            "when nothing in the frame could be the ball."),
+            "items": {"type": "array", "items": {"type": ["number", "null"]}}}
+    else:
+        props["balls"] = {
+            "type": "array",
+            "description": ("Every object that could plausibly be the ball, most "
+                            "likely first, at most three. Include rejected "
+                            "candidates with a low conf."),
+            "items": {"type": "object", "additionalProperties": False,
+                      "required": ["x", "y", "w", "h", "conf"],
+                      "properties": {
+                          "x": {"type": "number"}, "y": {"type": "number"},
+                          "w": {"type": "number"}, "h": {"type": "number"},
+                          "conf": {"type": "number"}}}}
+    props.pop("ball", None)
+    sc["schema"]["properties"] = {k: props[k] for k in order}
+    sc["schema"]["required"] = order
+    return sc
+
+
+PROMPT_V5 = PROMPT_V4 + """
+
+For the ball, report EVERY object in the frame that could plausibly be one,
+most likely first. Include the ones you decide against, with a low confidence -
+a pale round shape that turns out to be a boot, a sock, a painted marking or a
+logo is still a candidate. Do not stop at the first one you find."""
+
+PROMPT_SETS["v5"] = {
+    "prompt": PROMPT_V5,
+    "schema": _v5_schema(PROMPT_SETS["v4"]["schema"], False),
+    "compact_schema": _v5_schema(PROMPT_SETS["v4"]["compact_schema"], True),
+    "compact_order": list(PROMPT_SETS["v4"]["compact_order"]),
+    "player_conf": False,
+    "coords": None,
+}
+
+
+
+# ---------------------------------------------------------------------- v6
+#
+# v4, plus a BALL VISIBILITY judgement emitted BEFORE the ball coordinates.
+#
+# The hypothesis, from the decoy timestamps the user identified by watching:
+# every single one occurred while the real ball was OCCLUDED. A boot, a sock,
+# an advertising board and a painted spot were each reported as the ball at a
+# moment the ball itself could not be seen. So the failure is not "picked the
+# wrong object", it is "would not return nothing".
+#
+# Field ORDER is the whole mechanism, not decoration. JSON emits in schema
+# order, so `ball_state` is produced before any ball coordinate exists - the
+# model has to commit to "hidden" while it still costs nothing, rather than
+# rationalise a box it has already written. Same reasoning that puts `scene`
+# first (A4).
+#
+# The risk is D17: a model asked to classify will classify confidently whether
+# or not it knows. If v6 reports "clear" on the frames we know are occluded,
+# that is the answer and this route is closed too.
+def _v6_schema(src, compact):
+    import copy as _copy
+    sc = _copy.deepcopy(src)
+    props = sc["schema"]["properties"]
+    props["ball_state"] = {
+        "type": "string",
+        "enum": ["clear", "partly_hidden", "hidden"],
+        "description": ("Before giving any ball coordinates, say whether you "
+                        "can actually see the ball. clear = plainly visible. "
+                        "partly_hidden = you can see part of it. hidden = you "
+                        "cannot see it, because a player is in the way, it is "
+                        "out of frame, or it is simply not there. Decide this "
+                        "FIRST and answer honestly; hidden is a common and "
+                        "correct answer.")}
+    order = [k for k in props if k not in ("ball", "ball_state")]
+    order += ["ball_state", "ball"]
+    sc["schema"]["properties"] = {k: props[k] for k in order}
+    sc["schema"]["required"] = order
+    return sc
+
+
+PROMPT_V6 = PROMPT_V4 + """
+
+Before reporting the ball, say whether you can see it: clear, partly_hidden, or
+hidden. If it is hidden - blocked by a player, out of frame, or not there - say
+hidden and set ball to null. Do NOT substitute the nearest pale round object: a
+boot, a sock, a glove, a painted marking or a logo is not the ball, and "I
+cannot see it" is a correct and common answer."""
+
+PROMPT_SETS["v6"] = {
+    "prompt": PROMPT_V6,
+    "schema": _v6_schema(PROMPT_SETS["v4"]["schema"], False),
+    "compact_schema": _v6_schema(PROMPT_SETS["v4"]["compact_schema"], True),
+    "compact_order": list(PROMPT_SETS["v4"]["compact_order"]),
+    "player_conf": False,
+    "coords": None,
+}
+
 
 
 def normalise_result(result: dict, compact: bool,
@@ -734,8 +1044,17 @@ def normalise_result(result: dict, compact: bool,
                 pl["conf"] = 1.0
         return result
     out = []
+    malformed = []
     for row in result.get("players") or []:
         if not isinstance(row, list) or len(row) < len(order):
+            # COUNTED, NOT SILENT, since 4 Sep. This branch discarded a player
+            # with no counter, no log line and no error, which meant "the model
+            # did not report this player" and "the model reported them in a
+            # shape we could not read" were indistinguishable downstream - and
+            # the second is exactly the failure the compact array format makes
+            # possible, because `items` admits number|string|null at every
+            # position and nothing constrains the row LENGTH.
+            malformed.append(row if isinstance(row, list) else type(row).__name__)
             continue
         pl = dict(zip(order, row))
         for k in ("x", "y", "w", "h"):
@@ -757,6 +1076,28 @@ def normalise_result(result: dict, compact: bool,
             pl["conf"] = 1.0
         out.append(pl)
     result["players"] = out
+    if malformed:
+        result["_malformed_rows"] = malformed[:5]
+        result["_malformed_count"] = len(malformed)
+    # v5 returns a LIST of ball candidates. Collapse it to the single `ball`
+    # everything downstream expects - the top candidate - while keeping the
+    # whole list under `ball_candidates`. Nothing reads the list yet: the point
+    # of the first run is to find out what asking for it COSTS, not to build on
+    # it. Keeping the collapse here means track.py and render.py are untouched
+    # and the arms stay comparable.
+    if "balls" in result:
+        cands = result.pop("balls") or []
+        norm = []
+        for c in cands:
+            if isinstance(c, list) and len(c) >= 5:
+                norm.append({"x": float(c[0]), "y": float(c[1]),
+                             "w": float(c[2]), "h": float(c[3]),
+                             "conf": float(c[4])})
+            elif isinstance(c, dict) and "x" in c:
+                norm.append(c)
+        result["ball_candidates"] = norm
+        result["ball"] = norm[0] if norm else None
+        return result
     b = result.get("ball")
     if isinstance(b, list) and len(b) >= 5:
         result["ball"] = {"x": float(b[0]), "y": float(b[1]), "w": float(b[2]),
@@ -862,6 +1203,23 @@ def call_with_retry(session, headers, model, frame_idx, path, width, timeout,
         # once, undelayed retries would arrive as one synchronised wave — a
         # thundering herd that re-triggers the limiter it is waiting on. The
         # jitter is what breaks the wave up; the doubling is what backs off.
+        # 402 means the key is out of credit. Every remaining frame will fail
+        # the same way, and retrying is guaranteed waste - HANDOFF item 4 asked
+        # for this after six of eight losses on 1 Sep were silently dropped
+        # rate limits. Raise so the run stops instead of grinding through 150
+        # doomed calls and writing a detections file full of holes.
+        # A 404 means the model id does not resolve - a typo, or a model that
+        # has been delisted. Every remaining call fails identically, so stop
+        # rather than grind through the whole clip. Same reasoning as 402.
+        if rec.get("status") == 404:
+            raise SystemExit(
+                "\nHTTP 404 - the model id did not resolve. Run ABORTED.\n"
+                f"  {(rec.get('error') or '')[:200]}\n")
+        if rec.get("status") == 402:
+            raise SystemExit(
+                "\nHTTP 402 - the key is out of credit. Run ABORTED so the "
+                "rest of the frames are not spent failing.\n"
+                f"  provider said: {(rec.get('error') or '')[:180]}\n")
         rate_limited = rec.get("status") == 429
         if not (transient or rate_limited):
             return rec
@@ -885,11 +1243,22 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
              schema, effort, convention, variant=None,
              version=DEFAULT_PROMPT_VERSION):
     v = variant or {}
-    data_url, nbytes, w, h = encode(path, width, v.get("ruler", False))
+    # SECTION TIMING. `latency_s` starts after this and ends when the last byte
+    # arrives, so encode and base64 were invisible to every latency number this
+    # project has ever quoted. On volleyball the wall clock was 36.5s while the
+    # slowest call reported 25.6s and none of the gap was retries, backoff,
+    # HTTP status or payload size - which is not answerable without splitting
+    # the call into the parts that can actually be slow.
+    t_enc0 = time.perf_counter()
+    data_url, nbytes, w, h = encode(path, width, v.get("ruler", False),
+                                    v.get("grid", False))
+    t_encode = time.perf_counter() - t_enc0
     prompt = (CONTAINER_PROMPT if v.get("container")
               else PROMPT_SETS[version]["prompt"])
     if v.get("ruler"):
         prompt = prompt + "\n" + RULER_NOTE
+    if v.get("grid"):
+        prompt = prompt + "\n" + GRID_NOTE
     body = {
         "model": model,
         "max_tokens": MAX_TOKENS,
@@ -910,7 +1279,8 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
     # interleaved arm run they differ between calls, and the log writer merges
     # the record last so these win over the run-level defaults.
     rec = {"frame": frame_idx, "w": w, "h": h, "bytes": nbytes,
-           "model": model, "prompt_version": version}
+           "model": model, "prompt_version": version,
+           "t_encode_s": round(t_encode, 3)}
     try:
         # `timeout=` in requests is NOT a wall-clock limit. It is a socket
         # inactivity limit: the clock resets every time any byte arrives. A
@@ -937,8 +1307,13 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
         #
         # The wall-clock deadline is enforced separately in the read loop below,
         # so this only needs to be generous enough to get the bytes out.
+        t_req0 = time.perf_counter()
         r = session.post(ENDPOINT, headers=headers, json=body,
                          timeout=(min(30.0, timeout), timeout), stream=True)
+        # post() with stream=True returns once the response HEADERS arrive, so
+        # this is connect + upload + time-to-first-byte: the model thinking.
+        rec["t_ttfb_s"] = round(time.perf_counter() - t_req0, 3)
+        t_stream0 = time.perf_counter()
         rec["status"] = r.status_code
         if r.status_code != 200:
             rec["ok"] = False
@@ -947,14 +1322,23 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
             return rec
         parts = []
         for chunk in r.iter_content(16384):
-            if time.perf_counter() - t0 > timeout:
+            now = time.perf_counter()
+            if now - t0 > timeout:
                 r.close()
                 rec["ok"] = False
-                rec["latency_s"] = time.perf_counter() - t0
+                rec["latency_s"] = now - t0
                 rec["error"] = "deadline"
+                return rec
+            if CUT_AT[0] is not None and now > CUT_AT[0]:
+                r.close()
+                rec["ok"] = False
+                rec["latency_s"] = now - t0
+                rec["error"] = "straggler cut"
                 return rec
             parts.append(chunk)
         rec["latency_s"] = time.perf_counter() - t0
+        rec["t_stream_s"] = round(time.perf_counter() - t_stream0, 3)
+        t_parse0 = time.perf_counter()
         payload = json.loads(b"".join(parts).decode("utf-8", "replace"))
         usage = payload.get("usage") or {}
         rec["prompt_tokens"] = usage.get("prompt_tokens")
@@ -1011,6 +1395,13 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
             return rec
         rec["result"] = normalise_result(json.loads(content),
                                          v.get("compact", False), version)
+        # Lifted out of the result so it reaches the run log without ending up
+        # in the detections file the tracker reads.
+        n_bad = rec["result"].pop("_malformed_count", 0)
+        if n_bad:
+            # `_malformed_rows` is a sample capped at 5; the count is the truth.
+            rec["malformed_count"] = n_bad
+            rec["malformed_rows"] = rec["result"].pop("_malformed_rows", None)
         if convention:
             rec["result"] = to_fractions(rec["result"], convention, w, h)
         bad = validate_boxes(rec["result"], frame_aspect=(w / h if h else 16 / 9))
@@ -1024,6 +1415,7 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
                     f"({bad['dropped'] - bad['wide']} off the 0..1 scale, "
                     f"{bad['wide']} wider than {MAX_PIXEL_ASPECT}:1)")
                 return rec
+        rec["t_parse_s"] = round(time.perf_counter() - t_parse0, 3)
         rec["ok"] = True
         return rec
     except requests.exceptions.Timeout:
@@ -1038,6 +1430,101 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
         return rec
 
 
+# Wall-clock accounting, filled in as the run proceeds so the summary can say
+# where the time actually went rather than leaving it to be inferred from a
+# single `wall` number.
+T_EXTRACT = [0.0]
+T_WRITE = [0.0]
+
+
+def run_pool(fns, workers):
+    """Run every call, then abandon the slowest few once most have landed.
+
+    Arms the cut only after CUT_SHARE of the calls have returned, so a slow
+    provider day shifts the deadline instead of costing frames. Results come
+    back in SUBMISSION order, not completion order, because everything
+    downstream keys on frame index.
+    """
+    from concurrent.futures import as_completed
+    CUT_AT[0] = None
+    out = [None] * len(fns)
+    pool_t0 = time.perf_counter()
+
+    def stamped(fn):
+        """Wrap a call so the run log can separate WAITING from CALLING.
+
+        `latency_s` starts inside call_one, after the frame is encoded and just
+        before the POST - so everything before that is invisible to it. On the
+        volleyball run the wall clock was 36.5s while the slowest call reported
+        25.6s, and none of the 11s difference was retries, backoff, HTTP errors,
+        encoding or payload size. These two offsets say whether a thread started
+        late (scheduling / GIL contention on encode and base64) or finished late
+        (teardown after the straggler cut closed its socket).
+        """
+        def go():
+            t_in = time.perf_counter() - pool_t0
+            rec = fn()
+            if isinstance(rec, dict):
+                rec["t_start_s"] = round(t_in, 2)
+                rec["t_done_s"] = round(time.perf_counter() - pool_t0, 2)
+            return rec
+        return go
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        futs = {ex.submit(stamped(fn)): i for i, fn in enumerate(fns)}
+        need = max(1, int(round(CUT_SHARE * len(fns))))
+        done = 0
+        for fut in as_completed(futs):
+            out[futs[fut]] = fut.result()
+            done += 1
+            if done >= need and CUT_AT[0] is None and done < len(fns):
+                CUT_AT[0] = time.perf_counter() + CUT_GRACE_S
+    CUT_AT[0] = None
+    return out
+
+
+def report_sections(records, wall):
+    """Where the wall clock went, by section.
+
+    Every number here is per call except the extract/write rows, so the columns
+    do NOT sum to the wall clock - 150 calls run concurrently. Read `worst` as
+    "the slowest single call spent this long in this phase", because the wall is
+    set by one call, not by the average of them.
+    """
+    def col(key):
+        v = sorted(r[key] for r in records if r.get(key) is not None)
+        return v or [0.0]
+
+    def line(name, v, note=""):
+        n = len(v)
+        print(f"    {name:<14}{v[n // 2]:8.2f}{v[int(n * 0.9)]:9.2f}"
+              f"{v[-1]:9.2f}   {note}")
+
+    print(f"  --- where the time went ------------------------------------")
+    print(f"    {'section':<14}{'p50':>8}{'p90':>9}{'worst':>9}")
+    print(f"    {'ffmpeg extract':<14}{T_EXTRACT[0]:8.2f}{'':>9}{'':>9}   "
+          f"once, before any call")
+    line("encode+b64", col("t_encode_s"), "JPEG + base64, NOT in latency_s")
+    line("connect+TTFB", col("t_ttfb_s"), "upload + the model thinking")
+    line("stream body", col("t_stream_s"), "response download")
+    line("parse+validate", col("t_parse_s"), "json + normalise + box checks")
+    line("latency_s", col("latency_s"), "TTFB + stream, what we have quoted")
+    st = col("t_start_s")
+    line("thread start", st, "queue delay before the call began")
+    dn = col("t_done_s")
+    line("thread done", dn, "offset from pool start")
+    print(f"    {'write json':<14}{T_WRITE[0]:8.2f}{'':>9}{'':>9}")
+    slow = max(records, key=lambda r: r.get("t_done_s") or 0, default=None)
+    if slow and slow.get("t_done_s"):
+        print(f"    the call that SET the wall: frame {slow.get('frame')}, "
+              f"started {slow.get('t_start_s')}s in, "
+              f"encode {slow.get('t_encode_s')}s, ttfb {slow.get('t_ttfb_s')}s, "
+              f"stream {slow.get('t_stream_s')}s, done {slow.get('t_done_s')}s")
+        unexplained = wall - (slow.get("t_done_s") or 0)
+        print(f"    wall minus that call's completion: {unexplained:.2f}s "
+              f"(pool teardown + write)")
+
+
 def parse_arms(spec: str, args) -> list:
     """`model:version,model:version,...` -> a list of arm dicts.
 
@@ -1047,12 +1534,34 @@ def parse_arms(spec: str, args) -> list:
     """
     arms = []
     for n, part in enumerate(p.strip() for p in spec.split(",") if p.strip()):
-        model, _, version = part.partition(":")
-        version = version or DEFAULT_PROMPT_VERSION
+        bits = part.split(":")
+        model = bits[0]
+        version = (bits[1] if len(bits) > 1 and bits[1] else DEFAULT_PROMPT_VERSION)
+        # Effort is PER ARM, not per run. Three separate runs at three efforts
+        # would put provider variance back in exactly where the paired design
+        # takes it out - p90 moved 17.6s to 36.2s on one endpoint inside an
+        # hour, which is larger than any effort effect we are looking for.
+        # "none" means send no `reasoning` field at all, which is the shipping
+        # default and therefore the control.
+        effort = bits[2].lower() if len(bits) > 2 and bits[2] else None
+        if effort in ("none", "default", ""):
+            effort = None
+        if effort not in (None, "low", "medium", "high"):
+            sys.exit(f"arm {part!r}: unknown effort {effort!r}")
+        # 4th field: the image overlay, per arm, so a grid arm and its control
+        # can run in the same burst instead of hours apart.
+        overlay = bits[3].lower() if len(bits) > 3 and bits[3] else "plain"
+        if overlay not in ("plain", "grid", "ruler"):
+            sys.exit(f"arm {part!r}: unknown overlay {overlay!r}; "
+                     f"use plain, grid or ruler")
         if version not in PROMPT_SETS:
             sys.exit(f"arm {part!r}: unknown prompt version {version!r}. "
                      f"Known: {sorted(PROMPT_SETS)}")
-        convention = COORD_CONVENTION.get(model)
+        # A prompt set that dictates its own coordinate space overrides the
+        # per-model pin: we are the ones asking for 0-1000 here, so the model's
+        # natural convention is not what governs. Still verified, not assumed -
+        # validate_boxes rejects anything off the declared scale.
+        convention = PROMPT_SETS[version]["coords"] or COORD_CONVENTION.get(model)
         if convention is None:
             sys.exit(
                 f"\narm {part!r}: {model} has no pinned coordinate convention.\n\n"
@@ -1067,6 +1576,8 @@ def parse_arms(spec: str, args) -> list:
             "name": chr(ord("A") + n),
             "model": model,
             "version": version,
+            "effort": effort,
+            "overlay": overlay,
             "convention": convention,
             "schema": build_schema(scene_last=args.scene_last,
                                    terse=args.terse_schema,
@@ -1113,16 +1624,20 @@ def run_arms(args, arms, frames, session, headers, variant):
           f"{workers} concurrent")
     for a in arms:
         print(f"    {a['name']}: {a['model']}  prompt {a['version']}  "
+              f"effort {a['effort'] or 'default'}  overlay {a['overlay']}  "
               f"({a['convention']})")
 
     t0 = time.perf_counter()
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        records = list(ex.map(
-            lambda t: dict(call_with_retry(
-                session, headers, t[0]["model"], t[1], t[2], args.width,
-                args.timeout, t[0]["schema"], args.effort, t[0]["convention"],
-                variant, version=t[0]["version"]), arm=t[0]["name"]),
-            tasks))
+    records = run_pool([
+        (lambda t=t: dict(call_with_retry(
+            session, headers, t[0]["model"], t[1], t[2], args.width,
+            args.timeout, t[0]["schema"], t[0]["effort"], t[0]["convention"],
+            {**variant, "grid": t[0]["overlay"] == "grid",
+             "ruler": t[0]["overlay"] == "ruler"},
+            version=t[0]["version"]),
+            arm=t[0]["name"], effort=t[0]["effort"],
+            overlay=t[0]["overlay"]))
+        for t in tasks], workers)
     wall = time.perf_counter() - t0
     return records, wall
 
@@ -1141,14 +1656,16 @@ def write_arm_outputs(args, arms, records, wall, variant, stamp):
         mine = [r for r in records if r.get("arm") == a["name"]]
         ok = [r for r in mine if r.get("ok")]
         dropped = [r for r in mine if not r.get("ok")]
-        tag = f"{args.tag}_{a['name']}{a['version']}"
+        tag = (f"{args.tag}_{a['name']}{a['version']}_"
+               f"{a['effort'] or 'def'}_{a['overlay']}")
         out = DETECTIONS / f"{args.clip.stem}__{tag}.json"
         out.write_text(json.dumps({
             "clip": args.clip.name, "model": a["model"], "fps": args.fps,
             "width": args.width, "tag": tag, "ts": stamp,
-            "effort": args.effort, "scene_last": args.scene_last,
+            "effort": a["effort"], "scene_last": args.scene_last,
             "terse_schema": args.terse_schema, "timeout_s": args.timeout,
-            "variant": variant,
+            "variant": {**variant, "grid": a["overlay"] == "grid",
+                        "ruler": a["overlay"] == "ruler"},
             "coord_convention": a["convention"],
             # The arm block is what makes this file self-describing. A
             # detections file that does not say which prompt produced it is
@@ -1256,6 +1773,8 @@ def main():
                     help="players as fixed-order arrays, not named objects")
     ap.add_argument("--ruler", action="store_true",
                     help="A1: draw a coordinate ruler on the frame")
+    ap.add_argument("--grid", action="store_true",
+                    help="A1b: overlay a thin magenta grid every 0.1")
     ap.add_argument("--probe-convention", action="store_true",
                     help="send 3 frames, report which coordinate convention "
                          "this model uses, and exit without pinning anything")
@@ -1274,6 +1793,13 @@ def main():
                          "Defaults to both Google FLEX endpoints (same price). "
                          "Sets allow_fallbacks=false so a run cannot silently "
                          "land on a dearer tier. Pass '' to disable pinning")
+    ap.add_argument("--cut-share", type=float, default=None,
+                    help="fraction of calls that must return before the "
+                         "stragglers are abandoned. Pass 1.0 to DISABLE the "
+                         "cut and record the full latency distribution, which "
+                         "is what makes the saving measurable offline "
+                         "afterwards - an abandoned call's true latency is "
+                         "unknowable.")
     ap.add_argument("--prompt-version", choices=sorted(PROMPT_SETS),
                     default=DEFAULT_PROMPT_VERSION,
                     help="v2 (default) is the D26 rewrite. v1 is the frozen "
@@ -1287,6 +1813,8 @@ def main():
                          "file per arm. Overrides --model and --prompt-version.")
     args = ap.parse_args()
 
+    if args.cut_share is not None:
+        globals()["CUT_SHARE"] = args.cut_share
     if args.arms and args.probe_convention:
         sys.exit("--arms and --probe-convention are mutually exclusive: probe "
                  "each model on its own, pin it, then run the arms.")
@@ -1295,7 +1823,7 @@ def main():
                           compact=args.compact, version=args.prompt_version)
     variant = {"container": args.container, "system": args.system,
                "image_first": args.image_first, "compact": args.compact,
-               "ruler": args.ruler,
+               "ruler": args.ruler, "grid": args.grid,
                "provider_order": ([p.strip() for p in args.provider_order.split(",")]
                                   if args.provider_order else None)}
 
@@ -1303,7 +1831,8 @@ def main():
 
     # Pinned or it does not run. No inference, no fallback, no "probably".
     # parse_arms has already enforced this per arm.
-    convention = COORD_CONVENTION.get(args.model)
+    convention = (PROMPT_SETS[args.prompt_version]["coords"]
+                  or COORD_CONVENTION.get(args.model))
     if convention is None and not args.probe_convention and not arms:
         sys.exit(
             f"\n{args.model} has no pinned coordinate convention.\n\n"
@@ -1327,7 +1856,9 @@ def main():
 
     frames_dir = Path("outputs/frames") / args.clip.stem
     print(f"extracting {args.fps}fps from {args.clip.name} ...")
+    _t_ex0 = time.perf_counter()
     frames = extract_frames(args.clip, args.fps, frames_dir)
+    T_EXTRACT[0] = time.perf_counter() - _t_ex0
     if args.frames:
         want = {int(x) for x in args.frames.split(",")}
         frames = [(i, p) for i, p in frames if i in want]
@@ -1365,13 +1896,12 @@ def main():
     # payload is large.
     workers = args.max_concurrent or max(1, len(frames))
     t0 = time.perf_counter()
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        records = list(ex.map(
-            lambda fp: call_with_retry(session, headers, args.model, fp[0], fp[1],
+    records = run_pool([
+        (lambda fp=fp: call_with_retry(session, headers, args.model, fp[0], fp[1],
                                        args.width, args.timeout, schema,
                                        args.effort, convention, variant,
-                                       version=args.prompt_version),
-            frames))
+                                       version=args.prompt_version))
+        for fp in frames], workers)
     wall = time.perf_counter() - t0
 
     ok = [r for r in records if r.get("ok")]
@@ -1409,6 +1939,7 @@ def main():
 
     DETECTIONS.mkdir(parents=True, exist_ok=True)
     out = DETECTIONS / f"{args.clip.stem}__{args.tag}.json"
+    _t_w0 = time.perf_counter()
     out.write_text(json.dumps({
         "clip": args.clip.name, "model": args.model, "fps": args.fps,
         "width": args.width, "tag": args.tag, "ts": stamp,
@@ -1426,6 +1957,7 @@ def main():
         "frames": [{"frame": r["frame"], **r["result"]} for r in ok],
         "dropped": [{"frame": r["frame"], "error": r.get("error")} for r in dropped],
     }, indent=1), encoding="utf-8")
+    T_WRITE[0] = time.perf_counter() - _t_w0
 
     lat = sorted(r["latency_s"] for r in records if r.get("latency_s"))
     print(f"\n  wall            {wall:.1f}s")
@@ -1450,6 +1982,21 @@ def main():
               f"{sum(waits):.1f}s total, worst {max(waits):.1f}s on one call")
         print(f"                  wall was {wall:.1f}s; without any backoff the "
               f"floor would be ~{wall - max(waits):.1f}s")
+    cutoff = [r for r in records if (r.get("error") or "") == "straggler cut"]
+    if cutoff:
+        kept = sorted(r["latency_s"] for r in records
+                      if r.get("ok") and r.get("latency_s"))
+        print(f"  straggler cut   {len(cutoff)} calls abandoned at "
+              f"{CUT_SHARE:.0%} + {CUT_GRACE_S}s; slowest KEPT call "
+              f"{kept[-1]:.1f}s. Their true latency is unknowable, so the "
+              f"saving cannot be measured from this run")
+    mal = [r for r in records if r.get("malformed_count")]
+    if mal:
+        print(f"  malformed rows  {sum(r['malformed_count'] for r in mal)} player "
+              f"rows of the wrong shape across {len(mal)} frames — the model "
+              f"changed output format mid-run")
+        for r in mal[:3]:
+            print(f"                  frame {r['frame']}: {r['malformed_rows']}")
     inval = [r for r in records if r.get("invalid_boxes")]
     if inval:
         nb = sum(r["invalid_boxes"]["dropped"] for r in inval)
