@@ -88,22 +88,24 @@ an API key**.
 
 | clip | cost | wall clock | latency p50 / p90 | frames returned |
 |---|---|---|---|---|
-| football_cuts | $0.4727 | 22.4s | 12.7s / 16.5s | 150/150 |
-| allstars | $0.5148 | 26.6s | 16.7s / 19.1s | 147/150 |
-| basketball | $0.4245 | 37.4s | 18.0s / 21.8s | 147/150 |
+| football_cuts | $0.4727 | 22.4s | 12.3s / 15.5s | 150/150 |
+| allstars | $0.5148 | 26.6s | 16.6s / 18.9s | 147/150 |
+| basketball | $0.4407 | 21.2s | 11.5s / 15.1s | 149/150 |
 | football_amateur | $0.4654 | 22.6s | 14.2s / 17.4s | 149/150 |
-| volleyball | $0.4438 | 36.5s | 11.0s / 18.0s | 146/150 |
+| volleyball | $0.4438 | 36.5s | 11.0s / 17.6s | 146/150 |
 
-**Mean $0.4694 per finished video**, stable to about ±$0.05 across five clips
-and three sports.
+**Mean $0.4675 per finished video**, stable to about ±$0.04 across five clips
+and three sports. Every figure is the run that produced the committed video,
+over successful calls only.
 
 Where a single call's time goes (basketball, 150 calls): 1.41s encoding the
 frame, 9.28s to first byte, 2.12s streaming the answer back, and effectively
 zero parsing.
 
 > **On latency.** Provider variance is larger than anything in our control. The
-> same basketball clip, same configuration, ran **37.4s once and 21.3s on a
-> re-run** — a 43% swing with no code change. That is why the target is
+> same basketball clip, same configuration, ran **37.4s on one run and 21.2s on
+> another** — a 43% swing with no code change, and the reason the table above
+> reports the shipped run rather than a best of several. That is why the target is
 > reported as a range rather than a figure. A dynamic straggler cut abandons the
 > slowest 3% of calls once 97% have returned, which costs four frames of 150 and
 > a worst blind spell of 0.40s, comfortably inside the tracker's 0.60s coast.

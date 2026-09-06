@@ -760,7 +760,7 @@ defects of the system, which they are not.
 
 ### What was still open on this configuration
 
-> **Updated 6 Sep.** Cost closed: $0.8818 here became a **$0.4694 mean across
+> **Updated 6 Sep.** Cost closed: $0.8818 here became a **$0.4675 mean across
 > five clips**, via the flex tier (D18), the v1→v2 prompt rewrite (D29) and
 > `--compact` (D25). Latency did not close — see below, and D38 for where a
 > call's time actually goes.
@@ -773,7 +773,7 @@ at the batch tail, so the lever is `--max-concurrent`, **not** `TIMEOUT_S`.
 > `latency_s` that **did not include frame encoding** — 1.41s of local CPU per
 > call, invisible to a stopwatch around the HTTP request. Thread queue delay,
 > the mechanism blamed here, measures **0.30s**. Shipping range is now 21–37s,
-> and the dominant term is provider variance: **37.4s and 21.3s on the same
+> and the dominant term is provider variance: **37.4s and 21.2s on the same
 > clip, same configuration, one re-run apart.** A straggler cut at 97% caps the
 > tail. Latency remains the one unmet constraint and is reported as a range.
 
@@ -1651,7 +1651,7 @@ about the time the slowest one takes, so the queue is not the constraint.
 call.
 
 **Provider variance dominates everything.** The same clip, same configuration,
-same endpoint: **37.4s once and 21.3s on a re-run — a 43% swing with no code
+same endpoint: **37.4s once and 21.2s on a re-run — a 43% swing with no code
 change.** Any latency figure from a single run is a sample from that distribution,
 which is why the deliverable reports a range. It is also why every comparison in
 this document that mattered was run interleaved.

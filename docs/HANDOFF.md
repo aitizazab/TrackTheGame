@@ -32,17 +32,24 @@ flags needed beyond the above.
 
 | clip | cost | wall | lat p50 / p90 | frames | deliverable tag |
 |---|---|---|---|---|---|
-| football_cuts | $0.4727 | 22.4s | 12.7 / 16.5s | 150/150 | `cuts_v4` |
-| allstars | $0.5148 | 26.6s | 16.7 / 19.1s | 147/150 | `allstars_fr_eng_v4` |
-| basketball | $0.4407 | 21.3s | 11.5 / 15.4s | 149/150 | `basketball_timed` |
+| football_cuts | $0.4727 | 22.4s | 12.3 / 15.5s | 150/150 | `cuts_v4` |
+| allstars | $0.5148 | 26.6s | 16.6 / 18.9s | 147/150 | `allstars_fr_eng_v4` |
+| basketball | $0.4407 | 21.2s | 11.5 / 15.1s | 149/150 | `basketball_timed` |
 | football_amateur | $0.4654 | 22.6s | 14.2 / 17.4s | 149/150 | `football_amateur_v4` |
-| volleyball | $0.4438 | 36.5s | 11.0 / 18.0s | 146/150 | `volleyball_v4` |
+| volleyball | $0.4438 | 36.5s | 11.0 / 17.6s | 146/150 | `volleyball_v4` |
 
-**Mean $0.4694/video against a $1.00 cap — cost is solved.** Latency 21–37s
+> **Percentiles are over SUCCESSFUL calls only, corrected 6 Sep.** They had
+> been computed over every logged row, which silently included 150 dead Luna
+> 404s filed under the `cuts_v4` tag - an aborted attempt from just before
+> that model was delisted, billed at $0.00 but carrying a fast failure
+> latency that pulled that row's percentiles down. Cost was never affected.
+> **Filter on `ok` before quoting any latency figure from `run_log.jsonl`.**
+
+**Mean $0.4675/video against a $1.00 cap — cost is solved.** Latency 21–37s
 against "under 15s, 25s accepted" is the one constraint not met everywhere.
 
 **Provider variance is larger than any lever we control.** Basketball ran 37.4s
-and 21.3s on two runs of the identical configuration — a 43% swing, no code
+and 21.2s on two runs of the identical configuration — a 43% swing, no code
 change. Report latency as a range; never quote a single run as the figure.
 
 **Where a call's time actually goes** (basketball, 150 calls, p50): encode+base64
