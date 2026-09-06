@@ -53,12 +53,20 @@ CANDIDATES = {
     "allstars_fr_eng": ("",                                                     "65:35", "SHIPPED, clip 1 of 5 (D19). England v France, broadcast wide. URL WAS NEVER RECORDED — ask the user"),
     "basketball":      ("https://www.youtube.com/watch?v=5U9k1U6nN-g",          "00:05", "indoor court, 10 players not 22, large legible numbers — the number layer at the opposite extreme"),
     "football_amateur": ("https://www.youtube.com/watch?v=CNhrwaChUAA",         "02:56", "amateur match, no broadcast grade, uneven exposure"),
-    "football_cuts":   ("https://www.youtube.com/watch?v=OT3rAWUqOjU",          "00:00", "THREE HARD CUTS at t+3.60s (0.94), t+10.63s (0.50), t+24.03s (0.62). The only footage that exercises D8"),
-    "volleyball":      ("https://www.youtube.com/watch?v=0lN1HfFAYUY",          "00:00", "clip 5 of 5, user-chosen. A THIRD SPORT: no goalkeepers, a net splitting the two teams, and a ball that is airborne almost continuously - the hardest possible case for the possession rule, which is the one open defect"),
-    # Still wanted. '!' in `list` means the URL is not filled in.
-    "football_similar_kits": ("https://www.youtube.com/watch?v=",               "00:25", "THE HARD ONE — kits close in colour. D11's dE>=30 rule has never fired on real footage"),
-    "football_setpiece": ("https://www.youtube.com/watch?v=",                   "00:00", "corner or free kick: 15+ players in the box, maximum crossing. The association worst case"),
-    "football_pan_zoom": ("https://www.youtube.com/watch?v=",                   "00:00", "fast tracking pan or zoom. A zoom changes every box height at once, attacking the depth cue and the gate together"),
+    "football_cuts":   ("https://www.youtube.com/watch?v=OT3rAWUqOjU",          "00:00", "SHIPPED, clip 4 of 5. FIVE HARD CUTS: 17.2s, 18.3s, 21.6s and 29.4s are detected; the one at 8.8s is NOT and cannot be (D33). The only footage that exercises D8"),
+    "volleyball":      ("https://www.youtube.com/watch?v=0lN1HfFAYUY",          "00:00", "SHIPPED, clip 5 of 5, user-chosen. A THIRD SPORT: no goalkeepers, a net splitting the two teams, and a ball that is airborne almost continuously - the hardest possible case for the possession rule. Passed: the kit vote found the liberos unaided (white 705, blue 700, red 135, green 104) and the referee on the stand was correctly never detected"),
+    # ALL FIVE CLIPS COLLECTED, 5 Sep. The three below were never sourced and are
+    # kept only as a record of what the pool was aiming at. '!' in `list` means
+    # the URL is not filled in.
+    #   - football_similar_kits: D11's dE>=30 rule STILL has never fired on real
+    #     footage, so the similar-kit case remains untested. Volleyball was taken
+    #     as clip 5 instead, on the grounds that a third SPORT tests more of the
+    #     design than a fourth football clip would.
+    #   - football_setpiece / football_pan_zoom: superseded. Crowding is covered
+    #     by allstars, continuous hard pan by football_amateur.
+    "football_similar_kits": ("https://www.youtube.com/watch?v=",               "00:25", "NOT COLLECTED. Kits close in colour - D11's dE>=30 fallback has never fired on any real footage"),
+    "football_setpiece": ("https://www.youtube.com/watch?v=",                   "00:00", "NOT COLLECTED, superseded by allstars. Corner or free kick: 15+ players in the box, the association worst case"),
+    "football_pan_zoom": ("https://www.youtube.com/watch?v=",                   "00:00", "NOT COLLECTED, superseded by football_amateur. A zoom changes every box height at once, attacking the depth cue and the gate together"),
 }
 
 

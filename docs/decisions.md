@@ -758,11 +758,24 @@ at a moment. **A flagged failure is a question, not a finding, until someone
 watches it.** Both would otherwise have been written into the report as known
 defects of the system, which they are not.
 
-### What is still open on this configuration
+### What was still open on this configuration
+
+> **Updated 6 Sep.** Cost closed: $0.8818 here became a **$0.4694 mean across
+> five clips**, via the flex tier (D18), the v1→v2 prompt rewrite (D29) and
+> `--compact` (D25). Latency did not close — see below, and D38 for where a
+> call's time actually goes.
 
 **Wall clock, 31.0s against a 25s acceptance target** — the only unmet hard
 constraint. The diagnosis is in D18: bimodal latency driven by upload contention
 at the batch tail, so the lever is `--max-concurrent`, **not** `TIMEOUT_S`.
+
+> **Partly superseded by D38.** The upload-contention story was built on a
+> `latency_s` that **did not include frame encoding** — 1.41s of local CPU per
+> call, invisible to a stopwatch around the HTTP request. Thread queue delay,
+> the mechanism blamed here, measures **0.30s**. Shipping range is now 21–37s,
+> and the dominant term is provider variance: **37.4s and 21.3s on the same
+> clip, same configuration, one re-run apart.** A straggler cut at 97% caps the
+> tail. Latency remains the one unmet constraint and is reported as a range.
 
 Jersey numbers read at 9.0% on this clip against 19.5% on the easy opening 10s.
 Per D7 that is survivable — a label is decided once per track by majority vote,
@@ -1140,13 +1153,33 @@ non-deterministic model, is **not established**. The user counts six occurrences
 per clip; three separate metrics of mine failed to reproduce that count, so the
 visual count is the better evidence.
 
+> **CLOSED by D27, 5 Sep.** The half of this that was "unexplained" is now
+> explained, and the answer was on the tracker side after all — but not in the
+> place looked at here. The sentence above, *"the tracker behaved correctly: the
+> bad detection implied 0.09 frac/s, well inside the gate"*, contains the bug.
+> The gate was expressed as a **rate**, so it divided by `dt`, and a dropped
+> frame halved the score of an identical jump. The detection was bad *and* the
+> gate should have caught it. `--compact` remains exonerated; the gate does not.
+
 ---
 
 ## D26 · Prompt and schema rewritten around judgement calls, not word count
 
-Written 3 Sep, **not yet run against the API**. Everything below is a design
-change plus the offline evidence that motivated it; the token and accuracy
-effects are unmeasured and must not be quoted as results.
+> **RUN AND SHIPPED, 5 Sep.** This entry was written before any call was made;
+> the paragraph below used to warn that its numbers were unmeasured. They have
+> since been measured. What shipped is **v4** — this design plus the frame-edge
+> rule — and the results are in D29 and D30.
+>
+> **The headline: v4 is cost-NEUTRAL against v2**, $0.1829 vs $0.1815 over 50
+> interleaved frames, latency identical. The saving predicted here did not
+> appear, because removing `conf` and `kits` removes *output* tokens and the
+> bill is dominated by *reasoning* tokens, which the trimming did not touch.
+> v4 shipped on correctness — the frame-edge rule and the simplified ball test
+> — not on price. The real cost win was **v1 to v2** (26% on 3.7, 33% on 3.8),
+> which had already happened before this entry was written.
+>
+> The `kits` undo instruction below is still live and still correct. It was
+> never needed: clip 5 (volleyball) found its liberos unaided on the kit vote.
 
 **The premise.** D25 showed reasoning is ~64% of the per-video bill, and nothing
 in the prompt had ever been aimed at it. Reasoning scales with the number of
@@ -1214,6 +1247,462 @@ and record reasoning and content tokens separately. Three arms × 50 frames = 15
 calls ≈ **$0.20**, which also gives the report its one-variable ablation.
 
 ---
+
+## D27 · The `dt` bug — three gates that measured a rate when they meant a distance
+
+The single most productive finding of the project, because it explains a class of
+artefact rather than one instance.
+
+Every marker "fly-out" — a ring leaving its player and shooting across the frame —
+traced to **one bad detection**, not to the tracker's model of motion. The tracker
+had three independent defences against exactly that, and **all three were disarmed
+by the same mistake**: each expressed "too far" as a *speed* or an *acceleration*,
+dividing the displacement by `dt` (or `dt²`).
+
+Detections are sampled at 5fps, but frames go missing — a refused call, a
+straggler cut, a malformed row. When a frame is missing, `dt` doubles. An
+identical jump therefore scores **half** the speed and **a quarter** the
+acceleration. The gates relaxed precisely at the moment the tracker had least
+evidence and was most exposed.
+
+Measured on the `football_cuts` fly-out the user named: the jump scored
+**10.5 bh/s² against a threshold of 30**. It was never close to firing.
+
+**The fix is to stop dividing.** All three tests now measure displacement
+directly, in body heights:
+
+| constant | value | what it guards |
+|---|---|---|
+| `MAX_RESIDUAL_BH` | 1.2 | how far a sighting may sit from its own prediction |
+| `OUTLIER_JUMP_BH` | 0.35 | the round-trip test on a single sighting |
+| `BALL_JUMP_PH` | 1.19 | the ball, with `BALL_JUMP_FRAC` as a hard ceiling |
+
+The residual gate rejects **0.164%** of sightings against the acceleration gate's
+0.213% — it is *less* aggressive in total while actually catching the cases that
+matter, which is what you expect when a test stops firing at random.
+
+### Two things the unit had to get right
+
+**Body-height normalisation.** Dividing image displacement by the apparent box
+height gives a depth-invariant unit: a near player and a far player making the
+same physical movement produce the same number. This is what makes one threshold
+work across a broadcast wide shot and a goalkeeper close-up.
+
+**The 16:9 correction is mandatory.** `x` is a fraction of frame *width*; `h` is a
+fraction of frame *height*. Comparing them raw understates horizontal motion by
+**1.778**, so a sideways sprint reads as 56% of its true size. Every body-height
+figure in this document is aspect-corrected. This is the third time in the project
+that a coordinate-space assumption has produced a wrong number (see D12), and it
+will not be the last: **when a threshold behaves oddly, check the units before
+tuning the value.**
+
+### What the gate fixes, and what it does not
+
+Fixes: any single sighting that lands far from where the track was, in any
+direction. That covers every fly-out reported to date.
+
+Does **not** fix: a wrong detection that lands *plausibly* — the correct distance
+away, in the direction the player was already travelling. The user raised this
+before it was built and the objection stands. A gate on displacement cannot
+distinguish a real fast player from a convincing error; only appearance or a
+second view could, and neither is available. The gate is a filter on the absurd,
+not a truth test.
+
+---
+
+## D28 · Box aspect guard, and why it must be measured in pixels
+
+Corrupted rows occasionally arrive as ribbons — a box wider than the frame and a
+few pixels tall. They pass every existing check because their *position* is
+legal.
+
+Measured on **36,329 boxes** from the shipping configuration:
+
+| | pixel aspect (w/h) |
+|---|---|
+| p50 | 0.463 |
+| p99 | 0.874 |
+| plausible tail (dives, slides, a diving goalkeeper) | 1.40 – 1.94 |
+| corrupt rows | 5.61 – 8.44 |
+
+`MAX_PIXEL_ASPECT = 3.0` sits in the empty band between those last two groups. It
+rejects **3 boxes in 36,329 — 0.008%** — and every one is a ribbon. The user's
+diving-goalkeeper case is real and is comfortably inside the guard: the widest
+genuine box measured is 1.94, so the threshold has a 55% margin over the most
+extreme legitimate posture found in five clips.
+
+**The guard must be applied in PIXEL space, not fraction space.** Coordinates come
+back as fractions of width and height independently, so a perfectly normal
+standing player has a *fraction* aspect near 0.26 and a *pixel* aspect near 0.46.
+A threshold set in the wrong space rejects real players. `validate_boxes()` takes
+`frame_aspect` as an argument for exactly this reason.
+
+---
+
+## D29 · Gemini 3.8 Flash — measured and rejected
+
+3.8 Flash launched at the same listed token price as 3.7 Flash, which made it look
+free to adopt. It is not, because **price per token is not price per frame.**
+
+Three arms, interleaved call-by-call in a single pool so all three saw identical
+provider conditions, arm order rotated per frame to balance batch position
+(the method D26 specified). 50 frames each, `hard10_allstars` at 1080p:
+
+| arm | model | prompt | cost / 50 | p50 | p90 | reasoning tok | output tok |
+|---|---|---|---|---|---|---|---|
+| A | 3.7-flash | v2 | **$0.1819** | **10.8s** | 11.5s | 1090 | 1701 |
+| B | 3.8-flash | v1 (old) | $0.3212 | 14.4s | 21.4s | 2400 | 3030 |
+| C | 3.8-flash | v2 (new) | $0.2148 | 11.9s | 15.7s | 1434 | 2052 |
+
+**3.8 costs 18% more and runs 10% slower than 3.7 on the identical prompt**, for
+no quality difference visible in the renders. It reasons 32% harder about the same
+frame. At the same *listed* price, that is a straight loss. **Not adopted.**
+
+The run paid for itself anyway, because B vs C is a clean prompt ablation on a
+model that had never seen either: **v1 → v2 cuts cost 33% and reasoning 40%** on
+3.8, corroborating the same comparison on 3.7 (v1 $0.2475 vs v2 $0.1831 in
+`v3_ab`, a 26% cut). The prompt rewrite is not a 3.7-specific artefact.
+
+This is what the interleaved design buys. A blocked A/B here would have been read
+against a 43% provider swing and told us nothing.
+
+---
+
+## D30 · Prompt variants v3, v5 and v6 — all rejected, each for a different reason
+
+Four prompt sets were built after v2 and **only v4 shipped.** Recording the three
+failures because two of them looked like wins on cost.
+
+### v3 — integer coordinates. Cheapest, and unusable.
+
+v3 moved coordinates from decimal fractions to integers 0–1000, on the reasoning
+that `"0.121"` is three tokens and `"121"` is one. It worked as an economy:
+**$0.1715 against v2's $0.1831**, 6% cheaper, with fewer reasoning tokens.
+
+Then tracking collapsed.
+
+**My first explanation was wrong, and it failed its own test.** I claimed tall
+corrupt boxes were destroying association. Filtering all 64 suspect boxes left
+**97 identities against 96** — no effect. The user's challenge (was this an
+artefact of a hardcoded 0–1 assumption in *our* code?) was the right question; it
+was not our code, but asking it is what forced the real measurement.
+
+The real cause: **32.67% of v3 sightings have no counterpart within 0.05 in the
+next frame, against 0.83% for v2.** A third of v3's detections are
+frame-to-frame incoherent. Quantising to 1/1000 costs 1.9px at 1080p, far below
+the ~100px localisation jitter — so precision was never the issue. Something about
+emitting integers makes the model re-estimate rather than track, and the output
+stops being a stable measurement of the same scene.
+
+**The lesson is about the metric, not the prompt.** Cost, token counts and even
+identity counts all said v3 was fine. The number that condemned it —
+next-frame correspondence — is a *coherence* measure, and nothing in the standard
+metric set was measuring coherence at all. This is §5's metric problem in a new
+costume.
+
+### v5 — ball candidate lists. The cost objection did not materialise; a better one did.
+
+The user's hypothesis before spending: asking for *one* ball lets reasoning stop
+at the first find, while asking for *all candidates* forces an exhaustive sweep of
+the scene, and would cost far more. Correctly insisted this be tested before
+anything was built on it.
+
+| arm | prompt | cost / 50 | reasoning tok |
+|---|---|---|---|
+| A | v4 (one ball) | $0.1527 | 909 |
+| B | v5 (up to 3 candidates) | $0.1588 | 949 |
+
+**+4.0% cost, +4.4% reasoning.** The hypothesis did not hold — and testing it was
+still the right call, because the reason it did not hold is the reason v5 is
+useless: the model returns a mean of **0.94 candidates**. It is not sweeping the
+scene and declining to rank; it is answering the same question and putting it in a
+list. There is nothing to arbitrate between, so no downstream chooser can exist.
+
+Rejected on capability, not on price. The pre-spend test was cheap and it changed
+what we believed about the model.
+
+### v6 — occlusion awareness. Worse, and more expensive.
+
+v6 asked the model to declare the ball hidden rather than guess. On
+`football_cuts`: **removed 2 decoys and introduced 3**, at +8.1% cost, +11%
+latency and +13% reasoning. Net negative on the metric it was built for.
+
+---
+
+## D31 · Reasoning effort — nothing until "high", and "high" is unaffordable
+
+Run at three levels, interleaved, on the frames where fly-outs had been reported:
+
+| effort | cost / 9 frames | p50 | reasoning tok |
+|---|---|---|---|
+| none (default) | $0.0338 | 9.4s | 1152 |
+| medium | $0.0345 | 9.2s | 1206 |
+| high | $0.0745 | 16.3s | 3564 |
+
+**"medium" is indistinguishable from the default** — +2% cost, +5% reasoning,
+latency inside noise. Whatever the parameter nominally selects, it does not change
+the model's behaviour at that setting on this task.
+
+**"high" costs 120% more and 73% more latency** for 3.1× the reasoning tokens, and
+did not fix the artefact it was run against — which was, by then, already known to
+be the `dt` bug in D27 and not a perception failure at all.
+
+Together with D25's finding that *low* effort destroys format compliance (36% of
+frames in a wrong coordinate scale), the whole parameter is a dead lever on this
+workload: below default it breaks, at medium it does nothing, above it prices
+itself out. **Shipping at default.**
+
+---
+
+## D32 · Grid overlay — cost-neutral, and 24% slower
+
+Drawing a labelled grid onto the frame before sending it, to turn localisation
+into selection. Interleaved, 50 frames per arm:
+
+| arm | overlay | cost | p50 |
+|---|---|---|---|
+| A | grid | $0.1805 | 14.2s |
+| B | grid | $0.1766 | 14.6s |
+| C | plain | $0.1812 | **11.5s** |
+
+Cost is a wash; the grid arms are **24–27% slower**, and no better. This closes
+ablation candidate **A1** from the second direction — D25 already rejected the
+`--ruler` variant, and the labelled grid was the surviving half of that idea.
+
+---
+
+## D33 · Cut detection rebuilt, corroborated — and one bug I introduced
+
+D23 moved cut detection onto shot scale. Two further changes this session.
+
+**Corroboration by player count.** A hard cut usually changes how many players are
+visible. `CUT_COUNT_RATIO = 2.5` — true cuts score **4.0 to 9.0**, and across
+**595 cut-free frame boundaries the maximum is 1.50**. The band between 1.50 and
+4.0 is empty, which is the only kind of threshold worth trusting. Kit-distribution
+L1 distance (`CUT_KIT_L1 = 0.90`) is the third vote.
+
+Result on `football_cuts`: **4 of 5 cuts detected, zero false positives** across
+all five clips.
+
+**The debounce regression, which the user caught.** `CUT_DEBOUNCE_S = 0.50`
+suppresses repeat firings within half a second. I implemented it to keep the
+**first** firing — so on the 21.6s cut it kept a weak precursor at frame 642 and
+suppressed the real boundary at 648. Tracks retired 0.2s early and then
+*interpolated across the actual cut*, which is the exact failure the detector
+exists to prevent. Now keeps the **strongest** evidence in the window, not the
+earliest.
+
+Generalisable: **a debounce window must resolve by score, not by arrival order.**
+First-wins debouncing silently prefers the noisiest edge of an event.
+
+**The 8.8s cut remains undetectable and always will be from this data.** 18
+players either side, median box height 0.075 → 0.080, an identical kit
+distribution, and a scene description *more* similar than a typical non-cut
+boundary. Every signal we have says "no cut". Reported as a limitation rather
+than chased.
+
+---
+
+## D34 · Possession on the ground plane
+
+D24 made possession a state. Two corrections since.
+
+**The radius was wrong by 4×.** `ON_BALL_RADIUS_BH` was 1.6 body heights —
+roughly **2.9 metres**, which is not possession, it is proximity. Now **0.4**.
+The basketball clip moved 859 → 857 possession frames, so the tight radius costs
+almost nothing while removing the class of error where a ball passing near a
+stationary player briefly marks them. `MIN_POSSESSION_S = 0.40` still requires the
+state to persist.
+
+**Depth was being ignored, which the user identified from the amateur render.**
+Image distance is not ground distance: a ball lofted above a player's head is
+*close in pixels* and far in reality, so a header contest handed possession to
+whoever happened to be under the flight path. `_airborne()` fits the ground plane
+from the detections themselves — the bottom edge of a player box is their feet, so
+box-bottom against box-height across a frame's players recovers the perspective
+gradient, **R² p50 0.96** on `football_amateur`. A ball well above that plane is
+airborne, and nobody has it.
+
+This is a good example of the licensed division of labour: the model reports where
+things *are*, and geometry works out what that *means*. No extra call.
+
+---
+
+## D35 · Kalman: size in the state kept, adaptive process noise rejected
+
+Two changes bundled into one test produced a wash, which is uninterpretable. This
+is the second time in the project I bundled and lost attribution (see D25);
+separating them produced the verdict immediately.
+
+**Kept — box size in the filter state.** The state is now 6-D
+`[x, y, vx, vy, w, h]`, and `Track.w` / `Track.h` are properties delegating to the
+filter rather than last-sighting copies. Apparent size is a depth cue, and every
+body-height threshold in D27 divides by it — a size that jitters with each noisy
+detection makes every gate jitter with it. Smoothing size stabilises the gates,
+not just the drawing.
+
+**Rejected — adaptive process noise.** `MANOEUVRE_GAIN` inflates Q when residuals
+run high, on the theory that a player who just changed direction is less
+predictable. Measured, then set to **0.0**. It fails for the same structural
+reason auto-tuning failed on 31 Aug: the mechanism loosens the filter exactly when
+detections are least trustworthy, so it helps a genuine swerve and helps a bad
+detection equally. Kept in the code at zero as a documented dead end.
+
+**Also rejected — an RTS smoother.** Two-sided smoothing is legitimate here in
+principle (rendering is offline, so lookahead is free — see D36), but it is
+**invalid on this filter**: `coast()` and `retro_correct()` mutate track state
+outside the Kalman equations, so the stored covariances are not the ones that
+produced the estimates. The backward pass would be weighting by numbers that no
+longer describe anything. Fixing that means removing the two mechanisms that make
+the tracker work.
+
+---
+
+## D36 · Rendering is offline, so lookahead is free
+
+The single idea behind most of the render work: **nothing here is a live stream.**
+Tracking and rendering run over a completed file, so a frame may legally be drawn
+using information from later frames. Every item below is impossible in a streaming
+design and nearly free in a batch one.
+
+**Label collisions are resolved by movement, then by fading.** The old behaviour
+faded overlapping labels, which loses information. `resolve_label_collisions()`
+nudges labels **upward only** — `x` ties a label to its player and moving it
+sideways breaks that association — and near players hold position while distant
+ones give way.
+
+**Offsets are eased over the whole clip.** The user watched the first version and
+caught that the vertical displacement teleports: correct per frame, discontinuous
+between them. `precompute_label_offsets()` now solves collisions for every frame
+first, then eases each label's offset along a cubic across the clip. Maximum
+per-frame movement falls from **48px to 9.35px**. This is only possible because
+the whole timeline is known before the first pixel is drawn.
+
+**Alpha floors, because a rule that deletes information is worse than clutter.**
+`LABELS_MIN_ALPHA` was 0.0, which silently erased every distant label; now
+**0.38**. Crowd density fading floors at **0.55**. Occlusion alpha is computed
+from *resolved* rectangle overlap rather than raw centre distance, so a label that
+was successfully moved out of the way is no longer punished for the collision it
+no longer has.
+
+**Motion easing.** `SMOOTH_FOLLOW_S = 0.10`, a critically damped follower — the
+marker converges on the player without overshoot. Rendered both ways for the user
+to choose; the eased version was kept.
+
+**Fades are symmetric, and suppressed at cuts.** `FADE_OUT_S = FADE_IN_S = 0.30`.
+The user's point: a track dying fades out, so a track being born should fade in,
+or the two ends of a life do not match. Both are computed from distance to the
+track's own first and last sample, and **both are disabled within one sample
+interval of a camera cut** — at a hard cut the scene genuinely changes instantly
+and a fade would misrepresent it as gradual.
+
+---
+
+## D37 · Marker restyle — nine designs built, all rejected, and the one thing kept
+
+The user asked for a full visual overhaul with subagent review for readability and
+"wow" factor. Nine styles were built behind `--style`: broadcast, spotlight,
+tactical, stem, bar, reticle, halo, disc, arena. **All nine rejected** — the user's
+verdict was that added geometry reads as clutter over moving footage, and that the
+ring/ellipse on the ground is the right primitive. `classic` remains the default;
+the alternatives are kept in the code because the report needs to show what was
+tried, not only what shipped.
+
+**Kept from the exercise: the typeface.** Six rounds of candidates, most rejected
+as near-identical grotesques. `assets/fonts/BlackOpsOne.ttf` now heads
+`FONT_STACK` and is **committed to the repo**, so a render on another machine
+produces the same frames rather than silently falling back to a system font.
+
+**Also rejected: a carrier-specific accent colour.** Tinting the player in
+possession broke team identity — the user's words were that it was "actively
+detrimental". Reverted to team colour with a derived outer accent. That derivation
+then picked green on grass, because CIE76 ΔE weights lightness and a bright green
+scores "far" from dark turf despite sharing its hue; `pick_carrier_accent()` now
+carries an explicit hue guard.
+
+**Identifier scheme.** Arabic numerals mean a number actually read off a shirt;
+Roman numerals (`VII`, `XII`) are invented but stable. Roman was chosen over Greek
+because it is immediately legible to a viewer with no key, while remaining
+unmistakably distinct from a real jersey number.
+
+---
+
+## D38 · Where a call's time actually goes
+
+Latency had been recorded as one number per call, and it did not add up to the
+wall clock. Instrumented per section and re-run on `basketball` (150 calls):
+
+| section | time |
+|---|---|
+| encode the frame to base64 | **1.41s** |
+| time to first byte | 9.28s |
+| streaming the answer back | 2.12s |
+| parsing | ~0 |
+| thread queue delay | 0.30s |
+
+**Encoding was never in `latency_s`.** It is local CPU work done before the
+request exists, so a stopwatch around the HTTP call cannot see it — yet it is
+1.41s of every call, and it was the missing term in an 11-second discrepancy that
+had been blamed on queueing. Thread queue delay, the actual suspect, is 0.30s.
+
+Two consequences. **Concurrency is confirmed nearly free** — 150 calls complete in
+about the time the slowest one takes, so the queue is not the constraint.
+**Encoding is now the only part of the pipeline we control**, and it is 6% of a
+call.
+
+**Provider variance dominates everything.** The same clip, same configuration,
+same endpoint: **37.4s once and 21.3s on a re-run — a 43% swing with no code
+change.** Any latency figure from a single run is a sample from that distribution,
+which is why the deliverable reports a range. It is also why every comparison in
+this document that mattered was run interleaved.
+
+**The straggler cut.** `CUT_SHARE = 0.97`, `CUT_GRACE_S = 1.5`: once 97% of calls
+have returned, the rest are abandoned. Costs about 4 frames of 150, worst
+resulting blind spell **0.40s** against the tracker's 0.60s coast — inside what
+the tracker already survives.
+
+---
+
+## D39 · Ball decoys — five approaches, all measured, all rejected
+
+The one defect that survived the project. The model occasionally returns a boot, a
+sock, an advertising board or a painted mark instead of the ball, almost always at
+a moment the real ball is genuinely occluded. The user supplied timestamps for
+every instance across two clips, which is what made the failures measurable rather
+than anecdotal.
+
+| approach | result |
+|---|---|
+| **appearance** — confidence, size ratio, box aspect | decoys sit **inside** the real ball's distribution on all three. No separating surface exists in the features we have |
+| **camera-compensated motion** | decoy residual **0.058** against a real-ball median of **0.053**. No separation |
+| **candidate lists** (v5) | model returns a mean of **0.94** candidates — nothing to arbitrate between (D30) |
+| **occlusion awareness** (v6) | removed 2 decoys, **introduced 3**, at 8–11% more cost (D30) |
+| **positional recurrence** | every labelled decoy appears **once**, or twice separated by seconds. No clustering threshold can catch a singleton |
+
+**A sixth approach was built, tested, and reverted for making things worse.** A
+symmetric two-hop filter — indict a sighting if its neighbours both disagree —
+looked principled and failed on real data: on `allstars` t+22.6–23.4s two decoys
+*bracket* two real points, so the test indicted the truth and kept the errors.
+**A local consistency test assumes errors are in the minority locally, and at
+exactly the moments this fails, they are not.**
+
+**Related correction: `STATIC_MIN_HITS` no longer exists.** I proposed tuning it;
+the static-cluster filter it belonged to was **retired 28 Aug**. I had cited a
+`HANDOFF` comment describing the removed design — precisely the failure
+`CLAUDE.md` warns about, and the reason current-state and running-log documents
+are kept in separate files. D15 above is history, not current behaviour.
+
+**Reported, not hidden.** Five measured rejections are a more honest result than a
+sixth heuristic tuned until the named timestamps happen to pass.
+
+---
+
+# Legacy log — everything below predates D19
+
+> These sections are kept verbatim as the running record. Several are
+> **superseded**: D15's static-decoy filter was retired 28 Aug (see D39),
+> the cost paragraph is superseded by D18 and D21, and the ablation table is
+> closed out by D29-D32. Read D0-D39 above for current state.
 
 ## Session record — 31 Aug 2026
 

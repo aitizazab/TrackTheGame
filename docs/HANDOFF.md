@@ -5,46 +5,90 @@ reasoning behind each choice.
 
 ---
 
-## 0. Start here — state as of 3 Sep
+## 0. Start here — state as of 6 Sep
 
-**Budget: ~$9.77 of a $35 key limit.** The instructor topped up $10 on 3 Sep
-after the shared pool ran dry. `docs/run_log.jsonl` carries a real `usage.cost`
-on every call ever made — **query it, do not estimate**, my running total drifted
-by $0.58 across one session by subtracting from memory.
+**THE PROJECT IS FEATURE-COMPLETE.** Five clips collected, five annotated videos
+rendered and committed, pipeline frozen. What remains is the GitHub repo, the
+report, and the LinkedIn post.
 
-**The shipping configuration** (D19, plus everything since):
+**Budget: ~$2.9 remaining.** `docs/run_log.jsonl` records $29.09 across 7,732
+calls against a $35 limit, which nominally leaves $5.91 — but D21's three ledger
+holes (a second project on the same key, uncosted probes) are real, so treat
+~$2.9 as the working figure and **query the key endpoint before any large run**.
+
+### The shipping configuration
 
 ```
-uv run detect.py clips/<name>_1080.mp4 --fps 5 \
-    --model google/gemini-3.7-flash --tag <tag> --compact
+uv run detect.py clips/<name>_1080.mp4 --fps 5 --compact     --model google/gemini-3.7-flash --prompt-version v4     --provider-order google-ai-studio/flex
 uv run track.py  outputs/detections/<clip>__<tag>.json
-uv run render.py outputs/tracks/<clip>__<tag>__tracks.json --clip clips/<name>.mp4
+uv run render.py outputs/tracks/<clip>__<tag>__tracks.json     --clip clips/<name>.mp4 --ball-fade
 ```
 
-Provider defaults to both Google **flex** endpoints with `allow_fallbacks:false`.
-Cost lands near **$0.60/video**, wall clock **22-31s** against a 25s target.
+`v4` is the shipped prompt: the D26 rewrite, minus the `role` field, plus a
+frame-edge line. Font, marker style and every threshold are defaults now — no
+flags needed beyond the above.
 
-**What is settled:** the model and provider tier (D18/D19), 5fps, 1080p,
-fractions, the two-layer split. **What is open:** the four items in §7, and the
-`--compact` question in D25.
+### Measured, per finished video
 
-⚠ **The prompt and both schemas were rewritten on 3 Sep and have NOT been run
-against the API** (D26). `PROMPT` is 440 characters against ~2600, player `conf`
-and the whole `kits`/`accent` block are gone, and every rule is now stated once.
-Ball `conf` is kept — it is load-bearing in the ball speed gate. Offline the
-tracker runs clean on stripped detections at the cost of one extra fragment
-(17 → 18 identities on basketball). **The first live run is an experiment, not a
-deliverable** — interleave it against the old schema rather than running blocks,
-because provider p90 swung 17.6s → 36.2s on the same endpoint in one hour.
+| clip | cost | wall | lat p50 / p90 | frames | deliverable tag |
+|---|---|---|---|---|---|
+| football_cuts | $0.4727 | 22.4s | 12.7 / 16.5s | 150/150 | `cuts_v4` |
+| allstars | $0.5148 | 26.6s | 16.7 / 19.1s | 147/150 | `allstars_fr_eng_v4` |
+| basketball | $0.4407 | 21.3s | 11.5 / 15.4s | 149/150 | `basketball_timed` |
+| football_amateur | $0.4654 | 22.6s | 14.2 / 17.4s | 149/150 | `football_amateur_v4` |
+| volleyball | $0.4438 | 36.5s | 11.0 / 18.0s | 146/150 | `volleyball_v4` |
 
-⚠ **The `--compact` numbers in the first version of D25 were wrong** and are
-corrected there: two different experiments were welded into one table, and the
-"5 malformed JSON responses" were zero-token HTTP 200s from a degraded provider,
-not a schema effect. The live lesson: **report reasoning and content tokens
-separately**. Reasoning is 77.9% of output and ~64% of the per-video bill, and
-every optimisation so far has been aimed at the other 18%.
+**Mean $0.4694/video against a $1.00 cap — cost is solved.** Latency 21–37s
+against "under 15s, 25s accepted" is the one constraint not met everywhere.
 
----
+**Provider variance is larger than any lever we control.** Basketball ran 37.4s
+and 21.3s on two runs of the identical configuration — a 43% swing, no code
+change. Report latency as a range; never quote a single run as the figure.
+
+**Where a call's time actually goes** (basketball, 150 calls, p50): encode+base64
+**1.41s**, connect+TTFB 9.28s, stream body 2.12s, parse ~0. Note `latency_s`
+starts *after* encoding, so **every latency figure quoted before 6 Sep is ~1.4s
+per call short.** Thread queue delay is 0.30s — scheduling is not a factor.
+
+### What was tried and rejected this session — all with numbers
+
+| | verdict |
+|---|---|
+| **v3** 0–1000 integer coordinates | REJECTED. Saved 6.4% cost, corrupted ~6% of frames at FRAME level (63 boxes h>0.25 where v1/v2 had zero; only 1 of 973 exceeded 4× its own frame median, so no guard sees it). Tracking collapsed to 96 identities, match p50 0.587 |
+| **v5** ball candidate list | REJECTED. Only +4% reasoning, so the model was already sweeping the frame — but it returns a **mean 0.94 candidates/frame** even when asked for three. Nothing to arbitrate between |
+| **v6** ball-visibility judgement | REJECTED. Mechanism perfect (zero state/ball disagreements over two full clips), judgement wrong: against 7 labelled decoys it removed 2 and introduced 3, at +10.5% (cuts) to +23.5% (basketball). `partly_hidden` is a hedge — only `hidden` forces null |
+| **gemini-3.8-flash** | REJECTED. Same price, +33% reasoning, +19% cost, +16% latency vs 3.7 at identical prompt. Pinned FRACTION, probed 4 Sep |
+| **Grid overlay** (A1b) | NULL. Cost-neutral, reasoning slightly down, latency +24%, and **no effect on localisation jitter** — 2 grid runs sat inside the 4 plain runs' range |
+| **Reasoning effort** | The provider default IS effectively medium (1152 vs 1235 reasoning). `high` is 3.1× reasoning and $1.24/video, breaking the cap, and fixed nothing |
+| **Kalman adaptive process noise** | REJECTED. Isolated from the size change it added a spurious identity to basketball and cuts and improved nothing. Left at gain 0 so the ablation reproduces |
+| **9 marker restyles** | REJECTED on review. Default remains the original ring |
+
+### The ball-decoy problem is CLOSED, with five measured rejections
+
+Do not re-propose any of these:
+
+1. **Appearance** — decoys sit *inside* the real ball's distribution on
+   confidence (0.85 vs median 0.85), size ratio (0.142 vs 0.152) and aspect
+2. **Camera-compensated motion** — decoy residual 0.058 against a real-frame
+   median of 0.053. Most decoys are *worn* (a boot on a moving player), so
+   subtracting camera motion cannot null them
+3. **Candidate multiplicity** — 0.94 candidates per frame (v5)
+4. **Occlusion awareness** — net −1 decoy (v6)
+5. **Positional recurrence** — every labelled decoy appears **once**, or twice
+   separated by 5–13 seconds. No clustering threshold can catch a single
+   sighting. NB the static-cluster filter **was retired on 28 Aug** and does not
+   exist; `STATIC_MIN_HITS (RETIRED 28 Aug — the filter no longer exists)` is not a tunable, it is gone
+
+### Open, and honestly small
+
+- **Latency** 21–37s. The p97 straggler cut is in and works (3 calls abandoned
+  on allstars, 2 on basketball). It cannot touch a call still waiting for its
+  first byte, since it is checked inside the streaming loop.
+- **The 8.8s cut in `football_cuts` is undetectable** from detections: 18
+  players either side, median box height 0.075→0.080, identical kit mix, scene
+  sentence *more* similar than a typical non-cut boundary.
+- **Jersey read rate 9–32%** by shot scale. Most players carry a stable Roman
+  numeral instead. Permitted; state it.
 
 ## 1. Standing constraints
 
@@ -66,34 +110,32 @@ every optimisation so far has been aimed at the other 18%.
 
 ## 2. Where the project actually is
 
-**Four clips collected of five.** All verified at exactly 900 frames, CFR 30fps,
-in both `<name>.mp4` (1280x720, render target) and `<name>_1080.mp4` (detect
-input). URLs and start times are recorded in `fetch_clips.py:CANDIDATES`.
+**ALL FIVE CLIPS COLLECTED AND SHIPPED.** Each verified at exactly 900 frames,
+CFR 30fps, in both `<name>.mp4` (1280x720, render target) and `<name>_1080.mp4`
+(1920x1080, detect input). URLs and start times in `fetch_clips.py:CANDIDATES`.
 
-| clip | source | what it tests |
+| clip | what it tests | notes |
 |---|---|---|
-| `allstars_fr_eng` | England v France, broadcast wide | **SHIPPED, video 1 of 5.** URL never recorded — only the user can supply it |
-| `basketball` | 5s–35s | different sport, no goalkeeper, 10 players, large legible numbers |
-| `football_amateur` | 2:56–3:26 | VEO auto-follow: continuous **pan**, tiny players, flat overcast light |
-| `football_cuts` | 25s–55s | **three hard cuts** at t+17.2s, t+18.4s, t+21.8s — POV change, and the match clock jumps 02:45 → 06:24. Also a crowded goalmouth. The only footage that exercises D8 |
+| `allstars_fr_eng` | broadcast wide, 22 players, crowding | URL never recorded — only the user can supply it |
+| `basketball` | different sport, tight camera, 10 players, large legible numbers | best jersey read rate, ~30% |
+| `football_amateur` | VEO auto-follow, continuous hard pan, tiny players, flat light | where fly-INS were reported |
+| `football_cuts` | **four hard cuts** at 17.2s, 18.3s, 21.6s, 29.4s, plus a fifth at **8.8s that is undetectable**. Goalkeeper close-ups | the only clip exercising D8 |
+| `volleyball` | **third sport**: a net, no goalkeepers, liberos in contrasting kit, ball airborne almost continuously | hardest possible possession case |
 
-Derived test clips: `first10_*` (easy opening 10s) and `hard10_allstars_*`
-(11–21s, hardest by crowding) — both 300 frames, not deliverables.
+Derived test clips `first10_*` and `hard10_*` are 300 frames, not deliverables.
+**Use `first10` for allstars-like testing, not `hard10`** — the user's judgement
+is that it better represents what allstars actually exercises.
 
-**Still wanted (1 of 5):** a tight/close camera where players repeatedly leave
-frame — stresses track birth and death, which nothing collected so far touches.
-Similar-kits is **covered** by `allstars` per the user, though note D11's
-ΔE ≥ 30 fallback has therefore still never fired. A penalty was considered for
-the set-piece case and rejected: too few players, too static, and the crowded
-box is already inside `football_cuts`.
-
-**Pipeline is complete and works**: `fetch_clips.py` → `detect.py` →
-`track.py` → `render.py`. Plus `screen.py`, `probe_*.py`, `list_vision_models.py`,
-`rank_models.py`, `repair_convention.py`.
+**The volleyball kit vote found the liberos unaided.** Colours came back white
+705, blue 700, red 135, green 104 — the minority-colour pattern that identifies
+goalkeepers in football generalised to a different sport's special role with no
+code knowing anything about volleyball. The referee on the stand was correctly
+never detected, which was the main worry for that clip.
 
 ### Budget — reconciled 1 Sep, and the ledger was incomplete
 
-> ⚠ **Superseded by §0.** The limit is now **$35** and remaining is **~$9.77**.
+> ⚠ **Superseded by §0.** As of 6 Sep the ledger records $29.09 of a $35
+> limit; treat **~$2.9** as the working figure, per D21's known holes.
 > Everything in this subsection describes the state on 1 Sep and is kept for the
 > method, not the numbers.
 
@@ -235,7 +277,7 @@ See the addendum to §5 — the metric problem runs in both directions.
 | `--system` on Gemini | +23% latency, no gain |
 | `--scene-last` | helped Luna slightly, hurt Gemini |
 | **Low reasoning effort** | 22% cheaper and **destroys format compliance** — 36% of frames in a wrong coordinate scale, 13 mixing two scales in one response |
-| The cut detector | 52 cuts across nine runs, every one a false positive on a corrupted-coordinate frame. Removed; identities 49 → 32 |
+| ~~The cut detector~~ **REBUILT, and now shipping** | The *first* detector was removed: 52 cuts across nine runs, every one a false positive on a corrupted-coordinate frame, identities 49 → 32. D23 rebuilt it on shot scale and D33 added player-count and kit-distribution corroboration. Now **4 of 5 cuts on `football_cuts`, zero false positives across all five clips.** Do not read this row as "cut detection does not work" |
 | Camera-motion compensation for the ball filter | three variants, all made it worse. The camera estimate is untrustworthy |
 | Auto-tuning tracker constants | a single fixed number beat the whole adaptive system |
 | Shortening the coast / requiring re-confirmation | orphan markers 22 → 19 but missed detections 18 → 23. A wash |
@@ -244,9 +286,26 @@ See the addendum to §5 — the metric problem runs in both directions.
 | `mistralai/mistral-large-2512` (1 Sep, 100 frames) | cheapest screened ($0.42/video) and **best read-rate yet at 22.2%** — and still bad. Under-detects (12 players/frame vs 15), 8-word colour vocabulary incl. both `grey` and `gray`, match rate p50 **0.600** vs 0.933, **47 identities for ~22 players**, wall 42.1s. The read-rate trap again |
 | `moonshotai/kimi-k2.5`, `z-ai/glm-5.3-flash` | no usable detections on the convention probe, twice each. Both have providers lacking `structured_outputs`; unproven because `--probe-convention` discards its own errors |
 
+### Added 5–6 Sep — all interleaved, all with numbers (D29–D32, D35, D37, D39)
+
+| | why |
+|---|---|
+| **`gemini-3.8-flash`** | same *listed* token price as 3.7, **18% more cost and 10% more latency per frame** — it reasons 32% harder about the same image. No visible quality gain (D29) |
+| **Prompt v3 (integer coords 0–1000)** | 6% cheaper and **unusable**: 32.67% of sightings have no counterpart within 0.05 in the next frame, against 0.83% for v2. Cost metrics all said it was fine (D30) |
+| **Prompt v5 (ball candidate lists)** | only +4% cost — the price objection did not hold — but the model returns a mean of **0.94 candidates**, so there is nothing to choose between (D30) |
+| **Prompt v6 (occlusion awareness)** | removed 2 decoys, **introduced 3**, at +8% cost and +11% latency (D30) |
+| **Reasoning effort** | `medium` is indistinguishable from default (+2%); `high` is **+120% cost, +73% latency** and fixed nothing. `low` was already known to break format compliance. Dead lever in both directions (D31) |
+| **Grid overlay** | cost-neutral and **24–27% slower**, no accuracy gain. Closes ablation A1 from the second side (D32) |
+| **Adaptive process noise** (`MANOEUVRE_GAIN`) | loosens the filter exactly when detections are least trustworthy — helps a real swerve and a bad detection equally. Set to 0.0, kept as a documented dead end (D35) |
+| **RTS smoother** | **invalid on this filter**, not merely unhelpful: `coast()` and `retro_correct()` mutate state outside the Kalman equations, so the stored covariances do not describe the estimates. The backward pass would weight by meaningless numbers (D35) |
+| **Nine marker restyles** | broadcast, spotlight, tactical, stem, bar, reticle, halo, disc, arena — all rejected on screen. Added geometry reads as clutter over moving footage. Kept behind `--style` for the report (D37) |
+| **Carrier-specific accent colour** | destroyed team identity — the whole point of the two-colour scheme. Reverted to team colour plus a derived outer accent, with a hue guard after ΔE picked green on grass (D37) |
+| **Two-way outlier test on the ball** | reverted: on `allstars` t+22.6–23.4s two decoys *bracket* two real points, so a symmetric consistency test indicts the truth (D39) |
+
 ## 5. ⚠ The metric problem
 
-**Five times a number has said one thing and the video another.** qwen ranked
+**Six times a number has said one thing and the video another** (the sixth, and
+the most instructive, is v3 — see the 5 Sep addendum below). qwen ranked
 first on read-rate while unusable; 3fps "improved" identity inflation because
 fewer samples means fewer chances to fragment; `--system` looked transformative
 on a 50-frame worst-value statistic that halved at 146 frames; marker *count*
@@ -277,6 +336,29 @@ finding, and it must be phrased as one when handed over. Naming a timestamp and
 a predicted failure is still right — it is what let both of these be resolved in
 one pass instead of being quietly written into the report as known defects. But
 "58 frames with no ball" is a coordinate, not a defect, until someone looks.
+
+### Addendum, 5 Sep — the sixth case names the missing *kind* of metric
+
+Prompt v3 (D30) is the sharpest instance yet, because it is not a metric being
+read wrongly. Cost said cheaper, token counts said cheaper, reasoning tokens said
+cheaper, and even **identity count said fine — 97 against 96**. Every number in
+the standard set passed. The video was unusable.
+
+The number that condemned it had to be invented: **next-frame correspondence**,
+the share of sightings with no counterpart within 0.05 in the following frame.
+v3 scored **32.67%** against v2's **0.83%**.
+
+That is a *coherence* measure, and the whole existing set counts **events** —
+detections, identities, reads, frames, dollars. An event counter cannot see
+incoherence, because an incoherent stream contains exactly as many events as a
+coherent one. This is the same blind spot as "count matched, placement did not",
+stated generally.
+
+**So when a change looks free on every metric and wrong on screen, the missing
+metric is probably about continuity between frames, not quantity within one.**
+And note how it was found: the user refused my first explanation, which was
+plausible, and which failed its own test the moment it was checked (filtering all
+64 suspect boxes moved identities 96 → 97).
 
 ## 6. The analysis that should drive what happens next
 
@@ -363,226 +445,40 @@ The signals that *can* disambiguate a crossing:
 | signal | status |
 |---|---|
 | velocity continuity | in use, implicitly, via the Kalman prediction |
-| **apparent box height = depth** | **computed, smoothed, and never used in the cost matrix** |
+| **apparent box height = depth** | **DONE — now in the cost matrix, and in the state** |
 | kit colour | used as a ×4 penalty |
-| jersey number | used, but only 8–22% available |
+| jersey number | used, but only 9–32% available |
 
-**The most promising untried change is adding a box-height consistency term to
-the association cost.** Two overlapping players at different depths have
-different apparent heights; that is exactly the case position cannot separate.
+~~**The most promising untried change is adding a box-height consistency term to
+the association cost.**~~ **DONE, 5 Sep.** Box height is now a term in the
+Hungarian cost and lives in the Kalman state as well (D35), so it is smoothed
+rather than copied from the last sighting. It does double duty: it separates two
+overlapping players at different depths — the case position cannot resolve — and
+it is the divisor for every body-height threshold in D27. A jittery size makes
+every gate jitter with it, which is the argument for putting it in the filter
+rather than just in the cost.
 
-## 7. Suggested next steps, in order
+## 7. Open items — CLOSED 6 Sep
 
-> **Re-ordered 1 Sep.** Cost is solved (D18: $0.8818/video on flex). The one
-> failing hard constraint is now **wall clock — 31.0s against a 25s
-> acceptance target**.
->
-> **The straggler model from D2 does not hold on this run, and the timeout is
-> the wrong lever.** Latency is bimodal, not a thin tail: 93 calls at p50 11.7s
-> and 57 calls at p50 26.4s. Cutting the deadline to 20s would drop **57 of 150
-> frames (38%)**, not a handful.
->
-> The slow group is **not** doing more work — correlation of latency against
-> output tokens is **+0.02**, and the slow calls emit *fewer* tokens (2583 vs
-> 2767). It is position in the batch:
->
-> | frames submitted | lat p50 | share >20s |
-> |---|---|---|
-> | 0–14 | 26.1s | 53% |
-> | 30–74 | 10.9–13.2s | 0–7% |
-> | **120–149** | **25.3–26.4s** | **100%** |
->
-> It is **upload contention**, and `detect.py:719` already measured it once: at
-> 300 concurrent 1080p frames, 85 of 90 failures were
-> `TimeoutError('The write operation timed out')` mid-send, and *"the same code
-> at 720p had ZERO transport failures, which is the control."* At 150 concurrent
-> the same constraint shows up as latency instead of failure. `t0` is set at
-> `detect.py:703` — after encoding, before the POST — so **upload time is inside
-> `latency_s`**.
->
-> **CORRECTED — capping concurrency does not fix it, and would make it worse.**
-> The 150 frames are 325 KB each: **48.8 MB that must cross the wire whatever
-> the scheduling**. The 14.7s fast/slow gap over 48.8 MB implies an effective
-> uplink of **~25 Mbps**, so ~15s of the 31s wall is pure upload. Capping just
-> serialises it into waves:
->
-> | `--max-concurrent` | waves | wall floor | verdict |
-> |---|---|---|---|
-> | 150 (current) | 1 | ~12s + 15s wire | 31.0s measured |
-> | 96 | 2 | ~23s + wire | marginal |
-> | 64 | 3 | ~35s | **worse than now** |
-> | 32 | 5 | ~58s | much worse |
->
-> **The lever is payload size, not concurrency and not the deadline.** Refined
-> 1 Sep to include the **base64 wire tax of 33%** that the first pass missed:
-> 48.4 MB of JPEG is **64.4 MB actually sent**, which puts the effective uplink
-> at **~35 Mbps**, not 25.
->
-> Two independent ways to cut bytes — **resolution** and **JPEG quality**:
->
-> | config | KB/frame | wire MB | wire s |
-> |---|---|---|---|
-> | 1080p q90 (current) | 349 | 69.7 | **15.9** |
-> | **1080p q85** | **285** | **57.0** | **13.0** |
-> | 1080p q80 | 249 | 49.8 | 11.4 |
-> | 720p q90 | 193 | 38.7 | 8.8 |
-> | 720p q80 | 137 | 27.5 | 6.3 |
->
-> Resolution costs jersey numbers (§3, measured). **Quality has never been
-> varied at all** and might not — see step 0. On Gemini neither costs money:
-> §3 measured a flat 2821 input tokens at 640, 960, 1280 *and* 1920.
+Everything that was open on 3 Sep has been resolved or measured into a dead end.
+Kept as a record of how each closed, because several were closed by evidence
+that contradicts what was believed when they were written.
 
-> **Re-ordered again 3 Sep.** ⬆ **Everything in the blockquote ABOVE this line is
-> historical** — the wall-clock/bytes analysis was largely retracted (D20).
-> **A–D immediately below are the live open items.** The numbered list after the
-> horizontal rule is a working backlog: still useful, but check each item against
-> §0 before acting, because several were written against an older budget and an
-> older prompt.
->
-> **A. The marker artefact at frame edges — the user's top complaint, unsolved.**
-> A ring detaches from a player leaving the frame and drifts inward, six times
-> per clip by the user's count. Root cause at allstars f12 is a **detection**
-> error: the model put a foot at x=0.061 where the clean run said 0.016, 58px
-> apart, and the ring is held there until the track dies. The tracker is
-> blameless — 0.09 frac/s is well inside the gate. Unresolved: whether
-> `--compact` produces more of these than the object format (D25). Three of my
-> metrics failed to reproduce the user's count; trust the count.
->
-> **B. Player boxes have no aspect guard.** `validate_boxes` checks only the
-> 0..1 scale and positive extents. A box 8.4:1 wide passes, and the renderer
-> draws its ring at `w x 1.9` — 1362px, wider than the frame. Two such boxes
-> appeared in the basketball non-compact run. Across all 78,258 boxes ever
-> detected, w/h is p50 0.251, p90 0.378, p99 0.857. **A guard at w/h > 1.0
-> rejects 0.257%**, most of them the already-rejected low-effort run where
-> 0-1000 values leaked through. Free to add, not yet added.
->
-> **C. Wall clock, 22-31s against a 25s target.** Not bytes (D20 retracted) and
-> not the deadline. Provider-side variance dominates: the same 100 frames at the
-> same resolution differ 2x in wall clock between runs. `TIMEOUT_S = 35` now
-> binds on slower clips — the cuts non-compact run lost 19 frames to it.
->
-> **D. Prompt bloat — ACTED ON 3 Sep, not yet measured (D26).** The audit in §9
-> found ~60% of the prompt untested and its two best-measured blocks
-> (`conf`, `kits`/`accent`) measured to do nothing. Both are now removed, along
-> with the duplication that had every rule stated twice; judgement calls per
-> frame go 11 → 7 and `PROMPT` goes ~2600 → 440 characters. **No API run has
-> happened, so there are no token or accuracy figures.** The user is writing
-> their own prompt in parallel, which replaces this one wholesale. When it is
-> run, interleave the arms call-by-call — blocked runs cannot beat provider
-> variance, which is what produced the confounded result in D25.
+- **A. The marker fly-out artefact — FIXED.** Root cause was never the tracker.
+  It was one bad detection, and the gate that should have caught it divided by
+  `dt` (or `dt²`), so a dropped frame disarmed it. Three separate tests had the
+  same bug. All now measure displacement in body heights. See D27.
+- **B. Player boxes have no aspect guard — DONE.** Guard at 3.0 pixel aspect,
+  rejecting 3 boxes in 36,329 (0.008%), every one a ribbon. Must be measured in
+  PIXEL space; the fraction-space version rejects real players.
+- **C. Wall clock — PARTLY.** p97 straggler cut implemented and working. 21–37s
+  remains, and provider variance (43% swing on identical runs) dominates.
+- **D. Prompt bloat — DONE.** v4 shipped. The user's own prompt was never
+  needed; v2's rewrite plus role removal was sufficient.
 
----
-
-0. **JPEG quality — the untested lever, and the cheapest fix available.**
-   `detect.py:405` hardcodes `quality=90` and it has never been varied. Measured
-   offline on 5 real frames (no API calls), calibrated to the 35 Mbps effective
-   uplink implied by the 14.7s tail gap:
-
-   | quality | KB/frame | wire MB (incl. base64) | wire s | projected wall |
-   |---|---|---|---|---|
-   | **90 (current)** | 349 | 69.7 | 15.9 | **27.6s** ✗ |
-   | **85** | 285 | 57.0 | 13.0 | **24.7s** ✅ |
-   | 80 | 249 | 49.8 | 11.4 | 23.1s ✅ |
-   | 75 | 223 | 44.6 | 10.2 | 21.9s ✅ |
-   | *720p @ q90* | *193* | *38.7* | *8.8* | *20.5s* |
-
-   **q85 projects inside the 25s target at full 1080p.** One character.
-   Note base64 is a **33% wire tax** — 48.4 MB of JPEG is 64.4 MB on the wire.
-
-1. **The ablation this sets up, and it beats `--width`.** Two ways to spend the
-   same byte budget, which should damage jersey numbers *differently*:
-   720p @ q90 (193 KB) halves the pixels, so an 8px number becomes 4px — the
-   information is **gone**. 1080p @ q80 (249 KB) keeps every pixel and adds
-   ringing — the number is **noisier but still there**. Hypothesis: at a fixed
-   payload, lowering quality beats lowering resolution for small-text
-   legibility. Genuinely uncertain, since JPEG destroys exactly the
-   high-frequency detail a small number *is*. Three configs, one variable,
-   ~$1.92 with `--compact`.
-
-2. **`max_tokens` is the 402 reservation basis.** It is **6500** (raised twice —
-   D4); with `--compact` the median output is ~1750. A large reservation eases
-   nothing and directly worsens the in-flight ceiling that produced the 402s, so
-   there is room to lower it. D4's warning still applies — a cap measured on
-   easy input is not a cap, and reasoning reached 2578 tokens on real footage.
-
-   **Do not lower `TIMEOUT_S` to hit the latency target: at 25s it silently
-   discards 49 of 150 frames, and it never fires today anyway.**
-
-3. **Rebuild clip 1 with `--compact`** (~$0.64) — a settled win wrongly omitted
-   from the signed-off run (D19). Then run clips 2–5. **Budget is now ~$9.77,
-   not the $5.04 this was costed against** (§0); the four-clip + rebuild +
-   ablation plan came to $3.84 and still does.
-4. **`call_with_retry` handles no HTTP status errors** (`detect.py:678` covers
-   only `ConnectionError`/`SSLError`/`ChunkedEncoding`/`RemoteDisconnected`).
-   **Retry 429 with backoff; abort the run on 402.** Six of eight losses on
-   1 Sep were plain rate limiting silently dropped as frames. Free.
-5. **Check which end of the box is wrong** (free, no API). Compare box tops and
-   bottoms against player positions. If tops are right and bottoms are high, the
-   model is boxing torsos — a different fix from boxing loosely. **This gates
-   item 6**: the user's viewing suggests the markers sit correctly under feet,
-   which would mean the bottom is right, the boxes are short at the *top*, and
-   the foot-point change buys nothing.
-6. **Ask for the foot point directly** rather than deriving `y + h`. Measured at
-   only **5.4% of output (~$0.048/video)**, so the token case is weak and cost
-   is no longer binding. Do it for *accuracy*, and only if item 5 says the
-   bottom edge is wrong.
-7. **Box-height term in the cost matrix** (free, no API). Deferred by the user,
-   correctly: association is at ceiling on `allstars` (match rate p50 **1.00**,
-   zero mid-clip births), so an improvement to it is unmeasurable there. It
-   becomes testable on `football_cuts` and `football_amateur`.
-8. ~~**Screen a higher price tier**~~ — **done 1 Sep, and the framing was
-   wrong.** At 5fps/150 calls the $1 cap is a ceiling of ~$3/Mtok output, which
-   excludes every frontier model (sonnet-5 $3.33/video, gpt-5.1 $2.98,
-   gemini-3.1-pro $3.81 — all at *standard* tier). Anthropic ruled out by the
-   user as overpriced for vision. Mistral screened and rejected; kimi and glm
-   blocked on the probe. **But frames are not fixed**, and on flex pricing
-   `google/gemini-3.1-pro-preview` is **$0.85/video at 2fps** — the one
-   untried route to a genuinely stronger model inside the cap. It rests on the
-   §6 claim that better detections buy sparser sampling
-   (`dt_max ≈ 1–2fps with perfect detections`). Probe its convention first;
-   do **not** extrapolate from the flash-lite rows.
-8b. **Render polish — user-requested 2 Sep, all free, no API.** The current
-    render is correct but not finished-looking. Four items, in the order they
-    affect the viewer:
-
-    - **Motion smoothness.** Markers move as the tracker's per-sample output,
-      which at 5fps means 6 identical positions then a jump. The render already
-      interpolates position; what it does not do is ease it. The box render made
-      this obvious. Options in increasing cost: interpolate the *filtered*
-      Kalman state rather than raw observations (item 9 — we compute it and
-      discard it); or a short critically-damped follow on the marker so it eases
-      into each new position instead of stepping.
-    - **Invented labels: use Roman numerals, not letters.** Currently a fallback
-      track is `A·h` and reads as a typo. Roman numerals (I, II, III …) are
-      unmistakably *not* jersey numbers, need no legend, and stay legible at
-      9–21px. Preserves the existing hollow-vs-solid distinction, and removes the
-      `·` separator entirely — which the Windows console cannot print and which
-      has been mistaken for corruption once already.
-    - **A better font.** `FONT_STACK` currently falls through
-      bahnschrift → seguisb → tahomabd → DejaVuSansCondensed-Bold → arialbd,
-      i.e. whatever Windows has. Pick one deliberately, ship it in the repo so
-      the render is reproducible on any machine, and prefer a condensed
-      grotesque with **lining tabular numerals** — even digit widths stop labels
-      jittering as numbers change, and condensed means fewer neighbours trip the
-      crowding fade.
-    - **Fade on exit.** Markers currently vanish the instant a track ends, which
-      is jarring. Intent is a graceful exit; implementation is open. A distance
-      -from-frame-edge fade is the obvious version but wrong on its own — a
-      track that dies mid-pitch through occlusion pops just as hard. Better:
-      **fade on track death regardless of cause**, over ~0.3s, driven by the
-      tracker's existing coast state, so a player who walks off the edge and one
-      who is lost behind a crowd both leave the same way. Combining both — an
-      edge proximity fade *and* a death fade — is likely the finished behaviour.
-
-9. **Kalman options not yet explored**: render from the *filtered* state instead
-   of raw observations (we compute it and discard it); a proper RTS backward
-   smoother; adaptive process noise when a player accelerates; box size as part
-   of the state rather than an EMA.
-10. ~~**Collect the other four clips**~~ — **three collected 1 Sep** (§2).
-    `football_cuts` has three verified hard cuts, so **D8 is finally testable**.
-    One clip still wanted: a tight camera where players leave frame.
-11. ~~**Two combination ablations on Luna**~~ — moot. Luna is no longer the
-    model (D19); `--system` was rejected on Gemini anyway (+23% latency).
+The numbered backlog that used to live here is superseded by §0. JPEG quality
+(`quality=90`) remains the only untried lever, and D20 retracted the bytes model
+that motivated it.
 
 ## 8. Practical notes
 
@@ -702,19 +598,30 @@ Agents found two things unaided that had been missed for days: the square-matrix
 sentinel (D22) and the `--compact` field-by-field equivalence (D25). They are
 worth using, one at a time.
 
-## 12. Renders on disk, 3 Sep
+**Addendum, 5 Sep — an agent's findings split cleanly by type.** The marker
+review agent reported two bugs and one design criticism. **Both "bugs" dissolved
+on checking**: the ghost label was an artefact of the crop I handed it, and the
+claimed ball-ring offset does not exist — the ball is stored and drawn at its
+centre. The **design criticism held** and changed the render.
 
-`outputs/videos/` is down to 134 MB; 14 superseded renders moved to
-`legacy/iterations-20260903/`.
+The pattern is worth keeping: an agent looking at output it cannot re-derive
+will confidently explain artefacts of *how you framed the question*. Its
+judgement about what looks wrong is useful; its causal story about why is a
+hypothesis to test, not a finding. Verify every claim against the source before
+acting on it — which is the same rule as §5, applied to a different reporter.
 
-| file | what it is |
-|---|---|
-| `allstars_fr_eng_1080__flex_30s.mp4` | **the signed-off deliverable**, 1 Sep, never re-rendered. The user's reference for "no fly-outs" |
-| `ALL_distgate.mp4` · `AMA_distgate.mp4` · `CUTS_distgate.mp4` | current best per football clip |
-| `basketball_1080__basketball_v2.mp4` | current best basketball |
-| `BB_noncompact.mp4` · `CUTS_noncompact.mp4` | the non-compact comparison, 3 Sep |
-| `allstars_fr_eng_1080__compact_v2.mp4` | the render the user identified the artefact in, at t+0.184s |
+## 12. Renders on disk, 6 Sep
+
+`outputs/videos/` holds **five files and nothing else** — the deliverables:
+
+```
+FINAL_allstars_fr_eng.mp4   FINAL_basketball.mp4   FINAL_football_amateur.mp4
+FINAL_football_cuts.mp4     FINAL_volleyball.mp4
+```
+
+~68 superseded experimental renders were moved to `outputs/videos/legacy/`,
+which is gitignored, taking the repo-visible folder from ~1.7GB to 96MB. Every
+`_*.png` comparison sheet in that folder is also gitignored.
 
 **Do not re-render a tag you want to keep for comparison** — `render.py`
-overwrites by stem. Use `--out outputs/videos/<name>.mp4` for anything that
-needs to survive.
+overwrites by stem. Use `--out`.
