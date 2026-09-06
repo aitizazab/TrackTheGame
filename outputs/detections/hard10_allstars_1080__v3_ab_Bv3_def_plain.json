@@ -1,0 +1,9438 @@
+{
+ "clip": "hard10_allstars_1080.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 5,
+ "width": null,
+ "tag": "v3_ab_Bv3_def_plain",
+ "ts": "2026-09-04T23:47:51.604986+00:00",
+ "effort": null,
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 35.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": true,
+  "ruler": false,
+  "grid": false,
+  "provider_order": [
+   "google-ai-studio/flex"
+  ]
+ },
+ "coord_convention": "thousandth",
+ "arm": "B",
+ "prompt_version": "v3",
+ "arm_set": [
+  "google/gemini-3.7-flash:v2",
+  "google/gemini-3.7-flash:v3",
+  "google/gemini-3.7-flash:v1"
+ ],
+ "source_fps": 30,
+ "wall_s": 22.740035900002113,
+ "n_source_frames": 300,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "Wide stadium view of a football pitch, showing players in blue shirts with blue shorts and players in white shirts with white shorts.",
+   "players": [
+    {
+     "x": 0.134,
+     "y": 0.399,
+     "w": 0.016,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.157,
+     "y": 0.563,
+     "w": 0.018,
+     "h": 0.663,
+     "kit": "blue",
+     "num": 5,
+     "conf": 1.0
+    },
+    {
+     "x": 0.229,
+     "y": 0.273,
+     "w": 0.014,
+     "h": 0.735,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.243,
+     "y": 0.447,
+     "w": 0.016,
+     "h": 0.529,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.274,
+     "y": 0.223,
+     "w": 0.014,
+     "h": 0.337,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.299,
+     "y": 0.289,
+     "w": 0.013,
+     "h": 0.351,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.341,
+     "y": 0.276,
+     "w": 0.017,
+     "h": 0.417,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.272,
+     "w": 0.019,
+     "h": 0.737,
+     "kit": "blue",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.633,
+     "y": 0.638,
+     "w": 0.02,
+     "h": 0.742,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.264,
+     "y": 0.513,
+     "w": 0.013,
+     "h": 0.33,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.275,
+     "y": 0.547,
+     "w": 0.013,
+     "h": 0.345,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.332,
+     "y": 0.558,
+     "w": 0.014,
+     "h": 0.401,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.31,
+     "y": 0.644,
+     "w": 0.012,
+     "h": 0.386,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.34,
+     "y": 0.705,
+     "w": 0.012,
+     "h": 0.414,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.668,
+     "w": 0.018,
+     "h": 0.558,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.458,
+     "y": 0.691,
+     "w": 0.016,
+     "h": 0.542,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.418,
+     "y": 0.896,
+     "w": 0.014,
+     "h": 0.508,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.402,
+     "y": 0.911,
+     "w": 0.013,
+     "h": 0.492,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.424,
+     "y": 0.918,
+     "w": 0.02,
+     "h": 0.511,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.299,
+    "y": 0.406,
+    "w": 0.007,
+    "h": 0.008,
+    "conf": 0.7
+   }
+  },
+  {
+   "frame": 6,
+   "scene": "Wide camera angle of a football match under even daylight with players wearing blue and white shirts.",
+   "players": [
+    {
+     "x": 0.134,
+     "y": 0.563,
+     "w": 0.025,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.629,
+     "w": 0.028,
+     "h": 0.097,
+     "kit": "blue",
+     "num": 26,
+     "conf": 1.0
+    },
+    {
+     "x": 0.123,
+     "y": 0.391,
+     "w": 0.015,
+     "h": 0.48,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.241,
+     "y": 0.438,
+     "w": 0.022,
+     "h": 0.524,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.209,
+     "y": 0.269,
+     "w": 0.014,
+     "h": 0.335,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.264,
+     "y": 0.345,
+     "w": 0.023,
+     "h": 0.418,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.303,
+     "y": 0.284,
+     "w": 0.021,
+     "h": 0.368,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.266,
+     "y": 0.499,
+     "w": 0.015,
+     "h": 0.334,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.278,
+     "y": 0.531,
+     "w": 0.016,
+     "h": 0.348,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.53,
+     "w": 0.023,
+     "h": 0.399,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.309,
+     "y": 0.633,
+     "w": 0.016,
+     "h": 0.381,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.341,
+     "y": 0.684,
+     "w": 0.021,
+     "h": 0.417,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.476,
+     "y": 0.651,
+     "w": 0.023,
+     "h": 0.558,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.464,
+     "y": 0.672,
+     "w": 0.017,
+     "h": 0.545,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.621,
+     "w": 0.023,
+     "h": 0.735,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.418,
+     "y": 0.868,
+     "w": 0.025,
+     "h": 0.503,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.403,
+     "y": 0.888,
+     "w": 0.017,
+     "h": 0.48,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.422,
+     "y": 0.898,
+     "w": 0.023,
+     "h": 0.508,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.286,
+    "y": 0.409,
+    "w": 0.007,
+    "h": 0.009,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 12,
+   "scene": "Wide camera angle under daylight showing a soccer match between players in blue shirts and players in white shirts.",
+   "players": [
+    {
+     "x": 0.116,
+     "y": 0.56,
+     "w": 0.022,
+     "h": 0.097,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.246,
+     "y": 0.622,
+     "w": 0.022,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.106,
+     "y": 0.401,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.233,
+     "y": 0.436,
+     "w": 0.027,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.256,
+     "y": 0.345,
+     "w": 0.023,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.277,
+     "y": 0.303,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.19,
+     "y": 0.269,
+     "w": 0.015,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.482,
+     "y": 0.274,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.51,
+     "y": 0.287,
+     "w": 0.016,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.513,
+     "y": 0.331,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.601,
+     "y": 0.622,
+     "w": 0.023,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.634,
+     "y": 0.477,
+     "w": 0.018,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.651,
+     "y": 0.464,
+     "w": 0.018,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.616,
+     "y": 0.31,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.664,
+     "y": 0.346,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.847,
+     "y": 0.423,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.861,
+     "y": 0.404,
+     "w": 0.018,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.876,
+     "y": 0.423,
+     "w": 0.018,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.926,
+     "y": 0.507,
+     "w": 0.019,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.913,
+     "y": 0.567,
+     "w": 0.028,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.276,
+    "y": 0.412,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 18,
+   "scene": "Wide camera angle of a soccer match under bright daylight with teams wearing blue and white shirts.",
+   "players": [
+    {
+     "x": 0.232,
+     "y": 0.622,
+     "w": 0.023,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.092,
+     "y": 0.558,
+     "w": 0.023,
+     "h": 0.104,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.579,
+     "y": 0.618,
+     "w": 0.024,
+     "h": 0.108,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.236,
+     "y": 0.426,
+     "w": 0.021,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.243,
+     "y": 0.353,
+     "w": 0.027,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.892,
+     "y": 0.56,
+     "w": 0.029,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.608,
+     "y": 0.486,
+     "w": 0.022,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.471,
+     "w": 0.021,
+     "h": 0.084,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.898,
+     "y": 0.507,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.812,
+     "y": 0.429,
+     "w": 0.028,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.845,
+     "y": 0.424,
+     "w": 0.022,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.83,
+     "y": 0.403,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.09,
+     "y": 0.396,
+     "w": 0.016,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.642,
+     "y": 0.347,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.597,
+     "y": 0.306,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.487,
+     "y": 0.334,
+     "w": 0.02,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.49,
+     "y": 0.292,
+     "w": 0.017,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.272,
+     "y": 0.308,
+     "w": 0.016,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.462,
+     "y": 0.275,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.17,
+     "y": 0.266,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.264,
+    "y": 0.417,
+    "w": 0.006,
+    "h": 0.009,
+    "conf": 0.73
+   }
+  },
+  {
+   "frame": 24,
+   "scene": "Wide stadium view under bright daylight with one team in blue and the other in white.",
+   "players": [
+    {
+     "x": 0.21,
+     "y": 0.62,
+     "w": 0.024,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.558,
+     "y": 0.616,
+     "w": 0.021,
+     "h": 0.104,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.066,
+     "y": 0.563,
+     "w": 0.021,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.874,
+     "y": 0.568,
+     "w": 0.024,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.584,
+     "y": 0.488,
+     "w": 0.02,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.608,
+     "y": 0.477,
+     "w": 0.018,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.067,
+     "y": 0.404,
+     "w": 0.02,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.228,
+     "y": 0.427,
+     "w": 0.02,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.877,
+     "y": 0.51,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.772,
+     "y": 0.431,
+     "w": 0.023,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.801,
+     "y": 0.408,
+     "w": 0.02,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.816,
+     "y": 0.431,
+     "w": 0.025,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.228,
+     "y": 0.356,
+     "w": 0.025,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.26,
+     "y": 0.31,
+     "w": 0.023,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.147,
+     "y": 0.269,
+     "w": 0.013,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.614,
+     "y": 0.35,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.577,
+     "y": 0.31,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.468,
+     "y": 0.343,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.439,
+     "y": 0.283,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.466,
+     "y": 0.302,
+     "w": 0.016,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.244,
+    "y": 0.422,
+    "w": 0.009,
+    "h": 0.01,
+    "conf": 0.7
+   }
+  },
+  {
+   "frame": 30,
+   "scene": "Wide camera angle showing daylight match conditions, with one team wearing blue shirts and the other wearing white shirts.",
+   "players": [
+    {
+     "x": 0.125,
+     "y": 0.269,
+     "w": 0.013,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.048,
+     "y": 0.408,
+     "w": 0.022,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.622,
+     "y": 0.185,
+     "w": 0.098,
+     "h": 0.214,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.36,
+     "y": 0.21,
+     "w": 0.077,
+     "h": 0.233,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.418,
+     "y": 0.218,
+     "w": 0.079,
+     "h": 0.245,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.31,
+     "y": 0.254,
+     "w": 0.07,
+     "h": 0.271,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.285,
+     "y": 0.418,
+     "w": 0.069,
+     "h": 0.434,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.305,
+     "y": 0.444,
+     "w": 0.065,
+     "h": 0.461,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.343,
+     "y": 0.444,
+     "w": 0.063,
+     "h": 0.461,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.309,
+     "y": 0.555,
+     "w": 0.072,
+     "h": 0.572,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.353,
+     "y": 0.589,
+     "w": 0.072,
+     "h": 0.606,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.495,
+     "y": 0.559,
+     "w": 0.088,
+     "h": 0.579,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.588,
+     "w": 0.09,
+     "h": 0.606,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.608,
+     "y": 0.531,
+     "w": 0.103,
+     "h": 0.553,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.429,
+     "y": 0.73,
+     "w": 0.072,
+     "h": 0.761,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 36,
+   "scene": "Wide stadium angle under daylight showing a soccer match with players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.018,
+     "y": 0.563,
+     "w": 0.031,
+     "h": 0.091,
+     "kit": "blue",
+     "num": 5,
+     "conf": 1.0
+    },
+    {
+     "x": 0.173,
+     "y": 0.627,
+     "w": 0.03,
+     "h": 0.093,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.048,
+     "y": 0.404,
+     "w": 0.015,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.203,
+     "y": 0.365,
+     "w": 0.026,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.225,
+     "y": 0.423,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.255,
+     "y": 0.312,
+     "w": 0.023,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.411,
+     "y": 0.29,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.311,
+     "w": 0.014,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.344,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.308,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.577,
+     "y": 0.354,
+     "w": 0.02,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.542,
+     "y": 0.497,
+     "w": 0.024,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.585,
+     "y": 0.486,
+     "w": 0.017,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.52,
+     "y": 0.603,
+     "w": 0.02,
+     "h": 0.102,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.701,
+     "y": 0.427,
+     "w": 0.026,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.757,
+     "y": 0.408,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.758,
+     "y": 0.432,
+     "w": 0.025,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.843,
+     "y": 0.511,
+     "w": 0.017,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.844,
+     "y": 0.574,
+     "w": 0.025,
+     "h": 0.093,
+     "kit": "blue",
+     "num": 74,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.205,
+    "y": 0.434,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 42,
+   "scene": "Wide long shot of a soccer pitch under daylight stadium lighting, with one team wearing blue shirts and the other wearing white shirts.",
+   "players": [
+    {
+     "x": 0.12,
+     "y": 0.269,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.054,
+     "y": 0.41,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.022,
+     "y": 0.563,
+     "w": 0.03,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.17,
+     "y": 0.629,
+     "w": 0.028,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.207,
+     "y": 0.372,
+     "w": 0.028,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.233,
+     "y": 0.423,
+     "w": 0.021,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.272,
+     "y": 0.313,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.414,
+     "y": 0.295,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.316,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.439,
+     "y": 0.35,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.551,
+     "y": 0.31,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.575,
+     "y": 0.358,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.518,
+     "y": 0.599,
+     "w": 0.021,
+     "h": 0.099,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.533,
+     "y": 0.502,
+     "w": 0.021,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.586,
+     "y": 0.49,
+     "w": 0.019,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.678,
+     "y": 0.427,
+     "w": 0.031,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.746,
+     "y": 0.434,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.753,
+     "y": 0.408,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.842,
+     "y": 0.513,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.847,
+     "y": 0.577,
+     "w": 0.021,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.206,
+    "y": 0.439,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 48,
+   "scene": "Wide camera angle of a sunny soccer match showing one team in blue shirts with white shorts and the other in white shirts with blue shorts.",
+   "players": [
+    {
+     "x": 0.123,
+     "y": 0.27,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.056,
+     "y": 0.416,
+     "w": 0.021,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.024,
+     "y": 0.555,
+     "w": 0.023,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.165,
+     "y": 0.629,
+     "w": 0.021,
+     "h": 0.098,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.204,
+     "y": 0.372,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.243,
+     "y": 0.42,
+     "w": 0.02,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.284,
+     "y": 0.318,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.416,
+     "y": 0.298,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.321,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.443,
+     "y": 0.35,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.553,
+     "y": 0.31,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.582,
+     "y": 0.365,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.526,
+     "y": 0.508,
+     "w": 0.016,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.511,
+     "y": 0.597,
+     "w": 0.024,
+     "h": 0.094,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.59,
+     "y": 0.487,
+     "w": 0.018,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.66,
+     "y": 0.429,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.728,
+     "y": 0.432,
+     "w": 0.029,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.746,
+     "y": 0.41,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.842,
+     "y": 0.517,
+     "w": 0.018,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.847,
+     "y": 0.584,
+     "w": 0.019,
+     "h": 0.089,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.205,
+    "y": 0.442,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 54,
+   "scene": "A wide daylight shot of a soccer match with players in blue shirts and white shorts against opponents in white shirts.",
+   "players": [
+    {
+     "x": 0.022,
+     "y": 0.558,
+     "w": 0.029,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.163,
+     "y": 0.633,
+     "w": 0.024,
+     "h": 0.096,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.061,
+     "y": 0.415,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.128,
+     "y": 0.269,
+     "w": 0.015,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.207,
+     "y": 0.378,
+     "w": 0.018,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.255,
+     "y": 0.421,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.298,
+     "y": 0.319,
+     "w": 0.018,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.421,
+     "y": 0.303,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.451,
+     "y": 0.331,
+     "w": 0.013,
+     "h": 0.038,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.45,
+     "y": 0.355,
+     "w": 0.015,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.558,
+     "y": 0.313,
+     "w": 0.015,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.586,
+     "y": 0.374,
+     "w": 0.015,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.638,
+     "y": 0.426,
+     "w": 0.031,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.718,
+     "y": 0.439,
+     "w": 0.022,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.74,
+     "y": 0.412,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.519,
+     "y": 0.506,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.589,
+     "y": 0.508,
+     "w": 0.014,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.509,
+     "y": 0.592,
+     "w": 0.024,
+     "h": 0.098,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.846,
+     "y": 0.526,
+     "w": 0.014,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.85,
+     "y": 0.584,
+     "w": 0.018,
+     "h": 0.091,
+     "kit": "blue",
+     "num": 14,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.209,
+    "y": 0.447,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.77
+   }
+  },
+  {
+   "frame": 60,
+   "scene": "Wide stadium view of a football match between France in blue shirts and England in white shirts under natural daylight.",
+   "players": [
+    {
+     "x": 0.14,
+     "y": 0.273,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.064,
+     "y": 0.417,
+     "w": 0.018,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.206,
+     "y": 0.388,
+     "w": 0.028,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.322,
+     "y": 0.313,
+     "w": 0.013,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.427,
+     "y": 0.267,
+     "w": 0.016,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.305,
+     "y": 0.436,
+     "w": 0.014,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.337,
+     "y": 0.458,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.363,
+     "y": 0.459,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.316,
+     "y": 0.565,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.591,
+     "w": 0.015,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.43,
+     "y": 0.625,
+     "w": 0.015,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.708,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.417,
+     "y": 0.74,
+     "w": 0.015,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.506,
+     "y": 0.521,
+     "w": 0.016,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.509,
+     "y": 0.598,
+     "w": 0.015,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.592,
+     "y": 0.509,
+     "w": 0.014,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.536,
+     "y": 0.85,
+     "w": 0.015,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.589,
+     "y": 0.856,
+     "w": 0.016,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.641,
+     "y": 0.166,
+     "w": 0.017,
+     "h": 0.095,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.558,
+     "y": 0.033,
+     "w": 0.016,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.217,
+    "y": 0.452,
+    "w": 0.006,
+    "h": 0.009,
+    "conf": 0.88
+   }
+  },
+  {
+   "frame": 66,
+   "scene": "Wide stadium view of a football match under natural light with players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.151,
+     "y": 0.273,
+     "w": 0.016,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.069,
+     "y": 0.422,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.222,
+     "y": 0.395,
+     "w": 0.025,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.282,
+     "y": 0.423,
+     "w": 0.021,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.329,
+     "y": 0.323,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.037,
+     "y": 0.555,
+     "w": 0.02,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.168,
+     "y": 0.646,
+     "w": 0.019,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.311,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.343,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.362,
+     "w": 0.016,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.574,
+     "y": 0.318,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.599,
+     "y": 0.378,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.611,
+     "y": 0.429,
+     "w": 0.024,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.52,
+     "y": 0.502,
+     "w": 0.019,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.598,
+     "y": 0.503,
+     "w": 0.018,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.591,
+     "w": 0.029,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.698,
+     "y": 0.44,
+     "w": 0.022,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.747,
+     "y": 0.419,
+     "w": 0.021,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.853,
+     "y": 0.534,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.863,
+     "y": 0.592,
+     "w": 0.017,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.248,
+    "y": 0.458,
+    "w": 0.012,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 72,
+   "scene": "Wide daylight shot of a soccer pitch with one team in blue shirts and the other in white shirts.",
+   "players": [
+    {
+     "x": 0.163,
+     "y": 0.649,
+     "w": 0.023,
+     "h": 0.101,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.038,
+     "y": 0.555,
+     "w": 0.024,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.073,
+     "y": 0.422,
+     "w": 0.015,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.157,
+     "y": 0.274,
+     "w": 0.012,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.235,
+     "y": 0.4,
+     "w": 0.02,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.292,
+     "y": 0.428,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.334,
+     "y": 0.327,
+     "w": 0.017,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.454,
+     "y": 0.312,
+     "w": 0.016,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.35,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.471,
+     "y": 0.372,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.589,
+     "w": 0.021,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.519,
+     "y": 0.504,
+     "w": 0.018,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.577,
+     "y": 0.319,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.602,
+     "y": 0.384,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.587,
+     "y": 0.503,
+     "w": 0.017,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.593,
+     "y": 0.434,
+     "w": 0.021,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.682,
+     "y": 0.442,
+     "w": 0.025,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.744,
+     "y": 0.42,
+     "w": 0.019,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.849,
+     "y": 0.54,
+     "w": 0.019,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.861,
+     "y": 0.597,
+     "w": 0.019,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.316,
+    "y": 0.472,
+    "w": 0.01,
+    "h": 0.01,
+    "conf": 0.75
+   }
+  },
+  {
+   "frame": 78,
+   "scene": "Wide camera angle of a football match under natural daytime lighting; players are in blue shirts and white shirts.",
+   "players": [
+    {
+     "x": 0.154,
+     "y": 0.276,
+     "w": 0.013,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.064,
+     "y": 0.431,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.234,
+     "y": 0.4,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.296,
+     "y": 0.426,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.328,
+     "y": 0.337,
+     "w": 0.013,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.319,
+     "y": 0.449,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.356,
+     "y": 0.467,
+     "w": 0.014,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.468,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.511,
+     "w": 0.019,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.588,
+     "y": 0.487,
+     "w": 0.018,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.504,
+     "y": 0.575,
+     "w": 0.015,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.441,
+     "y": 0.567,
+     "w": 0.019,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.322,
+     "y": 0.574,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.387,
+     "y": 0.597,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.655,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.425,
+     "y": 0.736,
+     "w": 0.017,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.547,
+     "y": 0.836,
+     "w": 0.016,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.602,
+     "y": 0.846,
+     "w": 0.018,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.034,
+     "y": 0.557,
+     "w": 0.014,
+     "h": 0.087,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.155,
+     "y": 0.658,
+     "w": 0.017,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.371,
+    "y": 0.485,
+    "w": 0.007,
+    "h": 0.009,
+    "conf": 0.8
+   }
+  },
+  {
+   "frame": 84,
+   "scene": "A wide shot of a football match showing players in blue and white kits on a green pitch.",
+   "players": [
+    {
+     "x": 0.136,
+     "y": 0.669,
+     "w": 0.02,
+     "h": 0.1,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.01,
+     "y": 0.558,
+     "w": 0.024,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.047,
+     "y": 0.437,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.14,
+     "y": 0.277,
+     "w": 0.013,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.239,
+     "y": 0.404,
+     "w": 0.021,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.29,
+     "y": 0.435,
+     "w": 0.02,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.326,
+     "y": 0.332,
+     "w": 0.018,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.319,
+     "w": 0.017,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.387,
+     "y": 0.456,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.498,
+     "y": 0.501,
+     "w": 0.023,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.564,
+     "y": 0.327,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.585,
+     "y": 0.395,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.624,
+     "w": 0.022,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.557,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.464,
+     "y": 0.588,
+     "w": 0.023,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.427,
+     "y": 0.716,
+     "w": 0.021,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.823,
+     "y": 0.545,
+     "w": 0.02,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.826,
+     "y": 0.602,
+     "w": 0.02,
+     "h": 0.084,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.41,
+    "y": 0.495,
+    "w": 0.008,
+    "h": 0.008,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 90,
+   "scene": "Wide stadium view of a soccer match under daylight, with one team wearing blue shirts and the other in white shirts.",
+   "players": [
+    {
+     "x": 0.123,
+     "y": 0.276,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.312,
+     "y": 0.335,
+     "w": 0.017,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.43,
+     "y": 0.321,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.33,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.368,
+     "w": 0.014,
+     "h": 0.04,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.388,
+     "w": 0.015,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.569,
+     "y": 0.399,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.699,
+     "y": 0.426,
+     "w": 0.02,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.231,
+     "y": 0.404,
+     "w": 0.028,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.279,
+     "y": 0.442,
+     "w": 0.017,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.027,
+     "y": 0.434,
+     "w": 0.016,
+     "h": 0.082,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.483,
+     "y": 0.501,
+     "w": 0.023,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.504,
+     "y": 0.445,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.532,
+     "y": 0.506,
+     "w": 0.026,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.586,
+     "y": 0.444,
+     "w": 0.029,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.584,
+     "w": 0.019,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.114,
+     "y": 0.674,
+     "w": 0.021,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.0,
+     "y": 0.56,
+     "w": 0.016,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.808,
+     "y": 0.545,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.806,
+     "y": 0.603,
+     "w": 0.021,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.44,
+    "y": 0.503,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 96,
+   "scene": "Wide camera angle of a soccer match under bright daylight with teams in blue and white kits.",
+   "players": [
+    {
+     "x": 0.109,
+     "y": 0.273,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.008,
+     "y": 0.444,
+     "w": 0.021,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.098,
+     "y": 0.686,
+     "w": 0.021,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.236,
+     "y": 0.401,
+     "w": 0.02,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.275,
+     "y": 0.439,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.301,
+     "y": 0.332,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.421,
+     "y": 0.321,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.438,
+     "y": 0.372,
+     "w": 0.017,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.433,
+     "y": 0.396,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.54,
+     "y": 0.326,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.56,
+     "y": 0.399,
+     "w": 0.019,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.563,
+     "y": 0.444,
+     "w": 0.02,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.444,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.468,
+     "y": 0.501,
+     "w": 0.022,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.52,
+     "y": 0.501,
+     "w": 0.019,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.432,
+     "y": 0.586,
+     "w": 0.02,
+     "h": 0.093,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.688,
+     "y": 0.427,
+     "w": 0.021,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.797,
+     "y": 0.551,
+     "w": 0.02,
+     "h": 0.094,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.788,
+     "y": 0.604,
+     "w": 0.021,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.468,
+    "y": 0.509,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.72
+   }
+  },
+  {
+   "frame": 102,
+   "scene": "A wide angle view of a football pitch under bright stadium lighting, with one team wearing blue kits and the other wearing white kits.",
+   "players": [
+    {
+     "x": 0.108,
+     "y": 0.27,
+     "w": 0.013,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.007,
+     "y": 0.447,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.093,
+     "y": 0.691,
+     "w": 0.02,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.243,
+     "y": 0.403,
+     "w": 0.02,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.275,
+     "y": 0.441,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.299,
+     "y": 0.335,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.423,
+     "y": 0.321,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.375,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.433,
+     "y": 0.401,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.54,
+     "y": 0.328,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.464,
+     "y": 0.465,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.502,
+     "w": 0.017,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.495,
+     "y": 0.517,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.541,
+     "w": 0.016,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.558,
+     "y": 0.409,
+     "w": 0.016,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.428,
+     "y": 0.584,
+     "w": 0.019,
+     "h": 0.094,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.687,
+     "y": 0.428,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.784,
+     "y": 0.603,
+     "w": 0.017,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.799,
+     "y": 0.552,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.468,
+    "y": 0.509,
+    "w": 0.009,
+    "h": 0.012,
+    "conf": 0.72
+   }
+  },
+  {
+   "frame": 108,
+   "scene": "Wide camera angle of a football match under even daylight, showing players in blue shirts with white shorts and players in white shirts with blue shorts.",
+   "players": [
+    {
+     "x": 0.099,
+     "y": 0.691,
+     "w": 0.023,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.016,
+     "y": 0.442,
+     "w": 0.017,
+     "h": 0.082,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.115,
+     "y": 0.27,
+     "w": 0.019,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.263,
+     "y": 0.399,
+     "w": 0.021,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.332,
+     "y": 0.304,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.283,
+     "y": 0.445,
+     "w": 0.02,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.43,
+     "y": 0.318,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.45,
+     "y": 0.375,
+     "w": 0.017,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.443,
+     "y": 0.4,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.452,
+     "y": 0.455,
+     "w": 0.018,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.497,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.493,
+     "y": 0.523,
+     "w": 0.02,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.445,
+     "y": 0.53,
+     "w": 0.019,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.546,
+     "y": 0.326,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.566,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.427,
+     "y": 0.689,
+     "w": 0.018,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.804,
+     "w": 0.018,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.607,
+     "y": 0.78,
+     "w": 0.017,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.584,
+     "y": 0.433,
+     "w": 0.026,
+     "h": 0.088,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.455,
+    "y": 0.517,
+    "w": 0.008,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 114,
+   "scene": "A wide broadcast shot under daylight of a match with France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.109,
+     "y": 0.703,
+     "w": 0.021,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.03,
+     "y": 0.447,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.125,
+     "y": 0.27,
+     "w": 0.021,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.312,
+     "y": 0.332,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.285,
+     "y": 0.401,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.292,
+     "y": 0.447,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.318,
+     "y": 0.44,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.454,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.38,
+     "y": 0.46,
+     "w": 0.016,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.494,
+     "y": 0.477,
+     "w": 0.018,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.58,
+     "y": 0.44,
+     "w": 0.018,
+     "h": 0.089,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.492,
+     "y": 0.523,
+     "w": 0.017,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.449,
+     "y": 0.522,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.408,
+     "y": 0.575,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.325,
+     "y": 0.554,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.428,
+     "y": 0.692,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.549,
+     "y": 0.807,
+     "w": 0.021,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.604,
+     "y": 0.778,
+     "w": 0.018,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.446,
+    "y": 0.516,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 120,
+   "scene": "Wide camera angle of a football match under natural lighting, with players in blue shirts and white shirts.",
+   "players": [
+    {
+     "x": 0.12,
+     "y": 0.703,
+     "w": 0.021,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.043,
+     "y": 0.448,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.142,
+     "y": 0.269,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.32,
+     "y": 0.334,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.301,
+     "y": 0.398,
+     "w": 0.019,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.302,
+     "y": 0.448,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.449,
+     "y": 0.318,
+     "w": 0.014,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.469,
+     "y": 0.377,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.454,
+     "y": 0.434,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.405,
+     "y": 0.461,
+     "w": 0.019,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.495,
+     "y": 0.48,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.511,
+     "w": 0.015,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.488,
+     "y": 0.526,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.562,
+     "y": 0.326,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.583,
+     "y": 0.409,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.461,
+     "y": 0.563,
+     "w": 0.019,
+     "h": 0.099,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.693,
+     "y": 0.426,
+     "w": 0.016,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.812,
+     "y": 0.546,
+     "w": 0.017,
+     "h": 0.084,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.772,
+     "y": 0.608,
+     "w": 0.017,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.437,
+    "y": 0.519,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 126,
+   "scene": "Wide shot of a football pitch in daylight showing players in blue kits and white kits.",
+   "players": [
+    {
+     "x": 0.698,
+     "y": 0.127,
+     "w": 0.033,
+     "h": 0.106,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.549,
+     "y": 0.0,
+     "w": 0.016,
+     "h": 0.084,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.057,
+     "w": 0.018,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.451,
+     "y": 0.305,
+     "w": 0.021,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.399,
+     "y": 0.313,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.453,
+     "y": 0.42,
+     "w": 0.028,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.328,
+     "y": 0.326,
+     "w": 0.012,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.151,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.314,
+     "y": 0.455,
+     "w": 0.013,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.408,
+     "y": 0.465,
+     "w": 0.016,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.384,
+     "y": 0.475,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.508,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.483,
+     "y": 0.493,
+     "w": 0.022,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.491,
+     "y": 0.524,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.565,
+     "y": 0.471,
+     "w": 0.024,
+     "h": 0.09,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.405,
+     "y": 0.588,
+     "w": 0.016,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.424,
+     "y": 0.694,
+     "w": 0.022,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.323,
+     "y": 0.565,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.605,
+     "y": 0.762,
+     "w": 0.023,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.543,
+     "y": 0.81,
+     "w": 0.021,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.419,
+    "y": 0.518,
+    "w": 0.009,
+    "h": 0.012,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 132,
+   "scene": "A wide sunny soccer match camera shot showing players in blue and white shirts.",
+   "players": [
+    {
+     "x": 0.133,
+     "y": 0.7,
+     "w": 0.034,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.003,
+     "y": 0.543,
+     "w": 0.017,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.063,
+     "y": 0.44,
+     "w": 0.023,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.158,
+     "y": 0.259,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.307,
+     "y": 0.458,
+     "w": 0.013,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.324,
+     "y": 0.327,
+     "w": 0.013,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.389,
+     "y": 0.322,
+     "w": 0.014,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.451,
+     "y": 0.305,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.414,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.466,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.377,
+     "y": 0.475,
+     "w": 0.016,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.496,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.469,
+     "y": 0.502,
+     "w": 0.015,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.48,
+     "y": 0.524,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.551,
+     "y": 0.479,
+     "w": 0.021,
+     "h": 0.091,
+     "kit": "white",
+     "num": 99,
+     "conf": 1.0
+    },
+    {
+     "x": 0.316,
+     "y": 0.567,
+     "w": 0.013,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.406,
+     "y": 0.591,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.421,
+     "y": 0.693,
+     "w": 0.021,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.537,
+     "y": 0.804,
+     "w": 0.016,
+     "h": 0.085,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.592,
+     "y": 0.746,
+     "w": 0.027,
+     "h": 0.084,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.373,
+    "y": 0.534,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 138,
+   "scene": "Wide camera angle of a soccer match under bright outdoor lighting showing players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.143,
+     "y": 0.687,
+     "w": 0.026,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.01,
+     "y": 0.538,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.079,
+     "y": 0.426,
+     "w": 0.015,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.168,
+     "y": 0.252,
+     "w": 0.011,
+     "h": 0.051,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.309,
+     "y": 0.447,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.33,
+     "y": 0.318,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.334,
+     "y": 0.385,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.409,
+     "y": 0.442,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.486,
+     "y": 0.532,
+     "w": 0.018,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.462,
+     "y": 0.301,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.397,
+     "y": 0.468,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.478,
+     "y": 0.379,
+     "w": 0.014,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.493,
+     "y": 0.431,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.516,
+     "y": 0.461,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.526,
+     "y": 0.471,
+     "w": 0.02,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.57,
+     "y": 0.308,
+     "w": 0.014,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.596,
+     "y": 0.396,
+     "w": 0.015,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.694,
+     "y": 0.412,
+     "w": 0.018,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.739,
+     "y": 0.587,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.801,
+     "y": 0.529,
+     "w": 0.015,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.332,
+    "y": 0.562,
+    "w": 0.009,
+    "h": 0.013,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 144,
+   "scene": "A wide sunny tactical shot shows France in blue kits and England in white kits.",
+   "players": [
+    {
+     "x": 0.175,
+     "y": 0.239,
+     "w": 0.016,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.089,
+     "y": 0.421,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.015,
+     "y": 0.521,
+     "w": 0.016,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.152,
+     "y": 0.691,
+     "w": 0.028,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.341,
+     "y": 0.376,
+     "w": 0.019,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.402,
+     "y": 0.437,
+     "w": 0.026,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.453,
+     "y": 0.526,
+     "w": 0.032,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.302,
+     "y": 0.574,
+     "w": 0.019,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.576,
+     "y": 0.725,
+     "w": 0.027,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.307,
+     "y": 0.335,
+     "w": 0.014,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.311,
+     "w": 0.021,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.294,
+     "y": 0.469,
+     "w": 0.014,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.389,
+     "y": 0.468,
+     "w": 0.02,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.427,
+     "y": 0.49,
+     "w": 0.024,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.522,
+     "y": 0.492,
+     "w": 0.026,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.46,
+     "y": 0.532,
+     "w": 0.019,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.394,
+     "y": 0.601,
+     "w": 0.016,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.403,
+     "y": 0.698,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.521,
+     "y": 0.786,
+     "w": 0.026,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.301,
+    "y": 0.578,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 150,
+   "scene": "Wide pitch-level camera shot during daylight showing a football match between teams in blue and white kits.",
+   "players": [
+    {
+     "x": 0.185,
+     "y": 0.23,
+     "w": 0.014,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.305,
+     "y": 0.339,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.369,
+     "y": 0.356,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.414,
+     "y": 0.1,
+     "w": 0.016,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.52,
+     "y": 0.023,
+     "w": 0.014,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.679,
+     "y": 0.153,
+     "w": 0.019,
+     "h": 0.103,
+     "kit": "blue",
+     "num": 35,
+     "conf": 1.0
+    },
+    {
+     "x": 0.449,
+     "y": 0.314,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.428,
+     "y": 0.404,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.385,
+     "y": 0.467,
+     "w": 0.014,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.285,
+     "y": 0.474,
+     "w": 0.012,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.368,
+     "y": 0.483,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.418,
+     "y": 0.489,
+     "w": 0.014,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.513,
+     "y": 0.496,
+     "w": 0.021,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.537,
+     "w": 0.012,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.452,
+     "y": 0.542,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.293,
+     "y": 0.577,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.385,
+     "y": 0.606,
+     "w": 0.014,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.4,
+     "y": 0.7,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.577,
+     "y": 0.72,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.517,
+     "y": 0.784,
+     "w": 0.015,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.272,
+    "y": 0.604,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 156,
+   "scene": "Wide stadium view of a soccer match between France in blue shirts and England in white shirts.",
+   "players": [
+    {
+     "x": 0.151,
+     "y": 0.674,
+     "w": 0.025,
+     "h": 0.096,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.029,
+     "y": 0.513,
+     "w": 0.02,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.109,
+     "y": 0.403,
+     "w": 0.02,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.197,
+     "y": 0.227,
+     "w": 0.011,
+     "h": 0.051,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.344,
+     "y": 0.294,
+     "w": 0.011,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.369,
+     "y": 0.37,
+     "w": 0.018,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.315,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.412,
+     "y": 0.417,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.467,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.281,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.484,
+     "y": 0.36,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.416,
+     "y": 0.489,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.445,
+     "y": 0.546,
+     "w": 0.023,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.439,
+     "y": 0.546,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.497,
+     "y": 0.513,
+     "w": 0.017,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.579,
+     "y": 0.279,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.61,
+     "y": 0.381,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.703,
+     "y": 0.389,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.714,
+     "y": 0.571,
+     "w": 0.023,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.777,
+     "y": 0.503,
+     "w": 0.019,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.991,
+     "y": 0.366,
+     "w": 0.009,
+     "h": 0.065,
+     "kit": "red",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.248,
+    "y": 0.624,
+    "w": 0.009,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 162,
+   "scene": "Wide-angle camera shot of a soccer pitch during daytime, featuring players wearing blue shirts and players in white shirts.",
+   "players": [
+    {
+     "x": 0.157,
+     "y": 0.674,
+     "w": 0.185,
+     "h": 0.773,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.043,
+     "y": 0.51,
+     "w": 0.023,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.12,
+     "y": 0.399,
+     "w": 0.025,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.209,
+     "y": 0.212,
+     "w": 0.015,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.355,
+     "y": 0.388,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.322,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.412,
+     "y": 0.431,
+     "w": 0.023,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.288,
+     "y": 0.355,
+     "w": 0.012,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.374,
+     "y": 0.474,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.407,
+     "y": 0.497,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.491,
+     "y": 0.529,
+     "w": 0.023,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.435,
+     "y": 0.564,
+     "w": 0.021,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.573,
+     "y": 0.716,
+     "w": 0.017,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.504,
+     "y": 0.775,
+     "w": 0.017,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.386,
+     "y": 0.71,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.375,
+     "y": 0.619,
+     "w": 0.014,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.274,
+     "y": 0.589,
+     "w": 0.014,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.273,
+     "y": 0.487,
+     "w": 0.013,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.235,
+    "y": 0.64,
+    "w": 0.006,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 168,
+   "scene": "Wide high-angle camera shot of a soccer match under bright stadium lighting, showing France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.166,
+     "y": 0.663,
+     "w": 0.019,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.058,
+     "y": 0.509,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.146,
+     "y": 0.396,
+     "w": 0.014,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.213,
+     "y": 0.229,
+     "w": 0.012,
+     "h": 0.055,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.352,
+     "y": 0.407,
+     "w": 0.014,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.447,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.487,
+     "y": 0.545,
+     "w": 0.023,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.274,
+     "y": 0.6,
+     "w": 0.015,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.427,
+     "y": 0.591,
+     "w": 0.014,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.576,
+     "y": 0.722,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.368,
+     "y": 0.368,
+     "w": 0.012,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.268,
+     "y": 0.497,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.33,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.374,
+     "y": 0.482,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.406,
+     "y": 0.506,
+     "w": 0.017,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.582,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.374,
+     "y": 0.627,
+     "w": 0.015,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.382,
+     "y": 0.721,
+     "w": 0.015,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.502,
+     "y": 0.781,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.226,
+    "y": 0.66,
+    "w": 0.008,
+    "h": 0.011,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 174,
+   "scene": "Wide stadium angle of a daytime football match between players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.167,
+     "y": 0.658,
+     "w": 0.023,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.07,
+     "y": 0.501,
+     "w": 0.019,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.159,
+     "y": 0.391,
+     "w": 0.019,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.241,
+     "y": 0.208,
+     "w": 0.016,
+     "h": 0.054,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.347,
+     "y": 0.428,
+     "w": 0.02,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.389,
+     "y": 0.475,
+     "w": 0.019,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.27,
+     "y": 0.607,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.506,
+     "y": 0.351,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.421,
+     "y": 0.607,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.556,
+     "y": 0.477,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.726,
+     "y": 0.577,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.281,
+     "y": 0.378,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.507,
+     "y": 0.265,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.489,
+     "y": 0.368,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.516,
+     "y": 0.401,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.448,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.598,
+     "y": 0.436,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.636,
+     "y": 0.372,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.728,
+     "y": 0.378,
+     "w": 0.019,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.775,
+     "y": 0.494,
+     "w": 0.021,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.218,
+    "y": 0.674,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 180,
+   "scene": "Wide camera angle of a football pitch showing players in blue and white kits under stadium lighting.",
+   "players": [
+    {
+     "x": 0.169,
+     "y": 0.655,
+     "w": 0.027,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.076,
+     "y": 0.502,
+     "w": 0.028,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.389,
+     "y": 0.171,
+     "w": 0.015,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.207,
+     "y": 0.252,
+     "w": 0.012,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.457,
+     "y": 0.335,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.281,
+     "y": 0.386,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.344,
+     "y": 0.449,
+     "w": 0.013,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.389,
+     "y": 0.491,
+     "w": 0.019,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.368,
+     "y": 0.496,
+     "w": 0.017,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.356,
+     "y": 0.509,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.402,
+     "y": 0.524,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.481,
+     "y": 0.563,
+     "w": 0.019,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.433,
+     "y": 0.608,
+     "w": 0.02,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.416,
+     "y": 0.624,
+     "w": 0.015,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.369,
+     "y": 0.642,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.38,
+     "y": 0.735,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.498,
+     "y": 0.775,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.583,
+     "y": 0.732,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.263,
+     "y": 0.513,
+     "w": 0.013,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.269,
+     "y": 0.612,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.212,
+    "y": 0.685,
+    "w": 0.009,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 186,
+   "scene": "Wide stadium view of a football match between France in blue and England in white under bright daylight.",
+   "players": [
+    {
+     "x": 0.173,
+     "y": 0.649,
+     "w": 0.021,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.082,
+     "y": 0.497,
+     "w": 0.019,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.178,
+     "y": 0.381,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.2,
+     "y": 0.263,
+     "w": 0.01,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.458,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.393,
+     "y": 0.276,
+     "w": 0.012,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.458,
+     "y": 0.332,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.514,
+     "y": 0.258,
+     "w": 0.013,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.362,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.496,
+     "y": 0.375,
+     "w": 0.024,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.512,
+     "y": 0.353,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.532,
+     "y": 0.396,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.564,
+     "y": 0.48,
+     "w": 0.016,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.615,
+     "y": 0.267,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.645,
+     "y": 0.366,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.62,
+     "y": 0.421,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.629,
+     "y": 0.432,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.738,
+     "y": 0.376,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.775,
+     "y": 0.497,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.735,
+     "y": 0.584,
+     "w": 0.016,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.204,
+    "y": 0.695,
+    "w": 0.008,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 192,
+   "scene": "A wide angle daylight shot of a football match between France in blue shirts and England in white shirts.",
+   "players": [
+    {
+     "x": 0.269,
+     "y": 0.195,
+     "w": 0.014,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.182,
+     "y": 0.378,
+     "w": 0.019,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.086,
+     "y": 0.5,
+     "w": 0.017,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.179,
+     "y": 0.642,
+     "w": 0.023,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.477,
+     "y": 0.334,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.517,
+     "y": 0.351,
+     "w": 0.015,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.517,
+     "y": 0.367,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.619,
+     "y": 0.26,
+     "w": 0.015,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.64,
+     "y": 0.404,
+     "w": 0.015,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.738,
+     "y": 0.587,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.398,
+     "y": 0.271,
+     "w": 0.012,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.515,
+     "y": 0.255,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.329,
+     "y": 0.461,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.363,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.535,
+     "y": 0.396,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.564,
+     "y": 0.474,
+     "w": 0.018,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.633,
+     "y": 0.431,
+     "w": 0.019,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.647,
+     "y": 0.364,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.74,
+     "y": 0.372,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.772,
+     "y": 0.492,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.196,
+    "y": 0.704,
+    "w": 0.009,
+    "h": 0.014,
+    "conf": 0.88
+   }
+  },
+  {
+   "frame": 198,
+   "scene": "Wide daytime shot of a football match between France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.181,
+     "y": 0.638,
+     "w": 0.028,
+     "h": 0.091,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.087,
+     "y": 0.497,
+     "w": 0.018,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.189,
+     "y": 0.376,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.273,
+     "y": 0.193,
+     "w": 0.014,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.325,
+     "y": 0.467,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.399,
+     "y": 0.27,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.483,
+     "y": 0.328,
+     "w": 0.018,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.503,
+     "y": 0.357,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.513,
+     "y": 0.253,
+     "w": 0.014,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.519,
+     "y": 0.348,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.546,
+     "y": 0.365,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.547,
+     "y": 0.393,
+     "w": 0.018,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.556,
+     "y": 0.477,
+     "w": 0.022,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.618,
+     "y": 0.258,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.646,
+     "y": 0.36,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.652,
+     "y": 0.404,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.638,
+     "y": 0.429,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.739,
+     "y": 0.373,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.767,
+     "y": 0.494,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.737,
+     "y": 0.597,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.212,
+    "y": 0.703,
+    "w": 0.009,
+    "h": 0.01,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 204,
+   "scene": "Wide camera angle of a football match under stadium lights with one team in blue shirts and the other in white shirts.",
+   "players": [
+    {
+     "x": 0.18,
+     "y": 0.64,
+     "w": 0.036,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.082,
+     "y": 0.504,
+     "w": 0.02,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.189,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.476,
+     "y": 0.315,
+     "w": 0.02,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.27,
+     "y": 0.394,
+     "w": 0.018,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.192,
+     "y": 0.274,
+     "w": 0.015,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.255,
+     "y": 0.506,
+     "w": 0.018,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.329,
+     "y": 0.491,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.363,
+     "y": 0.499,
+     "w": 0.019,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.349,
+     "y": 0.516,
+     "w": 0.021,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.373,
+     "y": 0.527,
+     "w": 0.021,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.391,
+     "y": 0.549,
+     "w": 0.019,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.542,
+     "w": 0.022,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.438,
+     "y": 0.643,
+     "w": 0.02,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.365,
+     "y": 0.638,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.409,
+     "y": 0.654,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.613,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.371,
+     "y": 0.731,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.501,
+     "y": 0.758,
+     "w": 0.02,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.605,
+     "y": 0.731,
+     "w": 0.02,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.239,
+    "y": 0.696,
+    "w": 0.01,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 210,
+   "scene": "Wide camera angle during daylight showing France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.185,
+     "y": 0.647,
+     "w": 0.034,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.07,
+     "y": 0.509,
+     "w": 0.017,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.296,
+     "y": 0.492,
+     "w": 0.019,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.487,
+     "y": 0.522,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.62,
+     "y": 0.719,
+     "w": 0.017,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.508,
+     "y": 0.743,
+     "w": 0.017,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.44,
+     "y": 0.638,
+     "w": 0.017,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.415,
+     "y": 0.647,
+     "w": 0.015,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.375,
+     "y": 0.715,
+     "w": 0.017,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.366,
+     "y": 0.627,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.398,
+     "y": 0.545,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.366,
+     "y": 0.526,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.351,
+     "y": 0.507,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.359,
+     "y": 0.486,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.266,
+     "y": 0.601,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.257,
+     "y": 0.492,
+     "w": 0.014,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.274,
+     "y": 0.384,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.18,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.2,
+     "y": 0.263,
+     "w": 0.016,
+     "h": 0.05,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.972,
+     "w": 0.017,
+     "h": 0.067,
+     "kit": "red",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.253,
+    "y": 0.695,
+    "w": 0.01,
+    "h": 0.011,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 216,
+   "scene": "Wide stadium view of a soccer match under bright lights, with one team in blue shirts and the other in white.",
+   "players": [
+    {
+     "x": 0.194,
+     "y": 0.642,
+     "w": 0.029,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.051,
+     "y": 0.521,
+     "w": 0.02,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.166,
+     "y": 0.386,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.25,
+     "y": 0.201,
+     "w": 0.014,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.367,
+     "y": 0.279,
+     "w": 0.013,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.26,
+     "w": 0.013,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.586,
+     "y": 0.272,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.483,
+     "y": 0.335,
+     "w": 0.014,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.49,
+     "y": 0.355,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.474,
+     "y": 0.368,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.513,
+     "y": 0.368,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.53,
+     "y": 0.396,
+     "w": 0.023,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.609,
+     "y": 0.372,
+     "w": 0.016,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.631,
+     "y": 0.417,
+     "w": 0.018,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.628,
+     "y": 0.447,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.694,
+     "y": 0.381,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.494,
+     "y": 0.492,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.506,
+     "y": 0.279,
+     "w": 0.019,
+     "h": 0.081,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.723,
+     "y": 0.513,
+     "w": 0.018,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.703,
+     "y": 0.634,
+     "w": 0.023,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.948,
+     "y": 0.333,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "red",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.256,
+    "y": 0.696,
+    "w": 0.008,
+    "h": 0.011,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 222,
+   "scene": "Wide camera angle of a soccer match under bright daylight with one team in blue shirts and the other in white shirts.",
+   "players": [
+    {
+     "x": 0.188,
+     "y": 0.642,
+     "w": 0.038,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.024,
+     "y": 0.53,
+     "w": 0.022,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.257,
+     "y": 0.523,
+     "w": 0.024,
+     "h": 0.597,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.147,
+     "y": 0.391,
+     "w": 0.016,
+     "h": 0.467,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.204,
+     "y": 0.23,
+     "w": 0.013,
+     "h": 0.255,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.449,
+     "w": 0.013,
+     "h": 0.319,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.349,
+     "y": 0.28,
+     "w": 0.013,
+     "h": 0.337,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.372,
+     "y": 0.452,
+     "w": 0.016,
+     "h": 0.435,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.354,
+     "y": 0.474,
+     "w": 0.018,
+     "h": 0.423,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.366,
+     "y": 0.497,
+     "w": 0.016,
+     "h": 0.435,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.399,
+     "y": 0.523,
+     "w": 0.016,
+     "h": 0.469,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.505,
+     "y": 0.471,
+     "w": 0.019,
+     "h": 0.574,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.276,
+     "y": 0.566,
+     "w": 0.017,
+     "h": 0.345,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.378,
+     "y": 0.588,
+     "w": 0.017,
+     "h": 0.444,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.426,
+     "y": 0.611,
+     "w": 0.019,
+     "h": 0.475,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.452,
+     "y": 0.612,
+     "w": 0.018,
+     "h": 0.526,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.672,
+     "w": 0.019,
+     "h": 0.451,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.523,
+     "y": 0.703,
+     "w": 0.02,
+     "h": 0.6,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.648,
+     "y": 0.689,
+     "w": 0.019,
+     "h": 0.73,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.924,
+     "w": 0.017,
+     "h": 0.401,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.252,
+    "y": 0.698,
+    "w": 0.01,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 228,
+   "scene": "Wide daytime shot of a football match between France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.187,
+     "y": 0.642,
+     "w": 0.043,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.239,
+     "y": 0.532,
+     "w": 0.024,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.673,
+     "y": 0.665,
+     "w": 0.018,
+     "h": 0.083,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.682,
+     "y": 0.524,
+     "w": 0.019,
+     "h": 0.083,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.445,
+     "y": 0.513,
+     "w": 0.019,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.597,
+     "y": 0.456,
+     "w": 0.019,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.583,
+     "y": 0.429,
+     "w": 0.016,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.508,
+     "y": 0.404,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.476,
+     "y": 0.362,
+     "w": 0.016,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.43,
+     "y": 0.377,
+     "w": 0.016,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.566,
+     "y": 0.376,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.649,
+     "y": 0.384,
+     "w": 0.018,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.456,
+     "y": 0.36,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.542,
+     "y": 0.279,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.46,
+     "y": 0.329,
+     "w": 0.013,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.263,
+     "w": 0.013,
+     "h": 0.057,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.282,
+     "y": 0.325,
+     "w": 0.014,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.123,
+     "y": 0.399,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.205,
+     "y": 0.204,
+     "w": 0.016,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.537,
+     "y": 0.0,
+     "w": 0.014,
+     "h": 0.085,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.899,
+     "y": 0.334,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.241,
+    "y": 0.703,
+    "w": 0.009,
+    "h": 0.015,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 234,
+   "scene": "Wide stadium angle under daylight showing teams in blue and white kits with an orange goalkeeper.",
+   "players": [
+    {
+     "x": 0.639,
+     "y": 0.195,
+     "w": 0.014,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.544,
+     "y": 0.217,
+     "w": 0.014,
+     "h": 0.079,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.522,
+     "y": 0.414,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.674,
+     "y": 0.653,
+     "w": 0.016,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.536,
+     "y": 0.659,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.464,
+     "y": 0.579,
+     "w": 0.014,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.431,
+     "y": 0.548,
+     "w": 0.014,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.49,
+     "w": 0.014,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.381,
+     "y": 0.621,
+     "w": 0.014,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.54,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.358,
+     "y": 0.45,
+     "w": 0.013,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.36,
+     "y": 0.43,
+     "w": 0.014,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.377,
+     "y": 0.405,
+     "w": 0.014,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.33,
+     "y": 0.442,
+     "w": 0.013,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.283,
+     "y": 0.297,
+     "w": 0.013,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.393,
+     "w": 0.013,
+     "h": 0.058,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.277,
+     "y": 0.516,
+     "w": 0.013,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.333,
+     "y": 0.872,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.092,
+     "y": 0.4,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.177,
+     "y": 0.203,
+     "w": 0.011,
+     "h": 0.048,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.708,
+    "y": 0.226,
+    "w": 0.007,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 240,
+   "scene": "Wide camera angle of a soccer match under daylight with France in blue and England in white.",
+   "players": [
+    {
+     "x": 0.183,
+     "y": 0.638,
+     "w": 0.026,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.197,
+     "y": 0.56,
+     "w": 0.026,
+     "h": 0.082,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.53,
+     "y": 0.386,
+     "w": 0.021,
+     "h": 0.084,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.688,
+     "y": 0.642,
+     "w": 0.028,
+     "h": 0.086,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.538,
+     "y": 0.637,
+     "w": 0.02,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.468,
+     "y": 0.557,
+     "w": 0.021,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.424,
+     "y": 0.508,
+     "w": 0.025,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.408,
+     "y": 0.468,
+     "w": 0.017,
+     "h": 0.078,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.378,
+     "y": 0.516,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.388,
+     "y": 0.592,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.404,
+     "y": 0.056,
+     "w": 0.017,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.283,
+     "y": 0.265,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.261,
+     "y": 0.362,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.378,
+     "w": 0.021,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.356,
+     "y": 0.404,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.327,
+     "y": 0.422,
+     "w": 0.013,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.35,
+     "y": 0.419,
+     "w": 0.019,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.28,
+     "y": 0.487,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.203,
+     "y": 0.141,
+     "w": 0.017,
+     "h": 0.055,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.335,
+     "y": 0.844,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.217,
+    "y": 0.717,
+    "w": 0.008,
+    "h": 0.01,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 246,
+   "scene": "A wide daylight camera view shows a football match with one team wearing blue shirts and the other wearing white shirts.",
+   "players": [
+    {
+     "x": 0.108,
+     "y": 0.199,
+     "w": 0.013,
+     "h": 0.055,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.233,
+     "y": 0.283,
+     "w": 0.016,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.332,
+     "y": 0.26,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.459,
+     "y": 0.273,
+     "w": 0.016,
+     "h": 0.07,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.352,
+     "y": 0.386,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.376,
+     "y": 0.353,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.36,
+     "y": 0.375,
+     "w": 0.019,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.393,
+     "y": 0.394,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.407,
+     "y": 0.403,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.447,
+     "y": 0.407,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.407,
+     "y": 0.447,
+     "w": 0.02,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.431,
+     "y": 0.471,
+     "w": 0.019,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.378,
+     "y": 0.491,
+     "w": 0.02,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.564,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.544,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.614,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.358,
+     "w": 0.02,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.698,
+     "y": 0.64,
+     "w": 0.018,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.41,
+     "y": 0.017,
+     "w": 0.017,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.566,
+     "y": 0.178,
+     "w": 0.022,
+     "h": 0.08,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.647,
+     "y": 0.177,
+     "w": 0.024,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.328,
+     "y": 0.818,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.728,
+    "y": 0.222,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 252,
+   "scene": "Wide stadium view of a football match between France in blue shirts and England in white shirts, under clear daylight.",
+   "players": [
+    {
+     "x": 0.078,
+     "y": 0.196,
+     "w": 0.013,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.208,
+     "y": 0.281,
+     "w": 0.012,
+     "h": 0.059,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.307,
+     "y": 0.258,
+     "w": 0.012,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.436,
+     "y": 0.275,
+     "w": 0.014,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.321,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.345,
+     "y": 0.369,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.365,
+     "y": 0.355,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.333,
+     "w": 0.014,
+     "h": 0.067,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.414,
+     "y": 0.432,
+     "w": 0.013,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.43,
+     "y": 0.434,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.473,
+     "w": 0.013,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.384,
+     "y": 0.545,
+     "w": 0.014,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.473,
+     "y": 0.529,
+     "w": 0.015,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.554,
+     "y": 0.597,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.796,
+     "y": 0.326,
+     "w": 0.012,
+     "h": 0.06,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.575,
+     "y": 0.178,
+     "w": 0.013,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.657,
+     "y": 0.185,
+     "w": 0.017,
+     "h": 0.081,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.558,
+     "y": 0.339,
+     "w": 0.014,
+     "h": 0.079,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.712,
+     "y": 0.634,
+     "w": 0.013,
+     "h": 0.099,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.226,
+    "y": 0.737,
+    "w": 0.007,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 258,
+   "scene": "Wide camera angle of a football match between France in blue kits and England in white kits, with an orange-kitted goalkeeper.",
+   "players": [
+    {
+     "x": 0.049,
+     "y": 0.192,
+     "w": 0.017,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.184,
+     "y": 0.28,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.283,
+     "y": 0.254,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.313,
+     "y": 0.383,
+     "w": 0.016,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.338,
+     "y": 0.354,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.343,
+     "y": 0.345,
+     "w": 0.02,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.376,
+     "y": 0.321,
+     "w": 0.015,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.416,
+     "y": 0.275,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.455,
+     "y": 0.379,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.417,
+     "y": 0.411,
+     "w": 0.016,
+     "h": 0.075,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.408,
+     "y": 0.443,
+     "w": 0.017,
+     "h": 0.06,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.524,
+     "y": 0.384,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.524,
+     "y": 0.474,
+     "w": 0.018,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.59,
+     "y": 0.562,
+     "w": 0.016,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.779,
+     "y": 0.32,
+     "w": 0.017,
+     "h": 0.066,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.328,
+     "y": 0.566,
+     "w": 0.017,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.162,
+     "y": 0.577,
+     "w": 0.017,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.189,
+     "y": 0.66,
+     "w": 0.017,
+     "h": 0.09,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.631,
+     "y": 0.726,
+     "w": 0.019,
+     "h": 0.093,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.227,
+    "y": 0.742,
+    "w": 0.008,
+    "h": 0.014,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 264,
+   "scene": "A wide sunny shot of a football pitch with players in blue and white kits, and a goalkeeper in red/orange.",
+   "players": [
+    {
+     "x": 0.025,
+     "y": 0.186,
+     "w": 0.015,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.161,
+     "y": 0.278,
+     "w": 0.015,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.262,
+     "y": 0.249,
+     "w": 0.014,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.398,
+     "y": 0.273,
+     "w": 0.017,
+     "h": 0.075,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.363,
+     "y": 0.316,
+     "w": 0.018,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.327,
+     "y": 0.337,
+     "w": 0.016,
+     "h": 0.067,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.319,
+     "y": 0.36,
+     "w": 0.018,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.304,
+     "y": 0.384,
+     "w": 0.017,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.38,
+     "y": 0.439,
+     "w": 0.021,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.405,
+     "y": 0.415,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.448,
+     "y": 0.378,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.509,
+     "y": 0.381,
+     "w": 0.019,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.523,
+     "y": 0.475,
+     "w": 0.023,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.581,
+     "y": 0.568,
+     "w": 0.019,
+     "h": 0.087,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.324,
+     "y": 0.576,
+     "w": 0.026,
+     "h": 0.088,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.173,
+     "y": 0.584,
+     "w": 0.025,
+     "h": 0.096,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.196,
+     "y": 0.66,
+     "w": 0.044,
+     "h": 0.099,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.767,
+     "y": 0.316,
+     "w": 0.017,
+     "h": 0.063,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.636,
+     "y": 0.734,
+     "w": 0.034,
+     "h": 0.104,
+     "kit": "blue",
+     "num": 14,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.229,
+    "y": 0.747,
+    "w": 0.01,
+    "h": 0.015,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 270,
+   "scene": "Wide camera angle of a football pitch with daylight lighting, featuring teams in blue and white kits.",
+   "players": [
+    {
+     "x": 0.005,
+     "y": 0.18,
+     "w": 0.016,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.143,
+     "y": 0.273,
+     "w": 0.014,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.245,
+     "y": 0.247,
+     "w": 0.015,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.384,
+     "y": 0.265,
+     "w": 0.016,
+     "h": 0.078,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.314,
+     "y": 0.359,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.324,
+     "y": 0.314,
+     "w": 0.014,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.355,
+     "y": 0.31,
+     "w": 0.015,
+     "h": 0.077,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.383,
+     "y": 0.294,
+     "w": 0.015,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.362,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.412,
+     "y": 0.396,
+     "w": 0.017,
+     "h": 0.073,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.37,
+     "y": 0.439,
+     "w": 0.017,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.378,
+     "y": 0.501,
+     "w": 0.019,
+     "h": 0.072,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.471,
+     "y": 0.526,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.756,
+     "y": 0.312,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.586,
+     "y": 0.17,
+     "w": 0.021,
+     "h": 0.095,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.665,
+     "y": 0.221,
+     "w": 0.02,
+     "h": 0.099,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.587,
+     "y": 0.321,
+     "w": 0.021,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.571,
+     "y": 0.574,
+     "w": 0.017,
+     "h": 0.091,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.746,
+     "y": 0.652,
+     "w": 0.021,
+     "h": 0.107,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.241,
+    "y": 0.754,
+    "w": 0.011,
+    "h": 0.014,
+    "conf": 0.74
+   }
+  },
+  {
+   "frame": 276,
+   "scene": "A wide broadcast shot shows a soccer match under bright daylight with one team in blue shirts and the other in white shirts.",
+   "players": [
+    {
+     "x": 0.0,
+     "y": 0.178,
+     "w": 0.009,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.132,
+     "y": 0.269,
+     "w": 0.017,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.241,
+     "y": 0.234,
+     "w": 0.016,
+     "h": 0.052,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.379,
+     "y": 0.29,
+     "w": 0.019,
+     "h": 0.052,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.317,
+     "y": 0.305,
+     "w": 0.019,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.355,
+     "y": 0.304,
+     "w": 0.016,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.306,
+     "y": 0.355,
+     "w": 0.019,
+     "h": 0.053,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.264,
+     "y": 0.376,
+     "w": 0.015,
+     "h": 0.058,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.36,
+     "y": 0.442,
+     "w": 0.016,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.414,
+     "y": 0.393,
+     "w": 0.015,
+     "h": 0.053,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.372,
+     "y": 0.492,
+     "w": 0.02,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.441,
+     "y": 0.352,
+     "w": 0.019,
+     "h": 0.059,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.467,
+     "y": 0.536,
+     "w": 0.018,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.588,
+     "y": 0.177,
+     "w": 0.028,
+     "h": 0.065,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.665,
+     "y": 0.242,
+     "w": 0.02,
+     "h": 0.065,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.588,
+     "y": 0.326,
+     "w": 0.021,
+     "h": 0.064,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.575,
+     "y": 0.577,
+     "w": 0.021,
+     "h": 0.062,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.758,
+     "y": 0.653,
+     "w": 0.045,
+     "h": 0.071,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.744,
+     "y": 0.303,
+     "w": 0.016,
+     "h": 0.063,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.324,
+    "y": 0.771,
+    "w": 0.012,
+    "h": 0.013,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 282,
+   "scene": "A wide angle high shot shows soccer gameplay under daylight stadium lighting between players in blue kits and players in white shirts with blue shorts.",
+   "players": [
+    {
+     "x": 0.667,
+     "y": 0.75,
+     "w": 0.024,
+     "h": 0.103,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.581,
+     "y": 0.574,
+     "w": 0.023,
+     "h": 0.092,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.534,
+     "y": 0.467,
+     "w": 0.034,
+     "h": 0.076,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.733,
+     "y": 0.297,
+     "w": 0.017,
+     "h": 0.062,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.365,
+     "y": 0.492,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.347,
+     "y": 0.442,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.409,
+     "y": 0.387,
+     "w": 0.017,
+     "h": 0.077,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.444,
+     "y": 0.341,
+     "w": 0.023,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.256,
+     "y": 0.364,
+     "w": 0.018,
+     "h": 0.08,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.301,
+     "y": 0.355,
+     "w": 0.018,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.346,
+     "y": 0.298,
+     "w": 0.017,
+     "h": 0.076,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.298,
+     "y": 0.297,
+     "w": 0.017,
+     "h": 0.072,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.286,
+     "y": 0.377,
+     "w": 0.023,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.33,
+     "y": 0.595,
+     "w": 0.027,
+     "h": 0.092,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.25,
+     "y": 0.658,
+     "w": 0.04,
+     "h": 0.094,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.176,
+     "y": 0.591,
+     "w": 0.026,
+     "h": 0.086,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.225,
+     "y": 0.238,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.122,
+     "y": 0.265,
+     "w": 0.014,
+     "h": 0.063,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.395,
+    "y": 0.784,
+    "w": 0.013,
+    "h": 0.015,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 288,
+   "scene": "Wide camera shot of a stadium pitch under bright lighting showing players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.109,
+     "y": 0.263,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.213,
+     "y": 0.235,
+     "w": 0.014,
+     "h": 0.06,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.289,
+     "y": 0.305,
+     "w": 0.014,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.346,
+     "y": 0.289,
+     "w": 0.02,
+     "h": 0.057,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.299,
+     "y": 0.351,
+     "w": 0.017,
+     "h": 0.052,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.351,
+     "y": 0.261,
+     "w": 0.02,
+     "h": 0.056,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.284,
+     "y": 0.379,
+     "w": 0.018,
+     "h": 0.056,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.441,
+     "y": 0.333,
+     "w": 0.024,
+     "h": 0.064,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.415,
+     "y": 0.381,
+     "w": 0.016,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.341,
+     "y": 0.434,
+     "w": 0.021,
+     "h": 0.05,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.366,
+     "y": 0.48,
+     "w": 0.023,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.464,
+     "y": 0.546,
+     "w": 0.017,
+     "h": 0.054,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.579,
+     "y": 0.582,
+     "w": 0.018,
+     "h": 0.066,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.589,
+     "y": 0.168,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.651,
+     "y": 0.27,
+     "w": 0.038,
+     "h": 0.073,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.604,
+     "y": 0.327,
+     "w": 0.034,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.753,
+     "y": 0.665,
+     "w": 0.03,
+     "h": 0.077,
+     "kit": "blue",
+     "num": 14,
+     "conf": 1.0
+    },
+    {
+     "x": 0.719,
+     "y": 0.293,
+     "w": 0.02,
+     "h": 0.051,
+     "kit": "red",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.461,
+    "y": 0.801,
+    "w": 0.012,
+    "h": 0.012,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 294,
+   "scene": "Wide stadium view of a soccer match under bright lights with players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.099,
+     "y": 0.267,
+     "w": 0.018,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.203,
+     "y": 0.236,
+     "w": 0.014,
+     "h": 0.061,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.28,
+     "y": 0.304,
+     "w": 0.015,
+     "h": 0.062,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.281,
+     "y": 0.35,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.34,
+     "y": 0.263,
+     "w": 0.018,
+     "h": 0.063,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.35,
+     "y": 0.284,
+     "w": 0.016,
+     "h": 0.061,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.279,
+     "y": 0.382,
+     "w": 0.018,
+     "h": 0.07,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.335,
+     "y": 0.449,
+     "w": 0.016,
+     "h": 0.068,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.375,
+     "y": 0.417,
+     "w": 0.016,
+     "h": 0.074,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.331,
+     "w": 0.015,
+     "h": 0.069,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.471,
+     "y": 0.375,
+     "w": 0.018,
+     "h": 0.069,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.547,
+     "y": 0.47,
+     "w": 0.018,
+     "h": 0.071,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.708,
+     "y": 0.292,
+     "w": 0.016,
+     "h": 0.064,
+     "kit": "orange",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.16,
+     "y": 0.6,
+     "w": 0.026,
+     "h": 0.088,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.299,
+     "y": 0.65,
+     "w": 0.03,
+     "h": 0.098,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.35,
+     "y": 0.609,
+     "w": 0.021,
+     "h": 0.101,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.585,
+     "y": 0.583,
+     "w": 0.022,
+     "h": 0.09,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.66,
+     "y": 0.759,
+     "w": 0.028,
+     "h": 0.102,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.518,
+    "y": 0.815,
+    "w": 0.014,
+    "h": 0.014,
+    "conf": 0.95
+   }
+  }
+ ],
+ "dropped": []
+}
