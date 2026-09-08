@@ -157,11 +157,37 @@ def main():
         there = {p["track"]: p for p in (drawn.get(b) or [])}
         dets_b = det_at.get(b) or []
 
+        # LOCAL PLAYER SPACING, added after AGREE_BH was shown to be arbitrary.
+        #
+        # A fixed threshold in body heights means different things in different
+        # clips: the median nearest-neighbour distance is 1.140 bh on allstars
+        # and 0.532 bh on basketball, so 0.5 bh sits at ~p12 of spacing in one
+        # and ~p48 in the other. Comparing the two on a fixed constant is not a
+        # comparison at all.
+        #
+        # What actually decides whether a difference between the two estimators
+        # COULD mean "different person" is how far away the nearest other player
+        # is. Below that distance they are provably looking at the same player;
+        # above it a swap is geometrically possible. So the meaningful quantity
+        # is a RATIO, not a distance - which is the same normalisation D9
+        # already established for the association gate (gate / spacing).
+        cent = np.array([[(p["x"] + p["w"] / 2) * W, (p["y"] + p["h"] / 2) * H]
+                         for p in here])
+        nn_bh = []
+        for k, pl in enumerate(here):
+            if len(here) < 2:
+                nn_bh.append(None)
+                continue
+            dd = np.linalg.norm(cent - cent[k], axis=1)
+            dd[k] = 1e9
+            nn_bh.append(float(dd.min()) / max(pl["h"] * H, 1e-6))
+
         for k, pl in enumerate(here):
             sel = (owner == k) & (fb <= args.fb_max)
             n_ok = int(sel.sum())
             row = {"gap": [a, b], "track": pl["track"], "label": pl.get("label"),
-                   "survivors": n_ok, "fb_p50": round(float(np.median(fb[owner == k])), 2)}
+                   "survivors": n_ok, "fb_p50": round(float(np.median(fb[owner == k])), 2),
+                   "nn_bh": (round(nn_bh[k], 3) if nn_bh[k] is not None else None)}
 
             if n_ok < MIN_SURVIVORS:
                 row["verdict"] = "BRIDGE_FAILED"
@@ -195,6 +221,10 @@ def main():
                                (solver["y"] + solver["h"] / 2) * H])
                 gap_bh = float(np.linalg.norm(sc - pred)) / bh
                 row["solver_vs_bridge_bh"] = round(gap_bh, 3)
+                # the meaningful quantity: could they be different people?
+                if nn_bh[k]:
+                    row["ratio"] = round(gap_bh / nn_bh[k], 3)
+                    row["same_person"] = bool(row["ratio"] < 1.0)
                 if gap_bh <= AGREE_BH:
                     row["verdict"] = "AGREE"
                 elif best_d < gap_bh:

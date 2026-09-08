@@ -2107,6 +2107,82 @@ track births that 5fps does not have. **Not yet done. Nothing is wired in.**
 
 ---
 
+## D46 · Phase 1 answers its question, and the answer is no
+
+Two measurements finished the observe-only phase. The first fixed a broken
+metric; the second killed the idea.
+
+### The verdicts, re-derived on a criterion that means something
+
+`AGREE_BH = 0.5` was **set, not computed**, and the distance between the two
+estimators turned out to be a smooth unimodal decay with no empty band —
+agreement slid from 25% at 0.10 bh to 91% at 0.50 to 98% at 0.75. The headline
+"83.2% agree" was manufactured by the choice of constant.
+
+The derived replacement: normalise by **local player spacing**, because that is
+what decides whether a difference could mean "different person" at all. Median
+nearest-neighbour distance is **1.140 bh on allstars and 0.532 bh on
+basketball**, so the fixed constant sat at ~p12 of spacing in one clip and ~p48
+in the other — the cross-clip comparison was never valid.
+
+| ratio = estimator gap ÷ nearest-neighbour distance | allstars | basketball |
+|---|---|---|
+| **same person** (< 1.0) | **97.4%** | **85.2%** |
+| possible swap (≥ 1.0) | 2.6% | 14.8% |
+| (≥ 2.0) | 0.3% | 3.0% |
+
+Now comparable, and the boundary is physical rather than chosen. This is the
+same normalisation D9 established for the association gate; the fixed constant
+was a lapse back to a unit the project had already outgrown.
+
+### The cross-reference — do the flags predict fragmentation?
+
+The whole point of the bridge is to recover the identities 3fps loses. So: do
+its disagreements land on the tracks that actually die?
+
+**Aggregated per anchor, the test was meaningless** — 81–90% of anchors carry at
+least one flag, because with ~17 players and a ~15% per-player flag rate,
+P(at least one) ≈ 94%. Enrichment 1.05×. *That was my aggregation error, not a
+result.*
+
+Per track, which is the fair test:
+
+| | allstars | basketball |
+|---|---|---|
+| flag rate, any player any gap | 14.7% | 32.8% |
+| final bridge of a track that DIES mid-clip | 30.0% (6/20) | 34.6% (9/26) |
+| final bridge of a track that SURVIVES | 33.3% (5/15) | 22.2% (2/9) |
+| enrichment | **0.90×** | 1.56× |
+
+**No reliable signal.** On allstars dying tracks are marginally *less* flagged
+than surviving ones. Basketball's 1.56× rests on nine surviving tracks; 2/9
+against 9/26 is comfortably inside chance.
+
+### Verdict: do not build Phase 2
+
+The bridge works — 97.4% and 85.2% agreement with geometry on a physically
+meaningful criterion is evidence that both estimators are sound, and that is
+worth having as the project's first independent check of the tracker.
+
+But **its disagreements do not localise the failure it was built to fix.** Wiring
+it in would spend 7.2s of the latency budget to arbitrate cases that are not the
+ones fragmenting. The tension predicted before the measurement held: the bridge
+is most trustworthy exactly where it is least needed, because at a crossing the
+patch is occluded, LK loses it, and the forward-backward check discards the
+bridge — 14.1% of basketball bridges fail their own check.
+
+**Scope of the negative, stated honestly.** This tests bridges for tracks that
+exist at an anchor. It does not test the case where the detection was missing
+entirely — but that case is 3 gaps in 1,488 (D45), so there is little there
+either.
+
+**Cost of finding out: ~7s of compute and zero API spend.** The observe-first
+discipline paid for itself: had this been wired in on the strength of the 83%
+figure, it would have cost latency to change nothing, and the 83% would have
+been quoted in the report as evidence.
+
+---
+
 # Legacy log — everything below predates D19
 
 > These sections are kept verbatim as the running record. Several are
