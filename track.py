@@ -2367,6 +2367,13 @@ def main():
     ap.add_argument("--debug", action="store_true")
     ap.add_argument("--coast", type=float, default=None,
                     help="override MAX_COAST_S: how long a track survives unseen")
+    ap.add_argument("--residual", type=float, default=None,
+                    help="override MAX_RESIDUAL_BH. The gate is a DISPLACEMENT "
+                         "in body heights (D27), so it represents a different "
+                         "physical speed at a different sample rate: a step at "
+                         "3fps covers 1.67x the ground of one at 5fps. Scaling "
+                         "it by the CONFIGURED interval is legitimate; scaling "
+                         "by the OBSERVED gap is the dt bug D27 removed.")
     ap.add_argument("--stick", type=float, default=None,
                     help="override ON_BALL_STICK_S: how long a challenger must "
                          "be the per-frame pick before possession transfers. "
@@ -2394,6 +2401,8 @@ def main():
         globals()["MAX_COAST_S"] = args.coast
     if args.ball_min_conf is not None:
         globals()["BALL_MIN_CONF"] = args.ball_min_conf
+    if args.residual is not None:
+        globals()["MAX_RESIDUAL_BH"] = args.residual
     if args.stick is not None:
         globals()["ON_BALL_STICK_S"] = args.stick
     RECONFIRM[0] = args.reconfirm

@@ -1942,6 +1942,119 @@ defect that survived the project. Untested, and the strongest remaining lead.
 
 ---
 
+## D43 · The 3fps deficit is informational, not parametric — two free knobs, both null
+
+Before building anything, the two constants that could plausibly explain the 3fps
+fragmentation were swept. **Neither recovers it**, and that is the finding.
+
+### Coast length — null
+
+Hypothesis: `MAX_COAST_S = 0.60` sits between a 5fps single-miss gap (0.400s) and
+a 3fps one (**0.667s**), so moving to 3fps drops the tolerance for a missed
+detection from one to zero and tracks die at crossings. A clean discrete cliff.
+
+Measured, `--coast 0.70` on the same 3fps detections:
+
+| | labels | numeric | markers |
+|---|---|---|---|
+| coast 0.60 | 32 | 14 | 15,010 |
+| coast 0.70 | 32 | 14 | 15,000 |
+
+**Identical label sets.** Ten markers of difference in fifteen thousand. The
+cliff is real arithmetic and it is not what is costing us.
+
+### Association gate — worse, not null
+
+Hypothesis: `MAX_RESIDUAL_BH = 1.2` is a *displacement*, so at 3fps it represents
+a 1.67× slower physical speed than at 5fps and refuses real matches. The tracker
+reported 183 refusals of 208 scored pairs, which looked damning.
+
+| `MAX_RESIDUAL_BH` | identities |
+|---|---|
+| 1.2 (shipped) | **32** |
+| 1.6 | 36 |
+| 2.0 | 35 |
+| 2.4 | 35 |
+
+**Loosening it makes fragmentation worse.** The mechanism is not subtle in
+hindsight: a loose gate admits *wrong* matches, the mismatched track carries on
+with the wrong player, the real player is left unmatched, and a new track is born
+for them. **A bad match fragments exactly as effectively as a missed one**, so
+both ends of the gate's range produce births and the 1.2 setting is already near
+a local optimum. The 183 refusals were the gate working, not failing.
+
+*(A note on units: scaling this constant by the CONFIGURED sample interval would
+be legitimate; scaling by the OBSERVED gap is the dt bug D27 removed. The sweep
+above did the former and it still failed, so the distinction did not matter here.)*
+
+### What that leaves
+
+Two free parameters, two failures. **The 3fps loss survives loosening both the
+coast and the gate, which means it is not a tuning artefact — it is a deficit of
+information between anchors.** Nothing that only re-weights the existing
+detections can recover it.
+
+That is the strongest argument yet for a visual bridge, and it arrived by
+elimination rather than by advocacy. `--residual` was added to `track.py` for this
+sweep and is kept.
+
+---
+
+## D44 · Optical-flow bridging is affordable — measured, not estimated
+
+The objection to between-anchor visual tracking was CPU: the latency budget is
+15–25s for the whole pipeline and tracker time counts against it exactly like
+network time. Earlier estimates put CSRT in minutes and MOSSE at 20–35s, i.e.
+unaffordable.
+
+**Measured on the real clip** — 900 frames at 1280×720, sparse Lucas-Kanade,
+8 points per player, seeded from the actual 3fps anchor boxes, forward *and*
+backward for the drift check:
+
+| | |
+|---|---|
+| decode 900 frames + greyscale | **2.86s** |
+| LK forward + backward, 1,547 player-bridges over 89 gaps | **3.51s** |
+| **total added to the pipeline** | **6.37s** |
+
+| configuration | wall clock | cost |
+|---|---|---|
+| 5fps, no bridge (shipped) | 26.6s | $0.5253 |
+| 3fps, no bridge | 14.4s | $0.3217 |
+| **3fps + bridge (projected)** | **~20.8s** | **$0.3217** |
+
+**It fits, and it is faster and cheaper than what ships today.** The earlier
+estimate was wrong because it assumed a full correlation tracker per player;
+sparse LK on eight points is roughly two orders of magnitude cheaper and the
+boxes come from the anchors, so the tracker never has to search.
+
+### The forward-backward check has real signal
+
+Track each point to the next anchor, then back, and measure how far it returns
+from where it started:
+
+| FB error | |
+|---|---|
+| p50 | **0.29 px** |
+| p90 | 6.42 px |
+| p99 | 91.0 px |
+| max | 320.9 px |
+| share above 2px | 20.8% |
+| share above 5px | 12.2% |
+
+**Most bridges are essentially exact and a clear minority fail badly**, which is
+the distribution a discard rule wants — the failures are not spread evenly, they
+are a separable tail. With 8 points per player, a per-player median over the
+surviving points is robust to a few bad ones.
+
+**This is the answer to the objection that a drifting visual tracker fails
+*smoothly* and would therefore defeat every discontinuity-based gate we own.** FB
+error is a self-assessment: the bridge grades its own reliability before anything
+downstream trusts it. That asymmetry — one estimator carries an error bar, the
+other does not — is what makes adjudication possible at all.
+
+---
+
 # Legacy log — everything below predates D19
 
 > These sections are kept verbatim as the running record. Several are
