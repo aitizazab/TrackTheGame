@@ -2055,6 +2055,58 @@ other does not — is what makes adjudication possible at all.
 
 ---
 
+## D45 · Visual bridge, Phase 1 — the disagreement rate is low
+
+`bridge.py` builds a second, independent estimate of where each track went
+between anchors — sparse Lucas-Kanade through every source frame, graded by its
+own forward-backward error — and compares it to the Hungarian solver's answer.
+**It changes no output.** Phase 1 counts; it does not act.
+
+Run on `allstars` at 3fps, 1,488 player-gaps across 89 anchor gaps:
+
+| verdict | n | share |
+|---|---|---|
+| **AGREE** | 1,238 | **83.2%** |
+| DISAGREE_OTHER_DET — bridge lands on a *different* detection (possible swap) | 29 | 1.9% |
+| DISAGREE_NO_DET — bridge lands nowhere near a detection (drift, probably) | 97 | 6.5% |
+| SOLVER_LOST — solver dropped the track, bridge found a detection | 3 | 0.2% |
+| BOTH_LOST | 40 | 2.7% |
+| BRIDGE_FAILED — too few points survive the FB check | 81 | 5.4% |
+
+Cost: 3.93s tracking + 3.19s decode = **7.12s added**, consistent with D44's
+6.37s. 3fps + bridge projects to ~21.5s against 5fps's 26.6s, at $0.3217 against
+$0.5253.
+
+### What the numbers actually say — and it is not what I predicted
+
+**83% agreement is the reassuring part.** Two estimators with completely
+different failure modes concur on five gaps in six, which is evidence that both
+are basically working.
+
+**But the actionable set is tiny.** Only **29 suspected swaps** in 1,488 gaps,
+and only **3 rescues** where the bridge could keep a track the solver dropped. I
+had predicted the rescue case would be the main prize — "the least controversial
+use of the bridge is where there's nothing to arbitrate" — and it is 0.2% of
+gaps. That prediction was wrong.
+
+Against a fragmentation cost of **3 identities** (32 at 3fps vs 29 at 5fps), a
+mechanism that flags 29 suspects and 3 rescues *could* be enough — but only if
+those flags land on the right moments, which Phase 1 does not yet establish.
+
+**The unreliable fraction is not small either:** 6.5% drift plus 5.4% failing
+their own FB check is ~12% of bridges that must be discarded. The FB check is
+doing real work, which is the point of having it — but it means the bridge is
+not a clean second opinion everywhere, only in the 83%.
+
+### Open, for Phase 2
+
+Do the 29 swap-suspects and 3 rescues coincide with the moments where 3fps
+actually loses identities? That is the question that decides whether this is
+worth wiring in, and it needs the disagreement log cross-referenced against the
+track births that 5fps does not have. **Not yet done. Nothing is wired in.**
+
+---
+
 # Legacy log — everything below predates D19
 
 > These sections are kept verbatim as the running record. Several are
