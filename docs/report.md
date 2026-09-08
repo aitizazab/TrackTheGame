@@ -539,9 +539,22 @@ nothing, above it prices itself out.
 *Why:* the most direct cost and latency control available.
 
 Player spacing is **constant** (0.050–0.055 at every rate) while motion grows with
-`dt`. The ratio gate÷spacing therefore goes **1.9× at 10fps → 3.6× at 5fps → 6.1×
-at 3fps**, and failure appears between 3.6 and 6.1. 10fps buys nothing measurable
-over 5fps at twice the cost.
+`dt`, so lowering the rate should degrade association. It does. **The mechanism,
+however, is the opposite of what this report previously claimed.**
+
+The association gate takes `min()` of three limbs, and the third — a cap at 1.5×
+the clip's own player spacing — **binds on every clip at every sample rate**.
+Verified across seven runs: the gate ÷ spacing ratio is **1.50 by construction**,
+identically at 3fps and 5fps. An earlier version of this section reported the
+ratio rising 1.9× → 3.6× → 6.1× with falling frame rate; those are the *uncapped*
+speed limb, a code path the shipped tracker never evaluates.
+
+So the gate does not widen with `dt`. It stays pinned at 1.5× spacing while real
+motion grows 1.67×, which makes it relatively **tighter** at 3fps — real matches
+fall outside it, tracks go unmatched, and new ones are born. Scaling the cap for
+the longer interval (1.5 × 5/3 = 2.5) recovers two of the three lost identities.
+
+10fps buys nothing measurable over 5fps at twice the cost.
 
 `allstars` — the crowded case — was then run at 3fps to see what the prediction
 looks like in practice:

@@ -138,10 +138,16 @@ the original 15-second target.** It also tracks visibly worse.
 The cost is identity fragmentation, and the labels name it precisely: at 3fps the
 run *loses* real jersey numbers `30` and `93` and *gains* invented identifiers
 `I`, `II`, `III` and `XVIII`. Three more identities for the same twenty-two
-players means players are breaking into pieces. This is what D9 predicted from
-geometry alone — player spacing is constant while motion grows with the sample
-interval, so the association gate spans **3.6× the spacing at 5fps and 6.1× at
-3fps**, and the failure appears between those two numbers.
+players means players are breaking into pieces.
+
+The cause is the association gate, though not in the way this README first
+claimed. The gate is capped at **1.5× the clip's own player spacing**, and that
+cap binds on every clip at every sample rate — so the ratio is 1.50 by
+construction, not the 3.6×/6.1× reported here earlier, which described an
+uncapped code path the tracker never executes. The gate does not widen at 3fps;
+it stays pinned while real motion grows 1.67×, so it is relatively *tighter* and
+real matches fall outside it. Scaling the cap for the longer interval recovers
+two of the three lost identities.
 
 **Not shipped.** It produces a working annotated video in the literal sense, and
 it is worse, so the deliverable stays at 5fps. The detections and tracks are
