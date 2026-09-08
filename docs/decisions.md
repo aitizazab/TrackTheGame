@@ -2229,6 +2229,85 @@ been quoted in the report as evidence.
 
 ---
 
+## D47 · The gate/spacing table describes a code path that never runs — and D43 was wrong
+
+An independent audit of every constant in the project found this, and it is the
+most consequential finding in the log.
+
+### The gate is capped, so the ratio is 1.50 by construction
+
+`gate_width()` takes `min()` of three limbs and the last is
+`GATE_SPACING_MUL * CLIP_SPACING` = 1.5x spacing. **That cap binds on every clip
+at every sample rate**, verified independently:
+
+| run | body-height limb | speed limb | spacing cap | binds | gate/spacing |
+|---|---|---|---|---|---|
+| allstars 5fps | 0.2016 | 0.1760 | **0.1543** | spacing | **1.50** |
+| allstars 3fps | 0.3360 | 0.2933 | **0.1533** | spacing | **1.50** |
+| basketball 5fps | 0.5064 | 0.1760 | **0.1717** | spacing | **1.50** |
+| basketball 3fps | 0.8400 | 0.2933 | **0.1713** | spacing | **1.50** |
+| cuts | 0.1824 | 0.1760 | **0.1735** | spacing | **1.50** |
+| amateur | 0.2064 | 0.1760 | **0.1381** | spacing | **1.50** |
+| volleyball | 0.4440 | 0.1760 | **0.1709** | spacing | **1.50** |
+
+**`docs/report.md` A6, `README.md`, D42 and D9 all state the ratio goes "1.9x at
+10fps, 3.6x at 5fps, 6.1x at 3fps, and failure appears between 3.6 and 6.1".**
+Those figures are the *uncapped speed limb*, `0.88*dt + 0.01` over spacing. The
+shipped code never evaluates that. The real ratio is **1.50 at both rates.**
+
+The observation stands — 3fps does fragment, 32 drawn labels against 29 — but the
+mechanism in every document is wrong.
+
+### And the true mechanism is the inverse of the documented one
+
+The documents say the gate *widens* with `dt` until it spans too many players.
+In fact the gate is **pinned** at 1.5x spacing while real motion grows 1.67x, so
+at 3fps it is relatively **tighter**. Both stories predict degradation; they imply
+opposite fixes.
+
+Scaling the cap for the longer interval — `1.5 * 5/3 = 2.5` — recovers it:
+
+| 3fps `GATE_SPACING_MUL` | drawn labels | numeric | markers |
+|---|---|---|---|
+| 1.5 (shipped) | 32 | 14 | 15,010 |
+| 2.0 | 31 | 14 | 15,090 |
+| **2.5** (= dt-scaled) | **30** | 14 | 15,090 |
+| 3.0 | 30 | 14 | 15,090 |
+| *5fps baseline* | *29* | *15* | *15,450* |
+
+**Two of the three lost identities come back from a one-constant change**, giving
+near-5fps identity quality at $0.3217 and 14.4s against $0.5253 and 26.6s. One
+real jersey number is still lost.
+
+### D43 is retracted
+
+D43 concluded *"the 3fps loss survives loosening both the coast and the gate,
+which means it is not a tuning artefact - it is a deficit of information between
+anchors"*, and that conclusion is what motivated building the visual bridge.
+
+**It swept the wrong gate.** `MAX_RESIDUAL_BH` is the post-assignment residual
+check; `GATE_SPACING_MUL` is the pre-assignment association gate and the binding
+constraint. The deficit was substantially **parametric** after all.
+
+The failure was not the sweep, it was not knowing which constant was live. Four
+gate constants exist and three are inert; sweeping an inert one returns a flat
+line that reads as "insensitive, therefore safe" when it means "disconnected".
+
+**Consequence for D46:** the "do not build Phase 2" verdict is *strengthened*. If
+a single constant recovers most of the gap, a 7.2s optical-flow stage certainly
+does not earn its place.
+
+### Not applied to the shipping configuration
+
+`GATE_SPACING_MUL` governs all five deliverables. Changing it re-renders
+everything, and 2.5 is only correct *at 3fps* - the constant should scale with
+the sample interval rather than being reset. `--gate-spacing-mul` is added to
+`track.py` for the sweep. **The documents must be corrected regardless of whether
+the constant changes**, because they currently explain a shipped result with a
+mechanism that does not execute.
+
+---
+
 # Legacy log — everything below predates D19
 
 > These sections are kept verbatim as the running record. Several are

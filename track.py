@@ -2367,6 +2367,14 @@ def main():
     ap.add_argument("--debug", action="store_true")
     ap.add_argument("--coast", type=float, default=None,
                     help="override MAX_COAST_S: how long a track survives unseen")
+    ap.add_argument("--gate-spacing-mul", type=float, default=None,
+                    help="override GATE_SPACING_MUL. This cap BINDS on every "
+                         "shipping clip at every sample rate, so gate/spacing "
+                         "is 1.5 by construction - the 1.9/3.6/6.1 table in the "
+                         "report describes the uncapped speed limb, which never "
+                         "executes. The real mechanism at 3fps is that the gate "
+                         "stays pinned while motion grows 1.67x, so it gets "
+                         "relatively TIGHTER, not wider.")
     ap.add_argument("--residual", type=float, default=None,
                     help="override MAX_RESIDUAL_BH. The gate is a DISPLACEMENT "
                          "in body heights (D27), so it represents a different "
@@ -2401,6 +2409,8 @@ def main():
         globals()["MAX_COAST_S"] = args.coast
     if args.ball_min_conf is not None:
         globals()["BALL_MIN_CONF"] = args.ball_min_conf
+    if args.gate_spacing_mul is not None:
+        globals()["GATE_SPACING_MUL"] = args.gate_spacing_mul
     if args.residual is not None:
         globals()["MAX_RESIDUAL_BH"] = args.residual
     if args.stick is not None:
