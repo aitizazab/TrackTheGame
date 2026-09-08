@@ -2176,6 +2176,52 @@ exist at an anchor. It does not test the case where the detection was missing
 entirely — but that case is 3 gaps in 1,488 (D45), so there is little there
 either.
 
+### Correction: the ratio was evaluated at the wrong end of the gap
+
+The claim was that ratio < 1 makes a swap *geometrically impossible*: any two
+player centres in a frame are at least one nearest-neighbour distance apart, so a
+difference smaller than that cannot span two different players.
+
+**The logic is sound. The measurement was taken at anchor `a`, the START of the
+gap, when the quantity that matters is the separation at anchor `b`, the END.**
+And a crossing is by definition a convergence, so this is wrong precisely where
+swaps happen. Measured spacing change across one gap: p10 −12.3%, p50 −0.9%,
+p90 +15.2%, with **2.2% of gaps shrinking by more than 25%** — that tail is the
+crossings.
+
+Recomputed against spacing at `b`:
+
+| | reported (at `a`) | correct (at `b`) | gaps that flip to "possible swap" |
+|---|---|---|---|
+| allstars | 97.4% | **97.7%** | 15 (1.1%) |
+| basketball | 85.2% | **85.4%** | 31 (4.8%) |
+
+**The aggregate was robust and the per-gap classification was not.** 31 newly
+suspect gaps in basketball against 21 previously flagged as swaps is a
+substantial change to *which* gaps are named, inside an almost unchanged
+headline. The enrichment test was re-run on the corrected criterion and is
+**unchanged at 0.90x and 1.56x** — the flagged set is dominated by the verdict
+categories rather than the ratio — so D46's verdict stands.
+
+Third time this project has been bitten by evaluating a quantity in the wrong
+frame of reference, after fraction-vs-pixel aspect and the `dt` bug.
+
+### Two capabilities this phase exposed that were not the point of it
+
+**The discard rule is all-or-nothing per gap, and it should not be.** A bridge
+spans 10 source frames at 3fps. When the forward-backward check fails, all ten
+are thrown away — including the frames *before* the occlusion began, which
+tracked perfectly. The failure is localised in time; the discard is not.
+
+**There is no occlusion detector anywhere in this pipeline, and the bridge is
+one.** A missing detection is currently an unexplained absence. Three nearly
+free signals localise an occlusion to ~33ms: LK's per-point status flag drops,
+the nine points on one player scatter as the patch is covered, and FB error can
+be computed per step rather than end to end. That feeds the coast, the residual
+gate and possession, all of which presently guess. **This is plausibly worth more
+than the reconciliation the bridge was built for**, and it was surfaced by the
+user asking how many frames the thing actually looks at.
+
 **Cost of finding out: ~7s of compute and zero API spend.** The observe-first
 discipline paid for itself: had this been wired in on the strength of the 83%
 figure, it would have cost latency to change nothing, and the 83% would have
