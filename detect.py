@@ -239,7 +239,18 @@ TIMEOUT_S = 25.0
 # the cut properly needs socket-level read deadlines plus shutdown(wait=False,
 # cancel_futures=True); not attempted, because with the deadline at 25s there
 # is very little left for it to do.
-CUT_SHARE = 1.0     # 1.0 disables. Was 0.97; see above.
+# RE-ENABLED 10 Sep at 0.97. It was set to 1.0 because the cut "did not shorten
+# the wall clock" — true, and the reason was the pool's own shutdown(wait=True),
+# not the cut. With that fixed (see run_pool) the cut is worth a measured 8-20%
+# of wall clock: p97 against the max on every run we have is 15.8 vs 19.7s on
+# cuts_v6, 19.1 vs 21.2s on basketball_timed, 12.6 vs 15.2s on occl.
+#
+# The safety case is unchanged and was always the strong half: at p97 the cut
+# costs 5 frames of 150 and the worst BLIND SPELL — consecutive lost anchors —
+# is 0.40s, inside the tracker's 0.60s coast. The bridge makes those frames
+# cheaper still, because it measures displacement across the gap from pixels
+# rather than extrapolating the filter through it.
+CUT_SHARE = 0.97
 CUT_GRACE_S = 1.5
 # Set to a perf_counter deadline once the share is reached; call_one checks it
 # between chunks so an abandoned call actually closes its connection rather than
@@ -411,7 +422,7 @@ def source_frame_count(clip: Path) -> int:
         return 0
 
 
-def extract_frames(clip: Path, fps: int, out_dir: Path) -> list:
+def extract_frames(clip: Path, fps: float, out_dir: Path) -> list:
     """Sample `fps` frames per second. Returns [(source_frame_index, Path), ...].
 
     The source index matters downstream: the tracker needs real elapsed time
@@ -1320,8 +1331,19 @@ def call_one(session, headers, model, frame_idx, path, width, timeout,
     # tier, which is the failure this flag exists to make impossible.
     if v.get("provider_order"):
         body["provider"] = {"order": v["provider_order"], "allow_fallbacks": False}
+    # `effort` is either one of the coarse buckets ("low"/"medium"/"high") or a
+    # NUMERIC token budget. The buckets were swept in A5 and the useful range
+    # turned out to be a cliff, not a dial: "low" zeroes reasoning outright and
+    # wrecks box quality, "medium" and unspecified are indistinguishable. A
+    # numeric budget is the graded version of the same knob and has never been
+    # tried on this model — whether the provider honours it is exactly what the
+    # probe is for, since an ignored budget looks identical to a working one
+    # except in the token counts.
     if effort:
-        body["reasoning"] = {"effort": effort}
+        try:
+            body["reasoning"] = {"max_tokens": int(effort)}
+        except (TypeError, ValueError):
+            body["reasoning"] = {"effort": effort}
     t0 = time.perf_counter()
     # `model` and `prompt_version` are recorded PER CALL, not once per run. In an
     # interleaved arm run they differ between calls, and the log writer merges
@@ -1485,15 +1507,24 @@ T_EXTRACT = [0.0]
 T_WRITE = [0.0]
 
 
-def run_pool(fns, workers):
+def run_pool(fns, workers, on_done=None, keys=None):
     """Run every call, then abandon the slowest few once most have landed.
+
+    `on_done`, when given, is called with each record AS IT LANDS rather than
+    when the pool drains. That is the hook the visual bridge hangs off: a gap
+    needs only its own anchors, so it can be computed while the rest of the
+    calls are still in flight instead of costing 5.9s after them (bridge_live).
+    It is called from the pool thread and must never raise — `LiveBridge` is
+    responsible for swallowing its own errors, because by the time this runs the
+    money for the call is already spent and a tracking aid must not be able to
+    lose a paid-for detection.
 
     Arms the cut only after CUT_SHARE of the calls have returned, so a slow
     provider day shifts the deadline instead of costing frames. Results come
     back in SUBMISSION order, not completion order, because everything
     downstream keys on frame index.
     """
-    from concurrent.futures import as_completed
+    from concurrent.futures import FIRST_COMPLETED, wait
     CUT_AT[0] = None
     out = [None] * len(fns)
     pool_t0 = time.perf_counter()
@@ -1518,16 +1549,68 @@ def run_pool(fns, workers):
             return rec
         return go
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
+    # NOT `with ThreadPoolExecutor(...)`. Exiting that block calls
+    # shutdown(wait=True), which blocks until every worker thread has finished
+    # — including the stragglers whose answers we have just decided to
+    # abandon. That is why the cut appeared to save nothing: we stopped USING
+    # the slow results and then waited for them anyway. Instrumented on the
+    # volleyball re-run, the last useful call landed at 22.00s and the process
+    # did not return until 23.92s, and none of that 1.92s bought anything.
+    #
+    # Two changes. Stop collecting once the cut deadline passes, and shut the
+    # pool down without waiting. `call_one` already checks CUT_AT between
+    # chunks and closes its own connection, so the threads end on their own;
+    # this just stops the pool blocking on them while they do.
+    ex = ThreadPoolExecutor(max_workers=workers)
+    try:
         futs = {ex.submit(stamped(fn)): i for i, fn in enumerate(fns)}
         need = max(1, int(round(CUT_SHARE * len(fns))))
         done = 0
-        for fut in as_completed(futs):
-            out[futs[fut]] = fut.result()
-            done += 1
-            if done >= need and CUT_AT[0] is None and done < len(fns):
-                CUT_AT[0] = time.perf_counter() + CUT_GRACE_S
-    CUT_AT[0] = None
+        # `as_completed` is wrong here and the first version of this used it:
+        # it BLOCKS until the next future finishes, so a deadline checked at
+        # the top of the loop body is only ever checked after waiting for the
+        # very straggler it was meant to abandon. Measured on a synthetic pool
+        # with four 4-second stragglers and a 0.3s grace: still 4.00s.
+        #
+        # `wait(..., timeout=...)` returns when the deadline passes whether or
+        # not anything completed, which is the whole point.
+        pending = set(futs)
+        hard_stop = time.perf_counter() + TIMEOUT_S + CUT_GRACE_S + 5
+        while pending:
+            if CUT_AT[0] is not None:
+                budget = CUT_AT[0] - time.perf_counter()
+                if budget <= 0:
+                    break
+            else:
+                budget = hard_stop - time.perf_counter()
+                if budget <= 0:
+                    break
+            fin, pending = wait(pending, timeout=budget,
+                                return_when=FIRST_COMPLETED)
+            if not fin:
+                break                      # deadline passed, nothing new
+            for fut in fin:
+                rec = fut.result()
+                out[futs[fut]] = rec
+                if on_done is not None:
+                    on_done(rec)
+                done += 1
+                if done >= need and CUT_AT[0] is None and done < len(fns):
+                    CUT_AT[0] = time.perf_counter() + CUT_GRACE_S
+    finally:
+        # cancel_futures kills anything not yet started; wait=False means we do
+        # not block on the ones that have.
+        ex.shutdown(wait=False, cancel_futures=True)
+        CUT_AT[0] = None
+    # A slot still None was abandoned by the cut. It has to appear in the
+    # records as a real drop with its real frame index, or the run summary
+    # silently under-reports how many frames the cut cost — which is the one
+    # number that says whether the cut was worth it.
+    for i, r in enumerate(out):
+        if r is None:
+            out[i] = {"frame": (keys[i] if keys and i < len(keys) else None),
+                      "ok": False, "error": "abandoned (straggler cut)",
+                      "latency_s": None}
     return out
 
 
@@ -1786,19 +1869,48 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("clip", type=Path)
-    ap.add_argument("--fps", type=int, default=10,
-                    help="frames sampled per second (default 10)")
+    # FLOAT, not int. The low-fps work needs 2.5, and every consumer of this
+    # was already float-safe: ffmpeg's `fps=` filter takes a rational, the
+    # source-index step is SOURCE_FPS / fps, and track.py divides by it. The
+    # int was an assumption, not a requirement.
+    ap.add_argument("--fps", type=float, default=10,
+                    help="frames sampled per second (default 10). Fractional "
+                         "rates are allowed: 2.5 samples every 12th source "
+                         "frame of a 30fps clip")
     ap.add_argument("--width", type=int, default=None,
                     help="downscale width; omit for native (recommended)")
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--timeout", type=float, default=TIMEOUT_S)
     ap.add_argument("--tag", default="dev", help="run tag, for the ablation log")
+    # --- visual bridge, run CONCURRENTLY with the calls (bridge_live) ------
+    # Off unless --bridge-out is given: without it nothing here is imported,
+    # no thread is started, and the detection path is byte-for-byte what it was.
+    ap.add_argument("--bridge-out", type=Path, default=None,
+                    help="also emit visual-bridge predictions, computed while "
+                         "the API calls are still in flight. Measured cost on "
+                         "allstars at 3fps: 0.09s of wall clock against 5.90s "
+                         "for the same work run afterwards by bridge.py")
+    ap.add_argument("--bridge-clip", type=Path, default=None,
+                    help="clip the bridge reads pixels from; defaults to the "
+                         "720p render clip beside the 1080p detection clip. "
+                         "Boxes are fractions, so resolution need not match")
+    ap.add_argument("--bridge-seed", default="grid",
+                    choices=["grid", "torso", "corners"])
+    ap.add_argument("--bridge-fb-max", type=float, default=5.0)
+    ap.add_argument("--bridge-truncate", action="store_true", default=True)
+    ap.add_argument("--no-bridge-truncate", dest="bridge_truncate",
+                    action="store_false")
     ap.add_argument("--frames", default=None,
                     help="comma-separated source indices — smoke test on a few")
     # --- ablation switches (docs/decisions.md, A1-A7) ---------------------
-    ap.add_argument("--effort", choices=["low", "medium", "high"], default=None,
-                    help="A5: reasoning effort. Reasoning is 64%% of output "
-                         "tokens on Luna, so this is the largest latency lever.")
+    ap.add_argument("--effort", default=None,
+                    help="A5: reasoning budget. Either a bucket "
+                         "(low/medium/high) or an INTEGER token cap, which "
+                         "sends reasoning.max_tokens instead of "
+                         "reasoning.effort. Reasoning is 60-78%% of output "
+                         "tokens on gemini-3.7-flash, and the buckets are a "
+                         "cliff — low zeroes it and ruins box quality — so a "
+                         "numeric cap is the only graded form of this lever.")
     ap.add_argument("--scene-last", action="store_true",
                     help="A4: move the `scene` scratchpad to the END of the "
                          "schema, so coordinates are produced with no thinking "
@@ -1943,14 +2055,55 @@ def main():
     # at once and it produced a 25% connection-failure rate. Cap it when the
     # payload is large.
     workers = args.max_concurrent or max(1, len(frames))
+
+    # ---- start the visual bridge BEFORE dispatching anything -------------
+    # Decode depends on nothing, so it overlaps the calls entirely; each gap
+    # needs only its own anchors, so it is computed as those land. Started here
+    # rather than before extraction only because the anchor list comes from
+    # `frames` — moving it earlier would hide another ~2s of extraction, and is
+    # worth doing if extraction ever stops being the thing before this.
+    live_bridge = None
+    if args.bridge_out is not None:
+        try:
+            from bridge_live import LiveBridge
+            import bridge as _B
+            bclip = args.bridge_clip
+            if bclip is None:
+                bclip = args.clip.with_name(args.clip.name.replace("_1080", ""))
+            if not Path(bclip).exists():
+                print(f"  bridge: no clip at {bclip}, skipping")
+            else:
+                bcfg = dict(seed=args.bridge_seed, fb_max=args.bridge_fb_max,
+                            min_surv=_B.MIN_SURVIVORS,
+                            truncate=args.bridge_truncate,
+                            min_prefix=_B.MIN_PREFIX,
+                            fb="step" if args.bridge_truncate else "e2e")
+                live_bridge = LiveBridge(bclip, [fp[0] for fp in frames],
+                                         bcfg).start()
+                print(f"  bridge: decoding {bclip.name} alongside the calls")
+        except Exception as e:
+            print(f"  bridge: disabled ({type(e).__name__}: {e})")
+            live_bridge = None
+
     t0 = time.perf_counter()
     records = run_pool([
         (lambda fp=fp: call_with_retry(session, headers, args.model, fp[0], fp[1],
                                        args.width, args.timeout, schema,
                                        args.effort, convention, variant,
                                        version=args.prompt_version))
-        for fp in frames], workers)
+        for fp in frames], workers,
+        on_done=(live_bridge.on_result if live_bridge else None),
+        keys=[fp[0] for fp in frames])
     wall = time.perf_counter() - t0
+
+    if live_bridge is not None:
+        added, bstats = live_bridge.finish(args.bridge_out)
+        print(f"  bridge          {bstats['n_bridges']} player-bridges over "
+              f"{bstats['n_gaps']} gaps, decode {bstats['decode_s']}s overlapped, "
+              f"ADDED WALL {added:.2f}s")
+        if bstats["error"]:
+            print(f"  bridge ERROR    {bstats['error']}")
+        print(f"    -> {args.bridge_out}")
 
     ok = [r for r in records if r.get("ok")]
     dropped = [r for r in records if not r.get("ok")]

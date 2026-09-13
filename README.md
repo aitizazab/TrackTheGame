@@ -56,6 +56,26 @@ clip is answered in about the time one frame takes. Coordinates come back as
 fractions of the image, which is what lets detection run at 1080p while
 rendering runs at 720p.
 
+**2b · `bridge.py` / `bridge_live.py` — follow the pixels (built, not shipped)**
+Sparse Lucas-Kanade optical flow through every source frame between two anchors,
+a second pixel-measured estimate of where each player went, blended with the
+Kalman prediction. The brief permits classical CV for *tracking* but never for
+*detection*, and this sits exactly on that line: it never finds a player, only
+follows one the model already found.
+
+The **engineering** works and is worth reading: it runs concurrently with the
+API calls rather than after them — decode depends on nothing and starts before
+the first call, and each gap needs only its own anchor's detections — for
+**0.11–0.14s of added wall clock against 5.9s run serially**, with output
+verified byte-identical to the batch tool.
+
+The **tracking claim did not survive validation.** It reduces basketball from 22
+identities to 18, which looked like repaired fragmentation and is not: matching
+markers by exact position shows all three merges are wrong, joining players who
+are on court in the same frame. A lower identity count is what identity
+*switching* produces too, and the count cannot tell the two apart. Not applied
+to the deliverables. See D53 (retracted), D58.
+
 **3 · `track.py` — remember**
 The layer the task is actually about, and it makes zero network calls. A Kalman
 filter predicts where each player should be; Hungarian assignment matches
@@ -157,10 +177,36 @@ committed like every other run, so the render reproduces without an API key:
 uv run render.py outputs/tracks/allstars_fr_eng_1080__allstars_3fps__tracks.json     --clip clips/allstars_fr_eng.mp4 --ball-fade --out allstars_3fps.mp4
 ```
 
-The honest reading is that 5fps is not obviously the optimum — it is the point
-where we stopped, chosen from a geometric argument and confirmed rather than
-searched. 4fps was never run, and on these two data points it is where the
-interesting trade sits.
+### Going lower, measured live
+
+4fps and 2.5fps were later run for real, and both are worse than 5fps on
+every clip. The figures below are **live runs**, not decimations:
+
+| | cost | wall | identities (roster) | ID switches |
+|---|---|---|---|---|
+| basketball 5fps | $0.4407 | 21.2s | 22 (10) | reference |
+| basketball 4fps | $0.3400 | 27.3s | 22 (10) | 46 |
+| basketball 2.5fps | $0.2095 | 26.2s | 28 (10) | 73 |
+
+Cost falls as expected; **wall clock does not**, because it is set by the
+slowest single call and there is a slow call at any sample rate.
+
+A methodological warning worth more than the result. Lower rates were first
+estimated by *decimating* a 5fps run — dropping every other anchor — which is
+valid for isolating a tracker change but not for estimating quality, because
+**every decimated frame is byte-identical to the reference it is scored
+against** (75/75) while a live run shares none (0/74). Decimated basketball at
+2.5fps scores 0.767 IDF1; the live run at the same rate scores **0.595**. The
+harness flattered itself and we believed it for a day.
+
+The pattern across every low-rate experiment: reduced sampling survives on
+football-type broadcast footage and fails on a tight basketball camera. A
+footballer at broadcast distance barely moves in image terms between anchors; a
+basketball player covers several body heights and changes direction inside one.
+
+So 5fps is not obviously the optimum in principle — it was chosen from a
+geometric argument and confirmed rather than searched — but everything below it
+has now been searched, and 5fps wins.
 
 > **On latency.** Provider variance is larger than anything in our control, and
 > it has now been measured twice. The same basketball clip, same configuration,
@@ -172,16 +218,28 @@ interesting trade sits.
 > the committed video; the 36.5s original is kept here as the comparison.
 > That is why the target is
 > reported as a range rather than a figure. A dynamic straggler cut abandons the
-> slowest 3% of calls once 97% have returned, which costs four frames of 150 and
+> slowest 3% of calls once 97% have returned, which costs five frames of 150 and
 > a worst blind spell of 0.40s, comfortably inside the tracker's 0.60s coast.
 >
-> **The cut abandons the result, not the thread — so it does not shorten the
-> wall clock.** Instrumenting the volleyball re-run showed the last useful call
-> landing at 22.00s while the run did not end until 23.92s, because the process
-> cannot tear down until the abandoned sockets close. The cut is still doing its
-> real job, which is to stop the tracker waiting on data it has decided to live
-> without; it is simply not the latency saving it looks like. Known, measured,
-> not yet fixed: the fix is to stop joining abandoned futures, not to cut sooner.
+> **The cut looked useless for a while, and the diagnosis was one layer off.**
+> Instrumenting the volleyball re-run showed the last useful call landing at
+> 22.00s while the run did not end until 23.92s. The cause was not the cut but
+> `with ThreadPoolExecutor(...)`, whose exit calls `shutdown(wait=True)` and
+> blocks until every worker finishes — including the stragglers whose answers
+> had just been abandoned. We stopped *using* the slow results and then waited
+> for them anyway. Fixed by waiting with a deadline
+> (`wait(..., timeout=..., return_when=FIRST_COMPLETED)`) and shutting down with
+> `wait=False, cancel_futures=True`. Confirmed live: 16 calls with the cut
+> forced at 50%, three abandoned, process out **0.33s** after the last kept call
+> against 1.92s before.
+>
+> **The mechanism works; the saving does not.** Run end to end on
+> `football_cuts` with the cut enabled: **22.3s against the shipped run's
+> 22.4s**, on a worse provider draw. The 8–20% once projected here compared p97
+> to the observed maximum and ignored the 1.5s grace period and 1.26s of
+> teardown-and-write that sit between them. Kept enabled because it is correct,
+> free, and bounds the tail on a bad day — but it is not a latency saving and
+> should not be quoted as one.
 >
 > One further gap: **`ffmpeg` frame extraction (2.09s) sits outside the wall
 > clock above**, which is measured across the call pool. True end to end for
@@ -191,6 +249,11 @@ interesting trade sits.
 |---|---|---|
 | cost per video | under $1.00 | **$0.47** ✅ |
 | processing time | under 15s, 25s accepted | 21–27s ⚠️ |
+
+The processing-time row is the shipped runs. A later run with the repaired
+straggler cut enabled came back at 22.3s against the same clip's 22.4s, so the
+range above stands — provider variance (43% on identical configurations) is
+still larger than anything in our control.
 | output is a video | yes | ✅ |
 | every player marked | yes | ✅ |
 | teams marked differently | yes | ✅ |
@@ -229,6 +292,28 @@ number is 8–10 pixels tall, which is below what the encoder can resolve. Most
 players therefore carry a stable invented identifier instead — permitted by the
 brief, and stated rather than hidden.
 
+**Cost cannot go much below $0.47, and we know exactly why.** Between 60% and
+78% of every output token is the model's own reasoning, which we pay for at the
+same rate as the answer ($1.87/1M output, $0.38/1M input, fitted to five
+decimals) and then discard. It is the only pool large enough to matter — the
+answer itself is 33.6–37.0 tokens per player across three sports, near the floor
+for four numbers, a colour word and a jersey number.
+
+The API exposes two ways to shrink it and **both are the same switch**.
+`effort: low` zeroes reasoning; `reasoning.max_tokens: 600` also zeroes it
+rather than granting a budget. With reasoning off, two of three test frames
+returned **every box off the 0..1 scale**. The answer length barely changes
+(318 → 328 tokens) — only the coordinates break, because the model is not
+reasoning about sport, it is doing per-player arithmetic to normalise pixel
+positions into fractions. Reasoning here is load-bearing.
+
+**Adaptive sampling from optical flow does not generalise.** Profiling motion
+before any API call and densifying only the intervals that need it covers 57%
+of the fragmentation on `allstars` against 25% expected by chance — but exactly
+25% on basketball, which is chance. A tight camera on continuous play has no
+quiet interval to steal frames from. The profile also costs 5.4s that cannot be
+overlapped, since the schedule must be fixed before dispatch.
+
 ---
 
 ## Layout
@@ -237,7 +322,8 @@ brief, and stated rather than hidden.
 clips/              five 30s inputs, 720p to render and 1080p to detect
 outputs/detections/ per-frame model output — the evidence behind every claim
 outputs/tracks/     tracker output; re-render from here with no API key
-outputs/videos/     the five deliverables
+outputs/bridge/     optical-flow predictions, one file per run
+outputs/videos/     the five deliverables (+ legacy/ for superseded renders)
 docs/decisions.md   every decision with the measurement that justifies it
 docs/report.md      method, findings, ablation
 docs/run_log.jsonl  every API call ever made, with its real cost

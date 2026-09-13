@@ -1,0 +1,1272 @@
+{
+ "clip": "basketball_1080.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 5.0,
+ "width": null,
+ "tag": "teardown_test",
+ "ts": "2026-09-13T05:52:21.719562+00:00",
+ "effort": null,
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 25.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": true,
+  "ruler": false,
+  "grid": false,
+  "provider_order": [
+   "google-ai-studio/flex"
+  ]
+ },
+ "prompt_version": "v4",
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 9.142929199995706,
+ "n_source_frames": 900,
+ "frames": [
+  {
+   "frame": 0,
+   "scene": "Wide-angle broadcast of an NBA basketball game with white kits for the Lakers and blue kits for the Warriors under bright arena lighting.",
+   "players": [
+    {
+     "x": 0.138,
+     "y": 0.448,
+     "w": 0.052,
+     "h": 0.169,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.435,
+     "y": 0.488,
+     "w": 0.038,
+     "h": 0.191,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.509,
+     "y": 0.428,
+     "w": 0.033,
+     "h": 0.16,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.528,
+     "y": 0.334,
+     "w": 0.031,
+     "h": 0.158,
+     "kit": "blue",
+     "num": 22,
+     "conf": 1.0
+    },
+    {
+     "x": 0.643,
+     "y": 0.45,
+     "w": 0.036,
+     "h": 0.17,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.651,
+     "y": 0.503,
+     "w": 0.057,
+     "h": 0.187,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.669,
+     "y": 0.521,
+     "w": 0.057,
+     "h": 0.207,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.725,
+     "y": 0.563,
+     "w": 0.063,
+     "h": 0.194,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.768,
+     "y": 0.547,
+     "w": 0.04,
+     "h": 0.168,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 60,
+   "scene": "Wide camera angle of an indoor basketball game with Los Angeles Lakers in white and Golden State Warriors in blue under bright arena lighting.",
+   "players": [
+    {
+     "x": 0.184,
+     "y": 0.42,
+     "w": 0.05,
+     "h": 0.156,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    },
+    {
+     "x": 0.239,
+     "y": 0.418,
+     "w": 0.047,
+     "h": 0.161,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.395,
+     "y": 0.521,
+     "w": 0.046,
+     "h": 0.207,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.489,
+     "y": 0.474,
+     "w": 0.043,
+     "h": 0.193,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.514,
+     "y": 0.329,
+     "w": 0.046,
+     "h": 0.162,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.587,
+     "y": 0.28,
+     "w": 0.043,
+     "h": 0.137,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.686,
+     "y": 0.481,
+     "w": 0.058,
+     "h": 0.187,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.738,
+     "y": 0.485,
+     "w": 0.048,
+     "h": 0.206,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.71,
+     "y": 0.548,
+     "w": 0.04,
+     "h": 0.183,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.762,
+     "y": 0.579,
+     "w": 0.053,
+     "h": 0.219,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.185,
+    "y": 0.476,
+    "w": 0.012,
+    "h": 0.023,
+    "conf": 0.9
+   }
+  },
+  {
+   "frame": 120,
+   "scene": "A basketball court with bright arena lighting, featuring the Los Angeles Lakers in white jerseys and the Golden State Warriors in blue jerseys.",
+   "players": [
+    {
+     "x": 0.17,
+     "y": 0.267,
+     "w": 0.057,
+     "h": 0.207,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.29,
+     "y": 0.329,
+     "w": 0.065,
+     "h": 0.187,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.45,
+     "y": 0.297,
+     "w": 0.063,
+     "h": 0.171,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.505,
+     "y": 0.267,
+     "w": 0.046,
+     "h": 0.158,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.528,
+     "y": 0.531,
+     "w": 0.04,
+     "h": 0.256,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.556,
+     "y": 0.442,
+     "w": 0.053,
+     "h": 0.2,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.439,
+     "w": 0.062,
+     "h": 0.172,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.623,
+     "y": 0.589,
+     "w": 0.044,
+     "h": 0.224,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.647,
+     "y": 0.573,
+     "w": 0.058,
+     "h": 0.211,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.672,
+     "y": 0.456,
+     "w": 0.051,
+     "h": 0.244,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 180,
+   "scene": "A wide view of a basketball court under indoor arena lights with the Lakers wearing white and the Warriors wearing blue.",
+   "players": [
+    {
+     "x": 0.093,
+     "y": 0.37,
+     "w": 0.057,
+     "h": 0.203,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.22,
+     "y": 0.395,
+     "w": 0.052,
+     "h": 0.187,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.267,
+     "y": 0.473,
+     "w": 0.071,
+     "h": 0.228,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.334,
+     "y": 0.485,
+     "w": 0.072,
+     "h": 0.177,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.631,
+     "y": 0.338,
+     "w": 0.035,
+     "h": 0.186,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.467,
+     "w": 0.07,
+     "h": 0.227,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.748,
+     "y": 0.288,
+     "w": 0.034,
+     "h": 0.165,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.729,
+     "y": 0.443,
+     "w": 0.061,
+     "h": 0.219,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.751,
+     "y": 0.468,
+     "w": 0.075,
+     "h": 0.244,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.71,
+     "y": 0.54,
+     "w": 0.058,
+     "h": 0.262,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.269,
+    "y": 0.513,
+    "w": 0.019,
+    "h": 0.036,
+    "conf": 0.77
+   }
+  },
+  {
+   "frame": 240,
+   "scene": "A high wide-angle shot of a basketball court under bright arena lights, with one team wearing white jerseys and the other wearing blue jerseys.",
+   "players": [
+    {
+     "x": 0.168,
+     "y": 0.347,
+     "w": 0.047,
+     "h": 0.197,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    },
+    {
+     "x": 0.185,
+     "y": 0.513,
+     "w": 0.077,
+     "h": 0.189,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.282,
+     "y": 0.493,
+     "w": 0.063,
+     "h": 0.179,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.323,
+     "y": 0.404,
+     "w": 0.054,
+     "h": 0.134,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.352,
+     "y": 0.47,
+     "w": 0.069,
+     "h": 0.21,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.437,
+     "y": 0.449,
+     "w": 0.062,
+     "h": 0.21,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.735,
+     "y": 0.479,
+     "w": 0.048,
+     "h": 0.228,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.796,
+     "y": 0.472,
+     "w": 0.079,
+     "h": 0.183,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.785,
+     "y": 0.528,
+     "w": 0.098,
+     "h": 0.231,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.897,
+     "y": 0.497,
+     "w": 0.073,
+     "h": 0.237,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.245,
+    "y": 0.614,
+    "w": 0.027,
+    "h": 0.038,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 300,
+   "scene": "A wide broadcast shot of a basketball game under arena lighting, with one team wearing white jerseys and the other blue.",
+   "players": [
+    {
+     "x": 0.068,
+     "y": 0.369,
+     "w": 0.041,
+     "h": 0.207,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    },
+    {
+     "x": 0.344,
+     "y": 0.419,
+     "w": 0.067,
+     "h": 0.165,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.472,
+     "y": 0.387,
+     "w": 0.062,
+     "h": 0.164,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.521,
+     "y": 0.404,
+     "w": 0.066,
+     "h": 0.207,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.49,
+     "y": 0.486,
+     "w": 0.069,
+     "h": 0.187,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.485,
+     "y": 0.508,
+     "w": 0.048,
+     "h": 0.239,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.449,
+     "w": 0.052,
+     "h": 0.198,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.584,
+     "y": 0.547,
+     "w": 0.067,
+     "h": 0.222,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.657,
+     "y": 0.513,
+     "w": 0.052,
+     "h": 0.222,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.803,
+     "y": 0.533,
+     "w": 0.077,
+     "h": 0.245,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.765,
+    "y": 0.492,
+    "w": 0.019,
+    "h": 0.03,
+    "conf": 0.88
+   }
+  },
+  {
+   "frame": 360,
+   "scene": "Wide broadcast angle of a basketball court under bright arena lights, with the Lakers in white uniforms and the Warriors in blue.",
+   "players": [
+    {
+     "x": 0.049,
+     "y": 0.354,
+     "w": 0.044,
+     "h": 0.222,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    },
+    {
+     "x": 0.317,
+     "y": 0.384,
+     "w": 0.069,
+     "h": 0.171,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.273,
+     "y": 0.537,
+     "w": 0.064,
+     "h": 0.264,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.385,
+     "y": 0.518,
+     "w": 0.089,
+     "h": 0.208,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.414,
+     "y": 0.581,
+     "w": 0.088,
+     "h": 0.231,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.463,
+     "y": 0.496,
+     "w": 0.093,
+     "h": 0.226,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.559,
+     "y": 0.269,
+     "w": 0.052,
+     "h": 0.198,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.598,
+     "y": 0.315,
+     "w": 0.049,
+     "h": 0.208,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.65,
+     "y": 0.522,
+     "w": 0.051,
+     "h": 0.203,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.677,
+     "y": 0.575,
+     "w": 0.063,
+     "h": 0.216,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.688,
+    "y": 0.693,
+    "w": 0.021,
+    "h": 0.038,
+    "conf": 0.75
+   }
+  },
+  {
+   "frame": 420,
+   "scene": "A wide broadcast shot of a basketball court under bright arena lighting with the Lakers in white and the Warriors in blue.",
+   "players": [
+    {
+     "x": 0.059,
+     "y": 0.342,
+     "w": 0.043,
+     "h": 0.208,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.098,
+     "y": 0.476,
+     "w": 0.049,
+     "h": 0.233,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.301,
+     "y": 0.363,
+     "w": 0.046,
+     "h": 0.204,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.32,
+     "y": 0.404,
+     "w": 0.063,
+     "h": 0.197,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.346,
+     "y": 0.505,
+     "w": 0.078,
+     "h": 0.188,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    },
+    {
+     "x": 0.463,
+     "y": 0.283,
+     "w": 0.054,
+     "h": 0.187,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.567,
+     "y": 0.354,
+     "w": 0.056,
+     "h": 0.182,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.516,
+     "y": 0.51,
+     "w": 0.088,
+     "h": 0.186,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.559,
+     "y": 0.54,
+     "w": 0.079,
+     "h": 0.2,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.749,
+     "y": 0.528,
+     "w": 0.066,
+     "h": 0.252,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.789,
+    "y": 0.62,
+    "w": 0.018,
+    "h": 0.032,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 480,
+   "scene": "Overhead wide shot of an indoor basketball court with players wearing white and blue kits under bright arena lighting.",
+   "players": [
+    {
+     "x": 0.373,
+     "y": 0.508,
+     "w": 0.076,
+     "h": 0.28,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.709,
+     "y": 0.627,
+     "w": 0.075,
+     "h": 0.27,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.678,
+     "y": 0.514,
+     "w": 0.063,
+     "h": 0.248,
+     "kit": "blue",
+     "num": 22,
+     "conf": 1.0
+    },
+    {
+     "x": 0.505,
+     "y": 0.369,
+     "w": 0.088,
+     "h": 0.26,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.548,
+     "y": 0.354,
+     "w": 0.061,
+     "h": 0.258,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.474,
+     "y": 0.402,
+     "w": 0.052,
+     "h": 0.264,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.538,
+    "y": 0.378,
+    "w": 0.021,
+    "h": 0.036,
+    "conf": 0.78
+   }
+  },
+  {
+   "frame": 540,
+   "scene": "A wide angle basketball broadcast frame showing Golden State in blue jerseys and the Los Angeles Lakers in white jerseys under indoor stadium lighting.",
+   "players": [
+    {
+     "x": 0.617,
+     "y": 0.278,
+     "w": 0.082,
+     "h": 0.177,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.378,
+     "y": 0.352,
+     "w": 0.088,
+     "h": 0.245,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.334,
+     "y": 0.414,
+     "w": 0.088,
+     "h": 0.228,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.569,
+     "y": 0.465,
+     "w": 0.071,
+     "h": 0.264,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.666,
+     "y": 0.548,
+     "w": 0.093,
+     "h": 0.261,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.36,
+     "y": 0.638,
+     "w": 0.078,
+     "h": 0.242,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.392,
+     "y": 0.627,
+     "w": 0.081,
+     "h": 0.246,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.628,
+    "y": 0.361,
+    "w": 0.019,
+    "h": 0.033,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 600,
+   "scene": "A wide shot of a basketball court with the Lakers in white and the Warriors in blue.",
+   "players": [
+    {
+     "x": 0.06,
+     "y": 0.46,
+     "w": 0.088,
+     "h": 0.252,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.171,
+     "y": 0.575,
+     "w": 0.084,
+     "h": 0.264,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.237,
+     "y": 0.43,
+     "w": 0.05,
+     "h": 0.234,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.264,
+     "y": 0.368,
+     "w": 0.054,
+     "h": 0.224,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.288,
+     "y": 0.512,
+     "w": 0.082,
+     "h": 0.274,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.297,
+     "y": 0.294,
+     "w": 0.046,
+     "h": 0.203,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.422,
+     "y": 0.354,
+     "w": 0.057,
+     "h": 0.228,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.485,
+     "y": 0.472,
+     "w": 0.071,
+     "h": 0.246,
+     "kit": "blue",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.589,
+     "y": 0.267,
+     "w": 0.07,
+     "h": 0.172,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.877,
+     "y": 0.467,
+     "w": 0.096,
+     "h": 0.217,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.878,
+    "y": 0.631,
+    "w": 0.018,
+    "h": 0.03,
+    "conf": 0.95
+   }
+  },
+  {
+   "frame": 660,
+   "scene": "A wide broadcast view of a basketball game under indoor arena lights, with one team wearing white and the other wearing blue.",
+   "players": [
+    {
+     "x": 0.148,
+     "y": 0.563,
+     "w": 0.051,
+     "h": 0.271,
+     "kit": "blue",
+     "num": 22,
+     "conf": 1.0
+    },
+    {
+     "x": 0.19,
+     "y": 0.49,
+     "w": 0.063,
+     "h": 0.239,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.38,
+     "y": 0.339,
+     "w": 0.058,
+     "h": 0.21,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.45,
+     "y": 0.354,
+     "w": 0.063,
+     "h": 0.224,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.294,
+     "w": 0.046,
+     "h": 0.19,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.534,
+     "y": 0.228,
+     "w": 0.041,
+     "h": 0.16,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.592,
+     "y": 0.285,
+     "w": 0.046,
+     "h": 0.208,
+     "kit": "blue",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.627,
+     "y": 0.511,
+     "w": 0.066,
+     "h": 0.2,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.713,
+     "y": 0.381,
+     "w": 0.047,
+     "h": 0.228,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.835,
+     "y": 0.509,
+     "w": 0.084,
+     "h": 0.234,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.828,
+    "y": 0.634,
+    "w": 0.023,
+    "h": 0.035,
+    "conf": 0.85
+   }
+  },
+  {
+   "frame": 894,
+   "scene": "Wide-angle broadcast view of an indoor basketball court under arena lighting, with Lakers in white jerseys and Warriors in blue.",
+   "players": [
+    {
+     "x": 0.526,
+     "y": 0.312,
+     "w": 0.057,
+     "h": 0.22,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    },
+    {
+     "x": 0.751,
+     "y": 0.317,
+     "w": 0.054,
+     "h": 0.246,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.601,
+     "y": 0.446,
+     "w": 0.071,
+     "h": 0.285,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.854,
+     "y": 0.536,
+     "w": 0.084,
+     "h": 0.291,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    },
+    {
+     "x": 0.355,
+     "y": 0.362,
+     "w": 0.076,
+     "h": 0.234,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.368,
+     "y": 0.38,
+     "w": 0.06,
+     "h": 0.171,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.776,
+     "y": 0.551,
+     "w": 0.052,
+     "h": 0.289,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.373,
+    "y": 0.214,
+    "w": 0.019,
+    "h": 0.032,
+    "conf": 0.77
+   }
+  }
+ ],
+ "dropped": [
+  {
+   "frame": 720,
+   "error": "abandoned (straggler cut)"
+  },
+  {
+   "frame": 780,
+   "error": "abandoned (straggler cut)"
+  },
+  {
+   "frame": 840,
+   "error": "abandoned (straggler cut)"
+  }
+ ]
+}

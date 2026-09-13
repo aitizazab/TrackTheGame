@@ -61,3 +61,10 @@ thinking cap*
 
 # A peer's review of this project, shared privately. His content, his roadmap - not ours to publish.
 aiti report review*
+
+# Analysis scratch: regenerable from committed detections at zero cost.
+# _sweep alone is 444MB.
+outputs/tracks/_*/
+# Optical-flow predictions: derived from detections + clips by bridge.py,
+# deterministic, and 15MB. Rebuild rather than store.
+outputs/bridge/

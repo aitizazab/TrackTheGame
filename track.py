@@ -89,6 +89,32 @@ GATE_SPEED_HEADROOM = 4.0
 # stand in the clip. Measured on three runs; 1.5 halves the jumping frames and
 # 1.0 is past the point where the gate stops covering real motion.
 GATE_SPACING_MUL = 1.5
+
+# Share of tracks that must agree on the same camera shift before that shift is
+# applied. Below it the estimate is discarded and NO compensation is used, which
+# is a strong choice made on weak evidence: a wrong global offset drags every
+# prediction sideways, but so does using none while the camera is moving. 0.50
+# is the value it shipped with and was never swept. `--cam-support` exists to
+# sweep it; `camera_diag` in the output records, per anchor, what the vote was
+# and whether it was thrown away.
+CAM_SUPPORT_MIN = 0.50
+# Loaded by --bridge. A dict {"gaps": {"a-b": [per-detection record, ...]}}
+# produced by bridge.py from the DETECTIONS file alone. Kept in a one-element
+# list for the same reason CLIP_SPACING is: match() must read it without
+# threading another parameter through.
+BRIDGE = [None]
+# --bridge-observe: load the bridge, change no association, and record for every
+# matched (track, detection) pair how far the Kalman prediction and the bridge
+# prediction each landed from the detection the tracker actually took. A PAIRED
+# comparison on identical decisions, which is the only way to attribute a
+# difference to the predictor rather than to the different history a changed
+# association produces.
+BRIDGE_OBSERVE = [False]
+BRIDGE_ROWS = []
+BRIDGE_MODE = ["replace"]      # replace | blend | union
+BRIDGE_ALPHA = [1.0]           # blend weight on the bridge; 0 = pure Kalman
+BRIDGE_RESCUES = []
+BRIDGE_AMBIG_N = [2]            # detections in gate before the bridge is consulted
 # Filled in by run() from the detections. A one-element list so gate_width can
 # read it without threading a parameter through match().
 CLIP_SPACING = [None]
@@ -237,11 +263,44 @@ COAST_DAMP = 0.72           # velocity decay per frame while unmatched
 # edge. A track whose coasted centre crosses the boundary has left the picture;
 # stop predicting and let re-entry start a clean track.
 EDGE_MARGIN = 0.015         # a coasted centre this far outside [0,1] is gone
+# How close to a vertical frame edge a dying track must be before the bridge is
+# consulted instead of the coast timer. In BODY HEIGHTS, so it means the same
+# thing for a player near the camera and one at the far touchline. 1.0 is the
+# band where measured deaths stop looking like real exits: at 5fps the median
+# death sits at 0.14 bh from the edge, at 2.5fps at 0.58.
+EDGE_TEST_BH = 1.0
+# The reprieve is bounded. Optical flow that still has the patch is evidence,
+# but it is evidence about pixels, and a patch can survive on the wrong player.
+# 2x caps the damage at one extra coast's worth of drawing.
+EDGE_REPRIEVE_MUL = 2.0
+EDGE_REPRIEVE_ON = [True]   # --no-edge-reprieve, for the A/B
 # Longer than this between two observations and the marker is NOT drawn across
 # the gap. Short absences still interpolate — the player did not teleport — but
 # a long one is where interpolation stops being a plausible guess and becomes a
 # marker gliding through empty space to wherever the track resumed.
-MAX_DRAW_GAP_S = 0.50
+#
+# EXPRESSED IN ANCHOR INTERVALS, not seconds. It was 0.50s, and at the shipped
+# 5fps that is exactly 2.5 sampling intervals — i.e. "join across one missed
+# anchor, never two". That is a statement about SAMPLING, and seconds was only
+# ever a proxy for it that happened to be right at one rate.
+#
+# The proxy breaks the moment the rate moves, and it breaks silently. One missed
+# anchor is 0.40s at 5fps (inside 0.50, invisible) but 0.67s at 3fps and 0.80s
+# at 2.5fps — both outside it. So dropping the sample rate, which is the whole
+# point of the low-fps work, converted this from "tolerates one miss" into
+# "tolerates none", and every single-anchor miss in the clip became a visible
+# hole with a fade either side. Measured on allstars at 3fps: 27 holes and 290
+# lost player-frames at 0.50s, against 0 at the equivalent value.
+#
+# 2.5 intervals reproduces the shipped 5fps behaviour exactly (2.5 x 0.20 =
+# 0.50) and self-corrects elsewhere: 0.83s at 3fps, 1.00s at 2.5fps. The sweep
+# shows a flat plateau above one missed anchor — 0.70, 0.90 and 1.10 give
+# identical output at 3fps — so this sits in an empty band rather than on a
+# tuned point, and the worst marker speed is unchanged at every value tested
+# (0.398 allstars, 0.351 basketball), meaning the distance test below is what
+# actually prevents gliding. `--draw-gap` still overrides in seconds.
+MAX_DRAW_GAP_INTERVALS = 2.5
+MAX_DRAW_GAP_S = 0.50       # recomputed from the above once the rate is known
 # A 9 m/s sprint across a ~68m pitch is ~0.13 fraction units/sec. 0.22 leaves
 # headroom for camera motion and box jitter; past it, it is not a player.
 MAX_PLAYER_SPEED = 0.22
@@ -707,6 +766,7 @@ class Track:
         self.num_votes = defaultdict(float)   # number -> summed confidence
         self.num_counts = Counter()           # number -> how many times seen
         self.obs = []                          # (frame, x, y, w, h) for interpolation
+        self.last_det_j = None                 # raw detection index last matched
         self.absorb(det, frame, t)
 
     def absorb(self, det, frame, t):
@@ -722,6 +782,7 @@ class Track:
         self.obs.append((frame, fx, fy, self.w, self.h))
         self.last_t = t
         self.last_frame = frame
+        self.last_det_j = det.get("_j")
 
     @property
     def kit(self):
@@ -1088,10 +1149,17 @@ def reject_outliers(o, src_fps):
     return keep
 
 
-def match(tracks, preds, dets, dt, cam, team_of):
+def match(tracks, preds, dets, dt, cam, team_of, bpred=None):
     """Hungarian assignment of predicted track positions to detections.
 
     Returns (pairs, unmatched_track_idx, unmatched_det_idx).
+
+    `bpred`, when given, is a per-track visual-bridge position (or None) that
+    REPLACES the Kalman prediction for that track only. It is already in screen
+    coordinates at this frame - optical flow follows the pan - so the camera
+    offset is deliberately NOT added to it. Everything downstream (the gate, the
+    residual test) then measures against where the pixels say the player went
+    rather than where constant velocity says.
     """
     if not tracks or not dets:
         return [], list(range(len(tracks))), list(range(len(dets)))
@@ -1105,11 +1173,52 @@ def match(tracks, preds, dets, dt, cam, team_of):
         # BoT-SORT: shift the prediction by the estimated camera motion before
         # comparing. Under a pan every prediction is wrong in the same direction,
         # which is exactly the error a global offset removes.
-        px, py = pred[0] + cam[0], pred[1] + cam[1]
+        kx, ky = pred[0] + cam[0], pred[1] + cam[1]
+        bb = bpred[i] if bpred is not None else None
+        if bb is not None and BRIDGE_MODE[0] == "ambiguous":
+            # THE CRUX, MADE INTO A SWITCH. The bridge's advantage over the
+            # Kalman is not uniform: measured pair by pair on basketball it wins
+            # 66.8% of decisions where only one detection is in gate and 83.3%
+            # where three are, and its median error falls from 0.240 to 0.143
+            # spacings on exactly those crowded decisions. Geometry is
+            # sufficient when the gate holds one candidate - there is nothing to
+            # adjudicate - and insufficient when it holds several. So spend the
+            # bridge only there, and leave every unambiguous decision on the
+            # estimator that is already right.
+            g0 = gate_width(tr.h, dt)
+            nin = sum(1 for q in dets
+                      if np.hypot(foot(q)[0] - kx, foot(q)[1] - ky) <= g0)
+            if nin < BRIDGE_AMBIG_N[0]:
+                bb = None
+        if bb is None:
+            px, py = kx, ky
+        elif BRIDGE_MODE[0] in ("replace",):
+            px, py = bb
+        elif BRIDGE_MODE[0] in ("blend", "ambiguous"):
+            # A convex blend, not a replacement. The bridge carries an error bar
+            # and the Kalman does not, but the bridge's errors are also the
+            # catastrophic kind - a lost patch lands on another player - while
+            # the Kalman's are smooth. Weighting rather than switching is the
+            # only form of "use both" that degrades gracefully in both
+            # directions, and alpha is swept, not chosen.
+            al = BRIDGE_ALPHA[0]
+            px, py = kx + al * (bb[0] - kx), ky + al * (bb[1] - ky)
+        else:                                   # "union"
+            px, py = kx, ky                     # handled per-detection below
         gate = gate_width(tr.h, dt)
         for j, d in enumerate(dets):
             fx, fy = foot(d)
-            dist = float(np.hypot(fx - px, fy - py))
+            qx, qy = px, py                  # the prediction THIS pair is judged from
+            dist = float(np.hypot(fx - qx, fy - qy))
+            if bb is not None and BRIDGE_MODE[0] == "union":
+                # Two predictions, and a detection only has to be reachable from
+                # ONE of them. The union cannot lose a candidate the Kalman
+                # alone would have found, which is the failure mode "replace"
+                # has; what it risks instead is admitting a candidate neither
+                # predictor should have reached, which is what the sweep tests.
+                db = float(np.hypot(fx - bb[0], fy - bb[1]))
+                if db < dist:
+                    dist, qx, qy = db, bb[0], bb[1]
             rec = None
             if log_on:
                 rec = {"frame": COST_LOG["frame"], "stage": COST_LOG["stage"],
@@ -1138,7 +1247,7 @@ def match(tracks, preds, dets, dt, cam, team_of):
                 # Residual from the constant-velocity prediction, in body
                 # heights. NO dt term: `pred` already extrapolated over dt, so
                 # dividing again is what let a dropped frame hide a fly-out.
-                r_bh = float(np.hypot((fx - px) * FRAME_ASPECT, fy - py)) \
+                r_bh = float(np.hypot((fx - qx) * FRAME_ASPECT, fy - qy)) \
                     / max(tr.h, 0.02)
                 if rec:
                     rec["resid_bh"] = round(r_bh, 3)
@@ -1284,8 +1393,10 @@ def run(data, debug=False):
 
     active, finished, cuts, degenerate = [], [], [], []
     cam = (0.0, 0.0)
-    cam_cum, cam_at = [0.0, 0.0], {}
+    cam_cum, cam_at, cam_diag = [0.0, 0.0], {}, {}
+    edge_reprieves = []
     prev_t, prev_scene = None, None
+    prev_fi = None                 # previous anchor frame actually processed
     prev_med_h, prev_n = None, None
     prev_kits = Counter()
     # Association health, recorded every frame. Added after a run produced 392
@@ -1306,7 +1417,47 @@ def run(data, debug=False):
 
         preds = [tr.kf.predict(dt) for tr in active]
         raw_dets = f["players"]
+        # Tag each detection with its index in the RAW list before dedupe
+        # reorders and drops. bridge.py keys its predictions on that index
+        # because it reads the detections file and nothing else - which is what
+        # lets it run before, and concurrently with, this file.
+        for _j, _d in enumerate(raw_dets):
+            _d["_j"] = _j
         dets = dedupe(raw_dets)
+
+        # ---- visual bridge: pixel-measured displacement across the gap ------
+        #
+        # A track that matched detection j at the previous anchor gets the
+        # position optical flow followed that patch to, instead of the Kalman
+        # extrapolation. Only for tracks that HAVE such a record and whose
+        # bridge graded itself usable; everything else keeps the Kalman
+        # prediction, so this is strictly an override, never a replacement of
+        # the filter.
+        bpred_all = None
+        if BRIDGE[0] is not None and prev_fi is not None:
+            g = BRIDGE[0]["gaps"].get(f"{prev_fi}-{fi}")
+            if g:
+                bpred_all = []
+                for tr in active:
+                    r = None
+                    if tr.last_det_j is not None and tr.last_frame == prev_fi \
+                            and tr.last_det_j < len(g):
+                        rec = g[tr.last_det_j]
+                        if rec.get("verdict") == "OK":
+                            r = rec["pred"]
+                    bpred_all.append(r)
+                    # Cache it on the track. A bridge record exists only for
+                    # the anchor IMMEDIATELY after a sighting, but a track does
+                    # not die until it has missed two — so by the time the edge
+                    # test wants this, the live record is gone. The cached one
+                    # is one interval old and says exactly the thing the test
+                    # needs: where the pixels had got to at the end of the
+                    # interval following the last time we saw this player.
+                    if r is not None:
+                        tr.last_bpred = (fi, r)
+                if not any(x is not None for x in bpred_all):
+                    bpred_all = None
+        bpred = None if BRIDGE_OBSERVE[0] else bpred_all
 
         # A frame the model got stuck on carries no information — skip it.
         #
@@ -1444,7 +1595,7 @@ def run(data, debug=False):
         # is therefore nearly free to skip and actively harmful when the vote is
         # weak, because a noisy offset drags every prediction sideways. Apply it
         # only when a clear majority of tracks agree on the same shift.
-        cam = (cx, cy) if support >= 0.50 else (0.0, 0.0)
+        cam = (cx, cy) if support >= CAM_SUPPORT_MIN else (0.0, 0.0)
         # Accumulate it. A painted marking sits still ON THE PITCH, not on the
         # screen — under a pan it slides across the frame like everything else.
         # Summing the per-frame camera translation gives a roughly
@@ -1453,6 +1604,13 @@ def run(data, debug=False):
         cam_cum[0] += cam[0]
         cam_cum[1] += cam[1]
         cam_at[fi] = (cam_cum[0], cam_cum[1])
+        # RECORDED so the fallback above is auditable after the fact. Zeroing
+        # `cam` on a weak vote is a silent decision: it shows up only as tracks
+        # falling out of the gate together at one anchor, which looks exactly
+        # like a detection failure in the render. Without `support` in the
+        # output there is no way to tell those two apart from the file.
+        cam_diag[fi] = (round(cx, 4), round(cy, 4), round(support, 3),
+                        support < CAM_SUPPORT_MIN)
 
         # ---- D8 cut detection: REMOVED 31 Aug ----------------------------
         #
@@ -1478,8 +1636,36 @@ def run(data, debug=False):
         lo = [d for d in dets if d["conf"] < HIGH_CONF]
 
         COST_LOG["frame"], COST_LOG["stage"] = fi, "hi"
-        pairs, un_tr, un_hi = match(active, preds, hi, dt, cam, team_of)
+        # bpred is indexed by position in `active`; `hi`/`lo` split the
+        # detections, not the tracks, so it passes through unchanged here.
+        pairs, un_tr, un_hi = match(active, preds, hi, dt, cam, team_of, bpred)
         residuals = []
+        if BRIDGE_OBSERVE[0] and bpred_all is not None and len(dets) >= 2:
+            # local player spacing at THIS frame, aspect-corrected, so both
+            # errors are reported in the unit that decides whether a difference
+            # could mean "a different person"
+            _F = np.array([[foot(d)[0] * FRAME_ASPECT, foot(d)[1]] for d in dets])
+            _D = np.linalg.norm(_F[:, None, :] - _F[None, :, :], axis=2)
+            np.fill_diagonal(_D, 1e9)
+            _nn = float(np.median(_D.min(axis=1)))
+            for ti, di in pairs:
+                if bpred_all[ti] is None:
+                    continue
+                tr, d = active[ti], hi[di]
+                fx, fy = foot(d)
+                kx, ky = preds[ti][0] + cam[0], preds[ti][1] + cam[1]
+                bx, by = bpred_all[ti]
+                BRIDGE_ROWS.append({
+                    "frame": fi, "track": tr.id, "nn": round(_nn, 5),
+                    "h": round(float(tr.h), 5),
+                    "kal": round(float(np.hypot((fx - kx) * FRAME_ASPECT,
+                                                fy - ky)), 5),
+                    "brg": round(float(np.hypot((fx - bx) * FRAME_ASPECT,
+                                                fy - by)), 5),
+                    "n_in_gate": int(sum(
+                        1 for q in dets
+                        if np.hypot((foot(q)[0] - kx) * FRAME_ASPECT,
+                                    foot(q)[1] - ky) <= gate_width(tr.h, dt)))})
         for ti, di in pairs:
             tr, d = active[ti], hi[di]
             fx, fy = foot(d)
@@ -1503,8 +1689,9 @@ def run(data, debug=False):
         if un_tr and lo:
             sub = [active[i] for i in un_tr]
             subpred = [preds[i] for i in un_tr]
+            subb = [bpred[i] for i in un_tr] if bpred is not None else None
             COST_LOG["stage"] = "lo"
-            p2, un2, _ = match(sub, subpred, lo, dt, cam, team_of)
+            p2, un2, _ = match(sub, subpred, lo, dt, cam, team_of, subb)
             claimed = set()
             for si, di in p2:
                 tr, d = sub[si], lo[di]
@@ -1514,6 +1701,47 @@ def run(data, debug=False):
                 tr.absorb(d, fi, t)
                 claimed.add(un_tr[si])
             un_tr = [i for i in un_tr if i not in claimed]
+
+        # ---- RESCUE PASS: the bridge speaks only where geometry gave up -----
+        #
+        # Replacing the Kalman prediction with the bridge everywhere was
+        # measured and it is worse: the bridge wins the median only on
+        # basketball, and where it is wrong it is wrong catastrophically -
+        # a lost patch lands on another player and the gate is centred there,
+        # so a track that would have matched correctly now dies.
+        #
+        # This is the conservative form. Every decision the tracker already
+        # makes is left exactly as it was; the bridge is offered ONLY the
+        # tracks that found nobody and the detections about to become new
+        # tracks. That pairing is the fragmentation event itself - a track dies
+        # and a birth takes its place one frame later - so if the bridge is
+        # worth anything for identity, it is worth it here and nowhere else.
+        if BRIDGE_MODE[0] == "rescue" and bpred_all is not None \
+                and un_tr and un_hi:
+            cand = [i for i in un_tr if bpred_all[i] is not None]
+            if cand:
+                sub = [active[i] for i in cand]
+                subp = [bpred_all[i] for i in cand]
+                free = list(un_hi)
+                fd = [hi[j] for j in free]
+                # bpred is passed as the prediction AND as the bridge override,
+                # so cam is not added twice and the gate is centred on pixels.
+                p3, _, _ = match(sub, subp, fd, dt, (0.0, 0.0), team_of, subp)
+                took_t, took_d = set(), set()
+                for si, di in p3:
+                    tr, d = sub[si], fd[di]
+                    fx, fy = foot(d)
+                    gapl = t - tr.last_t
+                    if gapl > 2.5 * nominal_dt:
+                        tr.kf.retro_correct((fx, fy), gapl)
+                    tr.kf.update((fx, fy), d["conf"], d["h"], d.get("w"))
+                    tr.hits += 1
+                    tr.absorb(d, fi, t)
+                    took_t.add(cand[si])
+                    took_d.add(free[di])
+                    BRIDGE_RESCUES.append({"frame": fi, "track": tr.id})
+                un_tr = [i for i in un_tr if i not in took_t]
+                un_hi = [j for j in un_hi if j not in took_d]
 
         # ---- camera motion, from detections only (BoT-SORT, no pixels) ----
         if len(residuals) >= 3:
@@ -1546,6 +1774,30 @@ def run(data, debug=False):
             diag["kit_blocked"].append(kb)
             diag["gate_missed"].append(gm)
 
+        # UNMATCHED TRACKS. The paired comparison above only sees decisions the
+        # tracker made, which excludes by construction the population that
+        # fragments: a track that found nobody and later dies. For those, record
+        # how far each predictor sits from the nearest detection - the question
+        # is whether the bridge would have reached someone the Kalman could not.
+        if BRIDGE_OBSERVE[0] and bpred_all is not None and dets:
+            _F = np.array([[foot(d)[0] * FRAME_ASPECT, foot(d)[1]] for d in dets])
+            for i in un_tr:
+                if bpred_all[i] is None:
+                    continue
+                tr = active[i]
+                kx, ky = preds[i][0] + cam[0], preds[i][1] + cam[1]
+                bx, by = bpred_all[i]
+                gate = gate_width(tr.h, dt)
+                dk = float(np.min(np.linalg.norm(
+                    _F - np.array([kx * FRAME_ASPECT, ky]), axis=1)))
+                db = float(np.min(np.linalg.norm(
+                    _F - np.array([bx * FRAME_ASPECT, by]), axis=1)))
+                BRIDGE_ROWS.append({"frame": fi, "track": tr.id, "unmatched": 1,
+                                    "gate": round(gate, 5),
+                                    "h": round(float(tr.h), 5),
+                                    "kal_near": round(dk, 5),
+                                    "brg_near": round(db, 5)})
+
         for i in un_tr:
             active[i].kf.coast()
 
@@ -1576,11 +1828,49 @@ def run(data, debug=False):
                 continue
             if t - tr.last_t <= MAX_COAST_S:
                 still.append(tr)
-            elif tr.hits >= MIN_HITS:
+                continue
+            # ---- EDGE REPRIEVE: ask the pixels, not the clock ------------
+            #
+            # The death rule above is a TIMER, and a timer knows nothing about
+            # whether the player actually left. Measured on allstars: at 5fps a
+            # track dies a median 0.14 body heights from the frame edge, which
+            # is a player whose feet are on the boundary and who has genuinely
+            # gone. At 3fps that median is 0.67 and at 2.5fps 0.58 — the ring
+            # vanishes while the player is still visibly half a body height
+            # inside the picture. The rate drop did that, not the footage: one
+            # anchor interval is 0.4s at 2.5fps, so missing two anchors is 0.8s
+            # and already past MAX_COAST_S.
+            #
+            # The bridge can answer the question the timer cannot, because it
+            # measures where the PATCH went rather than extrapolating where the
+            # filter thinks it should be. If optical flow still has this
+            # player's points, graded usable by its own forward-backward check,
+            # and puts them inside the frame, the player has not left and the
+            # marker should stay. If the flow puts them past the boundary, the
+            # player has gone and the timer was right by luck.
+            #
+            # Deliberately narrow. It applies ONLY near a vertical edge, ONLY
+            # while the bridge grades itself usable, and it buys at most
+            # EDGE_REPRIEVE_MUL x MAX_COAST_S — an unbounded reprieve would
+            # resurrect the phantom markers that capping the coast removed.
+            near_edge = min(cx, 1.0 - cx) < EDGE_TEST_BH * max(tr.kf.h, 1e-6)
+            bp = getattr(tr, "last_bpred", None)
+            bp = bp[1] if bp else None
+            if (EDGE_REPRIEVE_ON[0] and near_edge and bp is not None
+                    and t - tr.last_t <= EDGE_REPRIEVE_MUL * MAX_COAST_S
+                    and -EDGE_MARGIN <= bp[0] <= 1 + EDGE_MARGIN
+                    and -EDGE_MARGIN <= bp[1] <= 1 + EDGE_MARGIN):
+                edge_reprieves.append({"frame": fi, "track": tr.id,
+                                       "x": round(cx, 4),
+                                       "bx": round(float(bp[0]), 4)})
+                still.append(tr)
+                continue
+            if tr.hits >= MIN_HITS:
                 finished.append(tr)
         active = still
 
         prev_t, prev_scene = t, f.get("scene", "")
+        prev_fi = fi
 
     finished.extend(tr for tr in active if tr.hits >= MIN_HITS)
 
@@ -1677,6 +1967,30 @@ def run(data, debug=False):
         # not motion. Drop the point and interpolate straight through the hole,
         # so the path stays continuous and the excursion never happens.
         o = reject_outliers(sorted(tr.obs), src_fps)
+        # RIGHT-CENSORING: TRIED, CORRECT, AND REVERTED 13 Sep. Kept as a
+        # comment because the reasoning is sound and the reason for reverting
+        # is not about the reasoning.
+        #
+        # The bar infers "spurious" from "short-lived", and that inference is
+        # invalid when the CLIP ends before a track could possibly have got
+        # long. Holding a track to `min(MIN_DRAW_SAMPLES, anchors remaining
+        # after its birth)` is the correct statistical treatment, and it
+        # recovered one genuine player on volleyball — the detector reports 11
+        # players at each of the last four anchors and only 10 were drawn.
+        #
+        # Reverted for one reason: it is the only change all week that makes a
+        # committed tracks file stop reproducing. README promises the render
+        # stages reproduce from the committed artefacts without an API key, and
+        # that promise is what the repo's evidence rests on. Worth 0.6s of one
+        # clip? No.
+        #
+        # It also does NOT fix the case that motivated it. football_cuts loses
+        # its final close-up because the model returned ZERO players at the
+        # last anchor (f894), so the replacement track has two sightings and
+        # dies at MIN_HITS — the track-validity bar — never reaching this one.
+        # Fixing that means censoring MIN_HITS, which decides whether a track
+        # is real at all, for one event in one clip caused by a detection
+        # failure. Not worth it. See D55.
         if len(o) < MIN_DRAW_SAMPLES:
             short_tracks += 1
             continue
@@ -1739,6 +2053,28 @@ def run(data, debug=False):
             # allstars against the 36 that the bridged gaps actually account for.
             bridged = span > sample_step
             moved = float(np.hypot(b[1] - a[1], b[2] - a[2]))
+            # TRIED AND REVERTED, 10 Sep: the same speed test applied to
+            # ADJACENT anchors, with camera motion subtracted first (cam_at is
+            # cumulative, so the camera's displacement across a gap is the
+            # difference of its endpoints, and a genuine pan therefore cannot
+            # trigger a split — which was the objection the comment above
+            # raises against testing adjacent pairs).
+            #
+            # It worked, narrowly: the marker flying across the court at
+            # basketball t+27.4s — 0.284 units/sec against a camera voting
+            # 0.009 — stopped being drawn. And it was not worth it. Like for
+            # like it cost 0.005 mean IDF1 and turned holes 0->7 on allstars,
+            # 1->8 on basketball, 12->15 on volleyball, and on screen those
+            # dropouts read worse than the glide they replaced. It also fixed
+            # only half the artefact: the outgoing marker stopped flying out,
+            # the incoming one still flew in, because a BIRTH has no previous
+            # observation for this test to look at.
+            #
+            # Kept as a comment rather than a flag because the finding is that
+            # splitting the DRAWING is the wrong layer. The two detections
+            # belong to different people; that is an association error, and
+            # refusing to draw it hides the symptom while leaving the identity
+            # wrong underneath.
             if gap_s > MAX_DRAW_GAP_S or (bridged and moved > MAX_PLAYER_SPEED * gap_s):
                 segs.append(cur)
                 cur = [b]
@@ -2159,7 +2495,10 @@ def run(data, debug=False):
         # and it invents nothing: the position is the one the model reported,
         # held for the interval it was sampled over, rather than extrapolated.
         # Never written over a bridged frame, and never across a cut.
-        hold = src_fps // max(data.get("fps") or 10, 1)
+        # int(): `//` returns a float when either operand is one, and a
+        # non-integer sample rate (2.5fps, from a decimated run) then made this
+        # 12.0 and blew up range(). Unchanged for every integer rate.
+        hold = int(src_fps // max(data.get("fps") or 10, 1))
         for r in seen:
             for k in range(1, hold):
                 f2 = r[0] + k
@@ -2351,6 +2690,9 @@ def run(data, debug=False):
         "camera_drift": [round(cam_cum[0], 4), round(cam_cum[1], 4)],
         "camera_track": [[f, round(v[0], 4), round(v[1], 4)]
                          for f, v in sorted(cam_at.items())],
+        # per anchor: [frame, voted dx, voted dy, support, was_discarded]
+        "camera_diag": [[f, *v] for f, v in sorted(cam_diag.items())],
+        "edge_reprieves": edge_reprieves,
         "diag": {k: ([round(float(np.percentile(v, p)), 3) for p in (10, 50, 90)]
                      if v else []) for k, v in diag.items()},
         "frames": out_frames,
@@ -2365,6 +2707,13 @@ def main():
                     help="disable the acceleration gate; for the A/B that "
                          "justifies it, and for measuring raw detection jitter")
     ap.add_argument("--debug", action="store_true")
+    ap.add_argument("--no-edge-reprieve", dest="edge_reprieve",
+                    action="store_false", default=True,
+                    help="disable the D55 edge reprieve, for the A/B")
+    ap.add_argument("--cam-support", type=float, default=None,
+                    help="override CAM_SUPPORT_MIN: the share of tracks that "
+                         "must agree before camera compensation is applied at "
+                         "all. Below it, NO compensation is used")
     ap.add_argument("--coast", type=float, default=None,
                     help="override MAX_COAST_S: how long a track survives unseen")
     ap.add_argument("--gate-spacing-mul", type=float, default=None,
@@ -2375,6 +2724,13 @@ def main():
                          "executes. The real mechanism at 3fps is that the gate "
                          "stays pinned while motion grows 1.67x, so it gets "
                          "relatively TIGHTER, not wider.")
+    ap.add_argument("--draw-gap", type=float, default=None,
+                    help="override MAX_DRAW_GAP_S. Like MAX_COAST_S this is in "
+                         "SECONDS and calibrated for a 0.2s sampling interval: "
+                         "at 5fps one missed anchor is 0.4s and clears both, at "
+                         "2.5fps the same single miss is 0.6s and exceeds both, "
+                         "blacking out every marker across the gap. The unit "
+                         "should be ANCHOR INTERVALS, not seconds.")
     ap.add_argument("--residual", type=float, default=None,
                     help="override MAX_RESIDUAL_BH. The gate is a DISPLACEMENT "
                          "in body heights (D27), so it represents a different "
@@ -2393,6 +2749,22 @@ def main():
                          "plausibly. Try 0.82")
     ap.add_argument("--reconfirm", action="store_true",
                     help="a lone sighting between two absences is not drawn")
+    ap.add_argument("--bridge", type=Path, default=None,
+                    help="a predictions file from bridge.py. Replaces the "
+                         "Kalman prediction with the optical-flow one for any "
+                         "track whose bridge graded itself usable. Off by "
+                         "default; the shipped configuration does not use it")
+    ap.add_argument("--bridge-observe", action="store_true",
+                    help="load the bridge but change no association; write the "
+                         "paired prediction-error comparison instead")
+    ap.add_argument("--bridge-rows", type=Path, default=None)
+    ap.add_argument("--bridge-mode", choices=["replace", "blend", "union", "rescue", "ambiguous"],
+                    default="replace")
+    ap.add_argument("--bridge-alpha", type=float, default=1.0,
+                    help="blend mode only: 0 = pure Kalman, 1 = pure bridge")
+    ap.add_argument("--bridge-ambig-n", type=int, default=2,
+                    help="ambiguous mode: consult the bridge only when at least "
+                         "this many detections sit inside the Kalman gate")
     ap.add_argument("--dump-costs", type=Path, default=None,
                     help="DEBUG. Write the full association cost matrix — every "
                          "(track, candidate) pair with its distance, gate, kit "
@@ -2405,21 +2777,40 @@ def main():
     if args.dump_costs is not None:
         COST_LOG["on"] = True
         COST_LOG["max_frame"] = args.dump_costs_until
+    EDGE_REPRIEVE_ON[0] = args.edge_reprieve
+    if args.cam_support is not None:
+        globals()["CAM_SUPPORT_MIN"] = args.cam_support
     if args.coast is not None:
         globals()["MAX_COAST_S"] = args.coast
     if args.ball_min_conf is not None:
         globals()["BALL_MIN_CONF"] = args.ball_min_conf
     if args.gate_spacing_mul is not None:
         globals()["GATE_SPACING_MUL"] = args.gate_spacing_mul
+    if args.draw_gap is not None:
+        globals()["MAX_DRAW_GAP_S"] = args.draw_gap
     if args.residual is not None:
         globals()["MAX_RESIDUAL_BH"] = args.residual
     if args.stick is not None:
         globals()["ON_BALL_STICK_S"] = args.stick
     RECONFIRM[0] = args.reconfirm
+    if args.bridge is not None:
+        BRIDGE[0] = json.loads(args.bridge.read_text(encoding="utf-8"))
+    BRIDGE_OBSERVE[0] = args.bridge_observe
+    BRIDGE_MODE[0] = args.bridge_mode
+    BRIDGE_ALPHA[0] = args.bridge_alpha
+    BRIDGE_AMBIG_N[0] = args.bridge_ambig_n
+    if args.bridge_observe and args.bridge_rows is None:
+        args.bridge_rows = Path("docs/bridge_pred_cmp.jsonl")
 
     if not args.detections.exists():
         sys.exit(f"no such file: {args.detections}")
     data = json.loads(args.detections.read_text(encoding="utf-8"))
+
+    # Scale the draw gap to this run's sampling interval. An explicit
+    # --draw-gap still wins, so every sweep already run stays reproducible.
+    if args.draw_gap is None:
+        _fps = data.get("fps") or data.get("fps_sampled") or SOURCE_FPS
+        globals()["MAX_DRAW_GAP_S"] = MAX_DRAW_GAP_INTERVALS / float(_fps)
 
     result, tracks, cuts, kit_counts = run(data, args.debug)
 
@@ -2432,6 +2823,14 @@ def main():
         # player-frame in the tracks json.
         print(f"  cost dump       {len(COST_LOG['rows'])} rows "
               f"-> {args.dump_costs}")
+
+    if BRIDGE_ROWS and args.bridge_rows is not None:
+        args.bridge_rows.parent.mkdir(parents=True, exist_ok=True)
+        with args.bridge_rows.open("w", encoding="utf-8") as fh:
+            for r in BRIDGE_ROWS:
+                fh.write(json.dumps(r) + "\n")
+        print(f"  bridge compare  {len(BRIDGE_ROWS)} paired rows "
+              f"-> {args.bridge_rows}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / (args.detections.stem + "__tracks.json")

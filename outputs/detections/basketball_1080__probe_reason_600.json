@@ -1,0 +1,137 @@
+{
+ "clip": "basketball_1080.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 5.0,
+ "width": null,
+ "tag": "probe_reason_600",
+ "ts": "2026-09-10T10:04:49.748878+00:00",
+ "effort": "600",
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 25.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": true,
+  "ruler": false,
+  "grid": false,
+  "provider_order": [
+   "google-ai-studio/flex"
+  ]
+ },
+ "prompt_version": "v4",
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 7.6841437999992195,
+ "n_source_frames": 900,
+ "frames": [
+  {
+   "frame": 822,
+   "scene": "Wide camera angle of a basketball court with players wearing white and blue uniforms under indoor arena lighting.",
+   "players": [
+    {
+     "x": 0.447,
+     "y": 0.454,
+     "w": 0.057,
+     "h": 0.227,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.525,
+     "w": 0.046,
+     "h": 0.258,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.499,
+     "y": 0.602,
+     "w": 0.052,
+     "h": 0.226,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    },
+    {
+     "x": 0.53,
+     "y": 0.571,
+     "w": 0.065,
+     "h": 0.211,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.686,
+     "y": 0.445,
+     "w": 0.071,
+     "h": 0.247,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.634,
+     "y": 0.391,
+     "w": 0.053,
+     "h": 0.237,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.675,
+     "y": 0.325,
+     "w": 0.051,
+     "h": 0.148,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.522,
+     "y": 0.266,
+     "w": 0.047,
+     "h": 0.187,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.485,
+     "y": 0.212,
+     "w": 0.044,
+     "h": 0.176,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.751,
+     "y": 0.258,
+     "w": 0.045,
+     "h": 0.212,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  }
+ ],
+ "dropped": [
+  {
+   "frame": 762,
+   "error": "coordinate corruption: 10 of 10 boxes invalid (10 off the 0..1 scale, 0 wider than 3.0:1)"
+  },
+  {
+   "frame": 798,
+   "error": "coordinate corruption: 10 of 10 boxes invalid (10 off the 0..1 scale, 0 wider than 3.0:1)"
+  }
+ ]
+}

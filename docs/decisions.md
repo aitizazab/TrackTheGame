@@ -1831,6 +1831,12 @@ misdetection has no reason to obey.
 
 ## D41 · The straggler cut disabled, and the deadline lowered to 25s
 
+> **SUPERSEDED IN PART BY D52 (10 Sep).** The cut is re-enabled at 0.97. The
+> observation here — that it did not shorten the wall clock — was correct; the
+> cause was the pool's own `shutdown(wait=True)`, not the cut. The 25s deadline
+> stands.
+
+
 The cut was the project's headline latency feature. It never worked, and the
 instrumentation added for D38 is what exposed it.
 
@@ -2109,6 +2115,13 @@ track births that 5fps does not have. **Not yet done. Nothing is wired in.**
 
 ## D46 · Phase 1 answers its question, and the answer is no
 
+> **OVERTURNED BY D53 (10 Sep).** This asked whether the bridge could pay for
+> *fewer frames*, and the answer to that is still no. It was never tested on the
+> shipped 5fps configuration, because 5fps was the reference every measurement
+> was taken against. Measured directly, the bridge cuts basketball from 22
+> identities to 18 against a 10-player roster, for +0.14s (D50).
+
+
 Two measurements finished the observe-only phase. The first fixed a broken
 metric; the second killed the idea.
 
@@ -2158,7 +2171,7 @@ Per track, which is the fair test:
 than surviving ones. Basketball's 1.56× rests on nine surviving tracks; 2/9
 against 9/26 is comfortably inside chance.
 
-### Verdict: do not build Phase 2
+### Verdict: do not build Phase 2  *(overturned — see D53)*
 
 The bridge works — 97.4% and 85.2% agreement with geometry on a physically
 meaningful criterion is evidence that both estimators are sound, and that is
@@ -2231,6 +2244,12 @@ been quoted in the report as evidence.
 
 ## D47 · The gate/spacing table describes a code path that never runs — and D43 was wrong
 
+> **The closing verdict is superseded by D53.** The gate analysis stands; the
+> conclusion that "a 7.2s optical-flow stage certainly does not earn its place"
+> rests on a cost figure that D50 replaces — the stage costs 0.14s concurrently,
+> not 7.2s serially.
+
+
 An independent audit of every constant in the project found this, and it is the
 most consequential finding in the log.
 
@@ -2293,7 +2312,7 @@ The failure was not the sweep, it was not knowing which constant was live. Four
 gate constants exist and three are inert; sweeping an inert one returns a flat
 line that reads as "insensitive, therefore safe" when it means "disconnected".
 
-**Consequence for D46:** the "do not build Phase 2" verdict is *strengthened*. If
+**Consequence for D46:** *(this paragraph is superseded by D53 — the stage costs 0.14s concurrently, not 7.2s serially.)* the "do not build Phase 2" verdict is *strengthened*. If
 a single constant recovers most of the gap, a 7.2s optical-flow stage certainly
 does not earn its place.
 
@@ -2305,6 +2324,545 @@ the sample interval rather than being reset. `--gate-spacing-mul` is added to
 `track.py` for the sweep. **The documents must be corrected regardless of whether
 the constant changes**, because they currently explain a shipped result with a
 mechanism that does not execute.
+
+---
+
+## D48 · Reasoning tokens are load-bearing, and the budget knob is a switch
+
+**This entry exists because its absence cost a whole session.** The finding was
+known — `detect.py` line 88 says "reasoning is 64% of all output tokens on this
+model" — but the *consequence* was never written down, so it was re-proposed
+twice on 10 Sep as a fresh idea and rejected from memory both times.
+
+### Where the money goes
+
+Least-squares fit over six calls, predicted cost matching actual to five
+decimal places:
+
+| | price |
+|---|---|
+| input | $0.38 per 1M tokens |
+| output | $1.87 per 1M tokens |
+
+**Reasoning is billed at the same rate as answer tokens, and only tokens
+actually generated are billed** — there is no charge for a budget you do not
+spend. Across the shipped runs:
+
+| run | prompt | completion | reasoning | answer | reasoning share |
+|---|---|---|---|---|---|
+| basketball_timed | 1212 | 1198 | 851 | 347 | 71% |
+| volleyball_timed | 1212 | 1231 | 820 | 411 | 67% |
+| allstars_fr_eng_v4 | 1212 | 1535 | 919 | 616 | 60% |
+| basketball_4fps_live | 1212 | 1125 | 742 | 384 | 66% |
+
+So 60–78% of every output token is the model thinking to itself, and none of it
+is retained. That is the only pool in the cost model large enough to reach a
+30¢ target from $0.4662.
+
+### Both mechanisms that could shrink it are the same cliff
+
+`reasoning: {effort: "low"}` was swept in A5 and zeroes reasoning outright.
+`reasoning: {max_tokens: 600}` was assumed to be the graded version of the same
+knob. It is not — measured on basketball's three most reasoning-hungry frames
+(762, 798, 822, chosen because their reasoning medians over 6–7 separate runs
+were the highest in the clip):
+
+| condition | reasoning | answer | cost/call | result |
+|---|---|---|---|---|
+| baseline | 906 / 1106 / 1223 | 318 / 310 / 336 | $0.00307 | 3/3 ok |
+| max_tokens 600 | **0 / 0 / 0** | 328 / 382 / 303 | $0.00109 | **2/3 coordinate corruption** |
+
+The provider does not grant a 600-token budget; it turns reasoning off. And
+with reasoning off, two of three frames returned **10 of 10 boxes off the 0..1
+scale**.
+
+### Why this task specifically needs it
+
+The answer token count barely moves (318 → 328). Only the *correctness of the
+coordinates* collapses. The model is not reasoning about basketball, it is
+reasoning about **arithmetic**: converting pixel positions into normalised
+fractions for 10–20 players is per-player division, and without reasoning it
+emits plausible-looking numbers on the wrong scale.
+
+### Consequence
+
+**The 30¢ target is closed, and not for want of trying.** The two mechanisms the
+API exposes both map to off, and off does not work. The remaining output is
+~34 tokens per player (measured at 33.6–37.0 across three sports), which is
+near the floor for four numbers, a colour word and a jersey number.
+
+Do not propose lowering reasoning effort again. If a future model separates
+"think less" from "think not at all", that is a different decision.
+
+---
+
+## D49 · The decimation harness cannot estimate quality — it shares content with its own reference
+
+`decimate.py` builds a lower-rate detections file by dropping anchors from a
+shipped run. Its docstring calls the shared content a virtue, and for its
+designed purpose — isolating a *tracker* change from model noise — it is one.
+It was then used for something else: estimating what a real low-fps run would
+look like. It cannot.
+
+```
+decimated frames IDENTICAL to the 5fps reference:  75/75
+live      frames IDENTICAL to the 5fps reference:   0/74
+```
+
+A decimated run is graded against detections it copied verbatim. A live run at
+the same rate is an independent draw. Measured on basketball at 2.5fps, same
+tracker, same settings, same bridge:
+
+| | IDF1 | frag | IDSW | identities (roster 10) |
+|---|---|---|---|---|
+| decimated | 0.767 | 2.63 | 41 | 20 |
+| **live** | **0.595** | **4.23** | **73** | **28** |
+
+**Every 2.5fps quality figure produced before 10 Sep is optimistic by roughly
+this margin.** Decimated numbers are valid only for comparing two tracker
+configurations against each other, never for "what would this rate give us".
+
+---
+
+## D50 · The visual bridge runs concurrently with the calls — 5.90s becomes 0.14s
+
+D44 measured optical-flow bridging at 6.4–7.4s and treated that as its cost.
+That is the cost of running it as a serial block afterwards, not the cost of
+the work. Two facts make almost all of it free:
+
+- **decode depends on nothing.** It reads a local file and can start before the
+  first call is dispatched.
+- **a gap depends only on its own anchors.** `bridge_gap` seeds from the
+  detections at anchor `a` and walks decoded frames to `b`. Nothing from
+  `track.py`. (Weaker than the docstring claimed: only anchor `a`'s detections
+  are read, so a gap is computable one call earlier than advertised.)
+
+`bridge_live.py` implements this: a decoder thread started before dispatch, a
+single consumer taking gaps in **readiness order** (anchor order costs 1.6s of
+head-of-line blocking, since calls land out of order), and a hook in
+`run_pool`'s collection loop.
+
+| | serial | concurrent |
+|---|---|---|
+| allstars 3fps, replayed schedule | 5.90s | **0.09s** |
+| basketball 2.5fps, **live** | ~5.5s | **0.14s** |
+| allstars 2.5fps live, 42/75 calls dropped | ~5.5s | **2.61s** |
+
+The last row is the honest caveat: when a *closing* anchor never lands, the
+tracker's real gap changes, and those gaps can only be computed after the pool
+drains. Added wall clock therefore degrades with the drop rate.
+
+**What "correct" means here, and it is checkable:** the emitted predictions must
+be byte-identical to `bridge.py`'s. Concurrency is a scheduling change; if a
+number moves, it is a bug. Verified four ways — replayed schedule (89/89 gaps,
+0 differing), all-at-once ordering on a second clip (88/88, 0 differing), the
+`run_pool` hook against fake calls (20/20 delivered exactly once, submission
+order preserved, results identical with and without the hook), and `detect.py`'s
+own glue block with the network replaced (identical to the committed file).
+
+---
+
+## D51 · `MAX_DRAW_GAP_S` was a sampling constant wearing a time unit
+
+The draw layer splits a track's marker into separate stretches when two
+observations are too far apart, so interpolation cannot glide a marker across
+the pitch. The limit was `0.50s`, and at 5fps that is **exactly 2.5 sampling
+intervals** — "join across one missed anchor, never two". That is a statement
+about sampling; seconds was a proxy that happened to be right at one rate.
+
+It breaks silently at any other rate, and the low-fps work is precisely the
+thing that changes the rate:
+
+| rate | one missed anchor | vs 0.50s |
+|---|---|---|
+| 5fps | 0.40s | inside — invisible |
+| 3fps | 0.67s | **outside** |
+| 2.5fps | 0.80s | **outside** |
+
+So dropping the sample rate converted the constant from "tolerates one miss"
+into "tolerates none", and every single-anchor miss became a visible hole with
+a fade either side. Measured on allstars at 3fps: **27 holes and 290 lost
+player-frames at 0.50s, against 0** at the scaled value.
+
+Now `MAX_DRAW_GAP_INTERVALS = 2.5`, divided by the run's sample rate. This
+reproduces the shipped 5fps output **byte-identically** (verified against
+`HEAD`) and self-corrects to 0.83s at 3fps and 1.00s at 2.5fps.
+
+The sweep shows a plateau rather than a tuned point — 0.70, 0.90 and 1.10 give
+identical output at 3fps — and the worst marker speed is unchanged at every
+value tested (0.398 allstars, 0.351 basketball), which says the *distance* test
+is what actually prevents gliding and the time test was only ever a backstop.
+
+**`MAX_COAST_S` is deliberately NOT scaled.** Coasting is extrapolation whose
+error grows with real elapsed time, not with how often we sampled, and the
+sweep agrees: coast 1.00 *lost* an identity on both clips tested.
+
+---
+
+## D52 · The straggler cut was never broken — the pool's shutdown was (supersedes D41)
+
+D41 disabled the cut (`CUT_SHARE = 1.0`) because it "abandons the result, not
+the thread, so it does not shorten the wall clock". The observation was right
+and the diagnosis was one layer off.
+
+`run_pool` used `with ThreadPoolExecutor(...) as ex:`. Exiting that block calls
+`shutdown(wait=True)`, which blocks until **every** worker has finished —
+including the stragglers whose answers had just been abandoned. We stopped
+*using* the slow results and then waited for them anyway. Instrumented on the
+volleyball re-run: last useful call at 22.00s, process returned at 23.92s.
+
+A first attempt at the fix kept `as_completed` and checked the deadline at the
+top of the loop. That does nothing, because `as_completed` **blocks until the
+next future completes** — the deadline is only ever checked after waiting for
+the very straggler it was meant to abandon. Measured on a synthetic pool with
+four 4-second stragglers and a 0.3s grace: still 4.00s.
+
+The working form is `wait(pending, timeout=..., return_when=FIRST_COMPLETED)`,
+which returns when the deadline passes whether or not anything completed, plus
+`shutdown(wait=False, cancel_futures=True)`. Same synthetic pool: **4.00s →
+0.37s**, and `CUT_SHARE = 1.0` still reproduces the old behaviour exactly.
+
+**What the cut is worth**, p97 against the observed maximum on every run we
+have:
+
+| run | p97 | wall | saved |
+|---|---|---|---|
+| cuts_v6 | 15.8 | 19.7 | 20% |
+| occl | 12.6 | 15.2 | 17% |
+| basketball_timed | 19.1 | 21.2 | 10% |
+| allstars_3fps | 13.1 | 14.4 | 9% |
+
+8–20%, not the ~70% that had been repeated from memory. The **safety** half of
+the original conclusion holds exactly: at p97 the cut costs 5 frames of 150 and
+the worst *blind spell* — consecutive lost anchors — is **0.40s**, inside the
+0.60s coast. Abandoned calls are now recorded as real drops with their real
+frame indices, so the summary cannot under-report what the cut cost.
+
+`CUT_SHARE` back to **0.97**.
+
+---
+
+## D53 · The bridge improves the shipped 5fps run (overturns D46)
+
+> **RETRACTED 13 Sep by D58.** The identity reduction is real and it is not an
+> improvement: on basketball all three merges are *provably wrong* — the bridge
+> switches between players who are on court simultaneously. Do not add the
+> bridge to the 5fps deliverables.
+
+D46 shelved the visual bridge, and D47 strengthened that verdict. Both were
+answering "can the bridge pay for fewer frames?" — and the bridge was never
+tested on the configuration we actually ship, because **5fps was the reference**
+every measurement was taken against. A change that improves the yardstick is
+unmeasurable by construction.
+
+Measured directly, `--bridge-mode blend --bridge-alpha 0.4`:
+
+| clip | 5fps base | 5fps + bridge | true roster |
+|---|---|---|---|
+| basketball | 22 identities | **18** | 10 |
+| allstars | 33 | **32** | 22 |
+
+18% less fragmentation on basketball for **+0.14s** of wall clock (D50) and no
+extra API spend. Renders: `outputs/videos/B5_basketball_bridge.mp4`,
+`B5_allstars_bridge.mp4`.
+
+**One uniform setting for every clip.** Per-clip alpha selection was tried and
+buys **+0.005 mean IDF1** over `blend 0.4` everywhere — noise. A per-clip choice
+is only legitimate when keyed to something measurable at runtime; "volleyball
+prefers 0.7" is fitting the test set, and an unseen clip has no such answer.
+
+Outstanding: fewer identities is only better if the merges are *correct*.
+Identity count alone cannot distinguish a repaired fragment from two players
+collapsed into one.
+
+---
+
+## D54 · Low sample rates, measured live and rejected
+
+All five clips at 2.5fps plus live runs at 2.5 and 4fps. Superseding the
+decimated figures, which D49 shows are optimistic.
+
+| run | cost | wall | IDF1 vs 5fps | frag | IDSW | ids |
+|---|---|---|---|---|---|---|
+| basketball 2.5fps **live** | $0.2095 | 26.2s | 0.595 | 4.23 | 73 | 28 (roster 10) |
+| basketball 4fps **live** | $0.3400 | 27.3s | 0.554 | 3.45 | 46 | 22 |
+| allstars 2.5fps live | $0.1125 | 30.1s | — | — | — | 42/75 calls dropped |
+
+Neither rate reaches 30¢ or 12s, and both degrade basketball badly. Note IDF1
+disagrees with every absolute measure on the 4fps row — 4fps is clearly better
+than 2.5fps on frag, IDSW and identity count while scoring *lower* IDF1. The
+basketball reference has 22 identities for a 10-player roster, so IDF1 against
+it is not a trustworthy yardstick on that clip.
+
+**The pattern across everything tried:** reduced rates work on football-type
+broadcast footage and fail on a tight basketball camera. A footballer at
+broadcast distance barely moves in image terms between anchors; a basketball
+player covers several body heights and changes direction inside one interval.
+
+`--fps` now accepts a float; it was `int`, which silently rejected 2.5.
+
+---
+
+## D55 · Track death at the frame edge is a timer, and the bridge can replace it with evidence
+
+> **INERT AS IMPLEMENTED — see D58.** The reprieve fires 5 times on allstars at
+> 2.5fps and changes the rendered output by **zero markers**. The measurement of
+> the problem below still stands; the fix does not work.
+
+A track dies when unseen for `MAX_COAST_S`. That is a clock, and a clock knows
+nothing about whether the player left the picture. Measured distance from the
+nearest vertical edge at the moment of death, in body heights:
+
+| rate | deaths at the edge (<1 bh) | median distance when it died |
+|---|---|---|
+| 5fps | 82% | **0.14 bh** — feet on the boundary, a real exit |
+| 3fps | 64% | 0.67 bh |
+| 2.5fps | 33–39% | 0.58 bh, and 18 of 27 deaths now well *inside* |
+
+At 5fps the ring dies when the player has gone. Below it, the ring dies while
+the player is still half a body height inside the frame.
+
+`EDGE_TEST_BH = 1.0`, `EDGE_REPRIEVE_MUL = 2.0`: within one body height of a
+vertical edge, if the bridge's last usable prediction places the patch inside
+the frame, the track survives for up to one extra coast. Bounded deliberately —
+optical flow is evidence about pixels, and a patch can survive on the wrong
+player.
+
+**Implementation note worth keeping:** the bridge record exists only for the
+anchor immediately after a sighting, but a track does not die until it has
+missed two, so the live record has expired exactly when the test wants it. The
+prediction is cached on the track (`last_bpred`). The first version fired **0
+times** for this reason. It now fires 5–13 times per clip.
+
+---
+
+## D56 · Rejected this session, with the measurement that condemned each
+
+**Splitting the drawing on adjacent-anchor speed.** Basketball t+27.4s had a
+marker travelling 0.284 fraction units/sec — 1.3× `MAX_PLAYER_SPEED` — smoothly
+between two consecutive anchors with the camera voting 0.009 units of motion,
+drawing a ring flying across the court into another player. Subtracting camera
+motion (`cam_at` is cumulative, so a gap's camera displacement is the difference
+of its endpoints) and testing adjacent pairs removed it. **Reverted**: like for
+like it cost 0.005 mean IDF1 and turned holes 0→7 on allstars, 1→8 on
+basketball, 12→15 on volleyball, and on screen those dropouts read worse than
+the glide. It also fixed only half the artefact — a *birth* has no previous
+observation, so the incoming marker still flew in. The lesson is that splitting
+the *drawing* is the wrong layer: the two detections belong to different people,
+which is an association error, and refusing to draw it hides the symptom.
+
+**Adaptive anchor placement from optical flow.** Idea: profile motion from
+pixels before any API call, then sample densely only where it matters. Target
+variable was excess track deaths at 2.5fps relative to 5fps — by definition the
+intervals that needed the extra frames. Of five flow features, only `resid_p90`
+keeps its sign on both clips. Ranking intervals by it and densifying the top
+25%: **57% of the damage covered on allstars, 25% on basketball — exactly
+chance.** `cam` scored 71% on allstars but had the opposite sign on basketball.
+Two independent reasons to reject: the signal does not generalise, and the
+profile costs **5.4s of serial pre-dispatch time** (decode 2.2s + flow 3.2s)
+that cannot be overlapped, because the schedule must be decided before
+dispatch. Paying +25% latency to save 20% of frames is the wrong direction.
+Recorded as a partial positive: on wide broadcast football the coverage is real
+(57%/86%), and it would be worth revisiting under a cost-only target.
+
+**Optical flow on the ball.** Feasibility only; nothing built. Error in ball
+diameters against the next anchor's detection, with a *stationary* control to
+rule out flow silently tracking the background:
+
+| clip | ball px | LK adaptive | stationary | beats stationary |
+|---|---|---|---|---|
+| allstars | 10.1 | **0.33 / 1.09** | 1.43 / 3.31 | 86% |
+| fb_amateur | 9.4 | **0.45 / 1.79** | 2.04 / 3.41 | 92% |
+| fb_cuts | 8.6 | 0.39 / 1.36 | 1.02 / 2.81 | 79% |
+| basketball | 23.8 | 1.31 / 5.90 | 2.05 / 6.43 | 73% |
+| volleyball | 17.3 | 1.84 / 5.67 | 2.71 / 5.74 | 66% |
+
+Ball size in pixels was predicted to decide this and **predicted it backwards**:
+the small-ball football clips track best. What matters is travel relative to
+the ball's own diameter across a whole gap, plus motion blur and spin. The
+hypothesis that fewer pyramid levels would help volleyball is disconfirmed
+(1.34 → 1.84 with adaptive sizing). Still potentially useful as a *decoy
+arbiter*, which needs only to catch grossly wrong balls, with per-clip slack
+derived from these measured errors.
+
+**Time-of-day scheduling.** Latency bucketed by local hour appears to show
+evening as worst and early morning as best. It is an artefact of which runs
+landed in which hour: `allstars_3fps` ran at 20:00 local and is the *fastest run
+on record* (p50 9.4s). Per-run, there is no time-of-day signal — the variance is
+run-to-run, consistent with the 43% and 34% swings already recorded.
+
+**Concurrency as the latency cause.** An isolated call has TTFB 3.63s against
+13.66s inside a 120-way burst, which looks conclusive until the full table is
+read: N=33 gave 17.19s and N=149 gave **7.00s**. Concurrency does not predict
+TTFB; neither does payload size (640px through 1920px all land at 11–14s) nor
+upload volume. Provider variance dominates, and at 149 concurrent calls we have
+already achieved 7.00s TTFB and 9.80s median latency — the median is not the
+problem, the tail is (D52).
+
+---
+
+## D57 · Camera-support rejection is a fraction, and fractions are brittle on small rosters
+
+`CAM_SUPPORT_MIN = 0.50` discards the camera-motion estimate when fewer than
+half the tracks agree on the same shift, substituting **no compensation at
+all**. `camera_diag` now records, per anchor, the voted `(dx, dy)`, the support,
+and whether it was discarded — the decision was previously invisible in the
+output and looked identical to a detection failure on screen.
+
+The support figure is `len(winning_bin) / len(preds)`. With ~20 football tracks
+one disagreeing track moves it by 0.05; with **10 basketball players it moves by
+0.10**, so the threshold is quantised into tenths. The observed values on
+basketball are all multiples of 0.05 because nothing else is possible.
+
+Consequence, basketball 2.5fps around t+27.4s — four consecutive anchors
+discarded:
+
+```
+f810 t+27.00s  vote (-0.0013,+0.0088)  support 0.80  applied
+f822 t+27.40s  vote (-0.2337,+0.2364)  support 0.40  DISCARDED
+f834 t+27.80s  vote (-0.0660,-0.0593)  support 0.25  DISCARDED
+f846 t+28.20s  vote (-0.0016,-0.0024)  support 0.40  DISCARDED
+```
+
+Only f834 costs anything — the others were voting ≈0, so zeroing changed
+nothing, and f822's 0.478-unit vote is physically impossible without a cut, so
+discarding it was right. The gate is both too eager and too crude. `--cam-support`
+added for the sweep; **not swept, and not changed.**
+
+Separately, the 5fps allstars run discards 7 anchors, all inside the first 2.8s,
+and the 3fps run discards frame 560 (t+18.67s) — the largest camera motion in
+the clip, support 0.38 — with the tracker's four worst residuals landing at
+t+19.00, 19.33, 19.67 and 20.67s.
+
+**Correction to an earlier diagnosis:** the 18.5–19.2s dropout reported on the
+*5fps* render was attributed to this mechanism. That was wrong — the 5fps run
+has no discard there. The mechanism is real and localised at 3fps; it was
+generalised to a run where it does not occur. `camera_track` is *cumulative*
+drift, and reading it as per-anchor motion is what produced the error.
+
+---
+
+## D58 · Validating the three unvalidated claims: two fail
+
+Three things were banked on 10 Sep without being checked properly. Checked
+13 Sep. Two do not survive, and both were flagged at the time as resting on a
+number going down rather than on evidence.
+
+### D53 retracted — the bridge's merges are wrong on basketball
+
+The claim was 22 identities to 18 against a 10-player roster. The test: both
+runs draw from the same detections, so a marker that came from the same
+detection has **identical stored coordinates**. Matching on exact position
+(94.7% of basketball markers, 99.8% of allstars) gives an exact correspondence
+with no nearest-neighbour guessing — the first attempt used position proximity
+and produced nonsense, including a *blue* identity absorbed into a white one.
+
+Two faults need no human judgement:
+
+  OVERLAP  two absorbed fragments were drawn in the SAME frame. Two markers on
+           screen at once are two different people, so the merge is wrong.
+  NUMBER   two absorbed fragments both carried a jersey number READ off a shirt,
+           and the numbers differ.
+
+| clip | merges | provably wrong |
+|---|---|---|
+| basketball 5fps | 3 | **3** |
+| allstars 5fps | 1 | 0 |
+
+Basketball's base `A22` and `A30` coexist in **804 frames** and both feed a
+single bridge identity. One bridge identity absorbs six base identities with
+jersey numbers 23, 22, 30 and 23-blue. This is not repaired fragmentation, it is
+identity switching, and a lower identity count is exactly what switching
+produces. **The bridge is not added to the deliverables.**
+
+The general point is worth keeping: *identity count cannot distinguish a
+repaired fragment from two players collapsed together, and the two move the
+number in the same direction.* Any future claim resting on a count going down
+needs this test.
+
+### D55 is inert — it fires and changes nothing
+
+`--no-edge-reprieve` added for the A/B. On allstars at 2.5fps with the bridge:
+
+```
+reprieve OFF   33 identities   15126 markers   0 reprieves fired
+reprieve ON    33 identities   15126 markers   5 reprieves fired
+frames differing: 0
+```
+
+The reprieve keeps a Track object alive for one extra interval, but **drawing is
+driven by observations and a coasting track produces none**. For it to help, the
+reprieved track must survive long enough to re-acquire a detection; in 5 of 5
+cases it did not. The measurement that motivated it stands — median death moves
+from 0.14 body heights inside the frame at 5fps to 0.58 at 2.5fps — but this fix
+does not address it. Left in place behind a flag, costing nothing, doing nothing.
+
+### D57 swept — 0.50 was already right
+
+`CAM_SUPPORT_MIN` had never been swept. Basketball at 2.5fps with the bridge:
+
+| threshold | identities (roster 10, reference 22) |
+|---|---|
+| 0.00 | 28 |
+| 0.25 | 26 |
+| **0.50 (shipped)** | **20** |
+| 0.75 | 21 |
+
+The shipped value is the best of four. Assumed correct, now measured correct.
+
+### Right-censoring the draw threshold: correct, and reverted
+
+`MIN_DRAW_SAMPLES = 4` rejects tracks with fewer than four surviving
+observations. A track born three anchors before the clip ends can never reach
+four — its lifetime is *censored*, not short. Holding it to
+`min(MIN_DRAW_SAMPLES, anchors remaining)` is the correct treatment and it
+recovered one genuine player on volleyball: the detector reports 11 players at
+each of the last four anchors and only 10 were drawn.
+
+Reverted anyway. It is the only change all week that stops a committed tracks
+file reproducing, and the README's promise that the render stages reproduce from
+committed artefacts without an API key is what the repository's evidence rests
+on. Worth 0.6s of one clip against that? No.
+
+It also does not fix the case that motivated it. `football_cuts` loses its final
+close-up because **the model returned zero players at the last anchor**, so the
+replacement track has two sightings and dies at `MIN_HITS` — the track-validity
+bar — never reaching the draw bar. Fixing that means relaxing whether a track is
+real at all, for one event in one clip caused by a detection failure.
+
+---
+
+## D59 · The straggler cut, measured end to end: the mechanism works, the saving does not
+
+D52 repaired the cut and projected 8–20% from recorded completion times. Run for
+real on `football_cuts` at 5fps with the cut enabled:
+
+| | shipped `cuts_v4` (no cut) | `cuts_p97` (cut enabled) |
+|---|---|---|
+| wall | 22.4s | **22.3s** |
+| cost | $0.4727 | $0.4689 |
+| returned | 150/150 | 148/150 |
+| latency p50 | 12.3s | 13.6s |
+
+**Indistinguishable**, and on a *worse* provider draw (p50 13.6s against 12.3s).
+
+The projection was wrong because it compared p97 against the observed maximum
+and ignored everything between:
+
+  - `CUT_GRACE_S = 1.5s` — the cut arms at p97 and then waits a further 1.5s
+  - teardown plus writing the detections JSON — measured 1.26s on this run
+
+Together those consume most of the gap the projection promised. On `cuts_v6` the
+whole p97-to-max distance was 3.9s, so 1.5s of grace alone spends 38% of it.
+
+The teardown fix itself is confirmed working, separately and cheaply: 16 calls
+with the cut forced at 50%, three abandoned, and the process exited **0.33s**
+after the last kept call against the **1.92s** measured before the fix. The
+mechanism is sound. What is not true is that it buys 8–20% of wall clock.
+
+**Kept enabled**, because it costs nothing, it is now correct, and it bounds the
+tail on a bad provider day even though it does not shorten a normal one. Quote
+it as "bounds the tail", never as a latency saving.
 
 ---
 

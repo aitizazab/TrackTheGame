@@ -5,16 +5,86 @@ reasoning behind each choice.
 
 ---
 
-## 0. Start here — state as of 6 Sep
+## 0. Start here — state as of 13 Sep
 
-**THE PROJECT IS FEATURE-COMPLETE.** Five clips collected, five annotated videos
-rendered and committed, pipeline frozen. What remains is the GitHub repo, the
-report, and the LinkedIn post.
+**THE PROJECT IS FEATURE-COMPLETE AND SHIPPED.** Five clips collected, five
+annotated videos rendered and committed, repo published. What remains is the
+report and the LinkedIn post.
 
-**Budget: ~$2.9 remaining.** `docs/run_log.jsonl` records $29.09 across 7,732
-calls against a $35 limit, which nominally leaves $5.91 — but D21's three ledger
-holes (a second project on the same key, uncosted probes) are real, so treat
-~$2.9 as the working figure and **query the key endpoint before any large run**.
+### What changed after the deliverables shipped (8–13 Sep)
+
+A push to reach the *true* targets — 30¢ and 12s, tighter than the brief's $1
+and 25s — beyond the shipped $0.4662 and 21–27s. **It did not reach them, and
+the reasons are now measured rather than suspected.** Four things were banked
+and several rejected; all are in `decisions.md` D48–D59.
+
+**Banked, and validated** — none of it changes the five shipped videos:
+
+| change | effect |
+|---|---|
+| `bridge_live.py` — optical flow concurrent with the calls (D50) | 5.9s → **0.11–0.14s** added wall clock, output byte-identical to the serial tool |
+| `MAX_DRAW_GAP_INTERVALS` replaces `MAX_DRAW_GAP_S` (D51) | 5fps output byte-identical; fixes 27 holes/290 lost player-frames at 3fps |
+| Straggler cut repaired (D52, D59) | teardown 1.92s → 0.33s. **Bounds the tail; it is NOT a latency saving** — 22.3s against the shipped 22.4s |
+| `CAM_SUPPORT_MIN` swept (D58) | 0.50 confirmed best of four. Assumed right, now measured right |
+
+**Claimed, then refuted on validation (D58)** — both were flagged at the time as
+resting on a number going down rather than on evidence, and both failed:
+
+- **D53 RETRACTED.** The bridge takes basketball 22 → 18 identities, and all
+  three merges are *provably wrong* — it joins players drawn in the same frame.
+  Identity count cannot tell a repaired fragment from two players collapsed
+  together. **Not applied to the deliverables.**
+- **D55 INERT.** The edge reprieve fires 5 times and changes the render by zero
+  markers: it keeps a track alive but drawing comes from observations, and a
+  coasting track produces none.
+
+**Rejected, with numbers** (D54, D56): 4fps and 2.5fps live, adaptive anchor
+placement from optical flow, splitting the drawing on adjacent-anchor speed,
+lowering reasoning effort, and right-censoring the draw threshold (correct, but
+it is the only change that stops a committed tracks file reproducing).
+
+### Three findings that will save the next person a day each
+
+1. **Reasoning is 60–78% of output tokens and cannot be reduced (D48).** Both
+   API mechanisms — `effort: low` and `reasoning.max_tokens` — set it to *zero*,
+   and at zero the model emits boxes off the 0..1 scale. It is doing per-player
+   arithmetic, not sport analysis. **The 30¢ target is closed.**
+2. **`decimate.py` cannot estimate quality (D49).** Its output is byte-identical
+   to the reference it gets scored against (75/75 frames; a live run shares
+   0/74). Decimated basketball at 2.5fps scores 0.767 IDF1, live scores 0.595.
+   Use it to compare tracker configurations, never to predict a rate.
+3. **Wall clock is set by the tail, and the median is already fast enough.** At
+   149 concurrent calls we have recorded 7.00s TTFB and 9.80s median latency.
+   Concurrency does not predict latency (N=33 gave 17.2s, N=149 gave 7.0s),
+   nor does payload size, nor time of day. Optimise the maximum, not the median.
+
+### The one pattern that explains most of it
+
+Every reduced-cost approach works on football-type broadcast footage and fails
+on a tight basketball camera. A footballer at broadcast distance barely moves in
+image terms between anchors; a basketball player covers several body heights and
+reverses direction inside one interval. If a future experiment succeeds on
+`allstars` alone, that is the null result, not a success.
+
+**Budget: treat as under $1 remaining.** `docs/run_log.jsonl` now records
+**$30.54** against a $35 limit, of which **$0.6938 was spent on 10–11 Sep**
+(three live low-fps runs and three probes — see the table below). The ledger
+nominally leaves $4.46, but D21's three holes (a second project on the same key,
+uncosted probes) are real and the owner's working figure is **under $1**. Take
+the smaller number. **Query the key endpoint before any run at all**, not just
+large ones.
+
+| 10–13 Sep | cost |
+|---|---|
+| `cuts_p97` (the straggler-cut confirmation, D59) | $0.4689 |
+| `basketball_4fps_live` | $0.3400 |
+| `basketball_25_live` | $0.2095 |
+| `allstars_25_live` (42/75 calls lost to the deadline) | $0.1125 |
+| `probe_seq`, `probe_reason_base`, `probe_reason_600`, `teardown_test` | $0.0642 |
+| **total** | **$1.195** |
+
+The key endpoint reported **$0.80 remaining** on 13 Sep before the `cuts_p97`
+run, so treat the remaining balance as **~$0.33**. Check it before spending.
 
 ### The shipping configuration
 
@@ -27,6 +97,18 @@ uv run render.py outputs/tracks/<clip>__<tag>__tracks.json     --clip clips/<nam
 `v4` is the shipped prompt: the D26 rewrite, minus the `role` field, plus a
 frame-edge line. Font, marker style and every threshold are defaults now — no
 flags needed beyond the above.
+
+**The five committed videos were produced with exactly that, and the committed
+detections and tracks still reproduce them bit-identically** — verified 13 Sep
+on all five after the censoring change was reverted. That property is what the
+repository's evidence rests on; do not break it casually.
+
+The bridge is available (`--bridge-out` on `detect.py`, `--bridge`/`--bridge-mode
+blend`/`--bridge-alpha 0.4` on `track.py`) and costs 0.11–0.14s, but **it is not
+part of the shipping configuration**: D58 shows its identity merges are wrong on
+basketball. Use it for the low-fps experiments it was built for, not here.
+If you do use it, `alpha 0.4` is uniform on purpose — per-clip tuning buys
++0.005 mean IDF1, which is noise, and an unseen clip has no per-clip answer.
 
 ### Measured, per finished video
 
@@ -104,15 +186,26 @@ Do not re-propose any of these:
 
 ### Open, and honestly small
 
-**The straggler cut does not shorten the wall clock (found 6 Sep, not fixed).**
-It abandons the *result* but not the *thread*, so the process waits for the
-abandoned socket to close before tearing down. On the instrumented volleyball
-re-run the last useful call landed at **22.00s** and the run ended at **23.92s**
-— 1.92s spent waiting on calls already given up on. The cut still does its real
-job (the tracker's worst blind spell stays 0.40s); it is just not a latency
-saving. Fix is to stop joining abandoned futures, **not** to lower `CUT_SHARE`,
-which would abandon more results for the same wait. Deferred because it changes
-`detect.py` and all five deliverables were produced with current behaviour.
+**The straggler cut — FIXED 10 Sep, see D52.** Found 6 Sep: it abandoned the
+*result* but not the *thread*, so the last useful call landed at **22.00s** on
+the instrumented volleyball re-run while the run ended at **23.92s**. The cause
+was one layer below where it was looked for — not the cut, but `with
+ThreadPoolExecutor(...)`, whose exit calls `shutdown(wait=True)` and blocks on
+every worker including the abandoned ones.
+
+Fixed with `wait(..., timeout=..., return_when=FIRST_COMPLETED)` plus
+`shutdown(wait=False, cancel_futures=True)`. Synthetic pool with four
+4-second stragglers: **4.00s → 0.37s**. `CUT_SHARE` back to **0.97**, worth
+8–20% of wall clock against every recorded run. Abandoned calls are logged as
+real drops with their real frame indices.
+
+Note the intermediate wrong fix, because it looks right: keeping `as_completed`
+and checking the deadline inside the loop does nothing, since `as_completed`
+blocks until the next future completes — it checks the deadline only after
+waiting for the straggler it meant to abandon.
+
+**No shipped video was produced with the cut enabled**, so the latency figures
+in §0 predate it.
 
 **Provider variance is now measured twice**, and it is the largest latency term
 by a wide margin: basketball 37.4s → 21.2s (43%), volleyball 36.5s → 23.9s
@@ -123,13 +216,14 @@ figure.
 call pool only. End-to-end is ~2s longer than every figure in these documents.
 
 
-- **Latency** 21–27s. ~~The p97 straggler cut is in and works~~ **DISABLED 6 Sep —
-  it never worked.** It abandons the result but not the thread, so it saved no
-  wall clock and no cost while discarding frames; `CUT_SHARE = 1.0`. The real
-  bound is `TIMEOUT_S`, now **25.0s**, which is above the slowest call on all
-  five clips and so costs nothing today. (3 calls abandoned
-  on allstars, 2 on basketball). It cannot touch a call still waiting for its
-  first byte, since it is checked inside the streaming loop.
+- **Latency** 21–27s on the shipped runs. ~~The p97 straggler cut is in and
+  works~~ ~~**DISABLED 6 Sep — it never worked.**~~ **RE-ENABLED 10 Sep at 0.97
+  once the real cause was found — the pool's `shutdown(wait=True)`, not the cut
+  (D52).** Worth 8–20% against every recorded run; costs 5 frames of 150 with a
+  worst blind spell of 0.40s, inside the 0.60s coast. The other bound is
+  `TIMEOUT_S`, now **25.0s**, above the slowest call on all five clips. Neither
+  can touch a call still waiting for its first byte, since both are checked
+  inside the streaming loop — and TTFB is where 60–90% of a call's time goes.
 - **The 8.8s cut in `football_cuts` is undetectable** from detections: 18
   players either side, median box height 0.075→0.080, identical kit mix, scene
   sentence *more* similar than a typical non-cut boundary.
@@ -288,9 +382,11 @@ See the addendum to §5 — the metric problem runs in both directions.
   free in tokens and expensive in seconds.
 - **Output is 82–85% of cost** on both models. Input is a floor you cannot
   lower on Gemini.
-- **5fps is the practical floor**; 3fps fails visibly. Player spacing is
-  constant (~0.050) while motion grows with `dt`, so gate÷spacing goes
-  1.9× (10fps) → 3.6× (5fps) → 6.1× (3fps). Failure appears between 3.6 and 6.1.
+- **5fps is the practical floor**, now confirmed by live runs at 4fps and
+  2.5fps rather than by argument (D54). The gate÷spacing ratios once quoted
+  here (1.9× / 3.6× / 6.1×) describe a code path that never executes — the cap
+  binds at 1.50 everywhere; see D47. The floor is real, the old explanation
+  for it was not.
 - **10fps buys nothing over 5fps** on either model.
 - **Detection is 98% reliable** within an established track. Misses are only
   mildly concentrated.
@@ -518,8 +614,13 @@ that contradicts what was believed when they were written.
   rejecting 3 boxes in 36,329 (0.008%), every one a ribbon. Must be measured in
   PIXEL space; the fraction-space version rejects real players.
 - **C. Wall clock — PARTLY.** ~~p97 straggler cut implemented and working.~~
-  The cut was disabled 6 Sep as measured waste; the deadline moved to 25s. 21–27s
-  remains, and provider variance (43% swing on identical runs) dominates.
+  ~~The cut was disabled 6 Sep as measured waste~~; the deadline moved to 25s.
+  **Cut repaired and re-enabled 10 Sep (D52); measured end to end 13 Sep and it
+  is NOT a latency saving (D59)** — 22.3s against the shipped 22.4s on the same
+  clip, because `CUT_GRACE_S` (1.5s) plus teardown-and-write (1.26s) consume the
+  p97-to-max gap. Kept because it bounds the tail on a bad day. 21–27s stands,
+  and provider variance (43% swing on identical runs) dominates any lever we
+  hold.
 - **D. Prompt bloat — DONE.** v4 shipped. The user's own prompt was never
   needed; v2's rewrite plus role removal was sufficient.
 

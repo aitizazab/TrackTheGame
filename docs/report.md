@@ -366,6 +366,48 @@ obey.
 
 ---
 
+### Stage 2b — a second estimator, from the pixels
+
+The instructor's clarification permits classical computer vision for *tracking*
+but never for *detection*, and this sits precisely on that line: it never finds a
+player, it only follows one the model already found.
+
+Sparse Lucas-Kanade optical flow runs through every source frame between two
+anchors, seeded on nine points inside each detected box, giving a pixel-measured
+estimate of where that player went. The two estimators fail on different things,
+which is the whole argument for running both: the Kalman filter sees only the
+sparse anchors and fails on ambiguity — two candidates a third of a second later
+and no way to choose; optical flow sees every frame and fails on occlusion — the
+patch is covered and the filter latches onto whatever is behind it.
+
+Used as a *replacement* for the Kalman prediction it is worse than useless
+(allstars IDF1 0.885 → 0.780), because where it fails it fails catastrophically
+and then aims the association gate at the wrong player. Used as a convex blend at
+`alpha 0.4` it is the best configuration measured, on one uniform setting for all
+five clips — per-clip tuning was tried and buys +0.005 mean IDF1, which is noise.
+
+**It costs 0.14s of wall clock, not the 5.9s it appears to.** Decode depends on
+nothing and starts before the first API call; each gap needs only its own anchor's
+detections, so it is computed as those land, and only the last gap cannot be
+hidden. The correctness standard is equality, not similarity: concurrency is a
+scheduling change, so the emitted predictions must be byte-identical to the batch
+tool's. Verified four ways, including through `detect.py`'s own code path with the
+network replaced by a replay of a recorded run's timings.
+
+On the shipped 5fps configuration it takes basketball from 22 identities to 18
+against a 10-player roster — **and that turned out not to be an improvement.**
+Matching markers between the two runs by exact stored position (94.7% of
+basketball markers match exactly, since both runs draw from the same detections)
+shows all three of those merges join players who are drawn in the *same frame*,
+with conflicting read jersey numbers. It is identity switching, not repaired
+fragmentation, and a falling identity count is what switching produces too.
+
+That is the trap worth naming: **identity count moves the same direction for a
+repaired fragment and for two players collapsed together.** The bridge is not
+part of the shipped pipeline.
+
+---
+
 ## 5. Stage 3 — rendering
 
 All drawing is Pillow; **the renderer reads no pixel it did not itself write.**
@@ -753,6 +795,44 @@ point.
 whose defining symptom is that it never reaches a cancellation point.** It could
 abandon the healthy and not the sick.
 
+#### Postscript: the diagnosis was one layer too shallow, and the cut works
+
+Everything above is accurate about the *symptom* and wrong about the *cause*, which
+is worth leaving in view rather than editing away.
+
+The cut was blamed for a wait it did not create. The pool was built as `with
+ThreadPoolExecutor(...) as ex:`, and exiting that block calls `shutdown(wait=True)`,
+which blocks until every worker finishes — including the ones whose answers had
+just been abandoned. The 1.92s was the *pool* waiting, not the cut failing. We
+stopped using the slow results and then waited for them anyway.
+
+The repair is to wait with a deadline rather than until completion —
+`wait(pending, timeout=..., return_when=FIRST_COMPLETED)` — and then
+`shutdown(wait=False, cancel_futures=True)`. On a synthetic pool with four
+four-second stragglers and a 0.3s grace: **4.00s → 0.37s**, with `CUT_SHARE = 1.0`
+still reproducing the old behaviour exactly.
+
+One intermediate attempt is worth recording because it looks correct and is not:
+keeping `as_completed` and testing the deadline at the top of the loop body changes
+nothing, because `as_completed` blocks until the next future completes. The deadline
+is then checked only *after* waiting for the very straggler it was meant to abandon.
+Same synthetic pool, same 4.00s.
+
+Re-enabled at p97. Measured against the recorded completion times of every run:
+
+| run | p97 | wall | saved |
+|---|---|---|---|
+| football_cuts | 15.8s | 19.7s | 20% |
+| occlusion probe | 12.6s | 15.2s | 17% |
+| basketball | 19.1s | 21.2s | 10% |
+| allstars 3fps | 13.1s | 14.4s | 9% |
+
+**8–20%, not the large saving originally claimed for it** — and the safety argument
+was always the sound half: five frames of 150, worst blind spell 0.40s, inside the
+tracker's 0.60s coast. The cost-ledger hole above is unaffected and still real.
+
+No shipped video was produced with the cut enabled.
+
 ---
 
 ## 9. What we got wrong
@@ -860,6 +940,46 @@ artefacts of how you framed the question.
 
 ---
 
+### The benchmark that graded itself
+
+The worst error in the project is not in the pipeline. It is in how the pipeline
+was measured.
+
+Lower sample rates are expensive to test, because each one costs a real API run.
+So they were estimated instead, by *decimating* a shipped 5fps run — dropping every
+other anchor to synthesise a 2.5fps run for free. `decimate.py` says in its own
+docstring that the detections are "a strict subset, so any identity difference is
+the tracker's, not the model's", which is true, and is exactly why it works for its
+designed purpose: isolating a tracker change from model noise.
+
+It was then used for a different purpose — estimating what a real 2.5fps run would
+look like — and for that it is worthless, because:
+
+```
+decimated frames byte-identical to the 5fps reference:  75/75
+live      frames byte-identical to the 5fps reference:   0/74
+```
+
+The decimated run is graded against detections it copied verbatim. Measured on
+basketball, same tracker, same settings, same bridge:
+
+| | IDF1 | frag | ID switches | identities (roster 10) |
+|---|---|---|---|---|
+| decimated 2.5fps | 0.767 | 2.63 | 41 | 20 |
+| **live 2.5fps** | **0.595** | **4.23** | **73** | **28** |
+
+Every low-rate quality figure produced before this was found is optimistic by
+roughly that margin, and a day's conclusions were built on them.
+
+**The general lesson is the dangerous kind, because the error flatters rather than
+breaks.** A benchmark that shares data with the thing it scores does not fail
+loudly; it returns plausible numbers that are too good, and each one confirms the
+approach that produced it. The check that caught it — *how much content do the test
+set and the reference actually share?* — took two lines and should have been run
+the day the harness was written.
+
+---
+
 ## 10. Limitations, honestly
 
 - **Ball decoys persist.** Seven approaches measured and rejected. The honest
@@ -879,10 +999,21 @@ artefacts of how you framed the question.
   no quantisation spike; `w` is *below* chance). Leading hypothesis is the centred
   smoother lagging along the direction of motion, which is single-axis by
   construction. Untested.
-- **4fps was never run**, and it is where the sampling trade most likely sits.
-- **The straggler cut is disabled rather than fixed.** A preemptive version —
-  socket read deadlines plus `shutdown(wait=False, cancel_futures=True)` — would
-  cap the tail at roughly the p97 call instead of the p100.
+- ~~**4fps was never run**, and it is where the sampling trade most likely sits.~~
+  **Run live 10 Sep: $0.3400, 27.3s, and worse than 5fps on every clip.** So was
+  2.5fps ($0.2095, 26.2s, 28 identities for a 10-player roster). Cost falls as
+  expected; wall clock does not, because it is set by the slowest single call and
+  there is one at any rate. The sampling trade does not sit below 5fps.
+- ~~**The straggler cut is disabled rather than fixed.**~~ **Fixed and re-enabled
+  10 Sep** — see the postscript in §8. Worth 8–20%, and the cause was the pool's
+  `shutdown(wait=True)`, not the cut.
+- **Cost cannot go much below $0.47, and the reason is now measured.** 60–78% of
+  output tokens are the model's own reasoning, billed at the same rate as the
+  answer and then discarded. Both API mechanisms for reducing it — `effort: low`
+  and `reasoning.max_tokens` — set it to *zero*, and at zero the model returns
+  boxes off the 0..1 scale: it is doing per-player arithmetic to normalise pixel
+  positions, not analysing sport. The answer itself is already near its floor at
+  33.6–37.0 tokens per player across three sports.
 
 ---
 
@@ -921,5 +1052,11 @@ and it was recorded in the project notes as a price rise rather than investigate
    takes a video to 32–35s and blows the target; on 3fps it lands at **20–22s**.
    The frame rate you would drop to for cost is exactly what buys the headroom to
    afford the fix for the defect that survived.
-4. **Preemptive straggler cancellation**, to make the tail bound real.
+4. ~~**Preemptive straggler cancellation**, to make the tail bound real.~~ Done;
+   §8 postscript.
 5. **A similar-kit clip**, to finally exercise the ΔE fallback.
+6. ~~**Verify the bridge's merges are correct, not merely fewer.**~~ Done, and
+   they are not: 3 of 3 basketball merges join players drawn in the same frame.
+   The bridge stays out of the deliverables. What remains open is whether it
+   helps at the *low* sample rates it was built for, where its errors compete
+   against much worse baseline fragmentation.

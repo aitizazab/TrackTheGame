@@ -1,0 +1,319 @@
+{
+ "clip": "basketball_1080.mp4",
+ "model": "google/gemini-3.7-flash",
+ "fps": 5.0,
+ "width": null,
+ "tag": "probe_reason_base",
+ "ts": "2026-09-10T10:04:39.565134+00:00",
+ "effort": null,
+ "scene_last": false,
+ "terse_schema": false,
+ "timeout_s": 25.0,
+ "variant": {
+  "container": false,
+  "system": false,
+  "image_first": false,
+  "compact": true,
+  "ruler": false,
+  "grid": false,
+  "provider_order": [
+   "google-ai-studio/flex"
+  ]
+ },
+ "prompt_version": "v4",
+ "coord_convention": "fraction",
+ "source_fps": 30,
+ "wall_s": 9.90193520000139,
+ "n_source_frames": 900,
+ "frames": [
+  {
+   "frame": 762,
+   "scene": "A basketball court with bright indoor broadcast lighting, featuring players in blue and white kits.",
+   "players": [
+    {
+     "x": 0.248,
+     "y": 0.566,
+     "w": 0.058,
+     "h": 0.222,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.225,
+     "y": 0.589,
+     "w": 0.057,
+     "h": 0.191,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.455,
+     "y": 0.264,
+     "w": 0.035,
+     "h": 0.203,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.432,
+     "y": 0.221,
+     "w": 0.038,
+     "h": 0.147,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.57,
+     "y": 0.485,
+     "w": 0.052,
+     "h": 0.221,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.6,
+     "y": 0.301,
+     "w": 0.038,
+     "h": 0.191,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.622,
+     "y": 0.531,
+     "w": 0.063,
+     "h": 0.249,
+     "kit": "blue",
+     "num": 22,
+     "conf": 1.0
+    },
+    {
+     "x": 0.693,
+     "y": 0.384,
+     "w": 0.05,
+     "h": 0.224,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.72,
+     "y": 0.246,
+     "w": 0.039,
+     "h": 0.196,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.85,
+     "y": 0.395,
+     "w": 0.043,
+     "h": 0.241,
+     "kit": "blue",
+     "num": 32,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 798,
+   "scene": "Wide television broadcast of an indoor basketball game with the Los Angeles Lakers in white and Golden State Warriors in blue.",
+   "players": [
+    {
+     "x": 0.281,
+     "y": 0.581,
+     "w": 0.098,
+     "h": 0.184,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.345,
+     "y": 0.564,
+     "w": 0.071,
+     "h": 0.239,
+     "kit": "blue",
+     "num": 30,
+     "conf": 1.0
+    },
+    {
+     "x": 0.496,
+     "y": 0.518,
+     "w": 0.041,
+     "h": 0.244,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.507,
+     "y": 0.445,
+     "w": 0.057,
+     "h": 0.229,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.272,
+     "w": 0.052,
+     "h": 0.18,
+     "kit": "white",
+     "num": 15,
+     "conf": 1.0
+    },
+    {
+     "x": 0.647,
+     "y": 0.309,
+     "w": 0.048,
+     "h": 0.187,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.66,
+     "y": 0.37,
+     "w": 0.055,
+     "h": 0.233,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.742,
+     "y": 0.427,
+     "w": 0.064,
+     "h": 0.244,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.744,
+     "y": 0.296,
+     "w": 0.047,
+     "h": 0.158,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    }
+   ],
+   "ball": null
+  },
+  {
+   "frame": 822,
+   "scene": "Wide camera angle of an indoor basketball game with the Los Angeles Lakers in white jerseys and Golden State Warriors in blue jerseys under bright arena lighting.",
+   "players": [
+    {
+     "x": 0.488,
+     "y": 0.214,
+     "w": 0.041,
+     "h": 0.174,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.526,
+     "y": 0.259,
+     "w": 0.04,
+     "h": 0.197,
+     "kit": "white",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.752,
+     "y": 0.257,
+     "w": 0.043,
+     "h": 0.216,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.672,
+     "y": 0.317,
+     "w": 0.054,
+     "h": 0.187,
+     "kit": "white",
+     "num": 23,
+     "conf": 1.0
+    },
+    {
+     "x": 0.631,
+     "y": 0.392,
+     "w": 0.055,
+     "h": 0.236,
+     "kit": "white",
+     "num": 3,
+     "conf": 1.0
+    },
+    {
+     "x": 0.446,
+     "y": 0.453,
+     "w": 0.055,
+     "h": 0.231,
+     "kit": "white",
+     "num": 28,
+     "conf": 1.0
+    },
+    {
+     "x": 0.686,
+     "y": 0.446,
+     "w": 0.071,
+     "h": 0.248,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.479,
+     "y": 0.529,
+     "w": 0.044,
+     "h": 0.26,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.531,
+     "y": 0.569,
+     "w": 0.063,
+     "h": 0.217,
+     "kit": "blue",
+     "num": null,
+     "conf": 1.0
+    },
+    {
+     "x": 0.499,
+     "y": 0.603,
+     "w": 0.054,
+     "h": 0.222,
+     "kit": "white",
+     "num": 12,
+     "conf": 1.0
+    }
+   ],
+   "ball": {
+    "x": 0.758,
+    "y": 0.347,
+    "w": 0.017,
+    "h": 0.029,
+    "conf": 0.8
+   }
+  }
+ ],
+ "dropped": []
+}
